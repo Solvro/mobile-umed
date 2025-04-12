@@ -40,7 +40,7 @@ dev_dependencies:
   solvro_config: ^1.0.1
   riverpod_generator: ^2.6.5
   riverpod_lint: ^2.6.5
-  flutter_lints: ^2.0.1
+  flutter_lints: ^5.0.0
 
 flutter_gen:
   output: lib/app/assets/
