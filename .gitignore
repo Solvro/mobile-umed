@@ -44,6 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+#git-crypt
+git-crypt-key
+
 #Code gen
 *.g.dart
 *.freezed.dart
