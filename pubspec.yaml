@@ -41,6 +41,9 @@ dependencies:
   # Utils
   intl: ^0.19.0
 
+  # env
+  envied: ^1.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,6 +52,7 @@ dev_dependencies:
   riverpod_generator: ^2.6.5
   riverpod_lint: ^2.6.5
   flutter_lints: ^5.0.0
+  envied_generator: ^1.1.1
 
 flutter_gen:
   output: lib/app/assets/
