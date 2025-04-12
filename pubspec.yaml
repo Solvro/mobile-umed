@@ -52,5 +52,7 @@ flutter:
   generate: true
   assets:
     - assets/images/
-    - assets/icons/lint_staged:
+    - assets/icons/
+    
+lint_staged:
   "lib/**.dart": dart format && dart fix --apply
