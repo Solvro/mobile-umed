@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
-      - name: Remove lib/app/l10n directory
-        run: rm -rf lib/app/l10n/*.g.dart
+      - name: Remove lib/app/l10n/arb directory
+        run: rm -rf lib/app/l10n/arb/*.g.dart
 
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
