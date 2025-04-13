@@ -27,6 +27,8 @@ dependencies:
 
   #Models
   freezed: ^3.0.6
+  freezed_annotation: ^3.0.0
+  json_serializable: ^6.9.4
 
   #HTTP Client
   dio: ^5.8.0+1
@@ -40,6 +42,7 @@ dependencies:
 
   # Utils
   intl: ^0.19.0
+  fast_immutable_collections: ^11.0.4             # Immutable collections
 
   # env
   envied: ^1.1.1
