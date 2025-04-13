@@ -2,7 +2,6 @@ import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
 import "checkpoint.dart";
-import "coords.dart";
 
 part "route.freezed.dart";
 part "route.g.dart";
@@ -17,8 +16,6 @@ abstract class Route with _$Route {
     required int length,
     required int requiredWater,
     required int estimatedTime,
-    required Coords start,
-    required Coords finish,
     required IList<Checkpoint> checkpoints,
   }) = _Route;
 
