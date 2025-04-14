@@ -1,7 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
-import "checkpoint.dart";
+import "landmark.dart";
 
 part "route.freezed.dart";
 part "route.g.dart";
@@ -13,10 +13,10 @@ abstract class Route with _$Route {
     required String name,
     required String description,
     required int calories,
-    required int length,
-    required int requiredWater,
+    required double length,
+    required double requiredWater,
     required int estimatedTime,
-    required IList<Checkpoint> checkpoints,
+    required IList<Landmark> landmarks,
   }) = _Route;
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
