@@ -8,11 +8,17 @@ final _shellNavigatorOthersKey = GlobalKey<NavigatorState>();
 final _router = GoRouter(
   initialLocation: HomePage.routeName,
   navigatorKey: _rootNavigatorKey,
-  // routes: <RouteBase>[GoRoute(path: HomePage.routeName, builder: (_, state) => const HomePage())],
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return BottomNavbar(navigationShell: navigationShell);
+        return BottomNavbar(
+          navigationShell: navigationShell,
+          items: const [
+            NavItem(label: HomePage.label, icon: HomePage.icon),
+            NavItem(label: AchievementsPage.label, icon: AchievementsPage.icon),
+            NavItem(label: OthersPage.label, icon: OthersPage.icon),
+          ],
+        );
       },
       branches: [
         StatefulShellBranch(

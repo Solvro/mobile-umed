@@ -2,8 +2,10 @@ import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 
 class BottomNavbar extends StatelessWidget {
-  const BottomNavbar({Key? key, required this.navigationShell}) : super(key: key ?? const ValueKey("BottomNavbar"));
+  const BottomNavbar({Key? key, required this.navigationShell, required this.items})
+    : super(key: key ?? const ValueKey("BottomNavbar"));
   final StatefulNavigationShell navigationShell;
+  final List<NavItem> items;
 
   void _goBranch(int index) {
     navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
@@ -15,13 +17,19 @@ class BottomNavbar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
-        destinations: const [
-          NavigationDestination(label: "Home", icon: Icon(Icons.home)),
-          NavigationDestination(label: "Achievements", icon: Icon(Icons.pie_chart_outline_sharp)),
-          NavigationDestination(label: "Other", icon: Icon(Icons.settings)),
-        ],
+        destinations:
+            items.map((item) {
+              return NavigationDestination(label: item.label, icon: item.icon);
+            }).toList(),
         onDestinationSelected: _goBranch,
       ),
     );
   }
+}
+
+class NavItem {
+  final String label;
+  final Icon icon;
+
+  const NavItem({required this.label, required this.icon});
 }
