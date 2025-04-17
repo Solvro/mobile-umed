@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 
-class BottomNavbar extends StatelessWidget {
-  const BottomNavbar({Key? key, required this.navigationShell, required this.items})
-    : super(key: key ?? const ValueKey("BottomNavbar"));
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({Key? key, required this.navigationShell, required this.items})
+    : super(key: key ?? const ValueKey("DashboardPage"));
   final StatefulNavigationShell navigationShell;
   final List<NavItem> items;
 
@@ -27,9 +27,4 @@ class BottomNavbar extends StatelessWidget {
   }
 }
 
-class NavItem {
-  final String label;
-  final Icon icon;
-
-  const NavItem({required this.label, required this.icon});
-}
+typedef NavItem = ({String label, Icon icon});

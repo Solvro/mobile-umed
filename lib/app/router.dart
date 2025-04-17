@@ -11,12 +11,12 @@ final _router = GoRouter(
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
-        return BottomNavbar(
+        return DashboardPage(
           navigationShell: navigationShell,
-          items: const [
-            NavItem(label: HomePage.label, icon: HomePage.icon),
-            NavItem(label: AchievementsPage.label, icon: AchievementsPage.icon),
-            NavItem(label: OthersPage.label, icon: OthersPage.icon),
+          items: const <NavItem>[
+            (label: HomePage.label, icon: HomePage.icon),
+            (label: AchievementsPage.label, icon: AchievementsPage.icon),
+            (label: OthersPage.label, icon: OthersPage.icon),
           ],
         );
       },
