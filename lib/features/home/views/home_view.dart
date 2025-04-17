@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "../../../app/app.dart";
+
 class MyHomeView extends StatefulWidget {
   const MyHomeView({super.key, required this.title});
 
@@ -28,6 +30,8 @@ class _MyHomeViewState extends State<MyHomeView> {
           children: <Widget>[
             const Text("You have pushed the button this many times:"),
             Text("$_counter", style: Theme.of(context).textTheme.headlineMedium),
+            // temporary
+            OutlinedButton(onPressed: () async => context.router.pushRouteMap(2), child: const Text("Route Map")),
           ],
         ),
       ),
