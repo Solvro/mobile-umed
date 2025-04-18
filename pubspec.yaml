@@ -29,7 +29,7 @@ dependencies:
   #Models
   freezed: ^3.0.6
   freezed_annotation: ^3.0.0
-  json_serializable: ^6.9.4
+  json_serializable: ^6.9.5
 
   #HTTP Client
   dio: ^5.8.0+1
