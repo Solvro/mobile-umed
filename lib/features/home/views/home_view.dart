@@ -31,7 +31,7 @@ class _MyHomeViewState extends State<MyHomeView> {
             const Text("You have pushed the button this many times:"),
             Text("$_counter", style: Theme.of(context).textTheme.headlineMedium),
             // temporary
-            OutlinedButton(onPressed: () async => context.router.pushRouteMap(2), child: const Text("Route Map")),
+            OutlinedButton(onPressed: () async => context.router.pushRouteMap(1), child: const Text("Route Map")),
           ],
         ),
       ),
