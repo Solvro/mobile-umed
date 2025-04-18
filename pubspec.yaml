@@ -45,6 +45,10 @@ dependencies:
   intl: ^0.19.0
   fast_immutable_collections: ^11.0.4
 
+  # Caching
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
+
   # env
   envied: ^1.1.1
 
