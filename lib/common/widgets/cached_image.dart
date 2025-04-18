@@ -1,6 +1,5 @@
 import "package:cached_network_image/cached_network_image.dart";
 import "package:flutter/material.dart";
-import "package:flutter_cache_manager/flutter_cache_manager.dart";
 
 import "../../app/config/cached_image_config.dart";
 import "no_image_placeholder.dart";
@@ -26,14 +25,14 @@ class CachedImage extends StatelessWidget {
     }
 
     return CachedNetworkImage(
-      imageUrl: imageUrl ?? "",
+      imageUrl: imageUrl!,
       fit: boxFit,
-      cacheManager: CacheManager(CachedImageConfig.cacheConfig),
+      cacheManager: CachedImageConfig.cacheManagerInstance,
       placeholder: switch (loadingType) {
         LoadingType.noLoading => null,
         LoadingType.circularProgressIndicator => (context, url) => const Center(child: CircularProgressIndicator()),
       },
-      errorWidget: (context, url, error) => const NoImagePlaceholder(),
+      errorWidget: (context, url, error) => NoImagePlaceholder(size: size),
       height: size?.height,
       width: size?.width,
     );
