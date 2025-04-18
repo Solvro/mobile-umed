@@ -1,6 +1,7 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "../../../app/app.dart";
+import "../../../app/config/flutter_map_config.dart";
 import "../../../common/models/route.dart";
 
 class RouteMapView extends StatelessWidget {
@@ -16,7 +17,7 @@ class RouteMapView extends StatelessWidget {
           FlutterMap(
             options: MapOptions(initialCenter: route.landmarks.first.location),
             children: [
-              TileLayer(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", maxZoom: 19),
+              TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
               PolylineLayer(
                 polylines: [
                   Polyline(
