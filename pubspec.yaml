@@ -36,7 +36,7 @@ dependencies:
 
   #Widgets
   cupertino_icons: ^1.0.8
-  flutter_svg: ^2.0.17 
+  flutter_svg: ^2.1.0 
 
   #Code Generation
   build_runner: ^2.4.15
