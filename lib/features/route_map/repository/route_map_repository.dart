@@ -16,7 +16,7 @@ Future<Map<String, dynamic>> fetchAllRoutes(Ref ref) async {
   if (response.statusCode == 200) {
     return response.data!;
   } else {
-    throw Exception("Failed to load users");
+    throw Exception("Failed to load routes");
   }
 }
 
@@ -30,6 +30,6 @@ Future<Map<String, dynamic>> fetchRouteWithId(Ref ref, int id) async {
   if (response.statusCode == 200) {
     return response.data!;
   } else {
-    throw Exception("Failed to load users");
+    throw Exception("Failed to load route with id $id");
   }
 }
