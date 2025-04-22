@@ -1,6 +1,6 @@
 # How to use
 
-## Deafult stale time --> 7 days
+## Default stale time --> 7 days
 
     final dio = await ref.read(dioClientProvider.future);
 
