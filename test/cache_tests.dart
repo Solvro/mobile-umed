@@ -34,9 +34,5 @@ Future<void> testCache(WidgetRef ref) async {
 }
 
 void main() {
-  runApp(
-    ProviderScope(
-      child: TestWidget(),
-    ),
-  );
+  runApp(ProviderScope(child: TestWidget()));
 }
