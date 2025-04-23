@@ -6,8 +6,8 @@ import "package:dio_cache_interceptor/dio_cache_interceptor.dart";
 import "package:flutter/widgets.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-import "../app/api_base/dio_client.dart";
-import "../app/api_base/options.dart";
+import "package:mobile_umed/app/api_base/cache_options.dart";
+import "package:mobile_umed/app/api_base/dio_client.dart";
 
 class TestWidget extends ConsumerWidget {
   @override
@@ -31,4 +31,12 @@ Future<void> testCache(WidgetRef ref) async {
   for (int i = 1; i <= 3; i++) {
     print("GET $i   -->   ${await measureTime()} ms");
   }
+}
+
+void main() {
+  runApp(
+    ProviderScope(
+      child: TestWidget(),
+    ),
+  );
 }

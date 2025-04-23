@@ -3,7 +3,7 @@ import "package:dio_cache_interceptor/dio_cache_interceptor.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
-import "options.dart";
+import "cache_options.dart";
 
 part "dio_client.g.dart";
 
