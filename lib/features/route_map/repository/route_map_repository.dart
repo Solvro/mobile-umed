@@ -1,34 +1,28 @@
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
 import "../../../common/data_source/remote/dio_client.dart";
+import "../../../common/models/route.dart";
 
 part "route_map_repository.g.dart";
 
 @riverpod
-Future<Map<String, dynamic>> fetchAllRoutes(Ref ref) async {
+Future<IList<Route>> fetchAllRoutes(Ref ref) async {
   final dio = ref.watch(dioClientProvider);
   final response = await dio.get<Map<String, dynamic>>(
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*",
   );
-
-  if (response.statusCode == 200) {
-    return response.data!;
-  } else {
-    throw Exception("Failed to load routes");
-  }
+  final data = response.data!["data"] as List<dynamic>;
+  return data.map((e) => Route.fromJson(e as Map<String, dynamic>)).toList().lock;
 }
 
 @riverpod
-Future<Map<String, dynamic>> fetchRouteWithId(Ref ref, int id) async {
+Future<Route> fetchRouteWithId(Ref ref, int id) async {
   final dio = ref.watch(dioClientProvider);
   final response = await dio.get<Map<String, dynamic>>(
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*&filter[id][_eq]=$id",
   );
-
-  if (response.statusCode == 200) {
-    return response.data!;
-  } else {
-    throw Exception("Failed to load route with id $id");
-  }
+  final data = response.data!["data"] as List<dynamic>;
+  return Route.fromJson(data[0] as Map<String, dynamic>);
 }
