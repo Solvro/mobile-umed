@@ -24,5 +24,6 @@ Future<Route> fetchRouteWithId(Ref ref, int id) async {
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*&filter[id][_eq]=$id",
   );
   final data = response.data!["data"] as List<dynamic>;
+
   return Route.fromJson(data[0] as Map<String, dynamic>);
 }

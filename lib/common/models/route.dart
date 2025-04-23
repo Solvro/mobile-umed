@@ -9,14 +9,15 @@ part "route.g.dart";
 
 @freezed
 abstract class Route with _$Route {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Route({
     required int id,
     required String name,
     required String description,
-    @Default(0) int calories,
-    @JsonKey(name: "distance") required double length,
-    @Default(0.0) double requiredWater,
-    @JsonKey(name: "estimated_time") required int estimatedTime,
+    required int? calories,
+    required double distance,
+    required double? requiredWater,
+    required int estimatedTime,
     @LandmarkListConverter() required IList<Landmark> landmarks,
   }) = _Route;
 
