@@ -10,7 +10,7 @@ final mockData = [
     name: "Mountain Trail",
     description: "A scenic mountain trail with beautiful views.",
     calories: 500,
-    length: 10.5,
+    distance: 10.5,
     requiredWater: 2,
     estimatedTime: 3,
     landmarks:
@@ -52,7 +52,7 @@ final mockData = [
     name: "Forest Path",
     description: "A peaceful walk through dense forest.",
     calories: 300,
-    length: 5.2,
+    distance: 5.2,
     requiredWater: 1,
     estimatedTime: 2,
     landmarks:
@@ -89,7 +89,7 @@ final mockData = [
     name: "Coastal Walk",
     description: "A refreshing walk along the coastline.",
     calories: 400,
-    length: 8,
+    distance: 8,
     requiredWater: 1.5,
     estimatedTime: 2,
     landmarks:
