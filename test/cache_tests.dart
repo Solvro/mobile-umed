@@ -8,6 +8,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "package:mobile_umed/app/api_base/cache_options.dart";
 import "package:mobile_umed/app/api_base/dio_client.dart";
+import "package:mobile_umed/app/config/env.dart";
 
 class TestWidget extends ConsumerWidget {
   @override
@@ -19,7 +20,7 @@ class TestWidget extends ConsumerWidget {
 
 Future<void> testCache(WidgetRef ref) async {
   final dio = await ref.read(dioClientProvider.future);
-  const url = "https://jsonplaceholder.typicode.com/posts/1";
+  final url = "${Env.apiUrl}items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*";
 
   Future<int> measureTime() async {
     final stopwatch = Stopwatch()..start();
