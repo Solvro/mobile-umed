@@ -1,8 +1,7 @@
 import "dart:async";
 
 import "package:dio_cache_interceptor/dio_cache_interceptor.dart";
-import "package:hive_flutter/hive_flutter.dart";
-import "package:http_cache_hive_store/http_cache_hive_store.dart";
+import "package:http_cache_drift_store/http_cache_drift_store.dart";
 import "package:path_provider/path_provider.dart";
 
 final errorCodes = [
@@ -50,10 +49,11 @@ final errorCodes = [
 
 Future<CacheOptions> getCacheOptions() async {
   final dir = await getApplicationSupportDirectory();
-  await Hive.initFlutter(dir.path);
+  // await Hive.initFlutter(dir.path);
+  // final dir = await getApplicationSupportDirectory();
 
   return CacheOptions(
-    store: HiveCacheStore(dir.path),
+    store: DriftCacheStore(databasePath: dir.path),
     hitCacheOnErrorCodes: errorCodes,
     hitCacheOnNetworkFailure: true,
     maxStale: const Duration(days: 7),
