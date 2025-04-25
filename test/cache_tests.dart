@@ -5,10 +5,9 @@ import "dart:async";
 import "package:dio_cache_interceptor/dio_cache_interceptor.dart";
 import "package:flutter/widgets.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
-import "package:mobile_umed/app/api_base/cache_options.dart";
-import "package:mobile_umed/app/api_base/dio_client.dart";
 import "package:mobile_umed/app/config/env.dart";
+import "package:mobile_umed/common/data_source/remote/cache_options.dart";
+import "package:mobile_umed/common/data_source/remote/dio_client.dart";
 
 class TestWidget extends ConsumerWidget {
   @override
