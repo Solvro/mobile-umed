@@ -49,8 +49,6 @@ final errorCodes = [
 
 Future<CacheOptions> getCacheOptions() async {
   final dir = await getApplicationSupportDirectory();
-  // await Hive.initFlutter(dir.path);
-  // final dir = await getApplicationSupportDirectory();
 
   return CacheOptions(
     store: DriftCacheStore(databasePath: dir.path),
