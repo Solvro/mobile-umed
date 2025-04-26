@@ -9,7 +9,7 @@ part "route_map_repository.g.dart";
 
 @riverpod
 Future<IList<Route>> fetchAllRoutes(Ref ref) async {
-  final dio = ref.watch(dioClientProvider);
+  final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>(
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*",
   );
@@ -19,7 +19,7 @@ Future<IList<Route>> fetchAllRoutes(Ref ref) async {
 
 @riverpod
 Future<Route> fetchRouteWithId(Ref ref, int id) async {
-  final dio = ref.watch(dioClientProvider);
+  final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>(
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*&filter[id][_eq]=$id",
   );
