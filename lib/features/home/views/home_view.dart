@@ -47,9 +47,10 @@ class _MyHomeViewState extends State<MyHomeView> {
                 itemBuilder: (_, index) {
                   final route = testRoutes[index];
                   return SizedBox(
+                    key: ValueKey(route.id),
                     width: 150,
                     child: ElevatedButton(
-                      style: sharedCardButtonStyle(minimumSize: 120, zeroPadding: true),
+                      style: sharedCardButtonStyle(minimumHeight: 120, zeroPadding: true),
                       onPressed: () {
                         // Navigator.push lub showDialog z route.id
                       },
@@ -140,7 +141,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      style: sharedCardButtonStyle(minimumSize: 80),
+                      style: sharedCardButtonStyle(minimumHeight: 80),
                       onPressed: () {},
                       child: const Column(
                         // tu Column, bo ikona nad tekstem
@@ -162,7 +163,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                   const SizedBox(width: 32),
                   Expanded(
                     child: ElevatedButton(
-                      style: sharedCardButtonStyle(minimumSize: 80),
+                      style: sharedCardButtonStyle(minimumHeight: 80),
                       onPressed: () {},
                       child: const Column(
                         mainAxisSize: MainAxisSize.min,

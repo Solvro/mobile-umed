@@ -5,11 +5,11 @@ class RouteItem {
   final String imageUrl;
   final String details;
 
-  RouteItem({required this.id, required this.name, required this.imageUrl, required this.details});
+  const RouteItem({required this.id, required this.name, required this.imageUrl, required this.details});
 }
 
 // 2. Dane testowe
-final List<RouteItem> testRoutes = [
+const List<RouteItem> testRoutes = [
   RouteItem(
     id: "1",
     name: "Spacer po Starym Mieście",
