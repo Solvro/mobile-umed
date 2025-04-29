@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../../common/models/test_routes_list.dart";
+import "../../../common/widgets/home_view_styles.dart";
+import "../../../common/widgets/horizontal_routes_list.dart";
+import "../../../common/widgets/section_header.dart";
 
-import "../../../app/app.dart";
-import "../../route_map/repository/route_map_repository.dart";
+const double _commonGap = 32;
+const double _iconSize = 84;
 
 class MyHomeView extends StatefulWidget {
   const MyHomeView({super.key, required this.title});
@@ -14,61 +17,120 @@ class MyHomeView extends StatefulWidget {
 }
 
 class _MyHomeViewState extends State<MyHomeView> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: Text(widget.title)),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text("Zdrowie gra pierwsze skrzypce", style: TextStyle(fontWeight: FontWeight.w500)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text("You have pushed the button this many times:"),
-            Text("$_counter", style: Theme.of(context).textTheme.headlineMedium),
-            // temporary
-            OutlinedButton(onPressed: () async => context.router.pushRouteMap(2), child: const Text("Route Map")),
-            const TestProviderWidget(),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            const Row(children: [SectionHeader("Najbliżej Ciebie!")]),
+            RouteListWidget(
+              key: const ValueKey("testRoutesList"),
+              routes: testRoutes,
+              onRouteTap: (route) {
+                // something happens
+              },
+            ),
+
+            const SizedBox(height: _commonGap),
+            const SectionHeader("Wybierz trasę!"),
+
+            ElevatedButton(
+              style: sharedCardButtonStyle(),
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: const CircleAvatar(
+                      radius: 36,
+                      backgroundColor: Colors.lightGreen,
+                      child: Icon(Icons.explore, color: Colors.white, size: 72),
+                    ),
+                  ),
+
+                  Flexible(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 120),
+                      child: const Text(
+                        "Rozpocznij swój spacer",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        textAlign: TextAlign.end,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: _commonGap),
+
+            SizedBox(
+              height: 200,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: sharedCardButtonStyle(minimumHeight: 80),
+                      onPressed: () {},
+                      child: const Column(
+                        // tu Column, bo ikona nad tekstem
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 8),
+                          Text(
+                            "Ukończone trasy",
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            textAlign: TextAlign.center,
+                          ),
+                          Spacer(),
+                          Icon(Icons.auto_graph, size: _iconSize, color: Colors.purpleAccent),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: _commonGap),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: sharedCardButtonStyle(minimumHeight: 80),
+                      onPressed: () {},
+                      child: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 8),
+                          Text(
+                            "Dowiedz się więcej",
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            textAlign: TextAlign.center,
+                          ),
+                          Spacer(),
+                          Icon(Icons.public, size: _iconSize, color: Colors.lightGreen),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: "Increment",
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class TestProviderWidget extends ConsumerWidget {
-  const TestProviderWidget({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final routes = ref.watch(fetchAllRoutesProvider);
-    final route_2 = ref.watch(fetchRouteWithIdProvider(2));
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        routes.when(
-          data: (routes) => Text("Routes:\n$routes"),
-          loading: CircularProgressIndicator.new,
-          error: (e, _) => Text("Error: $e"),
-        ),
-        route_2.when(
-          data: (route) => Text("\nRoute 2:\n$route"),
-          loading: CircularProgressIndicator.new,
-          error: (e, _) => Text("Error: $e"),
-        ),
-      ],
     );
   }
 }
