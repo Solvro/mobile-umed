@@ -50,4 +50,14 @@ git-crypt-key
 #Code gen
 *.g.dart
 *.freezed.dart
-*.gen.dart
+
+
+# Flutter Version Management
+.fvm/
+.fvmrc
+
+# VSCode settings
+.vscode/
+
+# backup gitignore
+.gitignore.save
