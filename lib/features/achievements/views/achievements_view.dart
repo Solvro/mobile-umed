@@ -3,6 +3,7 @@ import "../../../common/widgets/horizontal_routes_list.dart";
 import "../../../common/widgets/progressbar.dart";
 import "../../../common/widgets/section_header.dart";
 import "../../../common/widgets/stat_card.dart";
+import "./../../../app/l10n/arb/app_localizations.g.dart";
 import "./../../../common/data_source/mocks/mock_routes.dart";
 
 const double _statWidth = 150;
@@ -20,10 +21,11 @@ class AchievementsView extends StatefulWidget {
 class _AchievementsViewState extends State<AchievementsView> {
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Zdrowie gra pierwsze skrzypce", style: TextStyle(fontWeight: FontWeight.w500)),
+        title: Text(loc.common_finished_routes_title, style: const TextStyle(fontWeight: FontWeight.w500)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -41,7 +43,7 @@ class _AchievementsViewState extends State<AchievementsView> {
                 children: [
                   const SizedBox(height: 10),
                   // ——— Finished Routes ———
-                  const SectionHeader("Ukończone trasy"),
+                  SectionHeader(loc.common_finished_routes),
                   ProgressBar(progress: _progress),
                   const SizedBox(height: _commonGap),
 
@@ -56,20 +58,20 @@ class _AchievementsViewState extends State<AchievementsView> {
                   const SizedBox(height: _commonGap),
 
                   // ——— Statictics ———
-                  const SectionHeader("Statystyki"),
-                  const Row(
+                  SectionHeader(loc.achievements_statistics),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      StatCard(value: "12", label: "km", width: _statWidth, height: _statHeight),
-                      SizedBox(width: 32),
-                      StatCard(value: "999", label: "kcal", width: _statWidth, height: _statHeight),
+                      StatCard(value: "12", label: loc.achievements_kilometers, width: _statWidth, height: _statHeight),
+                      const SizedBox(width: 32),
+                      StatCard(value: "999", label: loc.achievements_kcal, width: _statWidth, height: _statHeight),
                     ],
                   ),
 
                   const SizedBox(height: _commonGap),
 
                   // ——— Achievements ———
-                  const SectionHeader("Osiągnięcia"),
+                  SectionHeader(loc.achievements_achievements),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

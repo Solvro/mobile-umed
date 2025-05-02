@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "../../../common/widgets/home_view_styles.dart";
 import "../../../common/widgets/horizontal_routes_list.dart";
 import "../../../common/widgets/section_header.dart";
+import "./../../../app/l10n/arb/app_localizations.g.dart";
 import "./../../../common/data_source/mocks/mock_routes.dart";
 
 const double _commonGap = 30;
@@ -19,10 +20,12 @@ class MyHomeView extends StatefulWidget {
 class _MyHomeViewState extends State<MyHomeView> {
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Zdrowie gra pierwsze skrzypce", style: TextStyle(fontWeight: FontWeight.w500)),
+        title: Text(loc.common_finished_routes_title, style: const TextStyle(fontWeight: FontWeight.w500)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -34,9 +37,9 @@ class _MyHomeViewState extends State<MyHomeView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const Row(children: [SectionHeader("Najbliżej Ciebie!")]),
+            Row(children: [SectionHeader(loc.home_nearest_to_you)]),
             RouteListWidget(
-              key: const ValueKey("testRoutesList"),
+              key: const ValueKey("mockRoutesList"),
               routes: mockData,
               onRouteTap: (route) {
                 // something happens
@@ -44,7 +47,7 @@ class _MyHomeViewState extends State<MyHomeView> {
             ),
 
             const SizedBox(height: _commonGap),
-            const SectionHeader("Wybierz trasę!"),
+            SectionHeader(loc.home_choose_route),
 
             ElevatedButton(
               style: sharedCardButtonStyle(),
@@ -65,9 +68,9 @@ class _MyHomeViewState extends State<MyHomeView> {
                   Flexible(
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 120),
-                      child: const Text(
-                        "Rozpocznij swój spacer",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      child: Text(
+                        loc.home_start_your_walk,
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
                         textAlign: TextAlign.end,
                       ),
                     ),
@@ -87,19 +90,19 @@ class _MyHomeViewState extends State<MyHomeView> {
                     child: ElevatedButton(
                       style: sharedCardButtonStyle(minimumHeight: 80),
                       onPressed: () {},
-                      child: const Column(
+                      child: Column(
                         // tu Column, bo ikona nad tekstem
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
-                            "Ukończone trasy",
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            loc.common_finished_routes,
+                            style: const TextStyle(fontSize: 16, color: Colors.black),
                             textAlign: TextAlign.center,
                           ),
-                          Spacer(),
-                          Icon(Icons.auto_graph, size: _iconSize, color: Colors.purpleAccent),
-                          Spacer(),
+                          const Spacer(),
+                          const Icon(Icons.auto_graph, size: _iconSize, color: Colors.purpleAccent),
+                          const Spacer(),
                         ],
                       ),
                     ),
@@ -109,18 +112,18 @@ class _MyHomeViewState extends State<MyHomeView> {
                     child: ElevatedButton(
                       style: sharedCardButtonStyle(minimumHeight: 80),
                       onPressed: () {},
-                      child: const Column(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
-                            "Dowiedz się więcej",
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            loc.home_learn_more,
+                            style: const TextStyle(fontSize: 16, color: Colors.black),
                             textAlign: TextAlign.center,
                           ),
-                          Spacer(),
-                          Icon(Icons.public, size: _iconSize, color: Colors.lightGreen),
-                          Spacer(),
+                          const Spacer(),
+                          const Icon(Icons.public, size: _iconSize, color: Colors.lightGreen),
+                          const Spacer(),
                         ],
                       ),
                     ),
