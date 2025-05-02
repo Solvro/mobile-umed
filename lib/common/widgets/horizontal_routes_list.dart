@@ -1,19 +1,12 @@
 import "package:flutter/material.dart";
-import "../models/test_routes_list.dart";
+import "../models/route.dart" as app_route;
 import "./home_view_styles.dart";
 
 class RouteListWidget extends StatelessWidget {
-  /// List of routes do disply
-  final List<RouteItem> routes;
-
-  /// Width of a widget(default 190)
+  final List<app_route.Route> routes;
+  final void Function(app_route.Route) onRouteTap;
   final double height;
-
-  /// Width of a single item (default 150)
   final double itemWidth;
-
-  /// What happens after the Tap
-  final void Function(RouteItem route) onRouteTap;
 
   const RouteListWidget({
     super.key,
@@ -33,6 +26,8 @@ class RouteListWidget extends StatelessWidget {
         separatorBuilder: (_, __) => const SizedBox(width: 10),
         itemBuilder: (_, index) {
           final route = routes[index];
+          final imageUrl = "https://picsum.photos/seed/${route.id}/300/200";
+
           return SizedBox(
             key: ValueKey(route.id),
             width: itemWidth,
@@ -44,12 +39,14 @@ class RouteListWidget extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
+                    // tło obrazka
                     Image.network(
-                      route.imageUrl,
+                      imageUrl,
                       fit: BoxFit.cover,
                       errorBuilder:
                           (_, __, ___) => const Center(child: Icon(Icons.broken_image, size: 48, color: Colors.grey)),
                     ),
+                    // gradient + nazwa
                     Container(
                       alignment: Alignment.bottomCenter,
                       decoration: const BoxDecoration(
@@ -62,7 +59,7 @@ class RouteListWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
                       child: Text(
                         route.name,
-                        style: const TextStyle(color: Colors.white, fontSize: 14),
+                        style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                         textAlign: TextAlign.center,
                       ),
                     ),
