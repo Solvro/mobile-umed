@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-import "../../../common/models/test_routes_list.dart";
 import "../../../common/widgets/home_view_styles.dart";
 import "../../../common/widgets/horizontal_routes_list.dart";
 import "../../../common/widgets/section_header.dart";
+import "./../../../common/data_source/mocks/mock_routes.dart";
 
-const double _commonGap = 32;
+const double _commonGap = 30;
 const double _iconSize = 84;
 
 class MyHomeView extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MyHomeViewState extends State<MyHomeView> {
             const Row(children: [SectionHeader("Najbliżej Ciebie!")]),
             RouteListWidget(
               key: const ValueKey("testRoutesList"),
-              routes: testRoutes,
+              routes: mockData,
               onRouteTap: (route) {
                 // something happens
               },

@@ -1,13 +1,13 @@
 import "package:flutter/material.dart";
-import "../../../common/models/test_routes_list.dart";
 import "../../../common/widgets/horizontal_routes_list.dart";
 import "../../../common/widgets/progressbar.dart";
 import "../../../common/widgets/section_header.dart";
 import "../../../common/widgets/stat_card.dart";
+import "./../../../common/data_source/mocks/mock_routes.dart";
 
 const double _statWidth = 150;
 const double _statHeight = 160;
-const double _commonGap = 32;
+const double _commonGap = 28;
 double _progress = 0.3;
 
 class AchievementsView extends StatefulWidget {
@@ -47,7 +47,7 @@ class _AchievementsViewState extends State<AchievementsView> {
 
                   RouteListWidget(
                     key: const ValueKey("finishedRoutes"),
-                    routes: testRoutes,
+                    routes: mockData,
                     onRouteTap: (route) {
                       // obsługa tapnięcia
                     },
