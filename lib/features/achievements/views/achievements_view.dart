@@ -1,12 +1,14 @@
 import "package:flutter/material.dart";
 import "../../../common/models/test_routes_list.dart";
 import "../../../common/widgets/horizontal_routes_list.dart";
+import "../../../common/widgets/progressbar.dart";
 import "../../../common/widgets/section_header.dart";
 import "../../../common/widgets/stat_card.dart";
 
 const double _statWidth = 150;
 const double _statHeight = 160;
 const double _commonGap = 32;
+double _progress = 0.3;
 
 class AchievementsView extends StatefulWidget {
   const AchievementsView({super.key, required this.title});
@@ -38,9 +40,11 @@ class _AchievementsViewState extends State<AchievementsView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 10),
-
                   // ——— Finished Routes ———
                   const SectionHeader("Ukończone trasy"),
+                  ProgressBar(progress: _progress),
+                  const SizedBox(height: _commonGap),
+
                   RouteListWidget(
                     key: const ValueKey("finishedRoutes"),
                     routes: testRoutes,
