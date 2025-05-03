@@ -60,17 +60,11 @@ mixin _$AppTextThemeTailorMixin on ThemeExtension<AppTextTheme> {
             other is AppTextTheme &&
             const DeepCollectionEquality().equals(headline, other.headline) &&
             const DeepCollectionEquality().equals(title, other.title) &&
-            const DeepCollectionEquality().equals(
-              titleWhite,
-              other.titleWhite,
-            ) &&
+            const DeepCollectionEquality().equals(titleWhite, other.titleWhite) &&
             const DeepCollectionEquality().equals(body, other.body) &&
             const DeepCollectionEquality().equals(bodyGrey, other.bodyGrey) &&
             const DeepCollectionEquality().equals(boldBody, other.boldBody) &&
-            const DeepCollectionEquality().equals(
-              boldBodyGrey,
-              other.boldBodyGrey,
-            ));
+            const DeepCollectionEquality().equals(boldBodyGrey, other.boldBodyGrey));
   }
 
   @override

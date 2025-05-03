@@ -16,12 +16,7 @@ mixin _$AppColorThemeTailorMixin on ThemeExtension<AppColorTheme> {
   HexColor get green;
 
   @override
-  AppColorTheme copyWith({
-    HexColor? onyx,
-    HexColor? white,
-    HexColor? jasper,
-    HexColor? green,
-  }) {
+  AppColorTheme copyWith({HexColor? onyx, HexColor? white, HexColor? jasper, HexColor? green}) {
     return AppColorTheme(
       onyx: onyx ?? this.onyx,
       white: white ?? this.white,

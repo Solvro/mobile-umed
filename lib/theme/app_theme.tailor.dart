@@ -15,18 +15,15 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
 
   @override
   AppTheme copyWith({AppColorTheme? colorTheme, AppTextTheme? textTheme}) {
-    return AppTheme(
-      colorTheme: colorTheme ?? this.colorTheme,
-      textTheme: textTheme ?? this.textTheme,
-    );
+    return AppTheme(colorTheme: colorTheme ?? this.colorTheme, textTheme: textTheme ?? this.textTheme);
   }
 
   @override
   AppTheme lerp(covariant ThemeExtension<AppTheme>? other, double t) {
     if (other is! AppTheme) return this as AppTheme;
     return AppTheme(
-      colorTheme: colorTheme.lerp(other.colorTheme, t) as AppColorTheme,
-      textTheme: textTheme.lerp(other.textTheme, t) as AppTextTheme,
+      colorTheme: colorTheme.lerp(other.colorTheme, t),
+      textTheme: textTheme.lerp(other.textTheme, t),
     );
   }
 
@@ -35,10 +32,7 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AppTheme &&
-            const DeepCollectionEquality().equals(
-              colorTheme,
-              other.colorTheme,
-            ) &&
+            const DeepCollectionEquality().equals(colorTheme, other.colorTheme) &&
             const DeepCollectionEquality().equals(textTheme, other.textTheme));
   }
 
