@@ -12,8 +12,11 @@ abstract class Landmark with _$Landmark {
     required int id,
     required String name,
     required String description,
+    required LandmarkType type,
     @LatLngConverter() required LatLng location,
   }) = _Landmark;
 
   factory Landmark.fromJson(Map<String, dynamic> json) => _$LandmarkFromJson(json);
 }
+
+enum LandmarkType { checkpoint, pulsometer }
