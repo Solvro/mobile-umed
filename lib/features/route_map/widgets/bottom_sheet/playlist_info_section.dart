@@ -19,18 +19,32 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
       padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 20,
+        spacing: 5,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              DecoratedBox(decoration: _decoration(), child: const Icon(Icons.queue_music)),
-              DecoratedBox(decoration: _decoration(), child: const Icon(Icons.play_circle_fill)),
-              DecoratedBox(decoration: _decoration(), child: const Icon(Icons.apple)),
+              Container(
+                decoration: _decoration(),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: const Icon(Icons.queue_music),
+              ),
+              Container(
+                decoration: _decoration(),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: const Icon(Icons.play_circle_fill),
+              ),
+              Container(
+                decoration: _decoration(),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: const Icon(Icons.apple),
+              ),
             ],
           ),
           ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
+            padding: EdgeInsets.zero,
             itemCount: widget.songs.length,
             itemBuilder: (context, index) {
               final song = widget.songs[index];
