@@ -1,12 +1,12 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
 import "../models/bottom_sheet_mode.dart";
+import "sheet_top_handle.dart";
 
 class MapBottomSheet extends ConsumerWidget {
-  const MapBottomSheet({super.key, required this.child, required this.button, required this.controls});
+  const MapBottomSheet({super.key, required this.child, required this.button, this.controls});
 
-  final SliverPersistentHeaderDelegate controls;
+  final Widget? controls;
   final Widget child;
   final ElevatedButton button;
 
@@ -34,7 +34,7 @@ class MapBottomSheet extends ConsumerWidget {
                   controller: scrollController,
                   slivers: [
                     // Title at the top
-                    SliverPersistentHeader(pinned: true, delegate: controls),
+                    SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: controls)),
                     SliverToBoxAdapter(child: child),
                   ],
                 ),

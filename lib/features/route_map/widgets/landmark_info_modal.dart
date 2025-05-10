@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "../../../common/models/landmark.dart";
+import "../../../common/widgets/cached_image.dart";
 
 class LandmarkInfoModal extends StatelessWidget {
   final Landmark landmark;
@@ -30,11 +31,9 @@ class LandmarkInfoModal extends StatelessWidget {
             // Image placeholder
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Container(
-                height: 160,
-                width: double.infinity,
-                color: Colors.grey[300],
-                child: const Icon(Icons.image, size: 48, color: Colors.grey),
+              child: const CachedImage(
+                //for now there is no image url property in the landmark model
+                "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
               ),
             ),
 

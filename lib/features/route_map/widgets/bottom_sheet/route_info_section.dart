@@ -8,6 +8,9 @@ class RouteInfoSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timer = ref.watch(routeTimerProvider);
+    final distance = ref.watch(distanceProvider);
+    final speed = ref.watch(speedProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Column(
@@ -27,12 +30,12 @@ class RouteInfoSection extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 decoration: _decoration(),
-                child: const Text("1000"),
+                child: Text("$distance m"),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 decoration: _decoration(),
-                child: const Text("6fd"),
+                child: Text("$speed km/h"),
               ),
             ],
           ),
