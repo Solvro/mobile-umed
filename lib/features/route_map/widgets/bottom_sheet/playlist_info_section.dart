@@ -1,6 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "../../../../common/models/song.dart";
+import "../../../../common/widgets/music_service_button.dart";
 import "song_tile.dart";
 
 class PlaylistInfoSection extends StatefulWidget {
@@ -24,20 +25,23 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                decoration: _decoration(),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.queue_music),
+              MusicServiceButton(
+                icon: Icons.queue_music,
+                onPressed: () {
+                  debugPrint("tu bedzie link do spotify");
+                },
               ),
-              Container(
-                decoration: _decoration(),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.play_circle_fill),
+              MusicServiceButton(
+                icon: Icons.play_circle_fill,
+                onPressed: () {
+                  debugPrint("tu bedzie link do yt music");
+                },
               ),
-              Container(
-                decoration: _decoration(),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.apple),
+              MusicServiceButton(
+                icon: Icons.apple,
+                onPressed: () {
+                  debugPrint("tu bedzie link do apple music");
+                },
               ),
             ],
           ),
@@ -55,11 +59,4 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
       ),
     );
   }
-}
-
-BoxDecoration _decoration() {
-  return BoxDecoration(
-    border: Border.all(color: Colors.green, width: 2),
-    borderRadius: const BorderRadius.all(Radius.circular(12)),
-  );
 }
