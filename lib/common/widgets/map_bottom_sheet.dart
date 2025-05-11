@@ -8,13 +8,13 @@ class MapBottomSheet extends ConsumerWidget {
 
   final Widget? controls;
   final Widget child;
-  final ElevatedButton button;
+  final Widget button;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(sheetModeProvider);
     const topBottomOffset = 80.0;
-    final sheetPosition = mode == SheetMode.half ? 0.3 : 0.5;
+    final sheetPosition = mode == SheetMode.half ? 0.26 : 0.45;
     return Stack(
       children: [
         Positioned(
@@ -24,16 +24,18 @@ class MapBottomSheet extends ConsumerWidget {
           top: topBottomOffset,
           child: DraggableScrollableSheet(
             snap: true,
-            initialChildSize: sheetPosition,
+            initialChildSize: 0.05,
             minChildSize: 0.05,
             maxChildSize: sheetPosition,
             builder: (context, scrollController) {
-              return ColoredBox(
-                color: Colors.white,
+              return DecoratedBox(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                ),
                 child: CustomScrollView(
                   controller: scrollController,
                   slivers: [
-                    // Title at the top
                     SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: controls)),
                     SliverToBoxAdapter(child: child),
                   ],
@@ -46,9 +48,13 @@ class MapBottomSheet extends ConsumerWidget {
           bottom: 0,
           left: 0,
           right: 0,
-          child: SizedBox(
+          child: Container(
             height: topBottomOffset,
-            child: ColoredBox(color: Colors.white, child: SafeArea(top: false, child: Center(child: button))),
+            color: Colors.white,
+            child: SafeArea(
+              top: false,
+              child: Align(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: button)),
+            ),
           ),
         ),
       ],

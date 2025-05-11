@@ -34,8 +34,8 @@ class RouteMapWidget extends StatelessWidget {
                 return Marker(
                   point: landmark.location,
                   child: GestureDetector(
-                    onTap: () {
-                      showDialog<LandmarkInfoModal>(
+                    onTap: () async {
+                      await showDialog<LandmarkInfoModal>(
                         context: context,
                         builder: (context) => LandmarkInfoModal(landmark: landmark),
                       );

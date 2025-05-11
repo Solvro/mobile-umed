@@ -8,7 +8,7 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.red, borderRadius: BorderRadius.vertical(top: Radius.circular(12))),
+      color: Colors.white,
       padding: const EdgeInsets.all(8),
       height: maxExtent,
       child: Column(

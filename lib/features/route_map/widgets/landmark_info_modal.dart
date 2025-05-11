@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "../../../common/models/landmark.dart";
 import "../../../common/widgets/cached_image.dart";
+import "../../../common/widgets/main_action_button.dart";
 
 class LandmarkInfoModal extends StatelessWidget {
   final Landmark landmark;
@@ -19,13 +20,8 @@ class LandmarkInfoModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min, // Fit to content
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(landmark.name),
-                IconButton(icon: const Icon(Icons.chevron_left), onPressed: () => Navigator.of(context).pop()),
-              ],
-            ),
+            Text(landmark.name),
+
             const SizedBox(height: 12),
 
             // Image placeholder
@@ -40,7 +36,10 @@ class LandmarkInfoModal extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Description field
-            SizedBox(height: 400, child: Text(landmark.description, maxLines: 15)),
+            Expanded(
+              child: Text(landmark.description, maxLines: 15, textAlign: TextAlign.start, overflow: TextOverflow.fade),
+            ),
+            MainActionButton(text: "Zamknij", onPressed: () => Navigator.of(context).pop()),
           ],
         ),
       ),

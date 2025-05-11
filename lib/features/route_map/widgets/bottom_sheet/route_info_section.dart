@@ -11,7 +11,8 @@ class RouteInfoSection extends ConsumerWidget {
     final distance = ref.watch(distanceProvider);
     final speed = ref.watch(speedProvider);
 
-    return Padding(
+    return Container(
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Column(
         spacing: 10,

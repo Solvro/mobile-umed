@@ -1,10 +1,13 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
+
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/app.dart";
 import "../../../common/models/bottom_sheet_mode.dart";
 import "../../../common/models/route.dart";
+import "../../../common/widgets/main_action_button.dart";
 import "../../../common/widgets/map_bottom_sheet.dart";
+import "../../../common/widgets/secondary_action_button.dart";
 import "../widgets/bottom_sheet/playlist_info_section.dart";
 import "../widgets/bottom_sheet/route_info_section.dart";
 import "../widgets/map/route_map_widget.dart";
@@ -16,10 +19,10 @@ class RouteMapView extends ConsumerStatefulWidget {
   final Route route;
 
   @override
-  _RouteMapViewState createState() => _RouteMapViewState();
+  RouteMapViewState createState() => RouteMapViewState();
 }
 
-class _RouteMapViewState extends ConsumerState<RouteMapView> {
+class RouteMapViewState extends ConsumerState<RouteMapView> {
   late SheetMode _currentSheetMode;
 
   @override
@@ -44,29 +47,35 @@ class _RouteMapViewState extends ConsumerState<RouteMapView> {
           RouteMapWidget(landmarks: widget.route.landmarks),
           RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3, progressBetweenLandmarks: 0.7),
           MapBottomSheet(
-            button: ElevatedButton(
+            button: MainActionButton(
+              text: "Zakończ trase",
               onPressed: () {
                 context.router.pop();
               },
-              child: const Text("Zakoncz trase"),
             ),
-            controls: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(sheetModeProvider.notifier).state = SheetMode.half;
-                  },
-                  child: const Text("1"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
-                  },
-                  child: const Text("2"),
-                ),
-              ],
+            controls: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                spacing: 18,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SecondaryActionButton(
+                    onPressed: () {
+                      ref.read(sheetModeProvider.notifier).state = SheetMode.half;
+                    },
+                    text: "Opis trasy",
+                  ),
+
+                  SecondaryActionButton(
+                    onPressed: () {
+                      ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+                    },
+                    text: "Playlista",
+                  ),
+                ],
+              ),
             ),
+
             child:
                 (_currentSheetMode == SheetMode.half)
                     ? const RouteInfoSection()

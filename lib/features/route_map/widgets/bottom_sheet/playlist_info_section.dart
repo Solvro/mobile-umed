@@ -1,7 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "../../../../common/models/song.dart";
-import "../../../../common/widgets/music_service_button.dart";
+import "../../../../common/widgets/secondary_action_button.dart";
 import "song_tile.dart";
 
 class PlaylistInfoSection extends StatefulWidget {
@@ -16,29 +16,31 @@ class PlaylistInfoSection extends StatefulWidget {
 class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 5,
+        spacing: 15,
         children: [
           Row(
+            spacing: 20,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              MusicServiceButton(
-                icon: Icons.queue_music,
+              SecondaryActionButton(
+                iconData: Icons.queue_music,
                 onPressed: () {
                   debugPrint("tu bedzie link do spotify");
                 },
               ),
-              MusicServiceButton(
-                icon: Icons.play_circle_fill,
+              SecondaryActionButton(
+                iconData: Icons.play_circle_fill,
                 onPressed: () {
                   debugPrint("tu bedzie link do yt music");
                 },
               ),
-              MusicServiceButton(
-                icon: Icons.apple,
+              SecondaryActionButton(
+                iconData: Icons.apple,
                 onPressed: () {
                   debugPrint("tu bedzie link do apple music");
                 },
