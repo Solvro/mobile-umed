@@ -77,6 +77,12 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+  fonts:
+    - family: Urbanist
+      fonts:
+        - asset: assets/fonts/Urbanist-Regular.ttf
+        - asset: assets/fonts/Urbanist-Bold.ttf
+          weight: 700
     
 lint_staged:
   "lib/**.dart": dart format && dart fix --apply

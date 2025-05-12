@@ -1,76 +1,85 @@
 import "package:flutter/material.dart";
+import "color_consts.dart";
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFF9AB55E), // Green
-      secondary: Color(0xFFD93B3A), // Jasper
-      surface: Color(0xFFFAFAFA), // White (#FAFAFA)
-      onPrimary: Color(0xFFFAFAFA), // White (#FAFAFA)
-      onSecondary: Color(0xFFFAFAFA), // White (#FAFAFA)
-      onSurface: Color(0xFF0F0F0F), // Onyx
-      error: Color(0xFFD93B3A), // Jasper
-      onError: Color(0xFFFAFAFA), // White (#FAFAFA)
+      primary: ColorConsts.primary,
+      secondary: ColorConsts.secondary,
+      surface: ColorConsts.surface,
+      onPrimary: ColorConsts.onPrimary,
+      onSecondary: ColorConsts.onSecondary,
+      onSurface: ColorConsts.onSurface,
+      error: ColorConsts.error,
+      onError: ColorConsts.onError,
     ),
     textTheme: const TextTheme(
       headlineSmall: TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.w500,
-        color: Color(0xFF0F0F0F), // Onyx
+        color: ColorConsts.onSurface,
+        fontFamily: "Urbanist",
       ),
       titleMedium: TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.w500,
-        color: Color(0xFF0F0F0F), // Onyx
+        color: ColorConsts.onSurface,
+        fontFamily: "Urbanist",
       ),
       bodyLarge: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w400,
-        color: Color(0xFF0F0F0F), // Onyx
+        color: ColorConsts.onSurface,
         height: 1.2,
+        fontFamily: "Urbanist",
       ),
       bodyMedium: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w400,
-        color: Color(0xFF6B6B6B), // Dim Gray
+        color: ColorConsts.dimGray,
         height: 1.2,
+        fontFamily: "Urbanist",
       ),
     ),
   );
 
   static ThemeData darkTheme = ThemeData(
     colorScheme: const ColorScheme.dark(
-      primary: Color(0xFF9AB55E), // Green
-      secondary: Color(0xFFD93B3A), // Jasper
-      surface: Color(0xFF0F0F0F), // Onyx
-      onPrimary: Color(0xFFFAFAFA), // White (#FAFAFA)
-      onSecondary: Color(0xFFFAFAFA), // White (#FAFAFA)
-      onSurface: Color(0xFFFAFAFA), // White (#FAFAFA)
-      error: Color(0xFFD93B3A), // Jasper
-      onError: Color(0xFFFAFAFA), // White (#FAFAFA)
+      primary: ColorConsts.primary,
+      secondary: ColorConsts.secondary,
+      surface: ColorConsts.onSurface,
+      onPrimary: ColorConsts.onPrimary,
+      onSecondary: ColorConsts.onSecondary,
+      onSurface: ColorConsts.onPrimary,
+      error: ColorConsts.error,
+      onError: ColorConsts.onError,
     ),
     textTheme: const TextTheme(
       headlineSmall: TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.w500,
-        color: Color(0xFFFAFAFA), // White (#FAFAFA)
+        color: ColorConsts.onPrimary,
+        fontFamily: "Urbanist",
       ),
       titleMedium: TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.w500,
-        color: Color(0xFFFAFAFA), // White (#FAFAFA)
+        color: ColorConsts.onPrimary,
+        fontFamily: "Urbanist",
       ),
       bodyLarge: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w400,
-        color: Color(0xFFFAFAFA), // White (#FAFAFA)
+        color: ColorConsts.onPrimary,
         height: 1.2,
+        fontFamily: "Urbanist",
       ),
       bodyMedium: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w400,
-        color: Color(0xFF6B6B6B), // Dim Gray
+        color: ColorConsts.dimGray,
         height: 1.2,
+        fontFamily: "Urbanist",
       ),
     ),
   );
