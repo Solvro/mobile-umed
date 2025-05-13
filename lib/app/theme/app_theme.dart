@@ -35,3 +35,8 @@ class AppTheme implements AppThemeData {
     bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
   );
 }
+
+extension AppThemeX on BuildContext {
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+  TextTheme get textTheme => Theme.of(this).textTheme;
+}
