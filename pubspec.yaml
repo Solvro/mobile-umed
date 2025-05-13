@@ -65,11 +65,18 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   flutter_lints: ^5.0.0
   envied_generator: ^1.1.1
+  flutter_gen_runner: ^5.10.0
 
 flutter_gen:
   output: lib/app/assets/
   integrations:
     flutter_svg: true
+  assets:
+    enabled: true
+  fonts:
+    enabled: true
+    outputs:
+      class_name: FontFamily
 
 flutter:
   uses-material-design: true
@@ -77,6 +84,25 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    
+  fonts:
+    - family: Urbanist
+      fonts:
+        - asset: assets/fonts/Urbanist-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Urbanist-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Urbanist-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Urbanist-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Urbanist-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Urbanist-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Urbanist-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Urbanist-Black.ttf
+          weight: 900
+      
 lint_staged:
   "lib/**.dart": dart format && dart fix --apply

@@ -1,0 +1,37 @@
+import "package:flutter/material.dart";
+import "../assets/fonts.gen.dart";
+import "color_consts.dart";
+
+abstract interface class AppThemeData {
+  ThemeData get light => ThemeData.light();
+
+  ThemeData get dark => ThemeData.dark();
+}
+
+class AppTheme implements AppThemeData {
+  @override
+  ThemeData get dark => ThemeData();
+
+  @override
+  ThemeData get light => ThemeData(
+    colorScheme: const ColorScheme.light(
+      primary: ColorConsts.primary,
+      secondary: ColorConsts.secondary,
+      surface: ColorConsts.surface,
+      onPrimary: ColorConsts.onPrimary,
+      onSecondary: ColorConsts.onSecondary,
+      onSurface: ColorConsts.onSurface,
+      error: ColorConsts.error,
+      onError: ColorConsts.onError,
+    ),
+    textTheme: _textTheme,
+    fontFamily: FontFamily.urbanist,
+  );
+
+  static const _textTheme = TextTheme(
+    headlineSmall: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: ColorConsts.onSurface),
+    titleMedium: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: ColorConsts.onSurface),
+    bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onSurface, height: 1.2),
+    bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
+  );
+}
