@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "../../app/config/ui_config.dart";
 
 class SheetTopHandle extends SliverPersistentHeaderDelegate {
   const SheetTopHandle({this.controls});
@@ -8,20 +9,30 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(8),
+      decoration: getTopDecoration(),
+      padding: const EdgeInsets.symmetric(vertical: BottomSheetConfig.smallVerticalPadding),
       height: maxExtent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [const _SheetHandle(), const SizedBox(height: 15), if (controls != null) controls!],
+        children: [
+          const _SheetHandle(),
+          const SizedBox(height: BottomSheetHeaderConfig.handleContentSpacing),
+          if (controls != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: BottomSheetConfig.horizontalPadding),
+              child: controls,
+            ),
+        ],
       ),
     );
   }
 
   @override
-  double get minExtent => controls != null ? 100 : 40;
+  double get minExtent =>
+      controls != null ? BottomSheetHeaderConfig.headerWithControls : BottomSheetHeaderConfig.headerWithoutControls;
   @override
-  double get maxExtent => controls != null ? 100 : 40;
+  double get maxExtent =>
+      controls != null ? BottomSheetHeaderConfig.headerWithControls : BottomSheetHeaderConfig.headerWithoutControls;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
@@ -32,19 +43,24 @@ class _SheetHandle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(children: [LineHandle(), SizedBox(height: 6), LineHandle()]);
+    return const Column(children: [_LineHandle(), SizedBox(height: 6), _LineHandle()]);
   }
 }
 
-class LineHandle extends StatelessWidget {
-  const LineHandle({super.key});
+class _LineHandle extends StatelessWidget {
+  const _LineHandle();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 36,
-      height: 4,
+      width: BottomSheetHeaderConfig.handleLength,
+      height: BottomSheetHeaderConfig.handleWidth,
       decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(100)),
     );
   }
 }
+
+BoxDecoration getTopDecoration() => const BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.vertical(top: Radius.circular(BottomSheetHeaderConfig.roundedTopRadius)),
+);

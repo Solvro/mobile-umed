@@ -3,6 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/app.dart";
+import "../../../app/config/ui_config.dart";
 import "../../../common/models/bottom_sheet_mode.dart";
 import "../../../common/models/route.dart";
 import "../../../common/widgets/main_action_button.dart";
@@ -53,27 +54,24 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
                 context.router.pop();
               },
             ),
-            controls: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                spacing: 18,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SecondaryActionButton(
-                    onPressed: () {
-                      ref.read(sheetModeProvider.notifier).state = SheetMode.half;
-                    },
-                    text: "Opis trasy",
-                  ),
+            controls: Row(
+              spacing: BottomSheetHeaderConfig.controlsSpacing,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SecondaryActionButton(
+                  onPressed: () {
+                    ref.read(sheetModeProvider.notifier).state = SheetMode.half;
+                  },
+                  text: "Opis trasy",
+                ),
 
-                  SecondaryActionButton(
-                    onPressed: () {
-                      ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
-                    },
-                    text: "Playlista",
-                  ),
-                ],
-              ),
+                SecondaryActionButton(
+                  onPressed: () {
+                    ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+                  },
+                  text: "Playlista",
+                ),
+              ],
             ),
 
             child:

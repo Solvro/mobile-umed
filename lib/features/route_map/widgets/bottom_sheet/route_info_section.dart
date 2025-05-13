@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../../../app/config/ui_config.dart";
 import "../../../../common/controllers/route_controller.dart";
 
 class RouteInfoSection extends ConsumerWidget {
@@ -12,32 +13,19 @@ class RouteInfoSection extends ConsumerWidget {
     final speed = ref.watch(speedProvider);
 
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+      padding: const EdgeInsets.all(RouteInfoConfig.contentPadding),
       child: Column(
-        spacing: 10,
+        spacing: RouteInfoConfig.verticalSpacing,
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-            decoration: _decoration(),
-            alignment: Alignment.center,
-            child: Text(_formatDuration(timer)),
-          ),
+          _informationBox(_formatDuration(timer)),
           Row(
+            spacing: RouteInfoConfig.infoBubbleSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                decoration: _decoration(),
-                child: Text("$distance m"),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                decoration: _decoration(),
-                child: Text("$speed km/h"),
-              ),
+              Expanded(child: _informationBox("$distance m")),
+              Expanded(child: _informationBox("$speed km/h")),
             ],
           ),
         ],
@@ -46,10 +34,19 @@ class RouteInfoSection extends ConsumerWidget {
   }
 }
 
+Widget _informationBox(String text) {
+  return Container(
+    constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight), // set your desired min height
+    alignment: Alignment.center,
+    decoration: _decoration(),
+    child: Text(text, textAlign: TextAlign.center),
+  );
+}
+
 BoxDecoration _decoration() {
   return BoxDecoration(
     border: Border.all(color: Colors.green, width: 2),
-    borderRadius: const BorderRadius.all(Radius.circular(22)),
+    borderRadius: const BorderRadius.all(Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
   );
 }
 

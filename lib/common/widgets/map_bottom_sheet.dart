@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../app/config/ui_config.dart";
 import "../models/bottom_sheet_mode.dart";
 import "sheet_top_handle.dart";
 
@@ -13,31 +14,33 @@ class MapBottomSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(sheetModeProvider);
-    const topBottomOffset = 80.0;
-    final sheetPosition = mode == SheetMode.half ? 0.26 : 0.45;
+    final sheetPosition =
+        mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
     return Stack(
       children: [
         Positioned(
-          bottom: topBottomOffset,
+          bottom: BottomSheetConfig.fixedBottomSpace,
           left: 0,
           right: 0,
-          top: topBottomOffset,
+          top: BottomSheetConfig.fixedBottomSpace,
           child: DraggableScrollableSheet(
             snap: true,
-            initialChildSize: 0.05,
-            minChildSize: 0.05,
+            initialChildSize: BottomSheetConfig.hiddenSizePercent,
+            minChildSize: BottomSheetConfig.hiddenSizePercent,
             maxChildSize: sheetPosition,
             builder: (context, scrollController) {
               return DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                ),
+                decoration: getTopDecoration(),
                 child: CustomScrollView(
                   controller: scrollController,
                   slivers: [
                     SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: controls)),
-                    SliverToBoxAdapter(child: child),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: BottomSheetConfig.horizontalPadding),
+                        child: child,
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -49,11 +52,19 @@ class MapBottomSheet extends ConsumerWidget {
           left: 0,
           right: 0,
           child: Container(
-            height: topBottomOffset,
+            height: BottomSheetConfig.fixedBottomSpace,
             color: Colors.white,
             child: SafeArea(
               top: false,
-              child: Align(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: button)),
+              child: Align(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: BottomSheetConfig.horizontalPadding,
+                    vertical: BottomSheetConfig.mainButtonVerticalPadding,
+                  ),
+                  child: button,
+                ),
+              ),
             ),
           ),
         ),

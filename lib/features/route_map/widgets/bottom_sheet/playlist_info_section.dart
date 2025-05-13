@@ -1,5 +1,6 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
+import "../../../../app/config/ui_config.dart";
 import "../../../../common/models/song.dart";
 import "../../../../common/widgets/secondary_action_button.dart";
 import "song_tile.dart";
@@ -17,14 +18,13 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.all(PlaylistInfoConfig.contentPadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 15,
+        spacing: PlaylistInfoConfig.verticalSpacing,
         children: [
           Row(
-            spacing: 20,
+            spacing: PlaylistInfoConfig.horizontalButtonSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SecondaryActionButton(
