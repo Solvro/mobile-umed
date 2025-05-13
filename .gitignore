@@ -50,3 +50,4 @@ git-crypt-key
 #Code gen
 *.g.dart
 *.freezed.dart
+*.gen.dart

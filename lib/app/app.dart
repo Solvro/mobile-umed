@@ -6,8 +6,8 @@ import "../features/dashboard/dashboard_page.dart";
 import "../features/home/home_page.dart";
 import "../features/others/others_page.dart";
 import "../features/route_map/route_map_page.dart";
-import "../theme/app_theme.dart";
 import "l10n/arb/app_localizations.g.dart";
+import "theme/app_theme.dart";
 
 part "router.dart";
 
@@ -16,10 +16,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO(tomasz-trela): move this to logic layer
+    final appTheme = AppTheme();
     return MaterialApp.router(
       title: "Flutter Demo",
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: appTheme.light,
+      darkTheme: appTheme.dark,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: _router,
