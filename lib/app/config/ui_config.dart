@@ -31,6 +31,10 @@ abstract class PlaylistInfoConfig {
   static const contentPadding = 5.0;
   static const verticalSpacing = 15.0;
   static const horizontalButtonSpacing = 25.0;
+
+  // song tile
+  static const songTileDotRad = 20.0;
+  static const songTileSpacing = 20.0;
 }
 
 abstract class RouteInfoConfig {
@@ -54,4 +58,11 @@ abstract class ProgressBarConfig {
   static const dotRad = 4.0;
   static const dotLinePadding = 2.0;
   static const lineHeight = 2.0;
+}
+
+abstract class ButtonsConfig {
+  static const secondaryButtonRadius = 20.0;
+  static const secondaryButtonShadowRadius = 25.0;
+
+  static const minimumSize = 44.0;
 }

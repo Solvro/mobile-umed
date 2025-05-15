@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "../../app/config/ui_config.dart";
 
 class SecondaryActionButton extends StatelessWidget {
   const SecondaryActionButton({
@@ -6,36 +7,41 @@ class SecondaryActionButton extends StatelessWidget {
     required this.onPressed,
     this.text,
     this.iconData,
-    this.backgroundColor = Colors.green,
-    this.textColor = Colors.white,
+    this.backgroundColor,
+    this.textColor,
   });
 
   final String? text;
   final IconData? iconData;
   final VoidCallback onPressed;
-  final Color backgroundColor;
-  final Color textColor;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
+    final chosenBgColor = backgroundColor ?? Theme.of(context).colorScheme.primary;
+    final chosenTextColor = textColor ?? Theme.of(context).colorScheme.onPrimary;
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonShadowRadius),
           boxShadow: const [BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 2, spreadRadius: 1)],
         ),
         width: double.infinity,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            minimumSize: const Size(44, 44),
-            backgroundColor: backgroundColor,
-            foregroundColor: textColor,
+            minimumSize: const Size(ButtonsConfig.minimumSize, ButtonsConfig.minimumSize),
+            backgroundColor: chosenBgColor,
+            foregroundColor: chosenTextColor,
             elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
             padding: EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1),
           ),
-          child: (iconData == null && text != null) ? Text(text!, style: TextStyle(color: textColor)) : Icon(iconData),
+          child:
+              (iconData == null && text != null)
+                  ? Text(text!, style: TextStyle(color: chosenTextColor))
+                  : Icon(iconData),
         ),
       ),
     );

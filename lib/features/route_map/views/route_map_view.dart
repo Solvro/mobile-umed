@@ -4,6 +4,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
+import "../../../app/theme/app_theme.dart";
 import "../../../common/models/bottom_sheet_mode.dart";
 import "../../../common/models/route.dart";
 import "../../../common/widgets/main_action_button.dart";
@@ -50,6 +51,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           MapBottomSheet(
             button: MainActionButton(
               text: "Zakończ trase",
+              backgroundColor: context.colorScheme.secondary,
               onPressed: () {
                 context.router.pop();
               },

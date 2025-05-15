@@ -5,30 +5,32 @@ class MainActionButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.backgroundColor = Colors.green,
-    this.textColor = Colors.white,
+    this.backgroundColor,
+    this.textColor,
   });
 
   final String text;
   final VoidCallback onPressed;
-  final Color backgroundColor;
-  final Color textColor;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
+    final chosenBgColor = backgroundColor ?? Theme.of(context).colorScheme.primary;
+    final chosenTextColor = textColor ?? Theme.of(context).colorScheme.onPrimary;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(44, 44),
-          backgroundColor: backgroundColor,
-          foregroundColor: textColor,
+          backgroundColor: chosenBgColor,
+          foregroundColor: chosenTextColor,
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
           padding: const EdgeInsets.symmetric(vertical: 6),
         ),
-        child: Text(text, style: TextStyle(color: textColor)),
+        child: Text(text, style: TextStyle(color: chosenTextColor)),
       ),
     );
   }

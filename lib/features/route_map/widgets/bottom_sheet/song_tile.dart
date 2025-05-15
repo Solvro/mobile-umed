@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "../../../../app/config/ui_config.dart";
+import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/song.dart";
 
 class SongTile extends StatelessWidget {
@@ -11,7 +13,7 @@ class SongTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      spacing: 20,
+      spacing: PlaylistInfoConfig.songTileSpacing,
       children: [
         Column(
           mainAxisSize: MainAxisSize.min,
@@ -21,14 +23,14 @@ class SongTile extends StatelessWidget {
               padding: const EdgeInsets.only(top: 1),
 
               child: Container(
-                height: 20,
-                width: 20,
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+                height: PlaylistInfoConfig.songTileDotRad,
+                width: PlaylistInfoConfig.songTileDotRad,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.primary),
                 alignment: Alignment.center,
-                child: Text(listIndex.toString()),
+                child: Text(listIndex.toString(), style: TextStyle(color: context.colorScheme.onPrimary)),
               ),
             ),
-            Container(height: 20, width: 4, color: Colors.green),
+            Container(height: PlaylistInfoConfig.songTileDotRad, width: 4, color: context.colorScheme.primary),
             const SizedBox(height: 1),
           ],
         ),
