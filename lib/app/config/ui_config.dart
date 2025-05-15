@@ -27,7 +27,7 @@ abstract class BottomSheetHeaderConfig {
   static const roundedTopRadius = 15.0;
 }
 
-abstract class PlaylistInfoConfig {
+abstract final class PlaylistInfoConfig {
   static const contentPadding = 5.0;
   static const verticalSpacing = 15.0;
   static const horizontalButtonSpacing = 25.0;
@@ -65,4 +65,26 @@ abstract class ButtonsConfig {
   static const secondaryButtonShadowRadius = 25.0;
 
   static const minimumSize = 44.0;
+}
+
+abstract class MarkerPaths {
+  static const visitedCheckpoint = "assets/icons/pointVisited.svg";
+  static const unvisitedCheckpoint = "assets/icons/pointUnvisited.svg";
+  static const inactiveCheckpoint = "assets/icons/pointInactive.svg";
+  static const activePulsometer = "assets/icons/pulsometerActive.svg";
+  static const inactivePulsometer = "assets/icons/pulsometerInactive.svg";
+  static const activeStart = "assets/icons/pulsometerActive.svg";
+  static const inactiveStart = "assets/icons/pulsometerActive.svg";
+  static const activeFinish = "assets/icons/pointFinish.svg";
+  static const inactiveFinish = "assets/icons/pointFinish.svg";
+}
+
+abstract final class MapConfig {
+  static const markerSize = 80.0;
+  static const textSize = 30.0;
+  static const markerPadding = 8.0;
+  static const visitedLineWidth = 6.0;
+  static const unvisitedLineWidth = 5.0;
+  static const dashLen = 9.0;
+  static const spaceLen = 8.0;
 }

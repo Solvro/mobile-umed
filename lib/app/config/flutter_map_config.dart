@@ -1,3 +1,3 @@
 abstract class FlutterMapConfig {
-  static const urlTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  static const urlTemplate = "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png";
 }

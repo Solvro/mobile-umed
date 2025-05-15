@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/theme/app_theme.dart";
 import "../../../../common/controllers/route_controller.dart";
 
 class RouteInfoSection extends ConsumerWidget {
@@ -19,13 +20,13 @@ class RouteInfoSection extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _informationBox(_formatDuration(timer)),
+          _informationBox(_formatDuration(timer), context.colorScheme.primary),
           Row(
             spacing: RouteInfoConfig.infoBubbleSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _informationBox("$distance m")),
-              Expanded(child: _informationBox("$speed km/h")),
+              Expanded(child: _informationBox("$distance m", context.colorScheme.primary)),
+              Expanded(child: _informationBox("$speed km/h", context.colorScheme.primary)),
             ],
           ),
         ],
@@ -34,18 +35,18 @@ class RouteInfoSection extends ConsumerWidget {
   }
 }
 
-Widget _informationBox(String text) {
+Widget _informationBox(String text, Color color) {
   return Container(
     constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight), // set your desired min height
     alignment: Alignment.center,
-    decoration: _decoration(),
+    decoration: _decoration(color),
     child: Text(text, textAlign: TextAlign.center),
   );
 }
 
-BoxDecoration _decoration() {
+BoxDecoration _decoration(Color color) {
   return BoxDecoration(
-    border: Border.all(color: Colors.green, width: 2),
+    border: Border.all(color: color, width: 2),
     borderRadius: const BorderRadius.all(Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
   );
 }
