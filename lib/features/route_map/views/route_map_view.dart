@@ -2,7 +2,6 @@ import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../common/data_source/mocks/mock_songs.dart";
-import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/models/bottom_sheet_info.dart";
@@ -13,6 +12,7 @@ import "../../../common/widgets/secondary_action_button.dart";
 import "../widgets/bottom_sheet/playlist_info_section.dart";
 import "../widgets/bottom_sheet/route_info_section.dart";
 import "../widgets/map/route_map_widget.dart";
+import "../widgets/modals/end_route_modal.dart";
 import "../widgets/progress_bar/route_progress_bar.dart";
 
 class RouteMapView extends ConsumerStatefulWidget {
@@ -66,9 +66,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
             button: MainActionButton(
               text: "Zakończ trase",
               backgroundColor: context.colorScheme.secondary,
-              onPressed: () {
-                ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-                context.router.pop();
+              onPressed: () async {
+                await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
+                ref.read(sheetTriggerProvider.notifier).state = !ref.read(sheetTriggerProvider);
               },
             ),
             controls: Row(

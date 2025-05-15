@@ -68,6 +68,22 @@ abstract class ButtonsConfig {
   static const minimumSize = 44.0;
 }
 
+abstract class InfoModalConfig {
+  static const radius = 15.0;
+  static const outerPaddingVertical = 25.0;
+  static const outerPaddingHorizontal = 20.0;
+  static const innerPadding = 16.0;
+  static const titleSpacer = 10.0;
+}
+
+abstract class OptionsModalConfig {
+  static const radius = 15.0;
+  static const outerPaddingVertical = 65.0;
+  static const outerPaddingHorizontal = 20.0;
+  static const innerPadding = 16.0;
+  static const titleSpacer = 6.0;
+}
+
 abstract class MarkerPaths {
   static const visitedCheckpoint = "assets/icons/pointVisited.svg";
   static const unvisitedCheckpoint = "assets/icons/pointUnvisited.svg";
@@ -81,9 +97,12 @@ abstract class MarkerPaths {
 }
 
 abstract final class MapConfig {
+  // marker
   static const markerSize = 80.0;
   static const textSize = 30.0;
   static const markerPadding = 8.0;
+
+  // line
   static const visitedLineWidth = 6.0;
   static const unvisitedLineWidth = 5.0;
   static const dashLen = 9.0;

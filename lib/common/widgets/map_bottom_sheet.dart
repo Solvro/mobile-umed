@@ -15,6 +15,7 @@ class MapBottomSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = DraggableScrollableController();
     final mode = ref.watch(sheetModeProvider);
+    // final trigger = ref.watch(sheetTriggerProvider);
     final sheetPosition =
         mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
 
@@ -40,6 +41,7 @@ class MapBottomSheet extends ConsumerWidget {
             minChildSize: BottomSheetConfig.hiddenSizePercent,
             maxChildSize: sheetPosition,
             builder: (context, scrollController) {
+              debugPrint("REBUILD");
               return DecoratedBox(
                 decoration: getTopDecoration(),
                 child: CustomScrollView(
