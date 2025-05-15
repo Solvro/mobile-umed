@@ -48,8 +48,6 @@ class RouteTimer extends _$RouteTimer {
     state = Duration.zero;
   }
 
-  Duration get current => state;
-
   void dispose() {
     _timer?.cancel();
   }

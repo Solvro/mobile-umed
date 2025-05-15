@@ -1,4 +1,5 @@
 import "package:flutter/material.dart" hide Route;
+import "../../../../app/config/ui_config.dart";
 
 class RouteProgressBarLine extends StatelessWidget {
   const RouteProgressBarLine({
@@ -12,17 +13,13 @@ class RouteProgressBarLine extends StatelessWidget {
   final bool done;
   final bool active;
   final double percent;
-  int get notDoneAlpha => 50;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          const padding = 2.0;
-          const dotRad = 4.0;
-          const lineHeight = 2.0;
-          final lineWidth = constraints.maxWidth - padding - dotRad;
+          final lineWidth = constraints.maxWidth - ProgressBarConfig.dotLinePadding - ProgressBarConfig.dotRad;
 
           final dotOffset = lineWidth * percent;
 
@@ -30,11 +27,11 @@ class RouteProgressBarLine extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Container(
-                height: lineHeight,
-                margin: const EdgeInsets.symmetric(horizontal: padding),
+                height: ProgressBarConfig.lineHeight,
+                margin: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.dotLinePadding),
                 decoration: BoxDecoration(
-                  color: done ? color : color.withAlpha(notDoneAlpha),
-                  borderRadius: BorderRadius.circular(2),
+                  color: done ? color : color.withAlpha(ProgressBarConfig.notDoneAlpha),
+                  borderRadius: BorderRadius.circular(ProgressBarConfig.lineHeight),
                 ),
               ),
 
@@ -43,18 +40,21 @@ class RouteProgressBarLine extends StatelessWidget {
                   left: 0,
                   right: lineWidth - dotOffset,
                   child: Container(
-                    height: lineHeight,
-                    margin: const EdgeInsets.symmetric(horizontal: padding),
-                    decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(lineHeight)),
+                    height: ProgressBarConfig.lineHeight,
+                    margin: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.dotLinePadding),
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(ProgressBarConfig.lineHeight),
+                    ),
                   ),
                 ),
               if (active)
                 Positioned(
                   left: dotOffset,
-                  top: -dotRad + 1,
+                  top: -ProgressBarConfig.dotRad + 1,
                   child: Container(
-                    width: dotRad * 2,
-                    height: dotRad * 2,
+                    width: ProgressBarConfig.dotRad * 2,
+                    height: ProgressBarConfig.dotRad * 2,
                     decoration: BoxDecoration(color: color, shape: BoxShape.circle),
                   ),
                 ),

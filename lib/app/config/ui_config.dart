@@ -41,3 +41,17 @@ abstract class RouteInfoConfig {
   static const infoBubbleRoundedRad = 30.0;
   static const infoBubbleSpacing = 15.0;
 }
+
+abstract class ProgressBarConfig {
+  // general
+  static const topPadding = 4.0;
+  static const bottomPadding = 10.0;
+  static const horizontalPadding = 25.0;
+  static const radius = 12.0;
+
+  // progressLine
+  static final notDoneAlpha = (0.3 * 255).toInt();
+  static const dotRad = 4.0;
+  static const dotLinePadding = 2.0;
+  static const lineHeight = 2.0;
+}
