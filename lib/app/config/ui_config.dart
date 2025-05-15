@@ -11,6 +11,7 @@ abstract class BottomSheetConfig {
   static const fullSizePercent = 0.5;
   static const halfSizePercent = 0.3;
   static const hiddenSizePercent = 0.04;
+  static const tolerance = 0.01;
 }
 
 abstract class BottomSheetHeaderConfig {

@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../app/config/ui_config.dart";
-import "../models/bottom_sheet_mode.dart";
+import "../models/bottom_sheet_info.dart";
 import "sheet_top_handle.dart";
 
 class MapBottomSheet extends ConsumerWidget {
@@ -13,9 +13,19 @@ class MapBottomSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = DraggableScrollableController();
     final mode = ref.watch(sheetModeProvider);
     final sheetPosition =
         mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
+
+    controller.addListener(() {
+      final currentPosition = controller.size;
+      ref.read(sheetStateProvider.notifier).state =
+          (currentPosition - BottomSheetConfig.hiddenSizePercent).abs() < BottomSheetConfig.tolerance
+              ? SheetState.hidden
+              : SheetState.visible;
+    });
+
     return Stack(
       children: [
         Positioned(
@@ -25,6 +35,7 @@ class MapBottomSheet extends ConsumerWidget {
           top: BottomSheetConfig.fixedBottomSpace,
           child: DraggableScrollableSheet(
             snap: true,
+            controller: controller,
             initialChildSize: BottomSheetConfig.hiddenSizePercent,
             minChildSize: BottomSheetConfig.hiddenSizePercent,
             maxChildSize: sheetPosition,
