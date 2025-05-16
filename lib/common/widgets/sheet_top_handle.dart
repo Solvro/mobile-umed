@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "../../app/config/ui_config.dart";
+import "../../app/theme/app_theme.dart";
 
 class SheetTopHandle extends SliverPersistentHeaderDelegate {
   const SheetTopHandle({this.controls});
@@ -9,7 +10,7 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      decoration: getTopDecoration(),
+      decoration: getSheetTopDecoration(context.colorScheme.surface),
       padding: const EdgeInsets.symmetric(vertical: BottomSheetConfig.smallVerticalPadding),
       height: maxExtent,
       child: Column(
@@ -60,7 +61,7 @@ class _LineHandle extends StatelessWidget {
   }
 }
 
-BoxDecoration getTopDecoration() => const BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.vertical(top: Radius.circular(BottomSheetHeaderConfig.roundedTopRadius)),
+BoxDecoration getSheetTopDecoration(Color color) => BoxDecoration(
+  color: color,
+  borderRadius: const BorderRadius.vertical(top: Radius.circular(BottomSheetHeaderConfig.roundedTopRadius)),
 );

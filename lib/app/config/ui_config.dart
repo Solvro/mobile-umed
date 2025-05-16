@@ -1,3 +1,5 @@
+import "package:flutter/material.dart";
+
 abstract class BottomSheetConfig {
   // main paddings
   static const horizontalPadding = 20.0;
@@ -70,18 +72,29 @@ abstract class ButtonsConfig {
 
 abstract class InfoModalConfig {
   static const radius = 15.0;
-  static const outerPaddingVertical = 25.0;
+  static const outerPaddingVertical = 105.0;
   static const outerPaddingHorizontal = 20.0;
   static const innerPadding = 16.0;
   static const titleSpacer = 10.0;
+  static const decorationOpacity = 0.5;
 }
 
 abstract class OptionsModalConfig {
   static const radius = 15.0;
-  static const outerPaddingVertical = 65.0;
+  static const outerPaddingVertical = 195.0;
   static const outerPaddingHorizontal = 20.0;
   static const innerPadding = 16.0;
   static const titleSpacer = 6.0;
+}
+
+abstract class RouteCompleteModalConfig {
+  static const distanceInfoColor = Colors.brown;
+  static const timeInfoColor = Colors.blueGrey;
+  static const caloriesInfoColor = Colors.red;
+  static const paceInfoColor = Colors.deepPurple;
+  static const verticalSpacing = 16.0;
+  static const horizontalSpacing = 26.0;
+  static const decorationSize = 150.0;
 }
 
 abstract class MarkerPaths {
@@ -91,9 +104,9 @@ abstract class MarkerPaths {
   static const activePulsometer = "assets/icons/pulsometerActive.svg";
   static const inactivePulsometer = "assets/icons/pulsometerInactive.svg";
   static const activeStart = "assets/icons/pulsometerActive.svg";
-  static const inactiveStart = "assets/icons/pulsometerActive.svg";
-  static const activeFinish = "assets/icons/pointFinish.svg";
-  static const inactiveFinish = "assets/icons/pointFinish.svg";
+  static const inactiveStart = "assets/icons/pulsometerInactive.svg";
+  static const activeFinish = "assets/icons/pulsometerActive.svg";
+  static const inactiveFinish = "assets/icons/pulsometerInactive.svg";
 }
 
 abstract final class MapConfig {
@@ -101,10 +114,22 @@ abstract final class MapConfig {
   static const markerSize = 80.0;
   static const textSize = 30.0;
   static const markerPadding = 8.0;
+  static const markerTextColor = Colors.black;
 
   // line
   static const visitedLineWidth = 6.0;
   static const unvisitedLineWidth = 5.0;
   static const dashLen = 9.0;
   static const spaceLen = 8.0;
+  static const unvisitedColor = Colors.grey;
+  static const inactiveColor = Colors.grey;
+}
+
+abstract final class StatInfoCompactConfig {
+  static const circleSize = 44.0;
+  static const boxRad = 32.0;
+  static const boxPadding = 2.0;
+  static const boxLeftOffset = 10.0;
+  static const borderWidth = 2.0;
+  static const iconPadding = 6.0;
 }

@@ -23,7 +23,7 @@ class RouteMapPolyline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final divider = max(visited, 1);
+    final divider = min(max(visited, 1), locations.length);
     final doneLocations = locations.sublist(0, divider);
     final notDoneLocations = locations.sublist(divider - 1);
 

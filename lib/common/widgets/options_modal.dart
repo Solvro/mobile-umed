@@ -32,7 +32,7 @@ class OptionsModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title),
+            Text(title, style: context.textTheme.headlineMedium),
             const SizedBox(height: OptionsModalConfig.titleSpacer),
             Expanded(child: child),
             cancelButton,

@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "../../../../app/theme/app_theme.dart";
 import "../../../../common/widgets/cached_image.dart";
 import "../../../../common/widgets/main_action_button.dart";
 import "../../../../common/widgets/options_modal.dart";
@@ -12,6 +13,7 @@ class EndRouteModal extends StatelessWidget {
     return OptionsModal(
       title: "Czy na pewno chcesz zakończyć trasę?",
       confirmButton: MainActionButton(
+        backgroundColor: context.colorScheme.secondary,
         text: "Zakończ trasę",
         onPressed: () {
           Navigator.of(context).pop();

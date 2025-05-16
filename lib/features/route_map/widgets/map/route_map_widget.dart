@@ -6,7 +6,7 @@ import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/landmark.dart";
-import "../landmark_info_modal.dart";
+import "../modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
@@ -26,8 +26,8 @@ class RouteMapWidget extends StatelessWidget {
         RouteMapPolyline(
           locations: landmarks.map((landmark) => landmark.location).toList(),
           doneColor: context.colorScheme.primary,
-          notDoneColor: Colors.grey,
-          inactiveColor: Colors.grey,
+          notDoneColor: MapConfig.unvisitedColor,
+          inactiveColor: MapConfig.inactiveColor,
           active: active,
           visited: visitedCount,
         ),
@@ -43,12 +43,15 @@ class RouteMapWidget extends StatelessWidget {
                   point: landmark.location,
                   rotate: true,
                   child: GestureDetector(
-                    onTap: () async {
-                      await showDialog<LandmarkInfoModal>(
-                        context: context,
-                        builder: (context) => LandmarkInfoModal(landmark: landmark),
-                      );
-                    },
+                    onTap:
+                        active
+                            ? () async {
+                              await showDialog<LandmarkInfoModal>(
+                                context: context,
+                                builder: (context) => LandmarkInfoModal(landmark: landmark),
+                              );
+                            }
+                            : null,
                     child: RouteMapMarker(
                       type: landmark.type,
                       active: active,

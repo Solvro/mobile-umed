@@ -67,8 +67,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
               text: "Zakończ trase",
               backgroundColor: context.colorScheme.secondary,
               onPressed: () async {
+                ref.read(sheetTriggerProvider.notifier).state = true;
                 await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
-                ref.read(sheetTriggerProvider.notifier).state = !ref.read(sheetTriggerProvider);
               },
             ),
             controls: Row(

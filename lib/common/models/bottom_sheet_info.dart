@@ -8,4 +8,4 @@ final sheetModeProvider = StateProvider<SheetMode>((ref) => SheetMode.half);
 
 final sheetStateProvider = StateProvider<SheetState>((ref) => SheetState.hidden);
 
-final sheetTriggerProvider = StateProvider<bool>((ref) => true);
+final sheetTriggerProvider = StateProvider<bool>((ref) => false);

@@ -49,7 +49,7 @@ class RouteMapMarker extends StatelessWidget {
   }
 }
 
-Widget _textMarker(String path, String value) {
+Stack _textMarker(String path, String value) {
   return Stack(
     alignment: Alignment.topCenter,
     children: [
@@ -58,7 +58,7 @@ Widget _textMarker(String path, String value) {
         padding: const EdgeInsets.all(MapConfig.markerPadding),
         child: Text(
           value,
-          style: const TextStyle(fontSize: MapConfig.textSize, color: Colors.black),
+          style: const TextStyle(fontSize: MapConfig.textSize, color: MapConfig.markerTextColor),
           textAlign: TextAlign.center,
         ),
       ),
@@ -66,6 +66,6 @@ Widget _textMarker(String path, String value) {
   );
 }
 
-Widget _simpleMarker(String path) {
+SvgPicture _simpleMarker(String path) {
   return SvgPicture.asset(path);
 }
