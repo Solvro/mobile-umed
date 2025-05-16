@@ -1,0 +1,107 @@
+import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../app/config/ui_config.dart";
+import "../../app/theme/app_theme.dart";
+import "../models/bottom_sheet_info.dart";
+import "sheet_top_handle.dart";
+
+class MapBottomSheet extends ConsumerStatefulWidget {
+  const MapBottomSheet({super.key, required this.child, required this.button, this.controls});
+  final Widget? controls;
+  final Widget child;
+  final Widget button;
+
+  @override
+  ConsumerState<MapBottomSheet> createState() => _MapBottomSheetState();
+}
+
+class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
+  final DraggableScrollableController controller = DraggableScrollableController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      final currentPosition = controller.size;
+      ref.read(sheetStateProvider.notifier).state =
+          (currentPosition - BottomSheetConfig.hiddenSizePercent).abs() < BottomSheetConfig.tolerance
+              ? SheetState.hidden
+              : SheetState.visible;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mode = ref.watch(sheetModeProvider);
+    final trigger = ref.watch(sheetTriggerProvider);
+    final sheetPosition =
+        mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
+
+    if (trigger) {
+      Future.microtask(() async {
+        ref.read(sheetTriggerProvider.notifier).state = false;
+        await controller.animateTo(
+          BottomSheetConfig.hiddenSizePercent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    }
+
+    return Stack(
+      children: [
+        Positioned(
+          bottom: BottomSheetConfig.fixedBottomSpace,
+          left: 0,
+          right: 0,
+          top: BottomSheetConfig.fixedBottomSpace,
+          child: DraggableScrollableSheet(
+            snap: true,
+            controller: controller,
+            initialChildSize: BottomSheetConfig.hiddenSizePercent,
+            minChildSize: BottomSheetConfig.hiddenSizePercent,
+            maxChildSize: sheetPosition,
+            builder: (context, scrollController) {
+              return DecoratedBox(
+                decoration: getSheetTopDecoration(context.colorScheme.surface),
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: widget.controls)),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: BottomSheetConfig.horizontalPadding),
+                        child: widget.child,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: BottomSheetConfig.fixedBottomSpace,
+            color: context.colorScheme.surface,
+            child: SafeArea(
+              top: false,
+              child: Align(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: BottomSheetConfig.horizontalPadding,
+                    vertical: BottomSheetConfig.mainButtonVerticalPadding,
+                  ),
+                  child: widget.button,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

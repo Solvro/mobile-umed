@@ -1,0 +1,59 @@
+import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../../../app/config/ui_config.dart";
+import "../../../../app/theme/app_theme.dart";
+import "../../../../common/controllers/route_controller.dart";
+
+class RouteInfoSection extends ConsumerWidget {
+  const RouteInfoSection({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timer = ref.watch(routeTimerProvider);
+    final distance = ref.watch(distanceProvider);
+    final speed = ref.watch(speedProvider);
+
+    return Container(
+      padding: const EdgeInsets.all(RouteInfoConfig.contentPadding),
+      child: Column(
+        spacing: RouteInfoConfig.verticalSpacing,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _informationBox(_formatDuration(timer), context.colorScheme.primary),
+          Row(
+            spacing: RouteInfoConfig.infoBubbleSpacing,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(child: _informationBox("$distance m", context.colorScheme.primary)),
+              Expanded(child: _informationBox("$speed km/h", context.colorScheme.primary)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _informationBox(String text, Color color) {
+  return Container(
+    constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight), // set your desired min height
+    alignment: Alignment.center,
+    decoration: _decoration(color),
+    child: Text(text, textAlign: TextAlign.center),
+  );
+}
+
+BoxDecoration _decoration(Color color) {
+  return BoxDecoration(
+    border: Border.all(color: color, width: 2),
+    borderRadius: const BorderRadius.all(Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
+  );
+}
+
+String _formatDuration(Duration duration) {
+  final hours = duration.inHours;
+  final minutes = duration.inMinutes % 60;
+  final seconds = duration.inSeconds % 60;
+  return "${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+}
