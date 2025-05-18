@@ -19,6 +19,9 @@ class RouteMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (landmarks.isEmpty) {
+      return FlutterMap(children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)]);
+    }
     return FlutterMap(
       options: MapOptions(initialCenter: landmarks.first.location),
       children: [
@@ -34,37 +37,55 @@ class RouteMapWidget extends StatelessWidget {
         MarkerLayer(
           markers:
               landmarks.asMap().entries.map((entry) {
-                final int index = entry.key;
+                final index = entry.key;
                 final landmark = entry.value;
-                return Marker(
-                  alignment: Alignment.topCenter,
-                  width: MapConfig.markerSize,
-                  height: MapConfig.markerSize,
-                  point: landmark.location,
-                  rotate: true,
-                  child: GestureDetector(
-                    onTap:
-                        active
-                            ? () async {
-                              await showDialog<LandmarkInfoModal>(
-                                context: context,
-                                builder: (context) => LandmarkInfoModal(landmark: landmark),
-                              );
-                            }
-                            : null,
-                    child: RouteMapMarker(
-                      type: landmark.type,
-                      active: active,
-                      start: index == 0,
-                      finish: index == landmarks.length - 1,
-                      visited: visitedCount - 1 >= index,
-                      order: index,
-                    ),
-                  ),
+                return _buildMarkers(
+                  context: context,
+                  landmark: landmark,
+                  index: index,
+                  visitedCount: visitedCount,
+                  active: active,
+                  totalLandmarks: landmarks.length,
                 );
               }).toList(),
         ),
       ],
     );
   }
+}
+
+Marker _buildMarkers({
+  required BuildContext context,
+  required Landmark landmark,
+  required int index,
+  required int visitedCount,
+  required bool active,
+  required int totalLandmarks,
+}) {
+  return Marker(
+    alignment: Alignment.topCenter,
+    width: MapConfig.markerSize,
+    height: MapConfig.markerSize,
+    point: landmark.location,
+    rotate: true,
+    child: GestureDetector(
+      onTap:
+          active
+              ? () async {
+                await showDialog<LandmarkInfoModal>(
+                  context: context,
+                  builder: (context) => LandmarkInfoModal(landmark: landmark),
+                );
+              }
+              : null,
+      child: RouteMapMarker(
+        type: landmark.type,
+        active: active,
+        start: index == 0,
+        finish: index == totalLandmarks - 1,
+        visited: visitedCount - 1 >= index,
+        order: index,
+      ),
+    ),
+  );
 }

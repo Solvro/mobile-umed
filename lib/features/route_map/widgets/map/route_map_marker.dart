@@ -27,25 +27,19 @@ class RouteMapMarker extends StatelessWidget {
     late final bool isTextMarker;
     final orderValue = order?.toString() ?? "";
 
-    if (start) {
-      path = active ? MarkerPaths.activeStart : MarkerPaths.inactiveStart;
-      isTextMarker = false;
-    } else if (finish) {
-      path = active ? MarkerPaths.activeFinish : MarkerPaths.inactiveFinish;
-      isTextMarker = false;
-    } else if (type == LandmarkType.pulsometer) {
-      path = active ? MarkerPaths.activePulsometer : MarkerPaths.inactivePulsometer;
-      isTextMarker = false;
-    } else {
-      if (active) {
-        path = visited ? MarkerPaths.visitedCheckpoint : MarkerPaths.unvisitedCheckpoint;
-      } else {
-        path = MarkerPaths.inactiveCheckpoint;
-      }
-      isTextMarker = true;
-    }
+    (path, isTextMarker) = switch ((start, finish, type, active, visited)) {
+      (true, _, _, true, _) => (MarkerPaths.activeStart, false),
+      (true, _, _, false, _) => (MarkerPaths.inactiveStart, false),
+      (_, true, _, true, _) => (MarkerPaths.activeFinish, false),
+      (_, true, _, false, _) => (MarkerPaths.inactiveFinish, false),
+      (_, _, LandmarkType.pulsometer, true, _) => (MarkerPaths.activePulsometer, false),
+      (_, _, LandmarkType.pulsometer, false, _) => (MarkerPaths.inactivePulsometer, false),
+      (_, _, LandmarkType.checkpoint, true, true) => (MarkerPaths.visitedCheckpoint, true),
+      (_, _, LandmarkType.checkpoint, true, false) => (MarkerPaths.unvisitedCheckpoint, true),
+      _ => (MarkerPaths.inactiveCheckpoint, true),
+    };
 
-    return isTextMarker ? _textMarker(path, orderValue) : _simpleMarker(path);
+    return isTextMarker ? _textMarker(path, orderValue) : SvgPicture.asset(path);
   }
 }
 
@@ -64,8 +58,4 @@ Stack _textMarker(String path, String value) {
       ),
     ],
   );
-}
-
-SvgPicture _simpleMarker(String path) {
-  return SvgPicture.asset(path);
 }

@@ -18,9 +18,8 @@ abstract class BottomSheetConfig {
 
 abstract class BottomSheetHeaderConfig {
   // handle
-  static const handleLength = 35.0;
-  static const handleWidth = 5.0;
-  static const handleContentSpacing = 15.0;
+  static const handleIconSize = 30.0;
+  static const handleContentSpacing = 5.0;
 
   // controls
   static const headerWithControls = 100.0;
@@ -58,14 +57,17 @@ abstract class ProgressBarConfig {
 
   // progressLine
   static final notDoneAlpha = (0.3 * 255).toInt();
-  static const dotRad = 4.0;
   static const dotLinePadding = 2.0;
   static const lineHeight = 2.0;
 }
 
 abstract class ButtonsConfig {
+  static const mainActionButtonRadius = 24.0;
+  static const mainActionButtonPadding = 6.0;
+
   static const secondaryButtonRadius = 20.0;
   static const secondaryButtonShadowRadius = 25.0;
+  static const secondaryButtonPadding = 6.0;
 
   static const minimumSize = 44.0;
 }
@@ -87,6 +89,16 @@ abstract class OptionsModalConfig {
   static const titleSpacer = 6.0;
 }
 
+abstract class LandmarkInfoModalConfig {
+  static const verticalSpacing = 20.0;
+  static const imageRadius = 12.0;
+}
+
+abstract class EndRouteModalConfig {
+  static const verticalSpacing = 10.0;
+  static const imageRadius = 12.0;
+}
+
 abstract class RouteCompleteModalConfig {
   static const distanceInfoColor = Colors.brown;
   static const timeInfoColor = Colors.blueGrey;
@@ -94,7 +106,7 @@ abstract class RouteCompleteModalConfig {
   static const paceInfoColor = Colors.deepPurple;
   static const verticalSpacing = 16.0;
   static const horizontalSpacing = 26.0;
-  static const decorationSize = 150.0;
+  static const decorationSize = 120.0;
 }
 
 abstract class MarkerPaths {

@@ -4,8 +4,8 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../common/models/bottom_sheet_info.dart";
 import "../../../common/models/route.dart";
+import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../../common/widgets/main_action_button.dart";
 import "../../../common/widgets/map_bottom_sheet.dart";
 import "../../../common/widgets/secondary_action_button.dart";
@@ -61,7 +61,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
             visitedCount: 3,
             active: _currentSheetState == SheetState.hidden,
           ),
-          RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3, progressBetweenLandmarks: 0.7),
+          RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3),
           MapBottomSheet(
             button: MainActionButton(
               text: "Zakończ trase",

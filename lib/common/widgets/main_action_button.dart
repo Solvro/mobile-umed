@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "../../app/config/ui_config.dart";
+
 class MainActionButton extends StatelessWidget {
   const MainActionButton({
     super.key,
@@ -23,12 +25,11 @@ class MainActionButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(44, 44),
+          minimumSize: const Size(ButtonsConfig.minimumSize, ButtonsConfig.minimumSize),
           backgroundColor: chosenBgColor,
-          foregroundColor: chosenTextColor,
           elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-          padding: const EdgeInsets.symmetric(vertical: 6),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.mainActionButtonRadius)),
+          padding: const EdgeInsets.symmetric(vertical: ButtonsConfig.mainActionButtonPadding),
         ),
         child: Text(text, style: TextStyle(color: chosenTextColor)),
       ),

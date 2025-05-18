@@ -9,14 +9,8 @@ import "route_progress_bar_line.dart";
 class RouteProgressBar extends StatefulWidget {
   final IList<Landmark> landmarks;
   final int visitedCount;
-  final double progressBetweenLandmarks;
 
-  const RouteProgressBar({
-    super.key,
-    required this.landmarks,
-    required this.visitedCount,
-    required this.progressBetweenLandmarks,
-  });
+  const RouteProgressBar({super.key, required this.landmarks, required this.visitedCount});
 
   @override
   State<RouteProgressBar> createState() => _RouteProgressBarState();
@@ -27,48 +21,43 @@ class _RouteProgressBarState extends State<RouteProgressBar> {
   Widget build(BuildContext context) {
     final total = widget.landmarks.length;
     final visited = widget.visitedCount.clamp(0, total);
-    final progress = widget.progressBetweenLandmarks.clamp(0.0, 1.0);
 
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Container(
-        decoration: _decoration(context.colorScheme.surface),
-        width: double.infinity,
-        padding: const EdgeInsets.only(top: ProgressBarConfig.topPadding, bottom: ProgressBarConfig.bottomPadding),
-        child: SafeArea(
-          bottom: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.horizontalPadding),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(widget.landmarks.length * 2 - 1, (i) {
-                if (i.isEven) {
-                  final index = i ~/ 2;
-                  final visited = index < widget.visitedCount;
-                  if (index == 0) {
-                    return RouteProgressBarIcon(start: true, done: true, color: context.colorScheme.primary);
-                  }
-                  if (index == total - 1) {
-                    return RouteProgressBarIcon(finish: true, done: visited, color: context.colorScheme.primary);
-                  }
-                  return RouteProgressBarIcon(done: visited, color: context.colorScheme.primary);
-                } else {
-                  final lineIndex = (i - 1) ~/ 2;
-                  final isActiveLine = lineIndex == visited - 1;
-                  final isVisited = lineIndex < visited - 1;
-                  return RouteProgressBarLine(
-                    color: context.colorScheme.primary,
-                    done: isVisited,
-                    active: isActiveLine,
-                    percent: progress,
-                  );
-                }
-              }),
+    return total <= 1
+        ? const SizedBox()
+        : Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            decoration: _decoration(context.colorScheme.surface),
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: ProgressBarConfig.topPadding, bottom: ProgressBarConfig.bottomPadding),
+            child: SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.horizontalPadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(widget.landmarks.length * 2 - 1, (i) {
+                    if (i.isEven) {
+                      final index = i ~/ 2;
+                      final visited = index < widget.visitedCount;
+                      if (index == 0) {
+                        return RouteProgressBarIcon(start: true, done: true, color: context.colorScheme.primary);
+                      }
+                      if (index == total - 1) {
+                        return RouteProgressBarIcon(finish: true, done: visited, color: context.colorScheme.primary);
+                      }
+                      return RouteProgressBarIcon(done: visited, color: context.colorScheme.primary);
+                    } else {
+                      final lineIndex = (i - 1) ~/ 2;
+                      final isVisited = lineIndex < visited - 1;
+                      return RouteProgressBarLine(color: context.colorScheme.primary, done: isVisited);
+                    }
+                  }),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }
 

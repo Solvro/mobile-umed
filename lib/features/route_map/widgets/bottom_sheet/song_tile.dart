@@ -41,14 +41,17 @@ class SongTile extends StatelessWidget {
             children: [Text(song.name), Text(song.author)],
           ),
         ),
-        Text(_durationToStr(song.duration)),
+        Text(song.duration.toShortTimeString()),
       ],
     );
   }
 }
 
-String _durationToStr(int duration) {
-  final int minutes = duration ~/ 60;
-  final int seconds = duration % 60;
-  return "$minutes:$seconds";
+extension DurationFormatting on Duration {
+  String toShortTimeString() {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    final minutes = twoDigits(inMinutes.remainder(60));
+    final seconds = twoDigits(inSeconds.remainder(60));
+    return "$minutes:$seconds";
+  }
 }

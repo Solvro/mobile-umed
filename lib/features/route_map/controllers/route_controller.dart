@@ -5,21 +5,17 @@ part "route_controller.g.dart";
 
 @riverpod
 class Distance extends _$Distance {
-  int _distance = 0; // Distance in meters
-
   @override
   int build() {
-    return _distance;
+    return 0;
   }
 
   void updateDistance(int distance) {
-    _distance = distance;
-    state = _distance;
+    state = distance;
   }
 
   void reset() {
-    _distance = 0;
-    state = _distance;
+    state = 0;
   }
 }
 

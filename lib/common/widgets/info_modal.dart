@@ -37,7 +37,7 @@ class InfoModal extends StatelessWidget {
               children: [
                 Text(title, style: context.textTheme.headlineMedium),
                 const SizedBox(height: InfoModalConfig.titleSpacer),
-                Expanded(child: child),
+                Flexible(child: child),
 
                 MainActionButton(text: "Zamknij", onPressed: onClose ?? () => Navigator.of(context).pop()),
               ],

@@ -28,21 +28,22 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SecondaryActionButton(
+                // TODO(simplyNoOne): zmienic ta ikonke
                 iconData: Icons.queue_music,
                 onPressed: () {
-                  debugPrint("tu bedzie link do spotify");
+                  // TODO(simplyNoOne): tu bedzie link do spotify
                 },
               ),
               SecondaryActionButton(
                 iconData: Icons.play_circle_fill,
                 onPressed: () {
-                  debugPrint("tu bedzie link do yt music");
+                  // TODO(simplyNoOne): tu bedzie link do yt music
                 },
               ),
               SecondaryActionButton(
                 iconData: Icons.apple,
                 onPressed: () {
-                  debugPrint("tu bedzie link do apple music");
+                  // TODO(simplyNoOne): tu bedzie link do apple music
                 },
               ),
             ],

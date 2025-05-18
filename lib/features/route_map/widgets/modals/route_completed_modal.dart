@@ -32,7 +32,7 @@ class RouteCompletedModal extends StatelessWidget {
             children: [
               Expanded(
                 child: StatInfoCompact(
-                  title: "Przebyta od",
+                  title: "Przebyta odległość",
                   value: "8,250",
                   icon: Icons.social_distance_outlined,
                   color: RouteCompleteModalConfig.distanceInfoColor,

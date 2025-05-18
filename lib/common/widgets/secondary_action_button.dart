@@ -38,12 +38,19 @@ class SecondaryActionButton extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
             padding: EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1),
           ),
-          child:
-              (iconData == null && text != null)
-                  ? Text(text!, style: TextStyle(color: chosenTextColor))
-                  : Icon(iconData),
+          child: _chooseButtonContent(iconData: iconData, text: text, textColor: chosenTextColor),
         ),
       ),
     );
+  }
+}
+
+Widget _chooseButtonContent({IconData? iconData, String? text, Color? textColor}) {
+  if (iconData == null && text == null) {
+    return const SizedBox.shrink();
+  } else if (iconData != null) {
+    return Icon(iconData);
+  } else {
+    return Text(text!);
   }
 }

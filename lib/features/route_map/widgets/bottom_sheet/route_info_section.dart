@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
-import "../../../../common/controllers/route_controller.dart";
+import "../../controllers/route_controller.dart";
 
 class RouteInfoSection extends ConsumerWidget {
   const RouteInfoSection({super.key});
@@ -20,12 +20,12 @@ class RouteInfoSection extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _informationBox(_formatDuration(timer), context.colorScheme.primary),
+          _informationBox(timer.toHmsString(), context.colorScheme.primary),
           Row(
             spacing: RouteInfoConfig.infoBubbleSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _informationBox("$distance m", context.colorScheme.primary)),
+              Expanded(child: _informationBox(distance.toDistanceString(), context.colorScheme.primary)),
               Expanded(child: _informationBox("$speed km/h", context.colorScheme.primary)),
             ],
           ),
@@ -37,7 +37,7 @@ class RouteInfoSection extends ConsumerWidget {
 
 Widget _informationBox(String text, Color color) {
   return Container(
-    constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight), // set your desired min height
+    constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight),
     alignment: Alignment.center,
     decoration: _decoration(color),
     child: Text(text, textAlign: TextAlign.center),
@@ -51,9 +51,23 @@ BoxDecoration _decoration(Color color) {
   );
 }
 
-String _formatDuration(Duration duration) {
-  final hours = duration.inHours;
-  final minutes = duration.inMinutes % 60;
-  final seconds = duration.inSeconds % 60;
-  return "${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+extension DurationFormatting on Duration {
+  String toHmsString() {
+    final hours = inHours;
+    final minutes = inMinutes % 60;
+    final seconds = inSeconds % 60;
+    return "${hours.toString().padLeft(2, '0')}:"
+        "${minutes.toString().padLeft(2, '0')}:"
+        "${seconds.toString().padLeft(2, '0')}";
+  }
+}
+
+extension DistanceFormatting on int {
+  String toDistanceString() {
+    if (this < 1000) {
+      return "$this m";
+    } else {
+      return "${(this / 1000).toStringAsFixed(1)} km";
+    }
+  }
 }

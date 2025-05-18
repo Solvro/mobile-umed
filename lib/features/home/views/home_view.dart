@@ -3,6 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../app/app.dart";
 import "../../route_map/repository/route_map_repository.dart";
+import "../../route_map/widgets/modals/route_completed_modal.dart";
 
 class MyHomeView extends StatefulWidget {
   const MyHomeView({super.key, required this.title});
@@ -34,6 +35,14 @@ class _MyHomeViewState extends State<MyHomeView> {
             Text("$_counter", style: Theme.of(context).textTheme.headlineMedium),
             // temporary
             OutlinedButton(onPressed: () async => context.router.pushRouteMap(2), child: const Text("Route Map")),
+            OutlinedButton(
+              onPressed:
+                  () async => showDialog<RouteCompletedModal>(
+                    context: context,
+                    builder: (context) => const RouteCompletedModal(),
+                  ),
+              child: const Text("Route Completed Modal"),
+            ),
             const TestProviderWidget(),
           ],
         ),

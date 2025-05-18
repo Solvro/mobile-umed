@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/widgets/cached_image.dart";
 import "../../../../common/widgets/main_action_button.dart";
@@ -28,11 +29,10 @@ class EndRouteModal extends StatelessWidget {
             textAlign: TextAlign.start,
             overflow: TextOverflow.fade,
           ),
-
-          const SizedBox(height: 10),
+          const SizedBox(height: EndRouteModalConfig.verticalSpacing),
           // Image placeholder
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(EndRouteModalConfig.imageRadius),
             child: const CachedImage(
               //for now there is no image url property in the landmark model
               "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",

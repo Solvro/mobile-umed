@@ -1,4 +1,3 @@
-import "dart:math";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "package:latlong2/latlong.dart";
@@ -23,7 +22,8 @@ class RouteMapPolyline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final divider = min(max(visited, 1), locations.length);
+    if (locations.isEmpty) return PolylineLayer(polylines: [Polyline(points: [])]);
+    final divider = visited.clamp(1, locations.length);
     final doneLocations = locations.sublist(0, divider);
     final notDoneLocations = locations.sublist(divider - 1);
 
