@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "../../app/config/app_paddings.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/theme/app_theme.dart";
 
@@ -11,18 +12,14 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: getSheetTopDecoration(context.colorScheme.surface),
-      padding: const EdgeInsets.symmetric(vertical: BottomSheetConfig.smallVerticalPadding),
+      padding: const EdgeInsets.symmetric(vertical: AppPaddings.verticalSmall),
       height: maxExtent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.drag_handle, size: BottomSheetHeaderConfig.handleIconSize),
-          const SizedBox(height: BottomSheetHeaderConfig.handleContentSpacing),
           if (controls != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: BottomSheetConfig.horizontalPadding),
-              child: controls,
-            ),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: AppPaddings.horizontalMedium), child: controls),
         ],
       ),
     );

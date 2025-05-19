@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "../../app/config/app_paddings.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/theme/app_theme.dart";
 import "main_action_button.dart";
@@ -21,13 +22,13 @@ class OptionsModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(
-        horizontal: OptionsModalConfig.outerPaddingHorizontal,
+        horizontal: AppPaddings.horizontalMedium,
         vertical: OptionsModalConfig.outerPaddingVertical,
       ),
       backgroundColor: context.colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(OptionsModalConfig.radius)),
       child: Padding(
-        padding: const EdgeInsets.all(OptionsModalConfig.innerPadding),
+        padding: const EdgeInsets.all(AppPaddings.inner),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

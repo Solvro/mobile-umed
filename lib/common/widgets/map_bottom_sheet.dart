@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../app/config/app_paddings.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/theme/app_theme.dart";
 import "../providers/bottom_sheet_providers.dart";
@@ -87,7 +88,7 @@ class _BottomSheetDraggableArea extends StatelessWidget {
       bottom: BottomSheetConfig.fixedBottomSpace,
       left: 0,
       right: 0,
-      top: BottomSheetConfig.fixedBottomSpace,
+      top: 0,
       child: DraggableScrollableSheet(
         snap: true,
         controller: controller,
@@ -103,7 +104,7 @@ class _BottomSheetDraggableArea extends StatelessWidget {
                 SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: controls)),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: BottomSheetConfig.horizontalPadding),
+                    padding: const EdgeInsets.symmetric(horizontal: AppPaddings.horizontalMedium),
                     child: child,
                   ),
                 ),
@@ -135,8 +136,8 @@ class _BottomSheetFixedButton extends StatelessWidget {
           child: Align(
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: BottomSheetConfig.horizontalPadding,
-                vertical: BottomSheetConfig.mainButtonVerticalPadding,
+                horizontal: AppPaddings.horizontalMedium,
+                vertical: AppPaddings.verticalMedium,
               ),
               child: button,
             ),

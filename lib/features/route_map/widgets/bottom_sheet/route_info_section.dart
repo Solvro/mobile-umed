@@ -20,35 +20,19 @@ class RouteInfoSection extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _informationBox(timer.toHmsString(), context.colorScheme.primary),
+          _InformationBox(text: timer.toHmsString(), color: context.colorScheme.primary),
           Row(
             spacing: RouteInfoConfig.infoBubbleSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _informationBox(distance.toDistanceString(), context.colorScheme.primary)),
-              Expanded(child: _informationBox("$speed km/h", context.colorScheme.primary)),
+              Expanded(child: _InformationBox(text: distance.toDistanceString(), color: context.colorScheme.primary)),
+              Expanded(child: _InformationBox(text: "$speed km/h", color: context.colorScheme.primary)),
             ],
           ),
         ],
       ),
     );
   }
-}
-
-Widget _informationBox(String text, Color color) {
-  return Container(
-    constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight),
-    alignment: Alignment.center,
-    decoration: _decoration(color),
-    child: Text(text, textAlign: TextAlign.center),
-  );
-}
-
-BoxDecoration _decoration(Color color) {
-  return BoxDecoration(
-    border: Border.all(color: color, width: 2),
-    borderRadius: const BorderRadius.all(Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
-  );
 }
 
 extension DurationFormatting on Duration {
@@ -69,5 +53,29 @@ extension DistanceFormatting on int {
     } else {
       return "${(this / 1000).toStringAsFixed(1)} km";
     }
+  }
+}
+
+class _InformationBox extends StatelessWidget {
+  final String text;
+  final Color color;
+
+  const _InformationBox({required this.text, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight),
+      alignment: Alignment.center,
+      decoration: _decoration(color), // keep this private method in same file
+      child: Text(text, textAlign: TextAlign.center),
+    );
+  }
+
+  static BoxDecoration _decoration(Color color) {
+    return BoxDecoration(
+      border: Border.all(color: color, width: 2),
+      borderRadius: const BorderRadius.all(Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
+    );
   }
 }

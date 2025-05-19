@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
-import "package:flutter_svg/flutter_svg.dart";
+import "../../../../app/assets/assets.gen.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
+
 import "../../../../common/widgets/info_modal.dart";
 import "stat_info_compact.dart";
 
@@ -11,9 +13,8 @@ class RouteCompletedModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InfoModal(
-      title: "Gratulacje!",
-      decoration: SvgPicture.asset(
-        "assets/icons/checkmark.svg",
+      title: context.l10n.route_completed_modal_title,
+      decoration: Assets.icons.checkmark.svg(
         width: RouteCompleteModalConfig.decorationSize,
         height: RouteCompleteModalConfig.decorationSize,
       ),
@@ -21,18 +22,18 @@ class RouteCompletedModal extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Ukonczyles trase, mozesz byc z siebie dumny", style: context.textTheme.bodyLarge),
+          Text(context.l10n.route_completed_modal_helper, style: context.textTheme.bodyLarge),
           const SizedBox(height: RouteCompleteModalConfig.verticalSpacing),
-          Text("Statystyki", style: context.textTheme.headlineMedium),
+          Text(context.l10n.stats, style: context.textTheme.headlineMedium),
           const SizedBox(height: RouteCompleteModalConfig.verticalSpacing),
 
-          const Row(
+          Row(
             spacing: RouteCompleteModalConfig.horizontalSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: StatInfoCompact(
-                  title: "Przebyta odległość",
+                  title: context.l10n.covered_distance,
                   value: "8,250",
                   icon: Icons.social_distance_outlined,
                   color: RouteCompleteModalConfig.distanceInfoColor,
@@ -40,7 +41,7 @@ class RouteCompletedModal extends StatelessWidget {
               ),
               Expanded(
                 child: StatInfoCompact(
-                  title: "Spalone",
+                  title: context.l10n.burnt_calories,
                   value: "540 kcal",
                   icon: Icons.local_fire_department,
                   color: RouteCompleteModalConfig.caloriesInfoColor,
@@ -50,13 +51,13 @@ class RouteCompletedModal extends StatelessWidget {
           ),
           const SizedBox(height: RouteCompleteModalConfig.verticalSpacing),
           // Second Row
-          const Row(
+          Row(
             spacing: RouteCompleteModalConfig.horizontalSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: StatInfoCompact(
-                  title: "Czas",
+                  title: context.l10n.time,
                   value: "6.2 km",
                   icon: Icons.timer_outlined,
                   color: RouteCompleteModalConfig.timeInfoColor,
@@ -64,7 +65,7 @@ class RouteCompletedModal extends StatelessWidget {
               ),
               Expanded(
                 child: StatInfoCompact(
-                  title: "Tempo",
+                  title: context.l10n.avg_pace,
                   value: "78 bpm",
                   icon: Icons.speed_outlined,
                   color: RouteCompleteModalConfig.paceInfoColor,
@@ -73,7 +74,8 @@ class RouteCompletedModal extends StatelessWidget {
             ],
           ),
           const SizedBox(height: RouteCompleteModalConfig.verticalSpacing),
-          Text("Zdobyte osiagniecia", style: context.textTheme.headlineMedium),
+          Text(context.l10n.achievements, style: context.textTheme.headlineMedium),
+          const SizedBox(height: RouteCompleteModalConfig.verticalSpacing),
         ],
       ),
     );

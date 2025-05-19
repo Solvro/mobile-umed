@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "../../app/config/ui_config.dart";
+import "../../app/theme/app_theme.dart";
 
 class MainActionButton extends StatelessWidget {
   const MainActionButton({
@@ -24,13 +24,7 @@ class MainActionButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          minimumSize: const Size(ButtonsConfig.minimumSize, ButtonsConfig.minimumSize),
-          backgroundColor: chosenBgColor,
-          elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.mainActionButtonRadius)),
-          padding: const EdgeInsets.symmetric(vertical: ButtonsConfig.mainActionButtonPadding),
-        ),
+        style: context.buttonStyle.copyWith(backgroundColor: WidgetStatePropertyAll(chosenBgColor)),
         child: Text(text, style: TextStyle(color: chosenTextColor)),
       ),
     );

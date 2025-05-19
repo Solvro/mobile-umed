@@ -25,12 +25,18 @@ class RouteTimer extends _$RouteTimer {
 
   @override
   Duration build() {
+    ref.onDispose(() {
+      _timer?.cancel();
+      _timer = null;
+    });
+
     return Duration.zero;
   }
 
   void start() {
-    _timer ??= Timer.periodic(const Duration(seconds: 1), (_) {
-      state = state + const Duration(seconds: 1);
+    stop();
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      state += const Duration(seconds: 1);
     });
   }
 
@@ -42,10 +48,6 @@ class RouteTimer extends _$RouteTimer {
   void reset() {
     stop();
     state = Duration.zero;
-  }
-
-  void dispose() {
-    _timer?.cancel();
   }
 }
 

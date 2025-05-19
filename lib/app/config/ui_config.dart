@@ -1,25 +1,19 @@
 import "package:flutter/material.dart";
 
 abstract class BottomSheetConfig {
-  // main paddings
-  static const horizontalPadding = 20.0;
-  static const smallVerticalPadding = 8.0;
-
   // fixed button
-  static const mainButtonVerticalPadding = 10.0;
   static const fixedBottomSpace = 95.0;
 
   // sheet content percent
-  static const fullSizePercent = 0.5;
-  static const halfSizePercent = 0.3;
-  static const hiddenSizePercent = 0.04;
+  static const fullSizePercent = 0.45;
+  static const halfSizePercent = 0.25;
+  static const hiddenSizePercent = 0.03;
   static const tolerance = 0.01;
 }
 
 abstract class BottomSheetHeaderConfig {
   // handle
   static const handleIconSize = 30.0;
-  static const handleContentSpacing = 5.0;
 
   // controls
   static const headerWithControls = 100.0;
@@ -51,7 +45,6 @@ abstract class RouteInfoConfig {
 abstract class ProgressBarConfig {
   // general
   static const topPadding = 4.0;
-  static const bottomPadding = 10.0;
   static const horizontalPadding = 25.0;
   static const radius = 12.0;
 
@@ -62,30 +55,20 @@ abstract class ProgressBarConfig {
 }
 
 abstract class ButtonsConfig {
-  static const mainActionButtonRadius = 24.0;
-  static const mainActionButtonPadding = 6.0;
-
   static const secondaryButtonRadius = 20.0;
   static const secondaryButtonShadowRadius = 25.0;
   static const secondaryButtonPadding = 6.0;
-
-  static const minimumSize = 44.0;
 }
 
 abstract class InfoModalConfig {
   static const radius = 15.0;
   static const outerPaddingVertical = 105.0;
-  static const outerPaddingHorizontal = 20.0;
-  static const innerPadding = 16.0;
-  static const titleSpacer = 10.0;
   static const decorationOpacity = 0.5;
 }
 
 abstract class OptionsModalConfig {
   static const radius = 15.0;
   static const outerPaddingVertical = 195.0;
-  static const outerPaddingHorizontal = 20.0;
-  static const innerPadding = 16.0;
   static const titleSpacer = 6.0;
 }
 
@@ -95,7 +78,6 @@ abstract class LandmarkInfoModalConfig {
 }
 
 abstract class EndRouteModalConfig {
-  static const verticalSpacing = 10.0;
   static const imageRadius = 12.0;
 }
 

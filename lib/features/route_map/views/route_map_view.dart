@@ -3,6 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/config/ui_config.dart";
+import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
@@ -64,7 +65,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3),
           MapBottomSheet(
             button: MainActionButton(
-              text: "Zakończ trase",
+              text: context.l10n.end_route,
               backgroundColor: context.colorScheme.secondary,
               onPressed: () async {
                 ref.read(sheetTriggerProvider.notifier).state = true;
@@ -79,14 +80,14 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
                   onPressed: () {
                     ref.read(sheetModeProvider.notifier).state = SheetMode.half;
                   },
-                  text: "Opis trasy",
+                  text: context.l10n.route_description,
                 ),
 
                 SecondaryActionButton(
                   onPressed: () {
                     ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
                   },
-                  text: "Playlista",
+                  text: context.l10n.playlist,
                 ),
               ],
             ),

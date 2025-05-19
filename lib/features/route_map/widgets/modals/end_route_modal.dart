@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 
+import "../../../../app/config/app_paddings.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/widgets/cached_image.dart";
 import "../../../../common/widgets/main_action_button.dart";
@@ -12,24 +14,20 @@ class EndRouteModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OptionsModal(
-      title: "Czy na pewno chcesz zakończyć trasę?",
+      title: context.l10n.route_end_modal_title,
       confirmButton: MainActionButton(
         backgroundColor: context.colorScheme.secondary,
-        text: "Zakończ trasę",
+        text: context.l10n.end_route,
         onPressed: () {
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         },
       ),
-      cancelButton: MainActionButton(text: "Kontynuuj trasę!", onPressed: () => Navigator.of(context).pop()),
+      cancelButton: MainActionButton(text: context.l10n.keep_going, onPressed: () => Navigator.of(context).pop()),
       child: Column(
         children: [
-          const Text(
-            "Lorem ipusf dsahaasfd gh iuiuh  dsuhifwefiweeaw",
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.fade,
-          ),
-          const SizedBox(height: EndRouteModalConfig.verticalSpacing),
+          Text(context.l10n.route_end_modal_helper, textAlign: TextAlign.start, overflow: TextOverflow.fade),
+          const SizedBox(height: AppPaddings.verticalMedium),
           // Image placeholder
           ClipRRect(
             borderRadius: BorderRadius.circular(EndRouteModalConfig.imageRadius),

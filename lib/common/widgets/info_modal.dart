@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
+
+import "../../app/config/app_paddings.dart";
 import "../../app/config/ui_config.dart";
+import "../../app/l10n/l10n.dart";
 import "../../app/theme/app_theme.dart";
 import "main_action_button.dart";
 
@@ -15,13 +18,13 @@ class InfoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(
-        horizontal: InfoModalConfig.outerPaddingHorizontal,
+        horizontal: AppPaddings.horizontalMedium,
         vertical: InfoModalConfig.outerPaddingVertical,
       ),
       backgroundColor: context.colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(InfoModalConfig.radius)),
       child: Padding(
-        padding: const EdgeInsets.all(InfoModalConfig.innerPadding),
+        padding: const EdgeInsets.all(AppPaddings.inner),
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -36,10 +39,10 @@ class InfoModal extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: context.textTheme.headlineMedium),
-                const SizedBox(height: InfoModalConfig.titleSpacer),
+                const SizedBox(height: AppPaddings.verticalMedium),
                 Flexible(child: child),
 
-                MainActionButton(text: "Zamknij", onPressed: onClose ?? () => Navigator.of(context).pop()),
+                MainActionButton(text: context.l10n.close, onPressed: onClose ?? () => Navigator.of(context).pop()),
               ],
             ),
           ],
