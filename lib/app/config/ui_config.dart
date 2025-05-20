@@ -91,18 +91,6 @@ abstract class RouteCompleteModalConfig {
   static const decorationSize = 120.0;
 }
 
-abstract class MarkerPaths {
-  static const visitedCheckpoint = "assets/icons/pointVisited.svg";
-  static const unvisitedCheckpoint = "assets/icons/pointUnvisited.svg";
-  static const inactiveCheckpoint = "assets/icons/pointInactive.svg";
-  static const activePulsometer = "assets/icons/pulsometerActive.svg";
-  static const inactivePulsometer = "assets/icons/pulsometerInactive.svg";
-  static const activeStart = "assets/icons/pulsometerActive.svg";
-  static const inactiveStart = "assets/icons/pulsometerInactive.svg";
-  static const activeFinish = "assets/icons/pulsometerActive.svg";
-  static const inactiveFinish = "assets/icons/pulsometerInactive.svg";
-}
-
 abstract final class MapConfig {
   // marker
   static const markerSize = 80.0;

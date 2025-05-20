@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+
+import "../../../../app/assets/assets.gen.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../common/models/landmark.dart";
 
@@ -23,31 +25,31 @@ class RouteMapMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final String path;
+    late final SvgPicture icon;
     late final bool isTextMarker;
     final orderValue = order?.toString() ?? "";
 
-    (path, isTextMarker) = switch ((start, finish, type, active, visited)) {
-      (true, _, _, true, _) => (MarkerPaths.activeStart, false),
-      (true, _, _, false, _) => (MarkerPaths.inactiveStart, false),
-      (_, true, _, true, _) => (MarkerPaths.activeFinish, false),
-      (_, true, _, false, _) => (MarkerPaths.inactiveFinish, false),
-      (_, _, LandmarkType.pulsometer, true, _) => (MarkerPaths.activePulsometer, false),
-      (_, _, LandmarkType.pulsometer, false, _) => (MarkerPaths.inactivePulsometer, false),
-      (_, _, LandmarkType.checkpoint, true, true) => (MarkerPaths.visitedCheckpoint, true),
-      (_, _, LandmarkType.checkpoint, true, false) => (MarkerPaths.unvisitedCheckpoint, true),
-      _ => (MarkerPaths.inactiveCheckpoint, true),
+    (icon, isTextMarker) = switch ((start, finish, type, active, visited)) {
+      (true, _, _, true, _) => (Assets.icons.startActive.svg(), false),
+      (true, _, _, false, _) => (Assets.icons.startInactive.svg(), false),
+      (_, true, _, true, _) => (Assets.icons.finishActive.svg(), false),
+      (_, true, _, false, _) => (Assets.icons.finishInactive.svg(), false),
+      (_, _, LandmarkType.pulsometer, true, _) => (Assets.icons.pulsometerActive.svg(), false),
+      (_, _, LandmarkType.pulsometer, false, _) => (Assets.icons.pulsometerInactive.svg(), false),
+      (_, _, LandmarkType.checkpoint, true, true) => (Assets.icons.checkpointVisited.svg(), true),
+      (_, _, LandmarkType.checkpoint, true, false) => (Assets.icons.checkpointUnvisited.svg(), true),
+      _ => (Assets.icons.checkpointInactive.svg(), true),
     };
 
-    return isTextMarker ? _textMarker(path, orderValue) : SvgPicture.asset(path);
+    return isTextMarker ? _textMarker(icon, orderValue) : icon;
   }
 }
 
-Stack _textMarker(String path, String value) {
+Stack _textMarker(SvgPicture icon, String value) {
   return Stack(
     alignment: Alignment.topCenter,
     children: [
-      SvgPicture.asset(path),
+      icon,
       Padding(
         padding: const EdgeInsets.all(MapConfig.markerPadding),
         child: Text(

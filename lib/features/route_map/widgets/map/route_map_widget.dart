@@ -39,6 +39,10 @@ class RouteMapWidget extends StatelessWidget {
               landmarks.asMap().entries.map((entry) {
                 final index = entry.key;
                 final landmark = entry.value;
+                Alignment? alignment;
+                if (index == 0 || index == landmarks.length - 1) {
+                  alignment = index == 0 ? Alignment.center : Alignment.topRight;
+                }
                 return _buildMarkers(
                   context: context,
                   landmark: landmark,
@@ -46,6 +50,7 @@ class RouteMapWidget extends StatelessWidget {
                   visitedCount: visitedCount,
                   active: active,
                   totalLandmarks: landmarks.length,
+                  markerAlignment: alignment ?? Alignment.topCenter,
                 );
               }).toList(),
         ),
@@ -61,9 +66,10 @@ Marker _buildMarkers({
   required int visitedCount,
   required bool active,
   required int totalLandmarks,
+  required Alignment markerAlignment,
 }) {
   return Marker(
-    alignment: Alignment.topCenter,
+    alignment: markerAlignment,
     width: MapConfig.markerSize,
     height: MapConfig.markerSize,
     point: landmark.location,
