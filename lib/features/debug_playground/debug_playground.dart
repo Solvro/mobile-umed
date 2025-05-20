@@ -1,39 +1,23 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-import "../../../app/app.dart";
-import "../../route_map/repository/route_map_repository.dart";
-import "../../route_map/widgets/modals/route_completed_modal.dart";
+import "../../app/app.dart";
+import "../route_map/repository/route_map_repository.dart";
+import "../route_map/widgets/modals/route_completed_modal.dart";
 
-class MyHomeView extends StatefulWidget {
-  const MyHomeView({super.key, required this.title});
+class DebugPlayground extends StatelessWidget {
+  const DebugPlayground({super.key});
 
-  final String title;
-
-  @override
-  State<MyHomeView> createState() => _MyHomeViewState();
-}
-
-class _MyHomeViewState extends State<MyHomeView> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  static const String routeName = "/debug_playground";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: Text(widget.title)),
+      appBar: AppBar(title: const Text("Debug Playground")),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text("You have pushed the button this many times:"),
-            Text("$_counter", style: Theme.of(context).textTheme.headlineMedium),
-            // temporary
             OutlinedButton(onPressed: () async => context.router.pushRouteMap(2), child: const Text("Route Map")),
             OutlinedButton(
               onPressed:
@@ -46,11 +30,6 @@ class _MyHomeViewState extends State<MyHomeView> {
             const TestProviderWidget(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: "Increment",
-        child: const Icon(Icons.add),
       ),
     );
   }

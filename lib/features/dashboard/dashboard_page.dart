@@ -1,5 +1,8 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
+
+import "../../app/app.dart";
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key, required this.navigationShell, required this.items})
@@ -23,6 +26,10 @@ class DashboardPage extends StatelessWidget {
             }).toList(),
         onDestinationSelected: _goBranch,
       ),
+      floatingActionButton:
+          kDebugMode
+              ? FloatingActionButton(onPressed: context.router.pushPlayground, child: const Icon(Icons.play_arrow))
+              : null,
     );
   }
 }
