@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "../../app/config/app_paddings.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/theme/app_theme.dart";
 

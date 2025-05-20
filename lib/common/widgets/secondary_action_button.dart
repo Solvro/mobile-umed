@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "../../app/config/ui_config.dart";
-import "../../app/theme/app_theme.dart";
 
 class SecondaryActionButton extends StatelessWidget {
   const SecondaryActionButton({
@@ -31,13 +30,11 @@ class SecondaryActionButton extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: onPressed,
-          style: context.buttonStyle.copyWith(
-            backgroundColor: WidgetStatePropertyAll(chosenBgColor),
-            foregroundColor: WidgetStatePropertyAll(chosenTextColor),
-            shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
-            ),
-            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: chosenBgColor,
+            foregroundColor: chosenTextColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
+            padding: EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1),
           ),
           child: _chooseButtonContent(iconData: iconData, text: text, textColor: chosenTextColor),
         ),

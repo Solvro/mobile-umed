@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "../../app/config/app_paddings.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/theme/app_theme.dart";
 import "../providers/bottom_sheet_providers.dart";

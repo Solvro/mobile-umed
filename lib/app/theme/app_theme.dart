@@ -26,17 +26,7 @@ class AppTheme implements AppThemeData {
     ),
     textTheme: _textTheme,
     fontFamily: FontFamily.urbanist,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(44, 44),
-        backgroundColor: ColorConsts.primary,
-        foregroundColor: ColorConsts.onPrimary,
-        elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-      ),
-    ),
+    elevatedButtonTheme: _elevatedButtonTheme,
   );
 
   static const _textTheme = TextTheme(
@@ -46,10 +36,21 @@ class AppTheme implements AppThemeData {
     bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onSurface, height: 1.2),
     bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
   );
+
+  ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      minimumSize: const Size(44, 44),
+      backgroundColor: ColorConsts.primary,
+      foregroundColor: ColorConsts.onPrimary,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+    ),
+  );
 }
 
 extension AppThemeX on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
   TextTheme get textTheme => Theme.of(this).textTheme;
-  ButtonStyle get buttonStyle => Theme.of(this).elevatedButtonTheme.style!;
 }

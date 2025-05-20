@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "../../app/theme/app_theme.dart";
-
 class MainActionButton extends StatelessWidget {
   const MainActionButton({
     super.key,
@@ -24,7 +22,7 @@ class MainActionButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: context.buttonStyle.copyWith(backgroundColor: WidgetStatePropertyAll(chosenBgColor)),
+        style: ElevatedButton.styleFrom(backgroundColor: chosenBgColor),
         child: Text(text, style: TextStyle(color: chosenTextColor)),
       ),
     );
