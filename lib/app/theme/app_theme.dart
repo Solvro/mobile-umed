@@ -26,13 +26,27 @@ class AppTheme implements AppThemeData {
     ),
     textTheme: _textTheme,
     fontFamily: FontFamily.urbanist,
+    elevatedButtonTheme: _elevatedButtonTheme,
   );
 
   static const _textTheme = TextTheme(
+    headlineMedium: TextStyle(fontSize: 23, fontWeight: FontWeight.w400, color: ColorConsts.primary),
     headlineSmall: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: ColorConsts.onSurface),
     titleMedium: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: ColorConsts.onSurface),
     bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onSurface, height: 1.2),
     bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
+  );
+
+  ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      minimumSize: const Size(44, 44),
+      backgroundColor: ColorConsts.primary,
+      foregroundColor: ColorConsts.onPrimary,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+    ),
   );
 }
 

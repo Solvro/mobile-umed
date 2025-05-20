@@ -80,7 +80,7 @@ final mockData = [
             id: 11,
             name: "Ostrów Tumski",
             description: "The oldest part of Wrocław",
-            type: LandmarkType.checkpoint,
+            type: LandmarkType.pulsometer,
             location: LatLng(51.1142, 17.0465),
           ),
           const Landmark(
@@ -127,7 +127,7 @@ final mockData = [
             id: 15,
             name: "Wrocław Fountain",
             description: "A multimedia fountain",
-            type: LandmarkType.checkpoint,
+            type: LandmarkType.pulsometer,
             location: LatLng(51.1063, 17.0767),
           ),
           const Landmark(

@@ -1,45 +1,101 @@
 import "package:flutter/material.dart" hide Route;
-import "package:flutter_map/flutter_map.dart";
-import "../../../app/app.dart";
-import "../../../app/config/flutter_map_config.dart";
-import "../../../common/models/route.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
-class RouteMapView extends StatelessWidget {
+import "../../../../common/data_source/mocks/mock_songs.dart";
+import "../../../app/config/ui_config.dart";
+import "../../../app/l10n/l10n.dart";
+import "../../../app/theme/app_theme.dart";
+import "../../../common/models/route.dart";
+import "../../../common/providers/bottom_sheet_providers.dart";
+import "../../../common/widgets/main_action_button.dart";
+import "../../../common/widgets/map_bottom_sheet.dart";
+import "../../../common/widgets/secondary_action_button.dart";
+import "../widgets/bottom_sheet/playlist_info_section.dart";
+import "../widgets/bottom_sheet/route_info_section.dart";
+import "../widgets/map/route_map_widget.dart";
+import "../widgets/modals/end_route_modal.dart";
+import "../widgets/progress_bar/route_progress_bar.dart";
+
+class RouteMapView extends ConsumerStatefulWidget {
   const RouteMapView({super.key, required this.route});
 
   final Route route;
 
   @override
+  RouteMapViewState createState() => RouteMapViewState();
+}
+
+class RouteMapViewState extends ConsumerState<RouteMapView> {
+  late SheetMode _currentSheetMode;
+  late SheetState _currentSheetState;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentSheetMode = ref.read(sheetModeProvider);
+    _currentSheetState = ref.read(sheetStateProvider);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
+      if (next != _currentSheetMode) {
+        setState(() {
+          _currentSheetMode = next;
+        });
+      }
+    });
+
+    ref.listen<SheetState>(sheetStateProvider, (previous, next) {
+      if (next != _currentSheetState) {
+        setState(() {
+          _currentSheetState = next;
+        });
+      }
+    });
+
     return Scaffold(
       body: Stack(
         children: [
-          FlutterMap(
-            options: MapOptions(initialCenter: route.landmarks.first.location),
-            children: [
-              TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
-              PolylineLayer(
-                polylines: [
-                  Polyline(
-                    points: route.landmarks.map((landmark) => landmark.location).toList(),
-                    color: Colors.blue,
-                    strokeWidth: 4,
-                  ),
-                ],
-              ),
-              MarkerLayer(
-                markers:
-                    route.landmarks
-                        .map((landmark) => Marker(point: landmark.location, child: const Icon(Icons.location_on)))
-                        .toList(),
-              ),
-            ],
+          RouteMapWidget(
+            landmarks: widget.route.landmarks,
+            visitedCount: 3,
+            active: _currentSheetState == SheetState.hidden,
           ),
-          SafeArea(
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(icon: const Icon(Icons.arrow_back), onPressed: context.router.pop),
+          RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3),
+          MapBottomSheet(
+            button: MainActionButton(
+              text: context.l10n.end_route,
+              backgroundColor: context.colorScheme.secondary,
+              onPressed: () async {
+                ref.read(sheetTriggerProvider.notifier).state = true;
+                await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
+              },
             ),
+            controls: Row(
+              spacing: BottomSheetHeaderConfig.controlsSpacing,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SecondaryActionButton(
+                  onPressed: () {
+                    ref.read(sheetModeProvider.notifier).state = SheetMode.half;
+                  },
+                  text: context.l10n.route_description,
+                ),
+
+                SecondaryActionButton(
+                  onPressed: () {
+                    ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+                  },
+                  text: context.l10n.playlist,
+                ),
+              ],
+            ),
+
+            child:
+                (_currentSheetMode == SheetMode.half)
+                    ? const RouteInfoSection()
+                    : PlaylistInfoSection(songs: mockSongs),
           ),
         ],
       ),
