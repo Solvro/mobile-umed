@@ -11,7 +11,7 @@ import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
 class RouteMapWidget extends StatelessWidget {
-  const RouteMapWidget({super.key, required this.landmarks, required this.visitedCount, this.active = true});
+  const RouteMapWidget({super.key, this.landmarks = const IListConst([]), this.visitedCount = 0, this.active = true});
 
   final IList<Landmark> landmarks;
   final int visitedCount;

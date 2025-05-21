@@ -4,11 +4,11 @@ import "../../common/data_source/mocks/mock_routes.dart";
 import "views/route_map_view.dart";
 
 class RouteMapPage extends StatelessWidget {
-  const RouteMapPage({super.key, required this.id});
+  const RouteMapPage({super.key, this.id});
 
-  final int id;
+  final int? id;
   static const routeName = "/route_map";
 
   @override
-  Widget build(BuildContext context) => RouteMapView(route: mockData[id]);
+  Widget build(BuildContext context) => RouteMapView(route: id != null ? mockData[id!] : null);
 }
