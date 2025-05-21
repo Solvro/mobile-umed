@@ -19,15 +19,7 @@ final _router = GoRouter(
     ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: _rootNavigatorKey,
-      builder:
-          (_, _, navigationShell) => DashboardPage(
-            navigationShell: navigationShell,
-            items: const <NavItem>[
-              (label: HomePage.label, icon: HomePage.icon),
-              (label: AchievementsPage.label, icon: AchievementsPage.icon),
-              (label: OthersPage.label, icon: OthersPage.icon),
-            ],
-          ),
+      builder: (_, _, navigationShell) => DashboardPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           navigatorKey: _shellNavigatorHomeKey,

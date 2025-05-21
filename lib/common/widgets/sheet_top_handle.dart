@@ -11,14 +11,14 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: getSheetTopDecoration(context.colorScheme.surface),
-      padding: const EdgeInsets.symmetric(vertical: AppPaddings.verticalSmall),
+      padding: const EdgeInsets.symmetric(vertical: AppPaddings.tiny),
       height: maxExtent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.drag_handle, size: BottomSheetHeaderConfig.handleIconSize),
           if (controls != null)
-            Padding(padding: const EdgeInsets.symmetric(horizontal: AppPaddings.horizontalMedium), child: controls),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium), child: controls),
         ],
       ),
     );

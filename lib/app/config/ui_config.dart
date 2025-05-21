@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 
 abstract class AppPaddings {
-  static const horizontalMedium = 20.0;
-  static const verticalMedium = 10.0;
-  static const verticalSmall = 7.0;
-  static const inner = 16.0;
+  static const medium = 20.0;
+  static const small = 16.0;
+  static const tinySmall = 10.0;
+  static const tiny = 8.0;
 }
 
 abstract class BottomSheetConfig {

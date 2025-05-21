@@ -3,28 +3,29 @@ import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 
 import "../../app/app.dart";
+import "../../app/config/ui_config.dart";
+import "widgets/nav_bar.dart";
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key, required this.navigationShell, required this.items})
-    : super(key: key ?? const ValueKey("DashboardPage"));
-  final StatefulNavigationShell navigationShell;
-  final List<NavItem> items;
+  const DashboardPage({Key? key, required this.navigationShell}) : super(key: key ?? const ValueKey("DashboardPage"));
 
-  void _goBranch(int index) {
-    navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
-  }
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        destinations:
-            items.map((item) {
-              return NavigationDestination(label: item.label, icon: item.icon);
-            }).toList(),
-        onDestinationSelected: _goBranch,
+      body: Stack(
+        children: [
+          navigationShell,
+          Positioned(
+            bottom: AppPaddings.small,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              child: NavBar(onItemSelected: navigationShell.goBranch, selectedIndex: navigationShell.currentIndex),
+            ),
+          ),
+        ],
       ),
       floatingActionButton:
           kDebugMode
@@ -33,5 +34,3 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
-
-typedef NavItem = ({String label, Icon icon});

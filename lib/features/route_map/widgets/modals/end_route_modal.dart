@@ -26,7 +26,7 @@ class EndRouteModal extends StatelessWidget {
       child: Column(
         children: [
           Text(context.l10n.route_end_modal_helper, textAlign: TextAlign.start, overflow: TextOverflow.fade),
-          const SizedBox(height: AppPaddings.verticalMedium),
+          const SizedBox(height: AppPaddings.tinySmall),
           // Image placeholder
           ClipRRect(
             borderRadius: BorderRadius.circular(EndRouteModalConfig.imageRadius),
