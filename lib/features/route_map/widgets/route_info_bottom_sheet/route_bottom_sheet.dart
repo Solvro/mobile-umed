@@ -9,8 +9,8 @@ import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/widgets/main_action_button.dart";
 import "../../../../common/widgets/map_bottom_sheet.dart";
 import "../../../../common/widgets/secondary_action_button.dart";
-import "../bottom_sheet/playlist_info_section.dart";
-import "../bottom_sheet/route_info_section.dart";
+import "../bottom_sheet/sections/playlist_info_section.dart";
+import "../bottom_sheet/sections/route_info_section.dart";
 import "../modals/end_route_modal.dart";
 
 class RouteBottomSheet extends ConsumerStatefulWidget {

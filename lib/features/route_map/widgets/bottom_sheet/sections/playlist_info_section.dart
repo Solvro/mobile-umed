@@ -1,9 +1,9 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../common/models/song.dart";
-import "../../../../common/widgets/secondary_action_button.dart";
-import "song_tile.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../common/models/song.dart";
+import "../../../../../common/widgets/secondary_action_button.dart";
+import "song_item.dart";
 
 class PlaylistInfoSection extends StatefulWidget {
   const PlaylistInfoSection({super.key, required this.songs});
@@ -55,7 +55,7 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
             itemCount: widget.songs.length,
             itemBuilder: (context, index) {
               final song = widget.songs[index];
-              return SongTile(listIndex: index + 1, song: song);
+              return SongItem(listIndex: index + 1, song: song);
             },
           ),
         ],

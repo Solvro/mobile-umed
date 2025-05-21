@@ -16,6 +16,9 @@ abstract class BottomSheetConfig {
   static const halfSizePercent = 0.25;
   static const hiddenSizePercent = 0.04;
   static const tolerance = 0.01;
+
+  // section item
+  static const itemDotRadius = 20.0;
 }
 
 abstract class BottomSheetHeaderConfig {
@@ -35,13 +38,20 @@ abstract final class PlaylistInfoConfig {
   static const verticalSpacing = 15.0;
   static const horizontalButtonSpacing = 25.0;
 
-  // song tile
-  static const songTileDotRad = 20.0;
+  // song item
+
   static const songTileSpacing = 20.0;
 }
 
 abstract final class SelectRouteConfig {
   static const contentPadding = 5.0;
+}
+
+abstract final class LandmarksSectionConfig {
+  static const contentPadding = 5.0;
+
+  // landmark item
+  static const landmarkItemSpacing = 20.0;
 }
 
 abstract class RouteInfoConfig {

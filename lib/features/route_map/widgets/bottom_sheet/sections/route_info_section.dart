@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../controllers/route_controller.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../app/theme/app_theme.dart";
+import "../../../controllers/route_controller.dart";
 
 class RouteInfoSection extends ConsumerWidget {
   const RouteInfoSection({super.key});

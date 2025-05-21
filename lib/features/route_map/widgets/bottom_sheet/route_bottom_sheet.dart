@@ -10,8 +10,8 @@ import "../../../../common/widgets/main_action_button.dart";
 import "../../../../common/widgets/map_bottom_sheet.dart";
 import "../../../../common/widgets/secondary_action_button.dart";
 import "../modals/end_route_modal.dart";
-import "playlist_info_section.dart";
-import "route_info_section.dart";
+import "sections/playlist_info_section.dart";
+import "sections/route_info_section.dart";
 
 class RouteBottomSheet extends ConsumerStatefulWidget {
   const RouteBottomSheet({super.key, required this.currentSheetMode});

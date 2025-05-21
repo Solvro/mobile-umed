@@ -1,6 +1,6 @@
 import "package:flutter/widgets.dart";
 
-import "../../../../app/theme/app_theme.dart";
+import "../../../../../app/theme/app_theme.dart";
 
 class RouteStat extends StatelessWidget {
   const RouteStat({super.key, required this.imgPath, required this.comment});

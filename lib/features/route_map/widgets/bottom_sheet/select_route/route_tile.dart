@@ -1,12 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../app/l10n/l10n.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../../../common/data_source/mocks/mock_songs.dart";
-import "../../../../common/models/route.dart" as rt;
-import "../../../../common/widgets/secondary_action_button.dart";
-import "playlist_info_section.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../app/l10n/l10n.dart";
+import "../../../../../app/theme/app_theme.dart";
+import "../../../../../common/data_source/mocks/mock_songs.dart";
+import "../../../../../common/models/route.dart" as rt;
+import "../../../../../common/widgets/secondary_action_button.dart";
+import "../sections/landmarks_section.dart";
+import "../sections/playlist_info_section.dart";
 import "route_stat.dart";
 
 class RouteTile extends ConsumerStatefulWidget {
@@ -77,7 +78,10 @@ class RouteTileState extends ConsumerState<RouteTile> {
             ],
           ),
         ),
-        if (_chosenOption == RouteInfoOption.info) const Text("fdsfsd") else PlaylistInfoSection(songs: mockSongs),
+        if (_chosenOption == RouteInfoOption.info)
+          LandmarksSection(landmarks: widget.route.landmarks)
+        else
+          PlaylistInfoSection(songs: mockSongs),
       ],
     );
   }
