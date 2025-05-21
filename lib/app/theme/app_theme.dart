@@ -15,14 +15,13 @@ class AppTheme implements AppThemeData {
   @override
   ThemeData get light => ThemeData(
     colorScheme: const ColorScheme.light(
-      primary: ColorConsts.primary,
-      secondary: ColorConsts.secondary,
-      surface: ColorConsts.surface,
-      onPrimary: ColorConsts.onPrimary,
-      onSecondary: ColorConsts.onSecondary,
-      onSurface: ColorConsts.onSurface,
-      error: ColorConsts.error,
-      onError: ColorConsts.onError,
+      primary: ColorConsts.lightGreen,
+      secondary: ColorConsts.green,
+      surface: ColorConsts.whiteGray,
+      onPrimary: ColorConsts.whiteGray,
+      onSecondary: Colors.white,
+      error: ColorConsts.red,
+      onTertiary: ColorConsts.onyx,
     ),
     textTheme: _textTheme,
     fontFamily: FontFamily.urbanist,
@@ -30,18 +29,18 @@ class AppTheme implements AppThemeData {
   );
 
   static const _textTheme = TextTheme(
-    headlineMedium: TextStyle(fontSize: 23, fontWeight: FontWeight.w400, color: ColorConsts.primary),
-    headlineSmall: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: ColorConsts.onSurface),
-    titleMedium: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: ColorConsts.onSurface),
-    bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onSurface, height: 1.2),
+    headlineMedium: TextStyle(fontSize: 23, fontWeight: FontWeight.w400, color: ColorConsts.lightGreen),
+    headlineSmall: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
+    titleMedium: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
+    bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onyx, height: 1.2),
     bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
   );
 
   ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       minimumSize: const Size(44, 44),
-      backgroundColor: ColorConsts.primary,
-      foregroundColor: ColorConsts.onPrimary,
+      backgroundColor: ColorConsts.lightGreen,
+      foregroundColor: ColorConsts.whiteGray,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       padding: const EdgeInsets.symmetric(vertical: 6),
