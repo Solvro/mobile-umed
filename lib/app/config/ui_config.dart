@@ -24,7 +24,7 @@ abstract class BottomSheetHeaderConfig {
 
   // controls
   static const headerWithControls = 100.0;
-  static const headerWithoutControls = 40.0;
+  static const headerWithoutControls = 44.0;
   static const controlsSpacing = 20.0;
 
   static const roundedTopRadius = 15.0;
@@ -38,6 +38,10 @@ abstract final class PlaylistInfoConfig {
   // song tile
   static const songTileDotRad = 20.0;
   static const songTileSpacing = 20.0;
+}
+
+abstract final class SelectRouteConfig {
+  static const contentPadding = 5.0;
 }
 
 abstract class RouteInfoConfig {

@@ -5,6 +5,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../widgets/bottom_sheet/route_bottom_sheet.dart";
+import "../widgets/bottom_sheet/select_route_bottom_sheet.dart";
 import "../widgets/map/route_map_widget.dart";
 import "../widgets/progress_bar/route_progress_bar.dart";
 
@@ -64,7 +65,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
             RouteBottomSheet(currentSheetMode: _currentSheetMode),
           ] else ...[
             RouteMapWidget(active: _currentSheetState == SheetState.hidden),
-            // ChooseRouteBottomSheet()
+            ChooseRouteBottomSheet(),
           ],
         ],
       ),
