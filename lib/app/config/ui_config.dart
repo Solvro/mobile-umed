@@ -27,7 +27,7 @@ abstract class BottomSheetHeaderConfig {
 
   // controls
   static const headerWithControls = 100.0;
-  static const headerWithoutControls = 44.0;
+  static const headerWithoutControls = 46.0;
   static const controlsSpacing = 20.0;
 
   static const roundedTopRadius = 15.0;

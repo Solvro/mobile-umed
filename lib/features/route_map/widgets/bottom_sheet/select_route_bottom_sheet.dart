@@ -27,7 +27,17 @@ class ChooseRouteBottomSheetState extends ConsumerState<ChooseRouteBottomSheet> 
   @override
   Widget build(BuildContext context) {
     return MapBottomSheet(
-      button: MainActionButton(text: context.l10n.start_route, onPressed: () async {}),
+      button: MainActionButton(
+        text: context.l10n.browse_routes,
+        onPressed: () {
+          if (ref.read(sheetStateProvider) == SheetState.hidden) {
+            ref.read(sheetStateProvider.notifier).state = SheetState.visible;
+          } else {
+            ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+          }
+          ref.read(sheetTriggerProvider.notifier).state = true;
+        },
+      ),
       child: Container(
         padding: const EdgeInsets.all(SelectRouteConfig.contentPadding),
         child: ListView.separated(

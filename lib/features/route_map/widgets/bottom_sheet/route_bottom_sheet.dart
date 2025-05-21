@@ -3,7 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
-import "../../../../app/theme/app_theme.dart";
+import "../../../../app/theme/color_consts.dart";
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/widgets/main_action_button.dart";
@@ -28,7 +28,7 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
     return MapBottomSheet(
       button: MainActionButton(
         text: context.l10n.end_route,
-        backgroundColor: context.colorScheme.secondary,
+        backgroundColor: ColorConsts.red,
         onPressed: () async {
           ref.read(sheetTriggerProvider.notifier).state = true;
           await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
