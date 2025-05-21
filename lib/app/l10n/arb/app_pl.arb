@@ -15,5 +15,7 @@
   "burnt_calories": "Spalone kalorie",
   "time": "Czas",
   "avg_pace": "Średnie tempo",
-  "start_route": "Rozpocznij trasę"
+  "start_route": "Rozpocznij trasę",
+  "ml_0": "0 ml",
+  "kcal_0": "0 kcal"
 }
