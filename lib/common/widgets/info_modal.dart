@@ -17,13 +17,13 @@ class InfoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(
-        horizontal: AppPaddings.horizontalMedium,
+        horizontal: AppPaddings.medium,
         vertical: InfoModalConfig.outerPaddingVertical,
       ),
       backgroundColor: context.colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(InfoModalConfig.radius)),
       child: Padding(
-        padding: const EdgeInsets.all(AppPaddings.inner),
+        padding: const EdgeInsets.all(AppPaddings.small),
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -38,7 +38,7 @@ class InfoModal extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: context.textTheme.headlineMedium),
-                const SizedBox(height: AppPaddings.verticalMedium),
+                const SizedBox(height: AppPaddings.tinySmall),
                 Flexible(child: child),
 
                 MainActionButton(text: context.l10n.close, onPressed: onClose ?? () => Navigator.of(context).pop()),

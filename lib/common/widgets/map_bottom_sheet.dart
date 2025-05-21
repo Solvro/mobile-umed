@@ -102,10 +102,7 @@ class _BottomSheetDraggableArea extends StatelessWidget {
               slivers: [
                 SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: controls)),
                 SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: AppPaddings.horizontalMedium),
-                    child: child,
-                  ),
+                  child: Padding(padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium), child: child),
                 ),
               ],
             ),
@@ -134,10 +131,7 @@ class _BottomSheetFixedButton extends StatelessWidget {
           top: false,
           child: Align(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPaddings.horizontalMedium,
-                vertical: AppPaddings.verticalMedium,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tinySmall),
               child: button,
             ),
           ),

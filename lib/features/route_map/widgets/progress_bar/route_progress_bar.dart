@@ -29,7 +29,7 @@ class _RouteProgressBarState extends State<RouteProgressBar> {
           child: Container(
             decoration: _decoration(context.colorScheme.surface),
             width: double.infinity,
-            padding: const EdgeInsets.only(top: ProgressBarConfig.topPadding, bottom: AppPaddings.verticalMedium),
+            padding: const EdgeInsets.only(top: ProgressBarConfig.topPadding, bottom: AppPaddings.tinySmall),
             child: SafeArea(
               bottom: false,
               child: Padding(

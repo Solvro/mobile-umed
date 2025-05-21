@@ -18,7 +18,7 @@ class DashboardPage extends StatelessWidget {
         children: [
           navigationShell,
           Positioned(
-            bottom: AppPaddings.horizontalSmall,
+            bottom: AppPaddings.small,
             left: 0,
             right: 0,
             child: SafeArea(

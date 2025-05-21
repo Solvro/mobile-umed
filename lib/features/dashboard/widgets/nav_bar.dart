@@ -22,6 +22,16 @@ class _NavBarState extends State<NavBar> {
     super.initState();
   }
 
+  @override
+  void didUpdateWidget(covariant NavBar oldWidget) {
+    if (oldWidget.selectedIndex != widget.selectedIndex) {
+      setState(() {
+        _selectedIndex = widget.selectedIndex;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   final List<(IconData, IconData)> _icons = [
     (Icons.home, Icons.home_outlined),
     (Icons.info, Icons.info_outline),
@@ -34,10 +44,7 @@ class _NavBarState extends State<NavBar> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppPaddings.horizontalSmall,
-            vertical: AppPaddings.horizontalTiny,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small, vertical: AppPaddings.tiny),
           decoration: BoxDecoration(
             color: context.colorScheme.onSecondary,
             borderRadius: BorderRadius.circular(50),
@@ -46,7 +53,7 @@ class _NavBarState extends State<NavBar> {
             ],
           ),
           child: Row(
-            spacing: AppPaddings.horizontalMedium,
+            spacing: AppPaddings.medium,
             children: List.generate(
               _icons.length,
               (index) => _NavBarItem(
