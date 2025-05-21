@@ -4,6 +4,8 @@ enum SheetMode { half, expanded }
 
 enum SheetState { hidden, visible }
 
+enum RouteDetailsOption { info, playlist }
+
 final sheetModeProvider = StateProvider<SheetMode>((ref) => SheetMode.half);
 
 final sheetStateProvider = StateProvider<SheetState>((ref) => SheetState.hidden);
