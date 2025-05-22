@@ -20,7 +20,10 @@ class RouteMapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (landmarks.isEmpty) {
-      return FlutterMap(children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)]);
+      return FlutterMap(
+        options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
+        children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
+      );
     }
     return FlutterMap(
       options: MapOptions(initialCenter: landmarks.first.location),
