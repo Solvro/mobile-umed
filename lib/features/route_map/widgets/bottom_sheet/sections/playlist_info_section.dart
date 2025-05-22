@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../common/models/song.dart";
 import "../../../../../common/widgets/secondary_action_button.dart";
-import "song_item.dart";
+import "../tiles/song_item.dart";
 
 class PlaylistInfoSection extends StatefulWidget {
   const PlaylistInfoSection({super.key, required this.songs});

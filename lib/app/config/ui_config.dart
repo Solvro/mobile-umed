@@ -90,7 +90,9 @@ abstract class InfoModalConfig {
 abstract class OptionsModalConfig {
   static const radius = 15.0;
   static const outerPaddingVertical = 195.0;
-  static const titleSpacer = 6.0;
+  static const titleSpacer = 12.0;
+  static const contentSpacer = 15.0;
+  static const buttonSpacer = 4.0;
 }
 
 abstract class LandmarkInfoModalConfig {

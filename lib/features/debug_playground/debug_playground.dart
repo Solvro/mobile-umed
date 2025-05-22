@@ -3,7 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
 import "../route_map/repository/route_map_repository.dart";
-import "../route_map/widgets/modals/route_completed_modal.dart";
+import "../route_map/widgets/bottom_sheet/modals/route_completed_modal.dart";
 
 class DebugPlayground extends StatelessWidget {
   const DebugPlayground({super.key});

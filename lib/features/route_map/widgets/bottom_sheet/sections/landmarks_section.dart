@@ -3,7 +3,7 @@ import "package:flutter/widgets.dart";
 
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../common/models/landmark.dart";
-import "landmark_item.dart";
+import "../tiles/landmark_item.dart";
 
 class LandmarksSection extends StatelessWidget {
   const LandmarksSection({super.key, required this.landmarks});

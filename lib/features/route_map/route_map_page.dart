@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../common/data_source/mocks/mock_routes.dart";
+import "../../common/providers/bottom_sheet_providers.dart";
 import "providers/route_provider.dart";
 import "views/route_map_view.dart";
 
@@ -13,15 +14,15 @@ class RouteMapPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (id != null) {
-      Future.microtask(() {
+    Future.microtask(() {
+      if (id != null) {
         ref.read(routeProvider.notifier).state = mockData[id!];
-      });
-    } else {
-      Future.microtask(() {
+      } else {
         ref.read(routeProvider.notifier).state = null;
-      });
-    }
+      }
+
+      ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+    });
     return const RouteMapView();
   }
 }

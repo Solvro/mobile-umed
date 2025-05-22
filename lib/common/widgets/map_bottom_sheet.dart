@@ -40,6 +40,7 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   Widget build(BuildContext context) {
     final mode = ref.watch(sheetModeProvider);
     final trigger = ref.watch(sheetTriggerProvider);
+
     final sheetPosition =
         mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
 

@@ -8,6 +8,7 @@ import "../../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../../../common/models/route.dart" as rt;
 import "../../../../../common/widgets/secondary_action_button.dart";
 import "../../../providers/route_provider.dart";
+import "../modals/start_route_modal.dart";
 import "../sections/landmarks_section.dart";
 import "../sections/playlist_info_section.dart";
 import "route_stat.dart";
@@ -57,8 +58,11 @@ class RouteTileState extends ConsumerState<RouteTile> {
         Padding(
           padding: const EdgeInsets.all(6),
           child: SecondaryActionButton(
-            onPressed: () {
-              ref.read(routeProvider.notifier).state = widget.route;
+            onPressed: () async {
+              await showDialog<StartRouteModal>(
+                context: context,
+                builder: (context) => StartRouteModal(route: widget.route),
+              );
             },
             text: context.l10n.start_route,
           ),

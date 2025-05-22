@@ -1,5 +1,5 @@
 import "package:flutter/material.dart" hide Route;
-import "../../../../app/config/ui_config.dart";
+import "../../../../../app/config/ui_config.dart";
 
 class RouteProgressBarLine extends StatelessWidget {
   const RouteProgressBarLine({super.key, required this.color, required this.done});

@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../common/models/landmark.dart";
-import "../../../../common/widgets/cached_image.dart";
-import "../../../../common/widgets/info_modal.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../common/models/landmark.dart";
+import "../../../../../common/widgets/cached_image.dart";
+import "../../../../../common/widgets/info_modal.dart";
 
 class LandmarkInfoModal extends StatelessWidget {
   final Landmark landmark;

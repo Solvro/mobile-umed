@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+<<<<<<< HEAD:lib/features/route_map/widgets/modals/end_route_modal.dart
 import "../../../../app/app.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
@@ -7,6 +8,14 @@ import "../../../../app/theme/app_theme.dart";
 import "../../../../common/widgets/cached_image.dart";
 import "../../../../common/widgets/main_action_button.dart";
 import "../../../../common/widgets/options_modal.dart";
+=======
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../app/l10n/l10n.dart";
+import "../../../../../app/theme/app_theme.dart";
+import "../../../../../common/widgets/cached_image.dart";
+import "../../../../../common/widgets/main_action_button.dart";
+import "../../../../../common/widgets/options_modal.dart";
+>>>>>>> e6141c5 (feat: implement on press of start route button):lib/features/route_map/widgets/bottom_sheet/modals/end_route_modal.dart
 
 class EndRouteModal extends StatelessWidget {
   const EndRouteModal({super.key});
