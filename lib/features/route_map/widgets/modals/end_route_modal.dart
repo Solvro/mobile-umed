@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "../../../../app/app.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
@@ -15,14 +16,14 @@ class EndRouteModal extends StatelessWidget {
     return OptionsModal(
       title: context.l10n.route_end_modal_title,
       confirmButton: MainActionButton(
-        backgroundColor: context.colorScheme.secondary,
+        backgroundColor: context.colorScheme.error,
         text: context.l10n.end_route,
         onPressed: () {
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
+          context.router.pop();
+          context.router.pop();
         },
       ),
-      cancelButton: MainActionButton(text: context.l10n.keep_going, onPressed: () => Navigator.of(context).pop()),
+      cancelButton: MainActionButton(text: context.l10n.keep_going, onPressed: context.router.pop),
       child: Column(
         children: [
           Text(context.l10n.route_end_modal_helper, textAlign: TextAlign.start, overflow: TextOverflow.fade),

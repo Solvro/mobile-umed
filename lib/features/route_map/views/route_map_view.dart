@@ -66,7 +66,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           MapBottomSheet(
             button: MainActionButton(
               text: context.l10n.end_route,
-              backgroundColor: context.colorScheme.secondary,
+              backgroundColor: context.colorScheme.error,
               onPressed: () async {
                 ref.read(sheetTriggerProvider.notifier).state = true;
                 await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
@@ -77,16 +77,12 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SecondaryActionButton(
-                  onPressed: () {
-                    ref.read(sheetModeProvider.notifier).state = SheetMode.half;
-                  },
+                  onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.half,
                   text: context.l10n.route_description,
                 ),
 
                 SecondaryActionButton(
-                  onPressed: () {
-                    ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
-                  },
+                  onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.expanded,
                   text: context.l10n.playlist,
                 ),
               ],
