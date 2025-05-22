@@ -19,7 +19,6 @@ class SecondaryActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("build button");
     final chosenBgColor = backgroundColor ?? Theme.of(context).colorScheme.primary;
     final chosenTextColor = textColor ?? Theme.of(context).colorScheme.onPrimary;
     return Expanded(
