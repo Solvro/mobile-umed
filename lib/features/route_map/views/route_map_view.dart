@@ -29,7 +29,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
 
   @override
   Widget build(BuildContext context) {
-    final route = ref.read(routeProvider);
+    final route = ref.watch(routeProvider);
 
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
@@ -68,5 +68,11 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    ref.read(routeProvider.notifier).state = null;
+    super.dispose();
   }
 }

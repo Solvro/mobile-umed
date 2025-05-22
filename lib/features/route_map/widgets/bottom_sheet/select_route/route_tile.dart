@@ -56,7 +56,12 @@ class RouteTileState extends ConsumerState<RouteTile> {
       children: [
         Padding(
           padding: const EdgeInsets.all(6),
-          child: SecondaryActionButton(onPressed: () {}, text: context.l10n.start_route),
+          child: SecondaryActionButton(
+            onPressed: () {
+              ref.read(routeProvider.notifier).state = widget.route;
+            },
+            text: context.l10n.start_route,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(6),

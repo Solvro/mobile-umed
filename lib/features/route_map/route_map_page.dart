@@ -17,6 +17,10 @@ class RouteMapPage extends ConsumerWidget {
       Future.microtask(() {
         ref.read(routeProvider.notifier).state = mockData[id!];
       });
+    } else {
+      Future.microtask(() {
+        ref.read(routeProvider.notifier).state = null;
+      });
     }
     return const RouteMapView();
   }
