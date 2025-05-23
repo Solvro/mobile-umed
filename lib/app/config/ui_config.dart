@@ -148,3 +148,18 @@ abstract final class VerticalButtonConfig {
   static const double buttonInnerSpacing = 8;
   static const double paddingHorizontal = 16;
 }
+
+abstract class RouteListConfig {
+  static const double height = 190;
+  static const double itemWidth = 150;
+  static const double minimumHeightCard = 120;
+  static const double separator = 10;
+  static const double borderRadius = 12;
+  static const String imageSemanticLabel = "Route image";
+
+  static const double titlePadding = 6;
+  static const TextStyle titleTextStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700);
+
+  static const double errorIconSize = 48;
+  static const Color errorIconColor = Colors.grey;
+}

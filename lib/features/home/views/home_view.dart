@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
-import "../../../common/widgets/common/horizontal_routes_list.dart";
+import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
 import "../../../common/widgets/home/button_row.dart";
 import "../../../common/widgets/home/start_route_button.dart";
@@ -38,7 +38,6 @@ class _MyHomeViewState extends State<MyHomeView> {
             const SizedBox(height: HomeViewConfig.paddingVertical),
             SectionHeader(loc.home_nearest_to_you),
             RouteListWidget(
-              key: const ValueKey("mockRoutesList"),
               routes: mockData,
               onRouteTap: (route) {
                 // TODO(eTraveler04): add action
