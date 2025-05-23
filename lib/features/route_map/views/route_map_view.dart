@@ -69,7 +69,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
               backgroundColor: context.colorScheme.error,
               onPressed: () async {
                 ref.read(sheetTriggerProvider.notifier).state = true;
-                // await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
+                await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
               },
             ),
             controls: Row(
