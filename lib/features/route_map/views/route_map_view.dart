@@ -2,6 +2,8 @@ import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
+import "../../../app/l10n/l10n.dart";
+import "../../../app/theme/app_theme.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../providers/route_provider.dart";
 import "../widgets/bottom_sheet/progress_bar/route_progress_bar.dart";
@@ -41,6 +43,14 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     final visitedCount = landmarks.isEmpty ? 0 : (landmarks.length <= 2 ? landmarks.length : 2);
 
     return Scaffold(
+      appBar:
+          route == null
+              ? AppBar(
+                title: Text(context.l10n.choose_route),
+                foregroundColor: context.colorScheme.onPrimary,
+                backgroundColor: context.colorScheme.primary,
+              )
+              : null,
       body: Stack(
         children: [
           if (route != null) ...[
