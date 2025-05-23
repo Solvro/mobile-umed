@@ -46,6 +46,7 @@ abstract final class PlaylistInfoConfig {
 
 abstract final class SelectRouteConfig {
   static const contentPadding = 5.0;
+  static const iconSize = 20.0;
 }
 
 abstract final class LandmarksSectionConfig {

@@ -1,11 +1,12 @@
 import "package:flutter/widgets.dart";
+import "package:flutter_svg/svg.dart";
 
 import "../../../../../app/theme/app_theme.dart";
 
 class RouteStat extends StatelessWidget {
-  const RouteStat({super.key, required this.imgPath, required this.comment});
+  const RouteStat({super.key, required this.icon, required this.comment});
 
-  final String imgPath;
+  final SvgPicture icon;
   final String comment;
 
   @override
@@ -14,9 +15,9 @@ class RouteStat extends StatelessWidget {
       width: 40,
       child: Column(
         children: [
-          Image.asset(imgPath, height: 20, width: 20),
-          const SizedBox(height: 2),
-          Text(comment, style: context.textTheme.bodySmall?.copyWith(fontSize: 10)),
+          icon,
+          const SizedBox(height: 8),
+          Text(comment, style: context.textTheme.bodySmall?.copyWith(fontSize: 10), textAlign: TextAlign.center),
         ],
       ),
     );

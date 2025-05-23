@@ -1,5 +1,6 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "../../../../../app/assets/assets.gen.dart";
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
@@ -47,11 +48,17 @@ class RouteTileState extends ConsumerState<RouteTile> {
             ),
           ),
           RouteStat(
-            imgPath: "assets/images/water.png",
+            icon: Assets.icons.water.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
             comment: widget.route.requiredWater?.inMililiters() ?? context.l10n.ml_0,
           ),
-          RouteStat(imgPath: "assets/images/time.png", comment: widget.route.estimatedTime.inMinutes()),
-          RouteStat(imgPath: "assets/images/kcal.png", comment: widget.route.calories?.inKcal() ?? context.l10n.kcal_0),
+          RouteStat(
+            icon: Assets.icons.time.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+            comment: widget.route.estimatedTime.inMinutes(),
+          ),
+          RouteStat(
+            icon: Assets.icons.kcal.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+            comment: widget.route.calories?.inKcal() ?? context.l10n.kcal_0,
+          ),
         ],
       ),
       children: [
