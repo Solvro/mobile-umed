@@ -1,11 +1,11 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
 import "../../../../../app/theme/color_consts.dart";
 import "../../../../../common/data_source/mocks/mock_songs.dart";
-import "../../../../../common/models/route.dart" as rt;
+import "../../../../../common/models/route.dart";
 import "../../../../../common/widgets/secondary_action_button.dart";
 import "../../../providers/route_provider.dart";
 import "../modals/start_route_modal.dart";
@@ -16,7 +16,7 @@ import "route_stat.dart";
 class RouteTile extends ConsumerStatefulWidget {
   const RouteTile({super.key, required this.route});
 
-  final rt.Route route;
+  final Route route;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => RouteTileState();
@@ -56,7 +56,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
       ),
       children: [
         Padding(
-          padding: const EdgeInsets.all(6),
+          padding: const EdgeInsets.all(AppPaddings.tinySmall),
           child: SecondaryActionButton(
             onPressed: () async {
               await showDialog<StartRouteModal>(
@@ -68,16 +68,14 @@ class RouteTileState extends ConsumerState<RouteTile> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(6),
+          padding: const EdgeInsets.all(AppPaddings.tinySmall),
           child: Row(
             spacing: BottomSheetHeaderConfig.controlsSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SecondaryActionButton(
                 onPressed: () {
-                  setState(() {
-                    _chosenOption = RouteDetailsOption.info;
-                  });
+                  setState(() => _chosenOption = RouteDetailsOption.info);
                 },
                 text: context.l10n.route_description,
                 backgroundColor:
@@ -87,9 +85,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
 
               SecondaryActionButton(
                 onPressed: () {
-                  setState(() {
-                    _chosenOption = RouteDetailsOption.playlist;
-                  });
+                  setState(() => _chosenOption = RouteDetailsOption.playlist);
                 },
                 text: context.l10n.playlist,
                 backgroundColor:

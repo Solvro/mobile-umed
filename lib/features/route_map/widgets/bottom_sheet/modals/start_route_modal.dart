@@ -1,9 +1,10 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
+import "../../../../../app/app.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
-import "../../../../../common/models/route.dart" as rt;
+import "../../../../../common/models/route.dart";
 import "../../../../../common/widgets/main_action_button.dart";
 import "../../../../../common/widgets/options_modal.dart";
 import "../../../providers/route_provider.dart";
@@ -11,7 +12,7 @@ import "../../../providers/route_provider.dart";
 class StartRouteModal extends ConsumerWidget {
   const StartRouteModal({super.key, required this.route});
 
-  final rt.Route route;
+  final Route route;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +27,7 @@ class StartRouteModal extends ConsumerWidget {
         text: context.l10n.start,
         onPressed: () {
           ref.read(routeProvider.notifier).state = route;
-          Navigator.of(context).pop();
+          context.router.pop();
         },
       ),
       child: Text(
