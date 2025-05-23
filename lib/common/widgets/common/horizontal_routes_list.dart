@@ -39,9 +39,11 @@ class RouteListWidget extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    // tło obrazka
+                    // background image
                     Image.network(
                       imageUrl,
+                      semanticLabel: "route image", // krótki opis obrazka
+
                       fit: BoxFit.cover,
                       errorBuilder:
                           (_, __, ___) => const Center(child: Icon(Icons.broken_image, size: 48, color: Colors.grey)),
