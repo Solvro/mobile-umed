@@ -149,7 +149,7 @@ abstract final class VerticalButtonConfig {
   static const double paddingHorizontal = 16;
 }
 
-abstract class RouteListConfig {
+abstract final class RouteListConfig {
   static const double height = 190;
   static const double itemWidth = 150;
   static const double minimumHeightCard = 120;
