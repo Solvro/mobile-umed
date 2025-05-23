@@ -19,7 +19,7 @@ class HomeButtonsRow extends StatelessWidget {
               icon: Icons.auto_graph,
               iconColor: HomeViewConfig.pinkIconColor,
               onPressed: () {
-                // TODO: add action "finished_routes"
+                // TODO(eTraveler04): add action "finished_routes"
               },
               textStyle: HomeViewConfig.buttonTextStyle,
             ),
@@ -31,7 +31,7 @@ class HomeButtonsRow extends StatelessWidget {
               icon: Icons.public,
               iconColor: HomeViewConfig.greenIconColor,
               onPressed: () {
-                // TODO: add action "learn_more"
+                // TODO(eTraveler04): add action "learn_more"
               },
               textStyle: HomeViewConfig.buttonTextStyle,
             ),

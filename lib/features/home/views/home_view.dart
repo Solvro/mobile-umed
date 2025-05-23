@@ -41,7 +41,7 @@ class _MyHomeViewState extends State<MyHomeView> {
               key: const ValueKey("mockRoutesList"),
               routes: mockData,
               onRouteTap: (route) {
-                // TODO: add action
+                // TODO(eTraveler04): add action
               },
             ),
             const SizedBox(height: HomeViewConfig.commonGap),
