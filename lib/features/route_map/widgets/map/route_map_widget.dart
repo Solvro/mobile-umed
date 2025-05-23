@@ -6,12 +6,12 @@ import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/landmark.dart";
-import "../modals/landmark_info_modal.dart";
+import "../bottom_sheet/modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
 class RouteMapWidget extends StatelessWidget {
-  const RouteMapWidget({super.key, required this.landmarks, required this.visitedCount, this.active = true});
+  const RouteMapWidget({super.key, this.landmarks = const IListConst([]), this.visitedCount = 0, this.active = true});
 
   final IList<Landmark> landmarks;
   final int visitedCount;
@@ -20,7 +20,10 @@ class RouteMapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (landmarks.isEmpty) {
-      return FlutterMap(children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)]);
+      return FlutterMap(
+        options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
+        children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
+      );
     }
     return FlutterMap(
       options: MapOptions(initialCenter: landmarks.first.location),

@@ -40,6 +40,7 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   Widget build(BuildContext context) {
     final mode = ref.watch(sheetModeProvider);
     final trigger = ref.watch(sheetTriggerProvider);
+
     final sheetPosition =
         mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
 
@@ -47,7 +48,7 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
       Future.microtask(() async {
         ref.read(sheetTriggerProvider.notifier).state = false;
         await controller.animateTo(
-          BottomSheetConfig.hiddenSizePercent,
+          ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );

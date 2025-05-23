@@ -14,5 +14,22 @@
   "covered_distance": "Przebyta odległość",
   "burnt_calories": "Spalone kalorie",
   "time": "Czas",
-  "avg_pace": "Średnie tempo"
+  "avg_pace": "Średnie tempo",
+  "browse_routes": "Przegądaj trasy",
+  "start_route": "Rozpocznij trasę!",
+  "ml_0": "0 ml",
+  "kcal_0": "0 kcal",
+  "start_route_modal_title": "Czy na pewno chcesz rozpocząć trasę {route_name}?",
+  "@start_route_modal_title": {
+    "description": "Title or modal asking for starting the route",
+    "placeholders": {
+      "route_name": {
+        "type": "String",
+        "example": "Mountain trail"
+      }
+    }
+  },
+  "keep_on_browsing": "Przegądaj dalej",
+  "start": "Rozpocznij",
+  "choose_route": "Wybierz trasę"
 }

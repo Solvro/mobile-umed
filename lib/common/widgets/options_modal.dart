@@ -34,8 +34,10 @@ class OptionsModal extends StatelessWidget {
           children: [
             Text(title, style: context.textTheme.headlineMedium),
             const SizedBox(height: OptionsModalConfig.titleSpacer),
-            Expanded(child: child),
+            Flexible(child: child),
+            const SizedBox(height: OptionsModalConfig.contentSpacer),
             cancelButton,
+            const SizedBox(height: OptionsModalConfig.buttonSpacer),
             confirmButton,
           ],
         ),

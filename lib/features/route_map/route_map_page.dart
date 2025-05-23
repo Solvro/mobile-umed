@@ -1,14 +1,28 @@
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../common/data_source/mocks/mock_routes.dart";
+import "../../common/providers/bottom_sheet_providers.dart";
+import "providers/route_provider.dart";
 import "views/route_map_view.dart";
 
-class RouteMapPage extends StatelessWidget {
-  const RouteMapPage({super.key, required this.id});
+class RouteMapPage extends ConsumerWidget {
+  const RouteMapPage({super.key, this.id});
 
-  final int id;
+  final int? id;
   static const routeName = "/route_map";
 
   @override
-  Widget build(BuildContext context) => RouteMapView(route: mockData[id]);
+  Widget build(BuildContext context, WidgetRef ref) {
+    Future.microtask(() {
+      if (id != null) {
+        ref.read(routeProvider.notifier).state = mockData[id!];
+      } else {
+        ref.read(routeProvider.notifier).state = null;
+      }
+
+      ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+    });
+    return const RouteMapView();
+  }
 }
