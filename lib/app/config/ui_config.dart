@@ -122,3 +122,29 @@ abstract final class StatInfoCompactConfig {
   static const borderWidth = 2.0;
   static const iconPadding = 6.0;
 }
+
+abstract final class HomeViewConfig {
+  // spacing
+  static const double commonGap = 30;
+  static const double paddingHorizontal = 16;
+  static const double paddingVertical = 10;
+  static const double circleAvatarRadius = 36;
+  static const double exploreIconSize = 72;
+  static const double constrainedTextMaxWidth = 120;
+  static const double buttonInnerHorizontalMargin = 8;
+
+  // colors
+  static const Color greenIconColor = Colors.lightGreen;
+  static const Color pinkIconColor = Colors.purpleAccent;
+
+  // texts
+  static const TextStyle appBarTextStyle = TextStyle(fontWeight: FontWeight.w500);
+  static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, color: Colors.black);
+}
+
+abstract final class VerticalButtonConfig {
+  static const double iconSize = 84;
+  static const double cardMinimumHeight = 80;
+  static const double buttonInnerSpacing = 8;
+  static const double paddingHorizontal = 16;
+}

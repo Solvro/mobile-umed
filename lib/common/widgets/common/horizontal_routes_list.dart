@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "../models/route.dart" as app_route;
-import "./home_view_styles.dart";
+import "../../models/route.dart" as app_route;
+import "button_styles.dart";
 
 class RouteListWidget extends StatelessWidget {
   final List<app_route.Route> routes;
@@ -46,7 +46,7 @@ class RouteListWidget extends StatelessWidget {
                       errorBuilder:
                           (_, __, ___) => const Center(child: Icon(Icons.broken_image, size: 48, color: Colors.grey)),
                     ),
-                    // gradient + nazwa
+                    // gradient + name
                     Container(
                       alignment: Alignment.bottomCenter,
                       decoration: const BoxDecoration(

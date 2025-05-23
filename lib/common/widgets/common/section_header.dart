@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "./section_accent.dart";
+import "section_accent.dart";
 
 /// Mały widget z zaokrąglonym paskiem po lewej stronie
 class SectionHeader extends StatelessWidget {
