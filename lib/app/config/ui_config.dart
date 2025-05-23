@@ -122,3 +122,44 @@ abstract final class StatInfoCompactConfig {
   static const borderWidth = 2.0;
   static const iconPadding = 6.0;
 }
+
+abstract final class HomeViewConfig {
+  // spacing
+  static const double commonGap = 30;
+  static const double paddingHorizontal = 16;
+  static const double paddingVertical = 10;
+  static const double circleAvatarRadius = 36;
+  static const double exploreIconSize = 72;
+  static const double constrainedTextMaxWidth = 120;
+  static const double buttonInnerHorizontalMargin = 8;
+
+  // colors
+  static const Color greenIconColor = Colors.lightGreen;
+  static const Color pinkIconColor = Colors.purpleAccent;
+
+  // texts
+  static const TextStyle appBarTextStyle = TextStyle(fontWeight: FontWeight.w500);
+  static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, color: Colors.black);
+}
+
+abstract final class VerticalButtonConfig {
+  static const double iconSize = 84;
+  static const double cardMinimumHeight = 80;
+  static const double buttonInnerSpacing = 8;
+  static const double paddingHorizontal = 16;
+}
+
+abstract final class RouteListConfig {
+  static const double height = 190;
+  static const double itemWidth = 150;
+  static const double minimumHeightCard = 120;
+  static const double separator = 10;
+  static const double borderRadius = 12;
+  static const String imageSemanticLabel = "Route image";
+
+  static const double titlePadding = 6;
+  static const TextStyle titleTextStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700);
+
+  static const double errorIconSize = 48;
+  static const Color errorIconColor = Colors.grey;
+}

@@ -23,7 +23,7 @@ final _router = GoRouter(
       branches: [
         StatefulShellBranch(
           navigatorKey: _shellNavigatorHomeKey,
-          routes: [GoRoute(path: HomePage.routeName, builder: (context, state) => const _NotImplementedPage())],
+          routes: [GoRoute(path: HomePage.routeName, builder: (context, state) => const HomePage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorAchievementsKey,

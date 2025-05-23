@@ -14,5 +14,24 @@
   "covered_distance": "Przebyta odległość",
   "burnt_calories": "Spalone kalorie",
   "time": "Czas",
-  "avg_pace": "Średnie tempo"
+  "avg_pace": "Średnie tempo",
+
+  "common_finished_routes": "Ukończone trasy",
+  "common_finished_routes_title": "Zdrowie gra pierwsze skrzypce",
+
+  "home_nearest_to_you": "Najbliżej Ciebie!",
+  "home_choose_route": "Wybierz trasę!",
+  "home_start_your_walk": "Rozpocznij swój spacer",
+  "home_learn_more": "Dowiedz się więcej",
+
+  "achievements_achievements": "Osiągnięcia",
+  "achievements_statistics": "Statystyki",
+  "achievements_kilometers": "km",
+  "achievements_kcal": "kcal",
+  "achievements_progress": "{value} %",
+  
+  "@achievements_progress": {
+    "description": "Procent ukończenia tras",
+    "placeholders": { "value": {} }
+  }
 }
