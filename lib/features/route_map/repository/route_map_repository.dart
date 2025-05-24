@@ -1,4 +1,5 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
+import "package:flutter_map_tile_caching/flutter_map_tile_caching.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
@@ -14,6 +15,7 @@ Future<IList<Route>> fetchAllRoutes(Ref ref) async {
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*",
   );
   final data = response.data!["data"] as List<dynamic>;
+  await const FMTCStore("mapStore").manage.create();
   return data.map((e) => Route.fromJson(e as Map<String, dynamic>)).toList().lock;
 }
 
@@ -24,6 +26,5 @@ Future<Route> fetchRouteWithId(Ref ref, int id) async {
     "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*&filter[id][_eq]=$id",
   );
   final data = response.data!["data"] as List<dynamic>;
-
   return Route.fromJson(data[0] as Map<String, dynamic>);
 }
