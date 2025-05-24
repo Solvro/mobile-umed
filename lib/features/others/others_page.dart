@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "../home/views/home_view.dart";
-
 class OthersPage extends StatelessWidget {
   const OthersPage({super.key});
 
@@ -11,6 +9,6 @@ class OthersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MyHomeView(title: label);
+    return const Placeholder();
   }
 }

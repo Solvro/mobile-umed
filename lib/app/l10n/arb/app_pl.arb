@@ -1,0 +1,18 @@
+{
+  "@@locale": "pl",
+  "route_description": "Opis trasy",
+  "playlist": "Playlista",
+  "close": "Zamknij",
+  "end_route": "Zakończ trasę",
+  "keep_going": "Kontynuuj trasę!",
+  "route_end_modal_title": "Czy na pewno chcesz zakończyć trasę?",
+  "route_end_modal_helper": "Zakończenie trasy spowoduje utracenie dotychczasowego postępu.",
+  "route_completed_modal_title": "Gratulacje!",
+  "route_completed_modal_helper": "Ukończyłeś trasę i możesz być z siebie dumny" ,
+  "stats": "Statystyki",
+  "achievements": "Zdobyte Osiągnięcia",
+  "covered_distance": "Przebyta odległość",
+  "burnt_calories": "Spalone kalorie",
+  "time": "Czas",
+  "avg_pace": "Średnie tempo"
+}

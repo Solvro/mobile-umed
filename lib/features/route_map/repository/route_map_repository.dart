@@ -12,7 +12,7 @@ part "route_map_repository.g.dart";
 Future<IList<Route>> fetchAllRoutes(Ref ref) async {
   final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>(
-    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*",
+    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*",
   );
   final data = response.data!["data"] as List<dynamic>;
   await const FMTCStore("mapStore").manage.create();
@@ -23,7 +23,7 @@ Future<IList<Route>> fetchAllRoutes(Ref ref) async {
 Future<Route> fetchRouteWithId(Ref ref, int id) async {
   final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>(
-    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*&filter[id][_eq]=$id",
+    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*&filter[id][_eq]=$id",
   );
   final data = response.data!["data"] as List<dynamic>;
   return Route.fromJson(data[0] as Map<String, dynamic>);

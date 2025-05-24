@@ -19,45 +19,28 @@ final _router = GoRouter(
     ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: _rootNavigatorKey,
-      builder:
-          (_, _, navigationShell) => DashboardPage(
-            navigationShell: navigationShell,
-            items: const <NavItem>[
-              (label: HomePage.label, icon: HomePage.icon),
-              (label: AchievementsPage.label, icon: AchievementsPage.icon),
-              (label: OthersPage.label, icon: OthersPage.icon),
-            ],
-          ),
+      builder: (_, _, navigationShell) => DashboardPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           navigatorKey: _shellNavigatorHomeKey,
-          routes: [
-            GoRoute(
-              path: HomePage.routeName,
-              pageBuilder: (context, state) => const NoTransitionPage(child: HomePage()),
-            ),
-          ],
+          routes: [GoRoute(path: HomePage.routeName, builder: (context, state) => const _NotImplementedPage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorAchievementsKey,
-          routes: [
-            GoRoute(
-              path: AchievementsPage.routeName,
-              pageBuilder: (context, state) => const NoTransitionPage(child: AchievementsPage()),
-            ),
-          ],
+          routes: [GoRoute(path: AchievementsPage.routeName, builder: (context, state) => const _NotImplementedPage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorOthersKey,
-          routes: [
-            GoRoute(
-              path: OthersPage.routeName,
-              pageBuilder: (context, state) => const NoTransitionPage(child: OthersPage()),
-            ),
-          ],
+          routes: [GoRoute(path: OthersPage.routeName, builder: (context, state) => const _NotImplementedPage())],
         ),
       ],
     ),
+    if (kDebugMode)
+      GoRoute(
+        path: DebugPlayground.routeName,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const DebugPlayground(),
+      ),
   ],
 );
 
@@ -68,4 +51,15 @@ extension ContexRouterX on BuildContext {
 extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   Future<void> pushRouteMap(int id) async => push("${RouteMapPage.routeName}/$id");
+  Future<void> pushPlayground() async => push(DebugPlayground.routeName);
+}
+
+//temp
+class _NotImplementedPage extends StatelessWidget {
+  const _NotImplementedPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text("Not implemented yet"));
+  }
 }

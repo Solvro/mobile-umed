@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "../home/views/home_view.dart";
-
 class AchievementsPage extends StatelessWidget {
   const AchievementsPage({super.key});
 
@@ -11,6 +9,6 @@ class AchievementsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MyHomeView(title: "AchievementsView");
+    return const Placeholder();
   }
 }
