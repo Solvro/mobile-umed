@@ -4,6 +4,7 @@ import "section_accent.dart";
 class SectionHeader extends StatelessWidget {
   final String title;
   const SectionHeader(this.title, {super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
