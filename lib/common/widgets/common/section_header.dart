@@ -1,15 +1,13 @@
 import "package:flutter/material.dart";
 import "section_accent.dart";
 
-/// Mały widget z zaokrąglonym paskiem po lewej stronie
 class SectionHeader extends StatelessWidget {
   final String title;
   const SectionHeader(this.title, {super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16), // dodany margines 16 pod nagłówkiem
+      margin: const EdgeInsets.only(bottom: 16),
       child: Row(
         children: [
           const SectionAccent(),
