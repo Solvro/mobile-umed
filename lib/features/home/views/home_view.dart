@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/l10n/l10n.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
 import "../../../common/widgets/home/button_row.dart";
 import "../../../common/widgets/home/start_route_button.dart";
-import "./../../../app/l10n/arb/app_localizations.g.dart";
 import "./../../../common/data_source/mocks/mock_routes.dart";
 
 class MyHomeView extends StatefulWidget {
@@ -18,11 +18,9 @@ class MyHomeView extends StatefulWidget {
 class _MyHomeViewState extends State<MyHomeView> {
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(loc.common_finished_routes_title, style: HomeViewConfig.appBarTextStyle),
+        title: Text(context.l10n.common_finished_routes_title, style: HomeViewConfig.appBarTextStyle),
         centerTitle: true,
         elevation: 0,
       ),
@@ -36,7 +34,7 @@ class _MyHomeViewState extends State<MyHomeView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: HomeViewConfig.paddingVertical),
-            SectionHeader(loc.home_nearest_to_you),
+            SectionHeader(context.l10n.home_nearest_to_you),
             RouteListWidget(
               routes: mockData,
               onRouteTap: (route) {
@@ -44,7 +42,7 @@ class _MyHomeViewState extends State<MyHomeView> {
               },
             ),
             const SizedBox(height: HomeViewConfig.commonGap),
-            SectionHeader(loc.home_choose_route),
+            SectionHeader(context.l10n.home_choose_route),
             StartRouteButton(),
             const SizedBox(height: HomeViewConfig.commonGap),
             HomeButtonsRow(),

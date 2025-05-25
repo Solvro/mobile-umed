@@ -1,13 +1,11 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/l10n/l10n.dart";
 import "../../../common/widgets/common/vertical_button.dart";
-import "./../../../app/l10n/arb/app_localizations.g.dart";
 
 class HomeButtonsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
-
     return SizedBox(
       height: 200,
       child: Row(
@@ -15,7 +13,7 @@ class HomeButtonsRow extends StatelessWidget {
         children: [
           Expanded(
             child: VerticalButton(
-              label: loc.common_finished_routes,
+              label: context.l10n.common_finished_routes,
               icon: Icons.auto_graph,
               iconColor: HomeViewConfig.pinkIconColor,
               onPressed: () {
@@ -27,7 +25,7 @@ class HomeButtonsRow extends StatelessWidget {
           const SizedBox(width: HomeViewConfig.commonGap),
           Expanded(
             child: VerticalButton(
-              label: loc.home_learn_more,
+              label: context.l10n.home_learn_more,
               icon: Icons.public,
               iconColor: HomeViewConfig.greenIconColor,
               onPressed: () {
