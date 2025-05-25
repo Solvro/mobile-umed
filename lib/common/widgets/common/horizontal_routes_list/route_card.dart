@@ -1,11 +1,10 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "../../../../../app/config/ui_config.dart";
-import "../../../models/route.dart" as app_route;
+import "../../../models/route.dart";
 import "../button_styles.dart";
 
-/// A single route card for horizontal lists in the app.
 class RouteCard extends StatelessWidget {
-  final app_route.Route route;
+  final Route route;
   final VoidCallback onTap;
   final double width;
   final double height;
@@ -33,7 +32,6 @@ class RouteCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // Background image with semantics
               Semantics(
                 label: "image for ${route.name}",
                 child: Image.network(
@@ -49,7 +47,6 @@ class RouteCard extends StatelessWidget {
                       ),
                 ),
               ),
-              // Gradient overlay and title
               Container(
                 alignment: Alignment.bottomCenter,
                 decoration: const BoxDecoration(
