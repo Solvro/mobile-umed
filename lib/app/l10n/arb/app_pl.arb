@@ -33,5 +33,18 @@
   "@achievements_progress": {
     "description": "Procent ukończenia tras",
     "placeholders": { "value": {} }
-  }
+  },
+
+  "follow_us": "Zaobserwuj nas!",
+  "about_app": "O Aplikacji",
+  "about_app_title": "Zdrowie gra pierwsze skrzypce",
+  "about_app_content": "lfdahgiodf Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas euismod libero ac malesuada. Proin tempor ipsum non tellus vehicula pellentesque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. DonecLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas euismod libero ac malesuada. Proin tehidfa hoeahiufeajdoig hfadvh uewhife waewa ifehs ",
+  "solvro": "Solvro",
+  "about_solvro_title": "Poznaj koło naukowe Solvro",
+  "about_solvro_content": "PLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas euismod libero ac malesuada. Proin tempor ipsum non tellus vehicula pellentesque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. DonecLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas euismod libero ac malesuada. Proin teo",
+  "umed": "Umed",
+  "about_umed_title": "Poznaj koło naukowe chorób serca",
+  "about_umed_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas euismod libero ac malesuada. Proin tempor ipsum non tellus vehicula pellentesque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. DonecLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas euismod libero ac malesuada. Proin tea",
+  "creators": "Creators",
+  "more_info": "Więcej o wydarzeniu!"
 }

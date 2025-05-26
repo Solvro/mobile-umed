@@ -152,3 +152,12 @@ abstract final class SectionAccentConfig {
   static const double height = 28;
   static const double width = 24;
 }
+
+abstract final class InfoSectionConfig {
+  // section title
+  static const radius = 15.0;
+  static const sectionTitleDecorationSize = 25.0;
+
+  // socials
+  static const socialIconSize = 35.0;
+}
