@@ -12,20 +12,12 @@ class TextInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: AppPaddings.medium,
-        top: AppPaddings.tiny,
-        left: AppPaddings.medium,
-        right: AppPaddings.medium,
-      ),
-      child: Container(
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 4,
+
+      child: Padding(
         padding: const EdgeInsets.all(AppPaddings.tiny),
-        decoration: BoxDecoration(
-          color: context.colorScheme.surface,
-          borderRadius: BorderRadius.circular(InfoSectionConfig.radius), // Rounded corners
-          boxShadow: [BoxShadow(color: Colors.black.withAlpha(50), blurRadius: 5, offset: const Offset(0, 4))],
-        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

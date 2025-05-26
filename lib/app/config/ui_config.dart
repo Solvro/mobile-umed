@@ -160,4 +160,8 @@ abstract final class InfoSectionConfig {
 
   // socials
   static const socialIconSize = 35.0;
+  static const socialIconCompactSize = 25.0;
+
+  // creator tile
+  static const creatorTileWidth = 190.0;
 }

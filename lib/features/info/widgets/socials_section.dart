@@ -8,8 +8,8 @@ import "../../../common/models/socials.dart";
 import "../../../common/utils/url_launcher.dart";
 
 class SocialsSection extends StatelessWidget {
-  const SocialsSection({super.key, required this.socials, this.hasTitle = false});
-  final bool hasTitle;
+  const SocialsSection({super.key, required this.socials, this.compact = true});
+  final bool compact;
   final Socials socials;
 
   @override
@@ -18,18 +18,20 @@ class SocialsSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (hasTitle) Text(style: TextStyle(color: context.colorScheme.primary), context.l10n.follow_us),
+        if (!compact) Text(style: context.textTheme.titleSmall, context.l10n.follow_us),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: compact ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
           children: [
-            if (socials.webUrl != null) SocialIconButton(icon: Assets.icons.socialsWeb.sized(), url: socials.webUrl!),
+            if (socials.webUrl != null)
+              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.webUrl!),
             if (socials.githubUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(), url: socials.githubUrl!),
+              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.githubUrl!),
             if (socials.facebookUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(), url: socials.facebookUrl!),
+              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.facebookUrl!),
             if (socials.linkedinUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(), url: socials.linkedinUrl!),
-            if (socials.email != null) SocialIconButton(icon: Assets.icons.socialsWeb.sized(), url: socials.email!),
+              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.linkedinUrl!),
+            if (socials.email != null)
+              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.email!),
           ],
         ),
       ],
@@ -50,7 +52,8 @@ class SocialIconButton extends StatelessWidget {
 }
 
 extension SvgGenImageX on SvgGenImage {
-  SvgPicture sized({double size = InfoSectionConfig.socialIconSize}) {
+  SvgPicture sized({required bool compact}) {
+    final size = compact ? InfoSectionConfig.socialIconCompactSize : InfoSectionConfig.socialIconSize;
     return this.svg(width: size, height: size);
   }
 }
