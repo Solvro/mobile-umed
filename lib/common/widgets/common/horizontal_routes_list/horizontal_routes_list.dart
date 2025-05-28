@@ -1,11 +1,11 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "../../../../app/config/ui_config.dart";
-import "../../../models/route.dart" as app_route;
+import "../../../models/route.dart";
 import "route_card.dart";
 
 class RouteListWidget extends StatelessWidget {
-  final List<app_route.Route> routes;
-  final void Function(app_route.Route) onRouteTap;
+  final List<Route> routes;
+  final void Function(Route) onRouteTap;
   final double height;
   final double itemWidth;
 
