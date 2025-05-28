@@ -1,14 +1,12 @@
 import "package:flutter/material.dart";
+import "../../../../../app/config/ui_config.dart";
 
-/// Section header with left accent stripe
 class SectionAccent extends StatelessWidget {
   final double width;
   final double height;
-
-  /// Accent color
   final Color color;
 
-  const SectionAccent({super.key, this.width = 24, this.height = 28, this.color = Colors.lightGreen});
+  const SectionAccent({super.key, this.width = 24, this.height = 28, this.color = AppColors.greenColor});
 
   @override
   Widget build(BuildContext context) {

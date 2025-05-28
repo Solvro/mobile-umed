@@ -42,7 +42,7 @@ class RouteCard extends StatelessWidget {
                         child: Icon(
                           Icons.broken_image,
                           size: RouteListConfig.errorIconSize,
-                          color: RouteListConfig.errorIconColor,
+                          color: AppColors.errorColor,
                         ),
                       ),
                 ),
@@ -53,10 +53,10 @@ class RouteCard extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black45],
+                    colors: [AppColors.transparent, AppColors.black45],
                   ),
                 ),
-                padding: const EdgeInsets.all(RouteListConfig.titlePadding),
+                padding: const EdgeInsets.all(AppPaddings.tiny),
                 child: Text(route.name, style: RouteListConfig.titleTextStyle, textAlign: TextAlign.center),
               ),
             ],

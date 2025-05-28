@@ -23,7 +23,7 @@ class RouteListWidget extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: routes.length,
-        separatorBuilder: (_, __) => const SizedBox(width: RouteListConfig.separator),
+        separatorBuilder: (_, __) => const SizedBox(width: AppPaddings.tinySmall),
         itemBuilder: (_, index) {
           final route = routes[index];
           return RouteCard(

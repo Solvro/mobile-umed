@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "../../../../../app/config/ui_config.dart";
 import "section_accent.dart";
 
 class SectionHeader extends StatelessWidget {
@@ -8,11 +9,11 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: AppPaddings.small),
       child: Row(
         children: [
           const SectionAccent(),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppPaddings.tiny),
           Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
         ],
       ),

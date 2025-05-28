@@ -26,9 +26,9 @@ class VerticalButton extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: VerticalButtonConfig.buttonInnerSpacing),
+          const SizedBox(height: AppPaddings.tiny),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: VerticalButtonConfig.paddingHorizontal),
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small),
             child: Text(label, style: textStyle, textAlign: TextAlign.center),
           ),
           const Spacer(),

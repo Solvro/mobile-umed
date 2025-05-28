@@ -26,14 +26,11 @@ class _MyHomeViewState extends State<MyHomeView> {
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(
-          horizontal: HomeViewConfig.paddingHorizontal,
-          vertical: HomeViewConfig.paddingVertical,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: AppPaddings.tinySmall, vertical: AppPaddings.tinySmall),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: HomeViewConfig.paddingVertical),
+            const SizedBox(height: AppPaddings.tinySmall),
             SectionHeader(context.l10n.home_nearest_to_you),
             RouteListWidget(
               routes: mockData,

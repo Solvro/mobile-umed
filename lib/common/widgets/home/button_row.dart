@@ -15,7 +15,7 @@ class HomeButtonsRow extends StatelessWidget {
             child: VerticalButton(
               label: context.l10n.common_finished_routes,
               icon: Icons.auto_graph,
-              iconColor: HomeViewConfig.pinkIconColor,
+              iconColor: AppColors.pinkColor,
               onPressed: () {
                 // TODO(eTraveler04): add action "finished_routes"
               },
@@ -27,7 +27,7 @@ class HomeButtonsRow extends StatelessWidget {
             child: VerticalButton(
               label: context.l10n.home_learn_more,
               icon: Icons.public,
-              iconColor: HomeViewConfig.greenIconColor,
+              iconColor: AppColors.greenColor,
               onPressed: () {
                 // TODO(eTraveler04): add action "learn_more"
               },
