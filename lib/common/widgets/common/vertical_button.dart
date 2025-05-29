@@ -21,15 +21,19 @@ class VerticalButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: sharedCardButtonStyle(minimumHeight: VerticalButtonConfig.cardMinimumHeight),
+      style: sharedCardButtonStyle(minimumHeight: VerticalButtonConfig.cardMinimumHeight, zeroPadding: true),
       onPressed: onPressed,
+
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: AppPaddings.tiny),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small),
-            child: Text(label, style: textStyle, textAlign: TextAlign.center),
+          Container(
+            decoration: const BoxDecoration(
+              color: AppColors.greenColor,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(VerticalButtonConfig.containerRadius)),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small, vertical: AppPaddings.tinySmall),
+            child: Text(label, style: textStyle.copyWith(color: AppColors.white), textAlign: TextAlign.center),
           ),
           const Spacer(),
           Icon(icon, size: VerticalButtonConfig.iconSize, color: iconColor),

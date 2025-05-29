@@ -37,6 +37,7 @@ class _MyHomeViewState extends State<MyHomeView> {
               onRouteTap: (route) {
                 // TODO(eTraveler04): add action
               },
+              sideMargin: HomeViewConfig.sideMargin,
             ),
             const SizedBox(height: HomeViewConfig.commonGap),
             SectionHeader(context.l10n.home_choose_route),

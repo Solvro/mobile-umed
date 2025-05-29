@@ -8,7 +8,8 @@ abstract class AppPaddings {
 }
 
 abstract class AppColors {
-  static const Color greenColor = Colors.lightGreen;
+  static const Color white = Colors.white;
+  static const Color greenColor = Color(0xFF9AB55E);
   static const Color pinkColor = Colors.purpleAccent;
   static const Color transparent = Colors.transparent;
   static const Color black45 = Colors.black45;
@@ -132,6 +133,7 @@ abstract final class StatInfoCompactConfig {
 }
 
 abstract final class HomeViewConfig {
+  static const double sideMargin = 10;
   static const double commonGap = 30;
   static const double circleAvatarRadius = 36;
   static const double exploreIconSize = 72;
@@ -144,16 +146,18 @@ abstract final class HomeViewConfig {
 
 abstract final class VerticalButtonConfig {
   static const double iconSize = 84;
-  static const double cardMinimumHeight = 80;
+  static const double cardMinimumHeight = 350;
+  static const double containerRadius = 12;
 }
 
 abstract final class RouteListConfig {
-  static const double height = 190;
+  static const double height = 215;
   static const double itemWidth = 150;
   static const double minimumHeightCard = 120;
   static const double borderRadius = 12;
   static const String imageSemanticLabel = "Route image";
   static const double errorIconSize = 48;
+  static const double sideMargin = 16;
 
   static const TextStyle titleTextStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700);
 }
