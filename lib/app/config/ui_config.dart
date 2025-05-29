@@ -139,7 +139,6 @@ abstract final class HomeViewConfig {
   static const double exploreIconSize = 72;
   static const double constrainedTextMaxWidth = 120;
 
-  // texts
   static const TextStyle appBarTextStyle = TextStyle(fontWeight: FontWeight.w500);
   static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, color: Colors.black);
 }
@@ -157,7 +156,7 @@ abstract final class RouteListConfig {
   static const double borderRadius = 12;
   static const String imageSemanticLabel = "Route image";
   static const double errorIconSize = 48;
-  static const double sideMargin = 16;
+  static const double defaultSideMargin = 16;
 
   static const TextStyle titleTextStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700);
 }
