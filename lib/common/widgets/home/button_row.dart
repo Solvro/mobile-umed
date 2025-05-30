@@ -9,6 +9,7 @@ class HomeButtonsRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
       child: SizedBox(
+        height: VerticalButtonConfig.cardMinimumHeight,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
