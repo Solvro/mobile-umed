@@ -7,15 +7,6 @@ abstract class AppPaddings {
   static const tiny = 8.0;
 }
 
-abstract class AppColors {
-  static const Color white = Colors.white;
-  static const Color greenColor = Color(0xFF9AB55E);
-  static const Color pinkColor = Colors.purpleAccent;
-  static const Color transparent = Colors.transparent;
-  static const Color black45 = Colors.black45;
-  static const Color errorColor = Colors.grey;
-}
-
 abstract class BottomSheetConfig {
   // fixed button
   static const fixedBottomSpace = 95.0;
@@ -138,14 +129,11 @@ abstract final class HomeViewConfig {
   static const double circleAvatarRadius = 36;
   static const double exploreIconSize = 72;
   static const double constrainedTextMaxWidth = 120;
-
-  static const TextStyle appBarTextStyle = TextStyle(fontWeight: FontWeight.w500);
-  static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, color: Colors.black);
 }
 
 abstract final class VerticalButtonConfig {
   static const double iconSize = 84;
-  static const double cardMinimumHeight = 350;
+  static const double cardMinimumHeight = 240;
   static const double containerRadius = 12;
 }
 
@@ -157,6 +145,9 @@ abstract final class RouteListConfig {
   static const String imageSemanticLabel = "Route image";
   static const double errorIconSize = 48;
   static const double defaultSideMargin = 16;
+}
 
-  static const TextStyle titleTextStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700);
+abstract final class SectionAccentConfig {
+  static const double height = 28;
+  static const double width = 24;
 }
