@@ -4,11 +4,11 @@ import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 
 class TextInfoTile extends StatelessWidget {
-  const TextInfoTile({super.key, required this.title, required this.content, required this.bottomActions});
+  const TextInfoTile({super.key, required this.title, required this.content, this.bottomActions});
 
   final String title;
   final String content;
-  final Widget bottomActions;
+  final Widget? bottomActions;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class TextInfoTile extends StatelessWidget {
             const SizedBox(height: AppPaddings.tinySmall),
             Text(content),
             const SizedBox(height: AppPaddings.small),
-            Flexible(child: bottomActions),
+            if (bottomActions != null) Flexible(child: bottomActions!),
           ],
         ),
       ),

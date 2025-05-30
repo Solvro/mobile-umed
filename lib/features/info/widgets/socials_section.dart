@@ -30,8 +30,8 @@ class SocialsSection extends StatelessWidget {
               SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.facebookUrl!),
             if (socials.linkedinUrl != null)
               SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.linkedinUrl!),
-            if (socials.email != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.email!),
+            if (socials.emailAddress != null)
+              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.emailAddress!),
           ],
         ),
       ],

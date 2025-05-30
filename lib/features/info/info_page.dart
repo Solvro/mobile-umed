@@ -8,5 +8,7 @@ class InfoPage extends StatelessWidget {
   static const routeName = "/info";
 
   @override
-  Widget build(BuildContext context) => InfoView();
+  Widget build(BuildContext context) {
+    return InfoView();
+  }
 }

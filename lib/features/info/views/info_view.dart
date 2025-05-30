@@ -1,71 +1,73 @@
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
-import "../../../common/models/creator.dart";
-import "../../../common/models/socials.dart";
+import "../../../app/theme/app_theme.dart";
 import "../../../common/utils/url_launcher.dart";
 import "../../../common/widgets/main_action_button.dart";
+import "../repository/info_repository.dart";
 import "../widgets/creator_tile.dart";
 import "../widgets/section_title.dart";
 import "../widgets/socials_section.dart";
 import "../widgets/text_info_tile.dart";
 
-class InfoView extends StatelessWidget {
+class InfoView extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    final creators = [
-      const Creator(id: 1, sort: 1, firstName: "Test", lastName: "jkfd", role: "Developer"),
-      const Creator(id: 1, sort: 1, firstName: "Ania", lastName: "Frania", role: "Developer"),
-      const Creator(id: 1, sort: 1, firstName: "Jakbu", lastName: "Sliman", role: "Developer"),
-      const Creator(id: 1, sort: 1, firstName: "dhsfl", lastName: "Uksdha", role: "Developer"),
-    ];
-    return Scaffold(
-      body: ListView(
-        children: [
-          SectionTitle(title: context.l10n.about_app),
-          TextInfoTile(
-            title: context.l10n.about_app_title,
-            content: context.l10n.about_app_content,
-            bottomActions: MainActionButton(
-              text: context.l10n.more_info,
-              onPressed: () async => customLaunchUrl("https://solvro.pwr.edu.pl/en/"),
-            ),
-          ).withStandardInfoPadding(),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final creatorsRef = ref.watch(fetchAllCreatorsProvider);
+    final infoSectionsRef = ref.watch(fetchAllInfosProvider);
 
-          SectionTitle(title: context.l10n.solvro),
-          TextInfoTile(
-            title: context.l10n.about_solvro_title,
-            content: context.l10n.about_solvro_content,
-            bottomActions: const SocialsSection(
-              compact: false,
-              socials: Socials(id: 2, webUrl: "https://solvro.pwr.edu.pl/en/"),
+    return ColoredBox(
+      color: context.colorScheme.surface,
+      child: infoSectionsRef.when(
+        data:
+            (infoSections) => creatorsRef.when(
+              data: (creators) {
+                final List<Widget> children = [];
+
+                for (final infoSection in infoSections) {
+                  children.add(SectionTitle(title: infoSection.title));
+
+                  children.add(
+                    infoSection.socials != null
+                        ? TextInfoTile(
+                          title: infoSection.subtitle,
+                          content: infoSection.description,
+                          bottomActions:
+                              (infoSection.socials != null && infoSection.socials!.onlyWeb)
+                                  ? MainActionButton(
+                                    text: context.l10n.more_info,
+                                    onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
+                                  )
+                                  : SocialsSection(compact: false, socials: infoSection.socials!),
+                        ).withStandardInfoPadding()
+                        : TextInfoTile(
+                          title: infoSection.subtitle,
+                          content: infoSection.description,
+                        ).withStandardInfoPadding(),
+                  );
+                }
+
+                children.add(SectionTitle(title: context.l10n.creators));
+
+                children.add(
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
+                      child: Row(children: creators.map(CreatorTile.new).toList()),
+                    ),
+                  ),
+                );
+
+                return ListView(children: children);
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Center(child: Text("Error loading creators: $error")),
             ),
-          ).withStandardInfoPadding(),
-          SectionTitle(title: context.l10n.umed),
-          TextInfoTile(
-            title: context.l10n.about_umed_title,
-            content: context.l10n.about_umed_content,
-            bottomActions: const SocialsSection(
-              compact: false,
-              socials: Socials(
-                id: 1,
-                webUrl: "https://solvro.pwr.edu.pl/en/",
-                email: "https://solvro.pwr.edu.pl/en/",
-                githubUrl: "https://solvro.pwr.edu.pl/en/",
-                linkedinUrl: "https://solvro.pwr.edu.pl/en/",
-              ),
-            ),
-          ).withStandardInfoPadding(),
-          SectionTitle(title: context.l10n.creators),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
-              child: Row(children: creators.map(CreatorTile.new).toList()),
-            ),
-          ),
-        ],
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text("Error loading infos: $error")),
       ),
     );
   }

@@ -164,4 +164,5 @@ abstract final class InfoSectionConfig {
 
   // creator tile
   static const creatorTileWidth = 190.0;
+  static const creatorTileHeight = 280.0;
 }

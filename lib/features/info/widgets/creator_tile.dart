@@ -3,7 +3,6 @@ import "package:flutter/material.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/models/creator.dart";
-import "../../../common/models/socials.dart";
 import "../../../common/widgets/cached_image.dart";
 import "socials_section.dart";
 
@@ -17,6 +16,7 @@ class CreatorTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(InfoSectionConfig.radius)),
       elevation: 4,
       child: SizedBox(
+        height: InfoSectionConfig.creatorTileHeight,
         width: InfoSectionConfig.creatorTileWidth,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -24,10 +24,7 @@ class CreatorTile extends StatelessWidget {
             CachedImage(creator.imageUrl),
             Text("${creator.firstName} ${creator.lastName}", style: context.textTheme.bodyMedium),
             Text(creator.role, style: context.textTheme.bodySmall),
-
-            const SocialsSection(
-              socials: Socials(id: 1, webUrl: "https://solvro.pwr.edu.pl/en/", email: "https://solvro.pwr.edu.pl/en/"),
-            ),
+            if (creator.socials != null) SocialsSection(socials: creator.socials!),
             const SizedBox(height: AppPaddings.tiny),
           ],
         ),

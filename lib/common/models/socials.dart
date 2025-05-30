@@ -5,13 +5,15 @@ part "socials.g.dart";
 
 @freezed
 abstract class Socials with _$Socials {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Socials({
     required int id,
     String? webUrl,
     String? githubUrl,
     String? facebookUrl,
     String? linkedinUrl,
-    String? email,
+    String? emailAddress,
+    @Default(false) bool onlyWeb,
   }) = _Socials;
 
   factory Socials.fromJson(Map<String, dynamic> json) => _$SocialsFromJson(json);
