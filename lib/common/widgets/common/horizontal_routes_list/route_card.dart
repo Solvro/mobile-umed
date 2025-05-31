@@ -1,5 +1,6 @@
 import "package:flutter/material.dart" hide Route;
 import "../../../../../app/config/ui_config.dart";
+import "../../../../app/theme/app_theme.dart";
 import "../../../models/route.dart";
 import "../button_styles.dart";
 
@@ -19,8 +20,6 @@ class RouteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = "https://picsum.photos/seed/${route.id}/300/200";
-
     return SizedBox(
       width: width,
       height: height,
@@ -32,32 +31,46 @@ class RouteCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Semantics(
-                label: "image for ${route.name}",
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                  errorBuilder:
-                      (_, __, ___) => const Center(
-                        child: Icon(
-                          Icons.broken_image,
-                          size: RouteListConfig.errorIconSize,
-                          color: AppColors.errorColor,
-                        ),
-                      ),
+              Container(color: context.colorScheme.onSecondary),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: ClipPath(
+                  clipper: TopRightTriangleClipper(),
+                  child: Container(height: RouteListConfig.clipperHeight, color: context.colorScheme.secondary),
                 ),
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [AppColors.transparent, AppColors.black45],
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: ClipPath(
+                  clipper: BottomDiagonalClipper(),
+                  child: Container(height: RouteListConfig.clipperHeight, color: context.colorScheme.primary),
+                ),
+              ),
+              Positioned(
+                left: AppPaddings.tiny,
+                bottom: AppPaddings.tiny,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(route.name, style: context.textTheme.labelMedium),
+                    Text("${route.distance} km", style: context.textTheme.labelSmall),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: AppPaddings.tiny, bottom: AppPaddings.tinySmall),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: context.colorScheme.secondary,
+                    size: RouteListConfig.arrowIconSize,
                   ),
                 ),
-                padding: const EdgeInsets.all(AppPaddings.tiny),
-                child: Text(route.name, style: RouteListConfig.titleTextStyle, textAlign: TextAlign.center),
               ),
             ],
           ),
@@ -65,4 +78,36 @@ class RouteCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class TopRightTriangleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(size.width / 2, 0);
+    path.lineTo(size.width - 30, 0);
+    path.lineTo((size.width / 2) + 25, size.height / 2);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+}
+
+class BottomDiagonalClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width / 2, 0);
+    path.lineTo((size.width / 2) + 25, size.height / 2);
+    path.lineTo(size.width / 2, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }

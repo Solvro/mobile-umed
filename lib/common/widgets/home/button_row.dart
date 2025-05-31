@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
+import "../../../../app/theme/app_theme.dart";
 import "../../../common/widgets/common/vertical_button.dart";
 
 class HomeButtonsRow extends StatelessWidget {
@@ -17,11 +18,10 @@ class HomeButtonsRow extends StatelessWidget {
               child: VerticalButton(
                 label: context.l10n.common_finished_routes,
                 icon: Icons.auto_graph,
-                iconColor: AppColors.greenColor,
+                iconColor: context.colorScheme.primary,
                 onPressed: () {
                   // TODO(eTraveler04): add action "finished_routes"
                 },
-                textStyle: HomeViewConfig.buttonTextStyle,
               ),
             ),
             const SizedBox(width: HomeViewConfig.commonGap),
@@ -29,11 +29,10 @@ class HomeButtonsRow extends StatelessWidget {
               child: VerticalButton(
                 label: context.l10n.home_learn_more,
                 icon: Icons.public,
-                iconColor: AppColors.greenColor,
+                iconColor: context.colorScheme.primary,
                 onPressed: () {
                   // TODO(eTraveler04): add action "learn_more"
                 },
-                textStyle: HomeViewConfig.buttonTextStyle,
               ),
             ),
           ],

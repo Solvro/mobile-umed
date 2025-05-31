@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
+import "../../../../app/theme/app_theme.dart";
 import "../../../common/widgets/common/button_styles.dart";
 
 class StartRouteButton extends StatelessWidget {
@@ -20,20 +21,22 @@ class StartRouteButton extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: AppPaddings.tiny),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: HomeViewConfig.circleAvatarRadius,
-                  backgroundColor: AppColors.greenColor,
-                  child: Icon(Icons.explore, color: Colors.white, size: HomeViewConfig.exploreIconSize),
+                  backgroundColor: context.colorScheme.primary,
+                  child: Icon(
+                    Icons.explore,
+                    color: context.colorScheme.onSecondary,
+                    size: HomeViewConfig.exploreIconSize,
+                  ),
                 ),
               ),
-              Flexible(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: HomeViewConfig.constrainedTextMaxWidth),
-                  child: Text(
-                    context.l10n.home_start_your_walk,
-                    style: HomeViewConfig.buttonTextStyle,
-                    textAlign: TextAlign.end,
-                  ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: HomeViewConfig.constrainedTextMaxWidth),
+                child: Text(
+                  context.l10n.home_start_your_walk,
+                  style: context.textTheme.headlineSmall,
+                  textAlign: TextAlign.end,
                 ),
               ),
             ],

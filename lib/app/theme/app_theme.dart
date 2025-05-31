@@ -29,11 +29,15 @@ class AppTheme implements AppThemeData {
   );
 
   static const _textTheme = TextTheme(
+    headlineLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
     headlineMedium: TextStyle(fontSize: 23, fontWeight: FontWeight.w400, color: ColorConsts.lightGreen),
     headlineSmall: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
     titleMedium: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
     bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onyx, height: 1.2),
     bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
+    labelLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
+    labelMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
+    labelSmall: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
   );
 
   ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(

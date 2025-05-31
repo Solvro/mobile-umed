@@ -133,18 +133,19 @@ abstract final class HomeViewConfig {
 
 abstract final class VerticalButtonConfig {
   static const double iconSize = 84;
-  static const double cardMinimumHeight = 240;
+  static const double cardMinimumHeight = 225;
   static const double containerRadius = 12;
+  static const double greenHeader = 60;
 }
 
 abstract final class RouteListConfig {
-  static const double height = 215;
-  static const double itemWidth = 150;
+  static const double height = 225;
+  static const double itemWidth = 160;
   static const double minimumHeightCard = 120;
   static const double borderRadius = 12;
-  static const String imageSemanticLabel = "Route image";
-  static const double errorIconSize = 48;
   static const double defaultSideMargin = 16;
+  static const double clipperHeight = 60;
+  static const double arrowIconSize = 35;
 }
 
 abstract final class SectionAccentConfig {

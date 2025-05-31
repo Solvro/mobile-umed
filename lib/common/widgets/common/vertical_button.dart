@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/theme/app_theme.dart";
 import "button_styles.dart";
 
 class VerticalButton extends StatelessWidget {
@@ -7,7 +8,6 @@ class VerticalButton extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final VoidCallback onPressed;
-  final TextStyle textStyle;
 
   const VerticalButton({
     super.key,
@@ -15,7 +15,6 @@ class VerticalButton extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.onPressed,
-    required this.textStyle,
   });
 
   @override
@@ -23,17 +22,19 @@ class VerticalButton extends StatelessWidget {
     return ElevatedButton(
       style: sharedCardButtonStyle(minimumHeight: VerticalButtonConfig.cardMinimumHeight, zeroPadding: true),
       onPressed: onPressed,
-
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            decoration: const BoxDecoration(
-              color: AppColors.greenColor,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(VerticalButtonConfig.containerRadius)),
+            height: VerticalButtonConfig.greenHeader,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: context.colorScheme.primary,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(VerticalButtonConfig.containerRadius)),
             ),
             padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small, vertical: AppPaddings.tinySmall),
-            child: Text(label, style: textStyle.copyWith(color: AppColors.white), textAlign: TextAlign.center),
+            child: Text(label, style: context.textTheme.labelMedium, textAlign: TextAlign.center),
           ),
           const Spacer(),
           Icon(icon, size: VerticalButtonConfig.iconSize, color: iconColor),
