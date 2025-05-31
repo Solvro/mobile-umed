@@ -44,7 +44,7 @@ class InfoView extends ConsumerWidget {
                           bottomActions:
                               (infoSection.socials != null && infoSection.socials!.onlyWeb)
                                   ? MainActionButton(
-                                    text: context.l10n.more_info,
+                                    text: context.l10n.info_more_info,
                                     onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
                                   )
                                   : SocialsSection(compact: false, socials: infoSection.socials!),
@@ -54,7 +54,7 @@ class InfoView extends ConsumerWidget {
             );
           }
 
-          children.add(SectionTitle(title: context.l10n.creators));
+          children.add(SectionTitle(title: context.l10n.info_creators));
 
           children.add(
             SingleChildScrollView(

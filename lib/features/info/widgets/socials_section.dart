@@ -18,7 +18,7 @@ class SocialsSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!compact) Text(context.l10n.follow_us, style: context.textTheme.titleSmall),
+        if (!compact) Text(context.l10n.info_follow_us, style: context.textTheme.titleSmall),
         Row(
           mainAxisAlignment: compact ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
           children: [
