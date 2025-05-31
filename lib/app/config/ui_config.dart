@@ -122,3 +122,33 @@ abstract final class StatInfoCompactConfig {
   static const borderWidth = 2.0;
   static const iconPadding = 6.0;
 }
+
+abstract final class HomeViewConfig {
+  static const double sideMargin = 10;
+  static const double commonGap = 30;
+  static const double circleAvatarRadius = 36;
+  static const double exploreIconSize = 72;
+  static const double constrainedTextMaxWidth = 120;
+}
+
+abstract final class VerticalButtonConfig {
+  static const double iconSize = 84;
+  static const double cardMinimumHeight = 225;
+  static const double containerRadius = 12;
+  static const double greenHeader = 60;
+}
+
+abstract final class RouteListConfig {
+  static const double height = 225;
+  static const double itemWidth = 160;
+  static const double minimumHeightCard = 120;
+  static const double borderRadius = 12;
+  static const double defaultSideMargin = 16;
+  static const double clipperHeight = 60;
+  static const double arrowIconSize = 35;
+}
+
+abstract final class SectionAccentConfig {
+  static const double height = 28;
+  static const double width = 24;
+}
