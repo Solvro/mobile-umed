@@ -33,5 +33,9 @@
   "@achievements_progress": {
     "description": "Procent ukończenia tras",
     "placeholders": { "value": {} }
-  }
+  },
+
+  "info_follow_us": "Zaobserwuj nas!",
+  "info_creators": "Creators",
+  "info_more_info": "Więcej o wydarzeniu!"
 }

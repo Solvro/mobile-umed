@@ -19,6 +19,7 @@ class DebugPlayground extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OutlinedButton(onPressed: () async => context.router.pushRouteMap(2), child: const Text("Route Map")),
+            OutlinedButton(onPressed: () async => context.router.pushInfo(), child: const Text("Info Page")),
             OutlinedButton(
               onPressed:
                   () async => showDialog<RouteCompletedModal>(

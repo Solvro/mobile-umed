@@ -17,6 +17,12 @@ final _router = GoRouter(
         return NoTransitionPage(child: RouteMapPage(id: id));
       },
     ),
+    GoRoute(
+      path: InfoPage.routeName,
+      pageBuilder: (context, state) {
+        return const NoTransitionPage(child: InfoPage());
+      },
+    ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: _rootNavigatorKey,
       builder: (_, _, navigationShell) => DashboardPage(navigationShell: navigationShell),
@@ -52,6 +58,7 @@ extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   Future<void> pushRouteMap(int id) async => push("${RouteMapPage.routeName}/$id");
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
+  Future<void> pushInfo() async => push(InfoPage.routeName);
 }
 
 //temp

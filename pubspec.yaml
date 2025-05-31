@@ -35,6 +35,9 @@ dependencies:
   #HTTP Client
   dio: ^5.8.0+1
 
+  # Redirects
+  url_launcher: ^6.2.3
+
   #Widgets
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.1.0 
