@@ -21,7 +21,7 @@ class _MyHomeViewState extends State<MyHomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.common_finished_routes_title, style: context.textTheme.titleLarge),
+        title: Text(context.l10n.common_finished_routes_title, style: context.textTheme.headlineLarge),
         centerTitle: true,
         elevation: 0,
       ),
