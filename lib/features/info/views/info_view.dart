@@ -15,21 +15,28 @@ import "../widgets/text_info_tile.dart";
 class InfoView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final creatorsRef = ref.watch(fetchAllCreatorsProvider);
-    final infoSectionsRef = ref.watch(fetchAllInfosProvider);
+    final combinedRef = ref.watch(fetchCreatorsAndInfosProvider);
 
     return ColoredBox(
       color: context.colorScheme.surface,
-      child: infoSectionsRef.when(
-        data:
-            (infoSections) => creatorsRef.when(
-              data: (creators) {
-                final List<Widget> children = [];
+      child: combinedRef.when(
+        data: (value) {
+          final creators = value.creators;
+          final infoSections = value.infoSections;
+          final List<Widget> children = [];
 
-                for (final infoSection in infoSections) {
-                  children.add(SectionTitle(title: infoSection.title));
+          for (final infoSection in infoSections) {
+            children.add(SectionTitle(title: infoSection.title));
 
-                  children.add(
+            children.add(
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: AppPaddings.medium,
+                  top: AppPaddings.tiny,
+                  left: AppPaddings.medium,
+                  right: AppPaddings.medium,
+                ),
+                child:
                     infoSection.socials != null
                         ? TextInfoTile(
                           title: infoSection.subtitle,
@@ -41,48 +48,29 @@ class InfoView extends ConsumerWidget {
                                     onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
                                   )
                                   : SocialsSection(compact: false, socials: infoSection.socials!),
-                        ).withStandardInfoPadding()
-                        : TextInfoTile(
-                          title: infoSection.subtitle,
-                          content: infoSection.description,
-                        ).withStandardInfoPadding(),
-                  );
-                }
+                        )
+                        : TextInfoTile(title: infoSection.subtitle, content: infoSection.description),
+              ),
+            );
+          }
 
-                children.add(SectionTitle(title: context.l10n.creators));
+          children.add(SectionTitle(title: context.l10n.creators));
 
-                children.add(
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
-                      child: Row(children: creators.map(CreatorTile.new).toList()),
-                    ),
-                  ),
-                );
-
-                return ListView(children: children);
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) => Center(child: Text("Error loading creators: $error")),
+          children.add(
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
+                child: Row(children: creators.map(CreatorTile.new).toList()),
+              ),
             ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(child: Text("Error loading infos: $error")),
-      ),
-    );
-  }
-}
+          );
 
-extension PaddedWidgets on Widget {
-  Widget withStandardInfoPadding() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: AppPaddings.medium,
-        top: AppPaddings.tiny,
-        left: AppPaddings.medium,
-        right: AppPaddings.medium,
+          return ListView(children: children);
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text("Error loading creators: $error")),
       ),
-      child: this,
     );
   }
 }

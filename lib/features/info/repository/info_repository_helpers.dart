@@ -42,6 +42,9 @@ Future<T> fetchSingleWithSocials<T>({
 }) async {
   final itemResponse = await dio.get<Map<String, dynamic>>(dataEndpoint);
   final itemData = itemResponse.data!["data"] as List<dynamic>;
+  if (itemData.isEmpty) {
+    throw Exception("No data found at $dataEndpoint");
+  }
   final item = fromJson(itemData[0] as Map<String, dynamic>);
   final socialsId = getSocialId(item);
   Socials? socials;
