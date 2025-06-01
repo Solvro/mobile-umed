@@ -17,6 +17,7 @@ class AppTheme implements AppThemeData {
     colorScheme: const ColorScheme.light(
       primary: ColorConsts.lightGreen,
       secondary: ColorConsts.green,
+      tertiary: ColorConsts.paleGreen,
       surface: ColorConsts.whiteGray,
       onPrimary: ColorConsts.whiteGray,
       onSecondary: Colors.white,
