@@ -2,7 +2,7 @@ part of "app.dart";
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
-final _shellNavigatorAchievementsKey = GlobalKey<NavigatorState>();
+final _shellNavigatorInfoKey = GlobalKey<NavigatorState>();
 final _shellNavigatorOthersKey = GlobalKey<NavigatorState>();
 
 final _router = GoRouter(
@@ -17,12 +17,6 @@ final _router = GoRouter(
         return NoTransitionPage(child: RouteMapPage(id: id));
       },
     ),
-    GoRoute(
-      path: InfoPage.routeName,
-      pageBuilder: (context, state) {
-        return const NoTransitionPage(child: InfoPage());
-      },
-    ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: _rootNavigatorKey,
       builder: (_, _, navigationShell) => DashboardPage(navigationShell: navigationShell),
@@ -32,8 +26,8 @@ final _router = GoRouter(
           routes: [GoRoute(path: HomePage.routeName, builder: (context, state) => const HomePage())],
         ),
         StatefulShellBranch(
-          navigatorKey: _shellNavigatorAchievementsKey,
-          routes: [GoRoute(path: AchievementsPage.routeName, builder: (context, state) => const _NotImplementedPage())],
+          navigatorKey: _shellNavigatorInfoKey,
+          routes: [GoRoute(path: InfoPage.routeName, builder: (context, state) => const InfoPage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorOthersKey,
@@ -58,7 +52,6 @@ extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   Future<void> pushRouteMap(int id) async => push("${RouteMapPage.routeName}/$id");
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
-  Future<void> pushInfo() async => push(InfoPage.routeName);
 }
 
 //temp
