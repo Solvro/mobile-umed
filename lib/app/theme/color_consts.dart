@@ -8,4 +8,5 @@ abstract class ColorConsts {
   static const whiteGray = Color(0xFFFAFAFA); // White (#FAFAFA)
   static const onyx = Color(0xFF0F0F0F); // Onyx
   static const dimGray = Color(0xFF6B6B6B); // Dim Gray
+  static const borderGray = Color.fromARGB(255, 235, 235, 235); // Border Gray
 }
