@@ -39,6 +39,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                 // TODO(eTraveler04): add action
               },
               sideMargin: HomeViewConfig.sideMargin,
+              icon: Icons.arrow_forward_ios,
             ),
             const SizedBox(height: HomeViewConfig.commonGap),
             SectionHeader(context.l10n.home_choose_route),

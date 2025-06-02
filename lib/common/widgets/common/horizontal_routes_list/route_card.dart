@@ -26,15 +26,10 @@ class RouteCard extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        style: sharedCardButtonStyle(
-          context,
-          minimumHeight: RouteListConfig.minimumHeightCard,
-          zeroPadding: true,
-          // borderRadius: ,
-        ),
+        style: sharedCardButtonStyle(context, minimumHeight: RouteListConfig.minimumHeightCard, zeroPadding: true),
         onPressed: onTap,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(RouteListConfig.borderRadius),
+          borderRadius: BorderRadius.circular(AppRadius.small),
           child: Stack(
             fit: StackFit.expand,
             children: [
