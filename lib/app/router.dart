@@ -2,7 +2,7 @@ part of "app.dart";
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>();
-final _shellNavigatorAchievementsKey = GlobalKey<NavigatorState>();
+final _shellNavigatorInfoKey = GlobalKey<NavigatorState>();
 final _shellNavigatorOthersKey = GlobalKey<NavigatorState>();
 
 final _router = GoRouter(
@@ -26,8 +26,8 @@ final _router = GoRouter(
           routes: [GoRoute(path: HomePage.routeName, builder: (context, state) => const HomePage())],
         ),
         StatefulShellBranch(
-          navigatorKey: _shellNavigatorAchievementsKey,
-          routes: [GoRoute(path: AchievementsPage.routeName, builder: (context, state) => const _NotImplementedPage())],
+          navigatorKey: _shellNavigatorInfoKey,
+          routes: [GoRoute(path: InfoPage.routeName, builder: (context, state) => const InfoPage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorOthersKey,
