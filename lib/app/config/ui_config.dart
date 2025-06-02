@@ -5,6 +5,11 @@ abstract class AppPaddings {
   static const small = 16.0;
   static const tinySmall = 10.0;
   static const tiny = 8.0;
+  static const nano = 4.0;
+}
+
+abstract class AppRadius {
+  static const small = 12.0;
 }
 
 abstract class BottomSheetConfig {
@@ -134,21 +139,41 @@ abstract final class HomeViewConfig {
 abstract final class VerticalButtonConfig {
   static const double iconSize = 84;
   static const double cardMinimumHeight = 225;
-  static const double containerRadius = 12;
   static const double greenHeader = 60;
 }
 
 abstract final class RouteListConfig {
   static const double height = 225;
-  static const double itemWidth = 160;
+  static const double itemWidth = 180;
   static const double minimumHeightCard = 120;
-  static const double borderRadius = 12;
   static const double defaultSideMargin = 16;
-  static const double clipperHeight = 60;
+  static const double clipperHeight = 55;
   static const double arrowIconSize = 35;
 }
 
 abstract final class SectionAccentConfig {
   static const double height = 28;
   static const double width = 24;
+}
+
+abstract final class ProfileViewConfig {
+  static const double sideMargin = 10;
+  static const double commonGap = 30;
+}
+
+abstract final class ProfileProgressBarConfig {
+  static const double barHeight = 16;
+  static const double clipperHeight = barHeight - borderThickness * 2;
+  static const double borderThickness = 2;
+}
+
+abstract final class CardListConfig {
+  static const double height = 160;
+  static const double itemWidth = 160;
+  static const double defaultSideMargin = 16;
+  static const double iconSize = 64;
+}
+
+abstract final class StatCardConfig {
+  static const double iconOpacity = 0.85;
 }
