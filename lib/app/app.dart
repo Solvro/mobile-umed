@@ -5,6 +5,7 @@ import "package:go_router/go_router.dart";
 import "../features/dashboard/dashboard_page.dart";
 import "../features/debug_playground/debug_playground.dart";
 import "../features/home/home_page.dart";
+import "../features/info/info_page.dart";
 import "../features/others/others_page.dart";
 import "../features/profile/profile_page.dart";
 import "../features/route_map/route_map_page.dart";

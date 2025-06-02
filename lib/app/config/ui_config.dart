@@ -177,3 +177,17 @@ abstract final class CardListConfig {
 abstract final class StatCardConfig {
   static const double iconOpacity = 0.85;
 }
+
+abstract final class InfoSectionConfig {
+  // section title
+  static const radius = 15.0;
+  static const sectionTitleDecorationSize = 25.0;
+
+  // socials
+  static const socialIconSize = 35.0;
+  static const socialIconCompactSize = 25.0;
+
+  // creator tile
+  static const creatorTileWidth = 190.0;
+  static const creatorTileHeight = 280.0;
+}
