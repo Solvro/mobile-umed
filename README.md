@@ -154,10 +154,10 @@ dart run custom_lint
 
 ## Additional Notes
 
-- For custom theme usage, see: `/lib/app/theme`
+- For theme usage, see: `/lib/app/theme`
 - For internationalization: [Flutter Internationalization Guide](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization)
 - For asset generation, we use [flutter_gen](https://pub.dev/packages/flutter_gen)
-- For navigation, we use [auto_route](https://pub.dev/packages/auto_route)
+- For navigation, we use [go_router](https://pub.dev/packages/go_router)
 ---
 
 ## Contact
