@@ -9,11 +9,13 @@ class RouteCard extends StatelessWidget {
   final VoidCallback onTap;
   final double width;
   final double height;
+  final IconData icon;
 
   const RouteCard({
     super.key,
     required this.route,
     required this.onTap,
+    required this.icon,
     this.width = RouteListConfig.itemWidth,
     this.height = RouteListConfig.height,
   });
@@ -24,10 +26,10 @@ class RouteCard extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        style: sharedCardButtonStyle(minimumHeight: RouteListConfig.minimumHeightCard, zeroPadding: true),
+        style: sharedCardButtonStyle(context, minimumHeight: RouteListConfig.minimumHeightCard, zeroPadding: true),
         onPressed: onTap,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(RouteListConfig.borderRadius),
+          borderRadius: BorderRadius.circular(AppRadius.small),
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -38,7 +40,7 @@ class RouteCard extends StatelessWidget {
                 right: 0,
                 child: ClipPath(
                   clipper: TopRightTriangleClipper(),
-                  child: Container(height: RouteListConfig.clipperHeight, color: context.colorScheme.secondary),
+                  child: Container(height: RouteListConfig.clipperHeight, color: context.colorScheme.tertiary),
                 ),
               ),
               Positioned(
@@ -65,11 +67,7 @@ class RouteCard extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: AppPaddings.tiny, bottom: AppPaddings.tinySmall),
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: context.colorScheme.secondary,
-                    size: RouteListConfig.arrowIconSize,
-                  ),
+                  child: Icon(icon, color: context.colorScheme.secondary, size: RouteListConfig.arrowIconSize),
                 ),
               ),
             ],
@@ -85,7 +83,7 @@ class TopRightTriangleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
     path.moveTo(size.width / 2, 0);
-    path.lineTo(size.width - 30, 0);
+    path.lineTo((size.width / 2) + 50, 0);
     path.lineTo((size.width / 2) + 25, size.height / 2);
     path.close();
     return path;

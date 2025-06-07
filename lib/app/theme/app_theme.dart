@@ -17,6 +17,7 @@ class AppTheme implements AppThemeData {
     colorScheme: const ColorScheme.light(
       primary: ColorConsts.lightGreen,
       secondary: ColorConsts.green,
+      tertiary: ColorConsts.paleGreen,
       surface: ColorConsts.whiteGray,
       onPrimary: ColorConsts.whiteGray,
       onSecondary: Colors.white,
@@ -39,6 +40,7 @@ class AppTheme implements AppThemeData {
     labelLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
     labelMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
     labelSmall: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
+    displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: ColorConsts.dimGray),
   );
 
   ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(

@@ -10,7 +10,7 @@ class StartRouteButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
       child: ElevatedButton(
-        style: sharedCardButtonStyle(),
+        style: sharedCardButtonStyle(context),
         onPressed: () {
           // TODO(eTraveler04): add action "begin you walk"
         },
