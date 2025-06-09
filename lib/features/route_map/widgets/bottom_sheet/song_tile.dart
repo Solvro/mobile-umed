@@ -38,7 +38,7 @@ class SongTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 2,
-            children: [Text(song.name), Text(song.author)],
+            children: [Text(song.title), Text(song.author)],
           ),
         ),
         Text(song.duration.toShortTimeString()),
