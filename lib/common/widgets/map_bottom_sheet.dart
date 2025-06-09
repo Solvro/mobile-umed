@@ -39,20 +39,19 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final mode = ref.watch(sheetModeProvider);
-    final trigger = ref.watch(sheetTriggerProvider);
     final sheetPosition =
         mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
 
-    if (trigger) {
-      Future.microtask(() async {
+    ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
+      if (shouldTrigger) {
         ref.read(sheetTriggerProvider.notifier).state = false;
         await controller.animateTo(
           BottomSheetConfig.hiddenSizePercent,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
-      });
-    }
+      }
+    });
 
     return Stack(
       children: [
