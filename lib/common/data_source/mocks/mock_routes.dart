@@ -2,7 +2,20 @@ import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:latlong2/latlong.dart";
 
 import "../../models/landmark.dart";
+import "../../models/playlist.dart";
 import "../../models/route.dart";
+import "../../models/song.dart";
+
+final mockPlaylist = Playlist(
+  id: 1,
+  name: "Nature Sounds",
+  songs:
+      [const Song(id: 1, title: "Birds Chirping", author: "Nature Sounds", duration: Duration(minutes: 3, seconds: 45))]
+          .lock,
+  spotifyUrl: "",
+  youtubeUrl: "",
+  appleUrl: "",
+);
 
 final mockData = [
   Route(
@@ -11,7 +24,7 @@ final mockData = [
     description: "A scenic mountain trail with beautiful views.",
     calories: 500,
     distance: 10.5,
-    requiredWater: 2,
+    waterDemand: 2,
     estimatedTime: 3,
     landmarks:
         [
@@ -51,6 +64,7 @@ final mockData = [
             location: LatLng(51.1054, 17.0782),
           ),
         ].lock,
+    playlist: mockPlaylist,
   ),
   Route(
     id: 2,
@@ -58,7 +72,7 @@ final mockData = [
     description: "A peaceful walk through dense forest.",
     calories: 300,
     distance: 5.2,
-    requiredWater: 1,
+    waterDemand: 1,
     estimatedTime: 2,
     landmarks:
         [
@@ -98,6 +112,7 @@ final mockData = [
             location: LatLng(51.1140, 17.0460),
           ),
         ].lock,
+    playlist: mockPlaylist,
   ),
   Route(
     id: 3,
@@ -105,7 +120,7 @@ final mockData = [
     description: "A refreshing walk along the coastline.",
     calories: 400,
     distance: 8,
-    requiredWater: 1.5,
+    waterDemand: 1.5,
     estimatedTime: 2,
     landmarks:
         [
@@ -145,5 +160,6 @@ final mockData = [
             location: LatLng(51.1097, 17.0489),
           ),
         ].lock,
+    playlist: mockPlaylist,
   ),
 ];

@@ -3,6 +3,7 @@ import "package:freezed_annotation/freezed_annotation.dart";
 
 import "../parsers/landmark_list_converter.dart";
 import "landmark.dart";
+import "playlist.dart";
 
 part "route.freezed.dart";
 part "route.g.dart";
@@ -16,8 +17,9 @@ abstract class Route with _$Route {
     required String description,
     required int? calories,
     required double distance,
-    required double? requiredWater,
+    required double? waterDemand,
     required int estimatedTime,
+    required Playlist playlist,
     @LandmarkListConverter() required IList<Landmark> landmarks,
   }) = _Route;
 
