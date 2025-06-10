@@ -35,6 +35,14 @@ final _router = GoRouter(
         ),
       ],
     ),
+    GoRoute(
+      path: ErrorPage.routeName,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final message = state.uri.queryParameters["message"];
+        return ErrorPage(message: message, onBackToHome: () => context.router.goHome());
+      },
+    ),
     if (kDebugMode)
       GoRoute(
         path: DebugPlayground.routeName,
@@ -52,6 +60,10 @@ extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   Future<void> pushRouteMap(int id) async => push("${RouteMapPage.routeName}/$id");
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
+  Future<void> pushFullScreenError(String message) async {
+    debugPrint(message);
+    await push("${ErrorPage.routeName}?message=${Uri.encodeComponent(message)}");
+  }
 }
 
 //temp

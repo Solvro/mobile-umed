@@ -1,6 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 
+import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/creator.dart";
@@ -38,13 +39,28 @@ class InfoView extends StatelessWidget {
   }
 }
 
-class InfoSectionWidget extends StatelessWidget {
+class InfoSectionWidget extends StatefulWidget {
   const InfoSectionWidget({super.key, required this.infoSection});
 
   final InfoSection infoSection;
 
   @override
+  State<InfoSectionWidget> createState() => _InfoSectionWidgetState();
+}
+
+class _InfoSectionWidgetState extends State<InfoSectionWidget> {
+  Future<void> _tryLaunchUrl(String url) async {
+    try {
+      await customLaunchUrl(url, context.l10n.errors_launch);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      await context.router.pushFullScreenError(e.toString());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final infoSection = widget.infoSection;
     return ListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -66,7 +82,7 @@ class InfoSectionWidget extends StatelessWidget {
                         (infoSection.socials != null && infoSection.socials!.onlyWeb)
                             ? MainActionButton(
                               text: context.l10n.info_more_info,
-                              onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
+                              onPressed: () => _tryLaunchUrl(infoSection.socials!.webUrl!),
                             )
                             : SocialsSection(compact: false, socials: infoSection.socials!),
                   )
