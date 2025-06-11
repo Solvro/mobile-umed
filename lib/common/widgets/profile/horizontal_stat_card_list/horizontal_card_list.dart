@@ -1,10 +1,11 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../models/stats.dart";
 import "card.dart";
 
 class StatListWidget extends StatelessWidget {
-  final IList<StatCard> stats;
+  final IList<Stats> stats;
   final double height;
   final double itemWidth;
   final double sideMargin;
@@ -32,14 +33,7 @@ class StatListWidget extends StatelessWidget {
             final stat = stats[index];
             return Padding(
               padding: const EdgeInsets.only(bottom: AppPaddings.nano),
-              child: StatCard(
-                value: stat.value,
-                iconCode: stat.iconCode,
-                iconColor: stat.iconColor,
-                iconSize: iconSize,
-                width: itemWidth,
-                height: height,
-              ),
+              child: StatCard(stat: stat, iconSize: iconSize, width: itemWidth, height: height),
             );
           },
         ),

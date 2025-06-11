@@ -2,19 +2,16 @@ import "package:flutter/material.dart";
 
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
+import "../../../models/stats.dart";
 
 class StatCard extends StatelessWidget {
-  final String value;
-  final int iconCode;
-  final int iconColor;
+  final Stats stat;
   final double width;
   final double height;
   final double iconSize;
 
   const StatCard({
-    required this.value,
-    required this.iconCode,
-    required this.iconColor,
+    required this.stat,
     this.iconSize = CardListConfig.iconSize,
     this.width = CardListConfig.itemWidth,
     this.height = CardListConfig.height,
@@ -38,10 +35,14 @@ class StatCard extends StatelessWidget {
           const Spacer(),
           Opacity(
             opacity: StatCardConfig.iconOpacity,
-            child: Icon(IconData(iconCode, fontFamily: "MaterialIcons"), color: Color(iconColor), size: iconSize),
+            child: Icon(
+              IconData(stat.iconCode, fontFamily: "MaterialIcons"),
+              color: Color(stat.iconColor),
+              size: iconSize,
+            ),
           ),
           const Spacer(),
-          Text(value, style: context.textTheme.displayLarge),
+          Text(stat.value, style: context.textTheme.displayLarge),
         ],
       ),
     );
