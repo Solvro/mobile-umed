@@ -4,7 +4,7 @@ import "package:http_cache_hive_store/http_cache_hive_store.dart";
 import "package:path_provider/path_provider.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
-part "path_provider.g.dart";
+part "cache_tile.g.dart";
 
 @riverpod
 Future<CachedTileProvider> cacheTile(Ref ref) async {
