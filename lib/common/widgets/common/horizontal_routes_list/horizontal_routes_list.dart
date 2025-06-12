@@ -9,10 +9,12 @@ class RouteListWidget extends StatelessWidget {
   final double height;
   final double itemWidth;
   final double sideMargin;
+  final IconData icon;
 
   const RouteListWidget({
     required this.routes,
     required this.onRouteTap,
+    required this.icon,
     this.height = RouteListConfig.height,
     this.itemWidth = RouteListConfig.itemWidth,
     this.sideMargin = RouteListConfig.defaultSideMargin,
@@ -36,6 +38,7 @@ class RouteListWidget extends StatelessWidget {
               onTap: () => onRouteTap(route),
               width: itemWidth,
               height: height,
+              icon: icon,
             );
           },
         ),
