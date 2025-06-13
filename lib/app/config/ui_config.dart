@@ -191,3 +191,8 @@ abstract final class InfoSectionConfig {
   static const creatorTileWidth = 190.0;
   static const creatorTileHeight = 280.0;
 }
+
+abstract final class ErrorWidgetConfig {
+  static const iconSize = 80.0;
+  static const buttonOutsidePadding = 60.0;
+}

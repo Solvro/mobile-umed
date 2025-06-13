@@ -5,7 +5,7 @@ import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/models/socials.dart";
-import "../../../common/utils/url_launcher.dart";
+import "social_icon_button.dart";
 
 class SocialsSection extends StatelessWidget {
   const SocialsSection({super.key, required this.socials, this.compact = true});
@@ -36,18 +36,6 @@ class SocialsSection extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-class SocialIconButton extends StatelessWidget {
-  const SocialIconButton({super.key, required this.icon, required this.url});
-
-  final SvgPicture icon;
-  final String url;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(icon: icon, onPressed: () async => customLaunchUrl(url));
   }
 }
 

@@ -27,6 +27,10 @@ class DebugPlayground extends StatelessWidget {
                   ),
               child: const Text("Route Completed Modal"),
             ),
+            OutlinedButton(
+              onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
+              child: const Text("Error Page"),
+            ),
             const TestProviderWidget(),
           ],
         ),

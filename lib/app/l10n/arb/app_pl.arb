@@ -37,5 +37,10 @@
 
   "info_follow_us": "Zaobserwuj nas!",
   "info_creators": "Creators",
-  "info_more_info": "Więcej o wydarzeniu!"
+  "info_more_info": "Więcej o wydarzeniu!",
+
+  "errors_back": "Wróć do głównej",
+  "errors_title": "Przepraszamy, wystąpił błąd",
+  "errors_generic":  "Coś poszło nie tak",
+  "errors_launch": "Wystąpił błąd podczas otwierania adresu"
 }
