@@ -1,7 +1,9 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:latlong2/latlong.dart";
 
 import "../parsers/landmark_list_converter.dart";
+import "../parsers/latlng_list_converter.dart";
 import "landmark.dart";
 import "playlist.dart";
 
@@ -20,6 +22,7 @@ abstract class Route with _$Route {
     required double? waterDemand,
     required int estimatedTime,
     required Playlist playlist,
+    @LatLngListConverter() required IList<LatLng> route,
     @LandmarkListConverter() required IList<Landmark> landmarks,
   }) = _Route;
 

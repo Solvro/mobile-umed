@@ -1,3 +1,4 @@
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "package:latlong2/latlong.dart";
@@ -13,7 +14,7 @@ class RouteMapPolyline extends StatelessWidget {
     required this.visited,
     required this.active,
   });
-  final List<LatLng> locations;
+  final IList<LatLng> locations;
   final Color doneColor;
   final Color notDoneColor;
   final Color inactiveColor;
@@ -30,12 +31,12 @@ class RouteMapPolyline extends StatelessWidget {
     return PolylineLayer(
       polylines: [
         Polyline(
-          points: doneLocations,
+          points: doneLocations.toList(),
           color: active ? doneColor : inactiveColor,
           strokeWidth: MapConfig.visitedLineWidth,
         ),
         Polyline(
-          points: notDoneLocations,
+          points: notDoneLocations.toList(),
           color: active ? notDoneColor : inactiveColor,
           strokeWidth: MapConfig.unvisitedLineWidth,
           pattern: StrokePattern.dashed(segments: const [MapConfig.dashLen, MapConfig.spaceLen]),

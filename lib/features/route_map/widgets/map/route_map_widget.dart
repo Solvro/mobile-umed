@@ -1,5 +1,4 @@
-import "package:fast_immutable_collections/fast_immutable_collections.dart";
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -7,21 +6,23 @@ import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/landmark.dart";
+import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
 import "../modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
 class RouteMapWidget extends ConsumerWidget {
-  const RouteMapWidget({super.key, required this.landmarks, required this.visitedCount, this.active = true});
+  const RouteMapWidget({super.key, required this.route, required this.visitedCount, this.active = true});
 
-  final IList<Landmark> landmarks;
+  final Route route;
   final int visitedCount;
   final bool active;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tileProvider = ref.watch(cacheTileProvider);
+    final landmarks = route.landmarks;
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
@@ -32,7 +33,7 @@ class RouteMapWidget extends ConsumerWidget {
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
                 RouteMapPolyline(
-                  locations: landmarks.map((landmark) => landmark.location).toList(),
+                  locations: route.route,
                   doneColor: context.colorScheme.primary,
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
@@ -62,7 +63,7 @@ class RouteMapWidget extends ConsumerWidget {
               ],
             ),
       AsyncError(:final error) => Text("error: $error"), // TODO(tomasz-trela): show error message
-      _ => const Text("loading"), // TODO(tomasz-trela): Show loading indicator
+      _ => const Text("loading"),
     };
   }
 

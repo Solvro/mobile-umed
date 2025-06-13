@@ -65,6 +65,14 @@ final mockData = [
           ),
         ].lock,
     playlist: mockPlaylist,
+    route:
+        [
+          const LatLng(51.1079, 17.0385),
+          const LatLng(51.1094, 17.0325),
+          const LatLng(51.1066, 17.0777),
+          const LatLng(51.1045, 17.0748),
+          const LatLng(51.1054, 17.0782),
+        ].lock,
   ),
   Route(
     id: 2,
@@ -113,6 +121,14 @@ final mockData = [
           ),
         ].lock,
     playlist: mockPlaylist,
+    route:
+        [
+          const LatLng(51.1079, 17.0385),
+          const LatLng(51.1102, 17.0316),
+          const LatLng(51.1142, 17.0465),
+          const LatLng(51.1027, 17.0465),
+          const LatLng(51.1140, 17.0460),
+        ].lock,
   ),
   Route(
     id: 3,
@@ -161,5 +177,13 @@ final mockData = [
           ),
         ].lock,
     playlist: mockPlaylist,
+    route:
+        [
+          const LatLng(51.1079, 17.0385),
+          const LatLng(51.1091, 17.0439),
+          const LatLng(51.1063, 17.0767),
+          const LatLng(51.0965, 17.0240),
+          const LatLng(51.1097, 17.0489),
+        ].lock,
   ),
 ];

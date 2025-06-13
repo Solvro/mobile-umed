@@ -57,11 +57,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(
-            landmarks: widget.route.landmarks,
-            visitedCount: 3,
-            active: _currentSheetState == SheetState.hidden,
-          ),
+          RouteMapWidget(route: widget.route, visitedCount: 3, active: _currentSheetState == SheetState.hidden),
           RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3),
           MapBottomSheet(
             button: MainActionButton(
