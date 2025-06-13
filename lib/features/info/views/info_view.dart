@@ -1,7 +1,6 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 
-import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/creator.dart";
@@ -54,7 +53,9 @@ class _InfoSectionWidgetState extends State<InfoSectionWidget> {
       await customLaunchUrl(url, context.l10n.errors_launch);
     } on Exception catch (e) {
       if (!mounted) return;
-      await context.router.pushFullScreenError(e.toString());
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString()), backgroundColor: Theme.of(context).colorScheme.error));
     }
   }
 

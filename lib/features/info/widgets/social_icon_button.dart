@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 
-import "../../../app/app.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/utils/url_launcher.dart";
 
@@ -26,7 +25,9 @@ class _SocialIconButtonState extends State<SocialIconButton> {
       await customLaunchUrl(widget.url, context.l10n.errors_launch);
     } on Exception catch (e) {
       if (!mounted) return;
-      await context.router.pushFullScreenError(e.toString());
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString()), backgroundColor: Theme.of(context).colorScheme.error));
     }
   }
 }
