@@ -43,7 +43,7 @@ dependencies:
   flutter_svg: ^2.1.0 
 
   #Code Generation
-  build_runner: ^2.4.15
+  build_runner: ^2.5.1
 
   # Utils
   intl: ^0.20.2
