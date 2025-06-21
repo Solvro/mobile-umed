@@ -83,7 +83,7 @@ class _InfoSectionWidgetState extends State<InfoSectionWidget> {
                         (infoSection.socials != null && infoSection.socials!.onlyWeb)
                             ? MainActionButton(
                               text: context.l10n.info_more_info,
-                              onPressed: () => _tryLaunchUrl(infoSection.socials!.webUrl!),
+                              onPressed: () async => _tryLaunchUrl(infoSection.socials!.webUrl!),
                             )
                             : SocialsSection(compact: false, socials: infoSection.socials!),
                   )

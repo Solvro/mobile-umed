@@ -31,6 +31,7 @@ dependencies:
   freezed: ^3.0.6
   freezed_annotation: ^3.0.0
   json_serializable: ^6.9.5
+  json_annotation: ^4.9.0 
 
   #HTTP Client
   dio: ^5.8.0+1
@@ -45,6 +46,9 @@ dependencies:
   #Code Generation
   build_runner: ^2.5.2
 
+  # Loading animations
+  shimmer: ^3.0.0
+  
   # Utils
   intl: ^0.20.2
   fast_immutable_collections: ^11.0.4
