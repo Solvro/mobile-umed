@@ -1,4 +1,7 @@
+import "dart:async";
+
 import "package:flutter/material.dart";
+import "package:shimmer/shimmer.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
@@ -60,6 +63,36 @@ class _MyHomeViewState extends State<MyHomeView> {
           const SizedBox(height: HomeViewConfig.commonGap),
           HomeButtonsRow(),
         ],
+      ),
+    );
+  }
+}
+
+// widget shimmera
+class RouteListShimmer extends StatelessWidget {
+  const RouteListShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
+      child: SizedBox(
+        height: RouteListConfig.height,
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: 3,
+            separatorBuilder: (_, __) => const SizedBox(width: AppPaddings.tinySmall),
+            itemBuilder:
+                (_, __) => Container(
+                  width: RouteListConfig.itemWidth,
+                  height: RouteListConfig.height,
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+                ),
+          ),
+        ),
       ),
     );
   }
