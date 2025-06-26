@@ -1,5 +1,7 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:geolocator/geolocator.dart";
+import "package:latlong2/latlong.dart";
 
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/config/ui_config.dart";
@@ -29,6 +31,25 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   late SheetMode _currentSheetMode;
   late SheetState _currentSheetState;
 
+  final GlobalKey<RouteMapWidgetState> _mapKey = GlobalKey();
+
+  Future<void> _centerToUserLocation() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return;
+
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) return;
+    }
+    if (permission == LocationPermission.deniedForever) return;
+
+    final position = await Geolocator.getCurrentPosition();
+    final latLng = LatLng(position.latitude, position.longitude);
+
+    _mapKey.currentState?.moveTo(latLng);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,24 +61,25 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   Widget build(BuildContext context) {
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
-        setState(() {
-          _currentSheetMode = next;
-        });
+        setState(() => _currentSheetMode = next);
       }
     });
 
     ref.listen<SheetState>(sheetStateProvider, (previous, next) {
       if (next != _currentSheetState) {
-        setState(() {
-          _currentSheetState = next;
-        });
+        setState(() => _currentSheetState = next);
       }
     });
 
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(route: widget.route, visitedCount: 3, active: _currentSheetState == SheetState.hidden),
+          RouteMapWidget(
+            key: _mapKey,
+            route: widget.route,
+            visitedCount: 3,
+            active: _currentSheetState == SheetState.hidden,
+          ),
           RouteProgressBar(landmarks: widget.route.landmarks, visitedCount: 3),
           MapBottomSheet(
             button: MainActionButton(
@@ -76,18 +98,19 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
                   onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.half,
                   text: context.l10n.route_description,
                 ),
-
                 SecondaryActionButton(
                   onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.expanded,
                   text: context.l10n.playlist,
                 ),
               ],
             ),
-
             child:
-                (_currentSheetMode == SheetMode.half)
-                    ? const RouteInfoSection()
-                    : PlaylistInfoSection(songs: mockSongs),
+                _currentSheetMode == SheetMode.half ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
+          ),
+          Positioned(
+            top: 128,
+            right: 32,
+            child: FloatingActionButton(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),
         ],
       ),
