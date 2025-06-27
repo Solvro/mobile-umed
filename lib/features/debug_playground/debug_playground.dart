@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
+import "../route_map/controllers/route_controller.dart";
 import "../route_map/repository/route_map_repository.dart";
 import "../route_map/widgets/modals/route_completed_modal.dart";
 
@@ -31,6 +32,7 @@ class DebugPlayground extends StatelessWidget {
               onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
               child: const Text("Error Page"),
             ),
+
             const TestProviderWidget(),
           ],
         ),
@@ -47,9 +49,22 @@ class TestProviderWidget extends ConsumerWidget {
     final routes = ref.watch(fetchAllRoutesProvider);
     final route_2 = ref.watch(fetchRouteWithIdProvider(2));
 
+    final count = ref.watch(visitedCountProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        OutlinedButton(
+          onPressed: () {
+            ref.read(visitedCountProvider.notifier).incrementVisited();
+          },
+          child: Text("Visit Next Landmark, current: $count"),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            ref.read(visitedCountProvider.notifier).resetVisited();
+          },
+          child: const Text("Reset"),
+        ),
         routes.when(
           data: (routes) => Text("Routes:\n$routes"),
           loading: CircularProgressIndicator.new,
