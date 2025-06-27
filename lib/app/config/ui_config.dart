@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:latlong2/latlong.dart";
 
 abstract class AppPaddings {
   static const medium = 20.0;
@@ -19,7 +20,7 @@ abstract class BottomSheetConfig {
   // sheet content percent
   static const fullSizePercent = 0.45;
   static const halfSizePercent = 0.25;
-  static const hiddenSizePercent = 0.03;
+  static const hiddenSizePercent = 0.04;
   static const tolerance = 0.01;
 }
 
@@ -117,6 +118,8 @@ abstract final class MapConfig {
   static const spaceLen = 8.0;
   static const unvisitedColor = Colors.grey;
   static const inactiveColor = Colors.grey;
+
+  static const wroclawCenter = LatLng(51.1079, 17.0325);
 }
 
 abstract final class StatInfoCompactConfig {

@@ -42,5 +42,6 @@
   "errors_back": "Wróć do głównej",
   "errors_title": "Przepraszamy, wystąpił błąd",
   "errors_generic":  "Coś poszło nie tak",
-  "errors_launch": "Wystąpił błąd podczas otwierania adresu"
+  "errors_launch": "Wystąpił błąd podczas otwierania adresu",
+  "choose_route": "Wybierz trasę"
 }

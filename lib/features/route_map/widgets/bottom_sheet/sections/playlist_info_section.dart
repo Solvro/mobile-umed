@@ -1,8 +1,8 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../common/models/song.dart";
-import "../../../../common/widgets/secondary_action_button.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../common/models/song.dart";
+import "../../../../../common/widgets/secondary_action_button.dart";
 import "song_tile.dart";
 
 class PlaylistInfoSection extends StatefulWidget {

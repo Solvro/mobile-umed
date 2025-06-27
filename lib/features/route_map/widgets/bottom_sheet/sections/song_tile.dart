@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../../../common/models/song.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../app/theme/app_theme.dart";
+import "../../../../../common/models/song.dart";
 
 class SongTile extends StatelessWidget {
   const SongTile({super.key, required this.listIndex, required this.song});

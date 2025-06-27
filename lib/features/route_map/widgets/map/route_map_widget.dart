@@ -1,3 +1,4 @@
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
@@ -49,6 +50,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
       AsyncData(:final value) =>
         landmarks.isEmpty
             ? FlutterMap(
+              options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
               mapController: mapController,
               children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
             )

@@ -1,10 +1,10 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
+import "../../../common/data_source/mocks/mock_songs.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../../common/utils/location_service.dart";
@@ -13,14 +13,16 @@ import "../../../common/widgets/map_bottom_sheet.dart";
 import "../../../common/widgets/secondary_action_button.dart";
 import "../widgets/bottom_sheet/playlist_info_section.dart";
 import "../widgets/bottom_sheet/route_info_section.dart";
+import "../widgets/bottom_sheet/sections/playlist_info_section.dart";
+import "../widgets/bottom_sheet/sections/route_info_section.dart";
 import "../widgets/map/route_map_widget.dart";
 import "../widgets/modals/end_route_modal.dart";
 import "../widgets/progress_bar/route_progress_bar.dart";
 
 class RouteMapView extends ConsumerStatefulWidget {
-  const RouteMapView({super.key, required this.route});
+  const RouteMapView({super.key, this.route});
 
-  final Route route;
+  final Route? route;
 
   @override
   RouteMapViewState createState() => RouteMapViewState();
@@ -61,12 +63,25 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       }
     });
 
+     if (widget.route == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(context.l10n.choose_route),
+          foregroundColor: context.colorScheme.onPrimary,
+          backgroundColor: context.colorScheme.primary,
+        ),
+        body: Stack(children: [RouteMapWidget(active: _currentSheetState == SheetState.hidden)]),
+      );
+    }
+
+    final route = widget.route!;
+
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(key: _mapKey, route: widget.route, active: _currentSheetState == SheetState.hidden),
+          RouteMapWidget(key: _mapKey, route: route, active: _currentSheetState == SheetState.hidden),
 
-          RouteProgressBar(landmarks: widget.route.landmarks),
+          RouteProgressBar(landmarks: route.landmarks),
           MapBottomSheet(
             button: MainActionButton(
               text: context.l10n.end_route,
