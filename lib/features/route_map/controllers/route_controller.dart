@@ -1,5 +1,9 @@
 import "dart:async";
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
+import "package:latlong2/latlong.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
+
+import "../../../common/models/landmark.dart";
 
 part "route_controller.g.dart";
 
@@ -80,4 +84,18 @@ class VisitedCount extends _$VisitedCount {
   void resetVisited() {
     state = 1;
   }
+}
+
+bool latLngEqual(LatLng a, LatLng b, {double tolerance = 0.0003}) {
+  return (a.latitude - b.latitude).abs() < tolerance && (a.longitude - b.longitude).abs() < tolerance;
+}
+
+int calculateLineChangeFromLandmarksLatLng({
+  required IList<Landmark> landmarks,
+  required IList<LatLng> route,
+  required int visited,
+}) {
+  final index = visited.clamp(1, landmarks.length) - 1;
+  final target = landmarks[index].location;
+  return route.indexWhere((point) => latLngEqual(point, target)) + 1;
 }

@@ -17,10 +17,10 @@ class RouteProgressBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final total = landmarks.length;
-    final visitedCount = ref.watch(visitedCountProvider);
-    final visited = visitedCount.clamp(0, total);
-
     if (total <= 1) return const SizedBox();
+
+    final visitedCount = ref.watch(visitedCountProvider);
+    final visited = visitedCount.clamp(1, total);
 
     return Align(
       alignment: Alignment.topCenter,
