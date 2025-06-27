@@ -1,6 +1,8 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
+import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -13,7 +15,7 @@ import "../modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
-class RouteMapWidget extends ConsumerWidget {
+class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, required this.route, this.active = true});
 
   final Route route;
@@ -21,7 +23,19 @@ class RouteMapWidget extends ConsumerWidget {
   final bool active;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  RouteMapWidgetState createState() => RouteMapWidgetState();
+}
+
+class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
+  final mapController = MapController();
+
+  void moveTo(LatLng latLng) {
+    mapController.move(latLng, 14);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
     final landmarks = route.landmarks;
@@ -34,18 +48,30 @@ class RouteMapWidget extends ConsumerWidget {
     return switch (tileProvider) {
       AsyncData(:final value) =>
         landmarks.isEmpty
-            ? FlutterMap(children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)])
+            ? FlutterMap(
+              mapController: mapController,
+              children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
+            )
             : FlutterMap(
+              mapController: mapController,
               options: MapOptions(initialCenter: landmarks.first.location),
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
                 RouteMapPolyline(
-                  locations: route.route,
+                  locations: widget.route.route,
                   doneColor: context.colorScheme.primary,
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
-                  active: active,
+                  active: widget.active,
                   visited: lineChangeIndex,
+                ),
+                const CurrentLocationLayer(
+                  style: LocationMarkerStyle(
+                    marker: DefaultLocationMarker(color: Colors.blue),
+                    markerSize: Size(28, 28),
+                    accuracyCircleColor: Color(0x2288B4EA),
+                    headingSectorColor: Color(0x4488B4EA),
+                  ),
                 ),
                 MarkerLayer(
                   markers:
@@ -61,7 +87,7 @@ class RouteMapWidget extends ConsumerWidget {
                           landmark: landmark,
                           index: index,
                           visitedCount: visitedCount,
-                          active: active,
+                          active: widget.active,
                           totalLandmarks: landmarks.length,
                           markerAlignment: alignment ?? Alignment.topCenter,
                         );
@@ -69,8 +95,9 @@ class RouteMapWidget extends ConsumerWidget {
                 ),
               ],
             ),
-      AsyncError(:final error) => Text("error: $error"), // TODO(tomasz-trela): show error message
-      _ => const Text("loading"),
+
+      AsyncError(:final error) => Center(child: Text("error: $error")),
+      _ => const Center(child: CircularProgressIndicator()),
     };
   }
 

@@ -7,6 +7,7 @@ import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
+import "../../../common/utils/location_service.dart";
 import "../../../common/widgets/main_action_button.dart";
 import "../../../common/widgets/map_bottom_sheet.dart";
 import "../../../common/widgets/secondary_action_button.dart";
@@ -29,6 +30,16 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   late SheetMode _currentSheetMode;
   late SheetState _currentSheetState;
 
+  final GlobalKey<RouteMapWidgetState> _mapKey = GlobalKey();
+
+  Future<void> _centerToUserLocation() async {
+    final latLng = await LocationService.getCurrentLatLng();
+
+    if (latLng != null) {
+      _mapKey.currentState?.moveTo(latLng);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,24 +51,21 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   Widget build(BuildContext context) {
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
-        setState(() {
-          _currentSheetMode = next;
-        });
+        setState(() => _currentSheetMode = next);
       }
     });
 
     ref.listen<SheetState>(sheetStateProvider, (previous, next) {
       if (next != _currentSheetState) {
-        setState(() {
-          _currentSheetState = next;
-        });
+        setState(() => _currentSheetState = next);
       }
     });
 
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(route: widget.route, active: _currentSheetState == SheetState.hidden),
+          RouteMapWidget(key: _mapKey, route: widget.route, active: _currentSheetState == SheetState.hidden),
+
           RouteProgressBar(landmarks: widget.route.landmarks),
           MapBottomSheet(
             button: MainActionButton(
@@ -76,18 +84,19 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
                   onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.half,
                   text: context.l10n.route_description,
                 ),
-
                 SecondaryActionButton(
                   onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.expanded,
                   text: context.l10n.playlist,
                 ),
               ],
             ),
-
             child:
-                (_currentSheetMode == SheetMode.half)
-                    ? const RouteInfoSection()
-                    : PlaylistInfoSection(songs: mockSongs),
+                _currentSheetMode == SheetMode.half ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
+          ),
+          Positioned(
+            top: 112,
+            right: 12,
+            child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),
         ],
       ),

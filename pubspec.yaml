@@ -26,6 +26,10 @@ dependencies:
   flutter_map: ^8.1.1
   latlong2: ^0.9.1
   flutter_map_cache: ^2.0.0
+  
+  # Location GPS 
+  geolocator: ^14.0.1  
+  flutter_map_location_marker: ^10.1.0 
 
   #Models
   freezed: ^3.0.6
