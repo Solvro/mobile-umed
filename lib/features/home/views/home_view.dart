@@ -25,29 +25,26 @@ class _MyHomeViewState extends State<MyHomeView> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: AppPaddings.tinySmall, vertical: AppPaddings.tinySmall),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: AppPaddings.tinySmall),
-            SectionHeader(context.l10n.home_nearest_to_you),
-            RouteListWidget(
-              routes: mockData,
-              onRouteTap: (route) {
-                // TODO(eTraveler04): add action
-              },
-              sideMargin: HomeViewConfig.sideMargin,
-              icon: Icons.arrow_forward_ios,
-            ),
-            const SizedBox(height: HomeViewConfig.commonGap),
-            SectionHeader(context.l10n.home_choose_route),
-            StartRouteButton(),
-            const SizedBox(height: HomeViewConfig.commonGap),
-            HomeButtonsRow(),
-          ],
-        ),
+        children: [
+          const SizedBox(height: AppPaddings.tinySmall),
+          SectionHeader(context.l10n.home_nearest_to_you),
+          RouteListWidget(
+            routes: mockData,
+            onRouteTap: (route) {
+              // TODO(eTraveler04): add action
+            },
+            sideMargin: HomeViewConfig.sideMargin,
+            icon: Icons.arrow_forward_ios,
+          ),
+          const SizedBox(height: HomeViewConfig.commonGap),
+          SectionHeader(context.l10n.home_choose_route),
+          StartRouteButton(),
+          const SizedBox(height: HomeViewConfig.commonGap),
+          HomeButtonsRow(),
+        ],
       ),
     );
   }
