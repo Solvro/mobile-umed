@@ -12,6 +12,7 @@ import "../../../common/widgets/main_action_button.dart";
 import "../../../common/widgets/map_bottom_sheet.dart";
 import "../../../common/widgets/secondary_action_button.dart";
 import "../widgets/bottom_sheet/playlist_info_section.dart";
+import "../widgets/bottom_sheet/route_bottom_sheet.dart";
 import "../widgets/bottom_sheet/route_info_section.dart";
 import "../widgets/bottom_sheet/sections/playlist_info_section.dart";
 import "../widgets/bottom_sheet/sections/route_info_section.dart";
@@ -79,35 +80,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(key: _mapKey, route: route, active: _currentSheetState == SheetState.hidden),
-
+          RouteMapWidget(route: widget.route, active: _currentSheetState == SheetState.hidden),
           RouteProgressBar(landmarks: route.landmarks),
-          MapBottomSheet(
-            button: MainActionButton(
-              text: context.l10n.end_route,
-              backgroundColor: context.colorScheme.error,
-              onPressed: () async {
-                ref.read(sheetTriggerProvider.notifier).state = true;
-                await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
-              },
-            ),
-            controls: Row(
-              spacing: BottomSheetHeaderConfig.controlsSpacing,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SecondaryActionButton(
-                  onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.half,
-                  text: context.l10n.route_description,
-                ),
-                SecondaryActionButton(
-                  onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.expanded,
-                  text: context.l10n.playlist,
-                ),
-              ],
-            ),
-            child:
-                _currentSheetMode == SheetMode.half ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
-          ),
+          const RouteBottomSheet(),
           Positioned(
             top: 112,
             right: 12,
