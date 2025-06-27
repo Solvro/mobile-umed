@@ -1,5 +1,6 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
+import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
 
@@ -49,6 +50,14 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
             inactiveColor: MapConfig.inactiveColor,
             active: widget.active,
             visited: widget.visitedCount,
+          ),
+          const CurrentLocationLayer(
+            style: LocationMarkerStyle(
+              marker: DefaultLocationMarker(color: Colors.blue),
+              markerSize: Size(28, 28),
+              accuracyCircleColor: Color(0x2288B4EA),
+              headingSectorColor: Color(0x4488B4EA),
+            ),
           ),
           if (landmarks.isNotEmpty)
             MarkerLayer(
