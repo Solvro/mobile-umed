@@ -32,9 +32,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
 
   final GlobalKey<RouteMapWidgetState> _mapKey = GlobalKey();
 
-  final locationService = LocationService();
   Future<void> _centerToUserLocation() async {
-    final latLng = await locationService.getCurrentLatLng();
+    final latLng = await LocationService.getCurrentLatLng();
+
     if (latLng != null) {
       _mapKey.currentState?.moveTo(latLng);
     }
@@ -64,7 +64,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(route: widget.route, active: _currentSheetState == SheetState.hidden),
+          RouteMapWidget(key: _mapKey, route: widget.route, active: _currentSheetState == SheetState.hidden),
           RouteProgressBar(landmarks: widget.route.landmarks),
           MapBottomSheet(
             button: MainActionButton(

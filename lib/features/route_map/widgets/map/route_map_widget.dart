@@ -30,7 +30,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
   final mapController = MapController();
 
   void moveTo(LatLng latLng) {
-    mapController.move(latLng, 15);
+    mapController.move(latLng, 14);
   }
 
   @override
@@ -48,8 +48,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
     return switch (tileProvider) {
       AsyncData(:final value) =>
         landmarks.isEmpty
-            ? FlutterMap(children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)])
+            ? FlutterMap(
+              mapController: mapController,
+              children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
+            )
             : FlutterMap(
+              mapController: mapController,
               options: MapOptions(initialCenter: landmarks.first.location),
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),

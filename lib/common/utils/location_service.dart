@@ -2,7 +2,7 @@ import "package:geolocator/geolocator.dart";
 import "package:latlong2/latlong.dart";
 
 class LocationService {
-  Future<LatLng?> getCurrentLatLng() async {
+  static Future<LatLng?> getCurrentLatLng() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) return null;
 
