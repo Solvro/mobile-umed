@@ -1,7 +1,5 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:geolocator/geolocator.dart";
-import "package:latlong2/latlong.dart";
 
 import "../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../app/config/ui_config.dart";
@@ -9,6 +7,7 @@ import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
+import "../../../common/utils/location_service.dart";
 import "../../../common/widgets/main_action_button.dart";
 import "../../../common/widgets/map_bottom_sheet.dart";
 import "../../../common/widgets/secondary_action_button.dart";
@@ -33,21 +32,12 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
 
   final GlobalKey<RouteMapWidgetState> _mapKey = GlobalKey();
 
+  final locationService = LocationService();
   Future<void> _centerToUserLocation() async {
-    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) return;
-
-    var permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) return;
+    final latLng = await locationService.getCurrentLatLng();
+    if (latLng != null) {
+      _mapKey.currentState?.moveTo(latLng);
     }
-    if (permission == LocationPermission.deniedForever) return;
-
-    final position = await Geolocator.getCurrentPosition();
-    final latLng = LatLng(position.latitude, position.longitude);
-
-    _mapKey.currentState?.moveTo(latLng);
   }
 
   @override
@@ -108,9 +98,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
                 _currentSheetMode == SheetMode.half ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
           ),
           Positioned(
-            top: 128,
-            right: 32,
-            child: FloatingActionButton(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
+            top: 112,
+            right: 12,
+            child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),
         ],
       ),

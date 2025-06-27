@@ -27,7 +27,7 @@ dependencies:
   latlong2: ^0.9.1
   flutter_map_cache: ^2.0.0
   
-  # Lokalizacja gps 
+  # Location GPS 
   geolocator: ^11.0.0  
 
   #Models
