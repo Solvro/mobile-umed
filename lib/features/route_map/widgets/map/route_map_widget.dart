@@ -15,6 +15,7 @@ import "../modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
+
 class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, required this.route, this.active = true});
 
@@ -36,12 +37,11 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
   @override
   Widget build(BuildContext context) {
     final tileProvider = ref.watch(cacheTileProvider);
-
     final visitedCount = ref.watch(visitedCountProvider);
-    final landmarks = widget.route.landmarks;
+    final landmarks = route.landmarks;
     final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
       landmarks: landmarks,
-      route: widget.route.route,
+      route: route.route,
       visited: visitedCount,
     );
 
