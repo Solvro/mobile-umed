@@ -35,6 +35,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
     final landmarks = route.landmarks;
