@@ -1,6 +1,7 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -8,27 +9,33 @@ import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/landmark.dart";
 import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
+import "../../controllers/route_controller.dart";
 import "../modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
 class RouteMapWidget extends ConsumerWidget {
-  const RouteMapWidget({super.key, required this.route, required this.visitedCount, this.active = true});
+  const RouteMapWidget({super.key, required this.route, this.active = true});
 
   final Route route;
-  final int visitedCount;
+
   final bool active;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tileProvider = ref.watch(cacheTileProvider);
+    final visitedCount = ref.watch(visitedCountProvider);
     final landmarks = route.landmarks;
+    final index = visitedCount.clamp(1, landmarks.length) - 1;
+    final turningPointsCount =
+        1 + route.route.indexWhere((point) => latLngEqual(route.landmarks[index].location, point));
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
         landmarks.isEmpty
             ? FlutterMap(children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)])
             : FlutterMap(
+              key: ValueKey("visited-$visitedCount"),
               options: MapOptions(initialCenter: landmarks.first.location),
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
@@ -38,7 +45,7 @@ class RouteMapWidget extends ConsumerWidget {
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
                   active: active,
-                  visited: visitedCount,
+                  visited: turningPointsCount,
                 ),
                 MarkerLayer(
                   markers:
@@ -101,4 +108,8 @@ class RouteMapWidget extends ConsumerWidget {
       ),
     );
   }
+}
+
+bool latLngEqual(LatLng a, LatLng b, {double tolerance = 0.0003}) {
+  return (a.latitude - b.latitude).abs() < tolerance && (a.longitude - b.longitude).abs() < tolerance;
 }

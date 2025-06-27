@@ -65,3 +65,19 @@ class Speed extends _$Speed {
     return (distance / time.inSeconds) * 3.6; // distance in km/h
   }
 }
+
+@riverpod
+class VisitedCount extends _$VisitedCount {
+  @override
+  int build() {
+    return 1;
+  }
+
+  void incrementVisited() {
+    state = state + 1;
+  }
+
+  void resetVisited() {
+    state = 1;
+  }
+}
