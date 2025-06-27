@@ -15,7 +15,6 @@ import "../modals/landmark_info_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
-
 class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, required this.route, this.active = true});
 
