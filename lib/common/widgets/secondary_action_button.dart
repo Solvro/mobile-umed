@@ -21,23 +21,21 @@ class SecondaryActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final chosenBgColor = backgroundColor ?? Theme.of(context).colorScheme.primary;
     final chosenTextColor = textColor ?? Theme.of(context).colorScheme.onPrimary;
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonShadowRadius),
-          boxShadow: const [BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 2, spreadRadius: 1)],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonShadowRadius),
+        boxShadow: const [BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 2, spreadRadius: 1)],
+      ),
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: chosenBgColor,
+          foregroundColor: chosenTextColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
+          padding: EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1),
         ),
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: chosenBgColor,
-            foregroundColor: chosenTextColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
-            padding: EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1),
-          ),
-          child: _chooseButtonContent(iconData: iconData, text: text, textColor: chosenTextColor),
-        ),
+        child: _chooseButtonContent(iconData: iconData, text: text, textColor: chosenTextColor),
       ),
     );
   }

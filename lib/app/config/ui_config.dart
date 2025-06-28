@@ -11,6 +11,7 @@ abstract class AppPaddings {
 
 abstract class AppRadius {
   static const small = 12.0;
+  static const big = 20.0;
 }
 
 abstract class BottomSheetConfig {
@@ -30,10 +31,22 @@ abstract class BottomSheetHeaderConfig {
 
   // controls
   static const headerWithControls = 100.0;
-  static const headerWithoutControls = 40.0;
+  static const headerWithoutControls = 46.0;
   static const controlsSpacing = 20.0;
 
   static const roundedTopRadius = 15.0;
+}
+
+abstract final class SelectRouteConfig {
+  static const contentPadding = 5.0;
+  static const iconSize = 20.0;
+}
+
+abstract final class LandmarksSectionConfig {
+  static const contentPadding = 5.0;
+
+  // landmark item
+  static const landmarkItemSpacing = 20.0;
 }
 
 abstract final class PlaylistInfoConfig {

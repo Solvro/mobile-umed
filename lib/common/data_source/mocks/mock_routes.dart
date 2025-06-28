@@ -24,8 +24,8 @@ final mockData = [
     description: "A scenic mountain trail with beautiful views.",
     calories: 500,
     distance: 10.5,
-    waterDemand: 2,
-    estimatedTime: 3,
+    waterDemand: 400,
+    estimatedTime: 130,
     landmarks:
         [
           const Landmark(
@@ -80,8 +80,8 @@ final mockData = [
     description: "A peaceful walk through dense forest.",
     calories: 300,
     distance: 5.2,
-    waterDemand: 1,
-    estimatedTime: 2,
+    waterDemand: 500,
+    estimatedTime: 200,
     landmarks:
         [
           const Landmark(
@@ -134,10 +134,10 @@ final mockData = [
     id: 3,
     name: "Coastal Walk",
     description: "A refreshing walk along the coastline.",
-    calories: 400,
+    calories: 140,
     distance: 8,
-    waterDemand: 1.5,
-    estimatedTime: 2,
+    waterDemand: 150.5,
+    estimatedTime: 120,
     landmarks:
         [
           const Landmark(
