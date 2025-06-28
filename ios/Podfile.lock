@@ -43,12 +43,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_rotation_sensor: bf55ead3f64f27207dacc5972fe8ebe932f3de0b
-  geolocator_apple: ab36aa0e8b7d7a2d7639b3b4e48308394e8cef5e
-  native_device_orientation: e3580675687d5034770da198f6839ebf2122ef94
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
-  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
-  url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
+  flutter_rotation_sensor: f37d8d24050572029bdd2d55a93e0f334e2eeac6
+  geolocator_apple: 66b711889fd333205763b83c9dcf0a57a28c7afd
+  native_device_orientation: 348b10c346a60ebbc62fb235a4fdb5d1b61a8f55
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
 

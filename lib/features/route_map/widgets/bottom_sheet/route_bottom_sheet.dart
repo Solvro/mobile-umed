@@ -53,29 +53,33 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         spacing: BottomSheetHeaderConfig.controlsSpacing,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SecondaryActionButton(
-            onPressed: () {
-              ref.read(sheetModeProvider.notifier).state = SheetMode.half;
-              setState(() {
-                _chosenOption = RouteDetailsOption.info;
-              });
-            },
-            text: context.l10n.route_description,
-            backgroundColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.lightGreen : ColorConsts.whiteGray,
-            textColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+          Expanded(
+            child: SecondaryActionButton(
+              onPressed: () {
+                ref.read(sheetModeProvider.notifier).state = SheetMode.half;
+                setState(() {
+                  _chosenOption = RouteDetailsOption.info;
+                });
+              },
+              text: context.l10n.route_description,
+              backgroundColor:
+                  _chosenOption == RouteDetailsOption.info ? ColorConsts.lightGreen : ColorConsts.whiteGray,
+              textColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+            ),
           ),
-
-          SecondaryActionButton(
-            onPressed: () {
-              ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
-              setState(() {
-                _chosenOption = RouteDetailsOption.playlist;
-              });
-            },
-            text: context.l10n.playlist,
-            backgroundColor:
-                _chosenOption == RouteDetailsOption.playlist ? ColorConsts.lightGreen : ColorConsts.whiteGray,
-            textColor: _chosenOption == RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+          Expanded(
+            child: SecondaryActionButton(
+              onPressed: () {
+                ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+                setState(() {
+                  _chosenOption = RouteDetailsOption.playlist;
+                });
+              },
+              text: context.l10n.playlist,
+              backgroundColor:
+                  _chosenOption == RouteDetailsOption.playlist ? ColorConsts.lightGreen : ColorConsts.whiteGray,
+              textColor: _chosenOption == RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+            ),
           ),
         ],
       ),

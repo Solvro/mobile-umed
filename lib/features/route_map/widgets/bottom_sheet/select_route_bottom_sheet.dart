@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -12,14 +14,18 @@ import "tiles/route_tile.dart";
 
 class SelectRouteBottomSheet extends ConsumerStatefulWidget {
   @override
-  ChooseRouteBottomSheetState createState() => ChooseRouteBottomSheetState();
+  SelectRouteBottomSheetState createState() => SelectRouteBottomSheetState();
 }
 
-class ChooseRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> {
+class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> {
   @override
   void initState() {
     super.initState();
-    ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+    unawaited(
+      Future.microtask(() {
+        ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+      }),
+    );
   }
 
   @override

@@ -55,7 +55,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       }
     });
 
-     if (widget.route == null) {
+    if (widget.route == null) {
       return Scaffold(
         appBar: AppBar(
           title: Text(context.l10n.choose_route),
