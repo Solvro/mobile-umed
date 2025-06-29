@@ -21,7 +21,7 @@ class RouteMapPage extends ConsumerWidget {
     final routeProvider = ref.watch(fetchRouteWithIdProvider(id!));
 
     return switch (routeProvider) {
-      AsyncData(:final value) => RouteMapView(route: value),
+      AsyncData() => const RouteMapView(),
       AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };

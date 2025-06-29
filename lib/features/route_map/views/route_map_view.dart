@@ -3,18 +3,16 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../../common/utils/location_service.dart";
+import "../providers/route_provider.dart";
 import "../widgets/bottom_sheet/route_bottom_sheet.dart";
 import "../widgets/bottom_sheet/select_route_bottom_sheet.dart";
 import "../widgets/map/route_map_widget.dart";
 import "../widgets/progress_bar/route_progress_bar.dart";
 
 class RouteMapView extends ConsumerStatefulWidget {
-  const RouteMapView({super.key, this.route});
-
-  final Route? route;
+  const RouteMapView({super.key});
 
   @override
   RouteMapViewState createState() => RouteMapViewState();
@@ -43,6 +41,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
 
   @override
   Widget build(BuildContext context) {
+    final route = ref.watch(routeProvider);
+
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
         setState(() => _currentSheetMode = next);
@@ -55,7 +55,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       }
     });
 
-    if (widget.route == null) {
+    if (route == null) {
       return Scaffold(
         appBar: AppBar(
           title: Text(context.l10n.choose_route),
@@ -67,13 +67,10 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
         ),
       );
     }
-
-    final route = widget.route!;
-
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(route: widget.route, active: _currentSheetState == SheetState.hidden),
+          RouteMapWidget(route: route, active: _currentSheetState == SheetState.hidden),
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),
           Positioned(
