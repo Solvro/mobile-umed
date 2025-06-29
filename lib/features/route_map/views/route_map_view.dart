@@ -23,7 +23,6 @@ class RouteMapView extends ConsumerStatefulWidget {
 class RouteMapViewState extends ConsumerState<RouteMapView> {
   late SheetMode _currentSheetMode;
   late SheetState _currentSheetState;
-  late final StateController<dynamic> _routeController;
 
   final GlobalKey<RouteMapWidgetState> _mapKey = GlobalKey();
 
@@ -40,7 +39,6 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     super.initState();
     _currentSheetMode = ref.read(sheetModeProvider);
     _currentSheetState = ref.read(sheetStateProvider);
-    _routeController = ref.read(routeProvider.notifier);
   }
 
   @override
@@ -58,6 +56,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
         setState(() => _currentSheetState = next);
       }
     });
+
+    debugPrint("state: $_currentSheetState");
+    debugPrint("mode: $_currentSheetMode");
 
     if (route == null) {
       return Scaffold(
@@ -85,15 +86,5 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    unawaited(
-      Future(() {
-        _routeController.state = null;
-      }),
-    );
-    super.dispose();
   }
 }

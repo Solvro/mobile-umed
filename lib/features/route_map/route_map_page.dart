@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
+import "../../common/providers/bottom_sheet_providers.dart";
 import "../error/error_page.dart";
 import "providers/route_provider.dart";
 import "repository/route_map_repository.dart";
@@ -16,6 +17,7 @@ class RouteMapPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (id == null) {
+      ref.read(routeProvider.notifier).state = null;
       return const RouteMapView();
     }
 
@@ -25,6 +27,7 @@ class RouteMapPage extends ConsumerWidget {
       data: (route) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ref.read(routeProvider.notifier).state = route;
+          ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
         });
         return const RouteMapView();
       },
