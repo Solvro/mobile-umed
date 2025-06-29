@@ -11,6 +11,13 @@ final _router = GoRouter(
   routes: [
     // this route is temporary here
     GoRoute(
+      path: RouteMapPage.routeName,
+      pageBuilder: (context, state) {
+        return const NoTransitionPage(child: RouteMapPage());
+      },
+    ),
+    // this route is temporary here
+    GoRoute(
       path: "${RouteMapPage.routeName}/:id",
       pageBuilder: (context, state) {
         final id = int.parse(state.pathParameters["id"]!);
@@ -58,10 +65,10 @@ extension ContexRouterX on BuildContext {
 
 extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
-  Future<void> pushRouteMap(int id) async => push("${RouteMapPage.routeName}/$id");
+  Future<void> pushRouteMap() async => push("${RouteMapPage.routeName}/");
+  Future<void> pushRouteMapWithRoute(int id) async => push("${RouteMapPage.routeName}/$id");
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
   Future<void> pushFullScreenError(String message) async {
-    debugPrint(message);
     await push("${ErrorPage.routeName}?message=${Uri.encodeComponent(message)}");
   }
 }

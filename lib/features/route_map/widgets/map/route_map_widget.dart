@@ -1,3 +1,4 @@
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
@@ -16,9 +17,9 @@ import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
 class RouteMapWidget extends ConsumerStatefulWidget {
-  const RouteMapWidget({super.key, required this.route, this.active = true});
+  const RouteMapWidget({super.key, this.route, this.active = true});
 
-  final Route route;
+  final Route? route;
 
   final bool active;
 
@@ -38,10 +39,10 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
-    final landmarks = route.landmarks;
+    final landmarks = route?.landmarks ?? const IListConst([]);
     final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
       landmarks: landmarks,
-      route: route.route,
+      route: route?.route ?? IList<LatLng>(),
       visited: visitedCount,
     );
 
@@ -49,6 +50,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
       AsyncData(:final value) =>
         landmarks.isEmpty
             ? FlutterMap(
+              options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
               mapController: mapController,
               children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
             )
@@ -58,7 +60,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
                 RouteMapPolyline(
-                  locations: widget.route.route,
+                  locations: route!.route,
                   doneColor: context.colorScheme.primary,
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
