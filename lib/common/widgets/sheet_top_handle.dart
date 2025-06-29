@@ -32,7 +32,7 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
       controls != null ? BottomSheetHeaderConfig.headerWithControls : BottomSheetHeaderConfig.headerWithoutControls;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant SheetTopHandle oldDelegate) => oldDelegate.controls != controls;
 }
 
 BoxDecoration getSheetTopDecoration(Color color) => BoxDecoration(

@@ -57,9 +57,6 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       }
     });
 
-    debugPrint("state: $_currentSheetState");
-    debugPrint("mode: $_currentSheetMode");
-
     if (route == null) {
       return Scaffold(
         appBar: AppBar(
