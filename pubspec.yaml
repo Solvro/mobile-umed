@@ -67,6 +67,9 @@ dependencies:
   # env
   envied: ^1.1.1
 
+  # others
+  flutter_foreground_task: ^9.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
