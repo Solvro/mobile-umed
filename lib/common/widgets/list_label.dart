@@ -12,7 +12,7 @@ class ListLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      spacing: 4,
+      spacing: AppPaddings.nano,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 1),

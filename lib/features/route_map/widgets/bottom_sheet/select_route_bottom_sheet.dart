@@ -1,6 +1,6 @@
 import "dart:async";
 
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../app/config/ui_config.dart";
@@ -46,22 +46,19 @@ class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> 
       ),
       child: Container(
         padding: const EdgeInsets.all(SelectRouteConfig.contentPadding),
-        child: routesAsync.when(
-          data:
-              (routes) => ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                separatorBuilder:
-                    (context, index) => const Divider(height: 1, thickness: 1, color: ColorConsts.mistGray),
-                itemCount: routes.length,
-                itemBuilder: (context, index) {
-                  return RouteTile(route: routes[index]);
-                },
-              ),
-          loading: CircularProgressIndicator.new,
-          error: (err, _) => Center(child: Text("Error: $err")),
-        ),
+        child: switch (routesAsync) {
+          AsyncData(:final value) => ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            separatorBuilder: (context, index) => const Divider(height: 1, thickness: 1, color: ColorConsts.mistGray),
+            itemCount: value.length,
+            itemBuilder: (context, index) => RouteTile(route: value[index]),
+          ),
+          AsyncError(:final error) => Center(child: Text("Error: $error")),
+          AsyncLoading() => const CircularProgressIndicator(),
+          _ => const SizedBox.shrink(),
+        },
       ),
     );
   }

@@ -34,7 +34,7 @@ extension RouteParamsDoubleX on double {
     return "$this km";
   }
 
-  String inMililiters() {
+  String inMilliliters() {
     return "${toInt()}\nml";
   }
 }

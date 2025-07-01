@@ -1,6 +1,7 @@
 import "package:flutter/widgets.dart";
 import "package:flutter_svg/svg.dart";
 
+import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/theme/app_theme.dart";
 
 class RouteStat extends StatelessWidget {
@@ -17,7 +18,11 @@ class RouteStat extends StatelessWidget {
         children: [
           icon,
           const SizedBox(height: 8),
-          Text(comment, style: context.textTheme.bodySmall?.copyWith(fontSize: 10), textAlign: TextAlign.center),
+          Text(
+            comment,
+            style: context.textTheme.bodySmall?.copyWith(fontSize: SelectRouteConfig.smallFontSize),
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

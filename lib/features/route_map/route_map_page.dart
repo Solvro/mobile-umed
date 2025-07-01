@@ -31,15 +31,16 @@ class RouteMapPage extends ConsumerWidget {
 
     final routeAsync = ref.watch(fetchRouteWithIdProvider(id!));
 
-    return routeAsync.when(
-      data: (route) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _initializeState(ref, route: route);
-        });
-        return const RouteMapView();
-      },
-      error: (error, _) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
-      loading: () => const Center(child: CircularProgressIndicator()),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (routeAsync is AsyncData) {
+        _initializeState(ref, route: routeAsync.value);
+      }
+    });
+
+    return switch (routeAsync) {
+      AsyncData() => const RouteMapView(),
+      AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
+      _ => const Center(child: CircularProgressIndicator()),
+    };
   }
 }

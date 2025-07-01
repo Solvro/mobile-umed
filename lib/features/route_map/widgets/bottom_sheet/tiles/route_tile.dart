@@ -14,6 +14,9 @@ import "../sections/landmarks_section.dart";
 import "../sections/playlist_info_section.dart";
 import "route_stat.dart";
 
+const _unitMl0 = "0 ml";
+const _unitKcal0 = "0 kcal";
+
 class RouteTile extends ConsumerStatefulWidget {
   const RouteTile({super.key, required this.route});
 
@@ -49,7 +52,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
           ),
           RouteStat(
             icon: Assets.icons.water.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
-            comment: widget.route.waterDemand?.inMililiters() ?? context.l10n.ml_0,
+            comment: widget.route.waterDemand?.inMilliliters() ?? _unitMl0,
           ),
           RouteStat(
             icon: Assets.icons.time.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
@@ -57,7 +60,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
           ),
           RouteStat(
             icon: Assets.icons.kcal.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
-            comment: widget.route.calories?.inKcal() ?? context.l10n.kcal_0,
+            comment: widget.route.calories?.inKcal() ?? _unitKcal0,
           ),
         ],
       ),
