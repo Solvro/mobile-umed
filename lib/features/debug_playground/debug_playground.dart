@@ -3,59 +3,23 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
 import "../../common/models/completed_route.dart";
-import "../../common/utils/completed_route_storage_utils.dart";
+import "../../common/providers/completed_routes_provider.dart";
 import "../route_map/controllers/route_controller.dart";
 import "../route_map/repository/route_map_repository.dart";
 import "../route_map/widgets/modals/route_completed_modal.dart";
 
-class DebugPlayground extends StatefulWidget {
+class DebugPlayground extends StatelessWidget {
   const DebugPlayground({super.key});
 
   static const String routeName = "/debug_playground";
-
-  @override
-  State<DebugPlayground> createState() => _DebugPlaygroundState();
-}
-
-class _DebugPlaygroundState extends State<DebugPlayground> {
-  String _routesInfo = "";
-
-  Future<void> _loadRoutesFromHive() async {
-    final routes = await getAllCompletedRoutes();
-    setState(() {
-      _routesInfo =
-          routes.isEmpty
-              ? "No completed routes saved."
-              : routes
-                  .map((r) {
-                    return """
-                    Route ID: ${r.routeId}
-                    Date: ${r.dateCompleted}
-                    Distance: ${r.distance} km
-                    Time: ${r.time} min
-                    Tempo: ${r.tempo} min/km
-                    Water: ${r.water} ml
-                    Calories: ${r.calories} kcal
-                    ---
-                    """;
-                  })
-                  .join("\n");
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadRoutesFromHive();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Debug Playground")),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OutlinedButton(onPressed: () async => context.router.pushRouteMap(), child: const Text("RouteMap")),
             OutlinedButton(
@@ -71,26 +35,9 @@ class _DebugPlaygroundState extends State<DebugPlayground> {
               child: const Text("Route Completed Modal"),
             ),
             OutlinedButton(
-              onPressed: () => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
+              onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
               child: const Text("Error Page"),
             ),
-            OutlinedButton(
-              onPressed: () async {
-                final route = CompletedRoute(
-                  dateCompleted: DateTime.now(),
-                  routeId: 3,
-                  water: 600,
-                  distance: 8,
-                  calories: 450,
-                  time: 42,
-                  tempo: 5.2,
-                );
-                await saveCompletedRoute(route);
-                await _loadRoutesFromHive();
-              },
-              child: const Text("Complete route 2"),
-            ),
-            Text(_routesInfo),
             const TestProviderWidget(),
           ],
         ),
@@ -106,6 +53,7 @@ class TestProviderWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final routes = ref.watch(fetchAllRoutesProvider);
     final route_2 = ref.watch(fetchRouteWithIdProvider(2));
+    final completed = ref.watch(completedRoutesProvider);
 
     final count = ref.watch(visitedCountProvider);
     return Column(
@@ -122,6 +70,26 @@ class TestProviderWidget extends ConsumerWidget {
             ref.read(visitedCountProvider.notifier).resetVisited();
           },
           child: const Text("Reset"),
+        ),
+        OutlinedButton(
+          onPressed: () async {
+            final route = CompletedRoute(
+              dateCompleted: DateTime.now(),
+              routeId: 2,
+              water: 600,
+              distance: 8,
+              calories: 450,
+              time: 42,
+              tempo: 5.2,
+            );
+            await ref.read(completedRoutesProvider.notifier).addCompletedRoute(route);
+          },
+          child: const Text("Complete route 2"),
+        ),
+        completed.when(
+          data: (data) => Text("Completed:\n$data"),
+          loading: CircularProgressIndicator.new,
+          error: (e, _) => Text("Error: $e"),
         ),
         routes.when(
           data: (routes) => Text("Routes:\n$routes"),

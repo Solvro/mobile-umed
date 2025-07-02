@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
 
-import "../common/utils/completed_route_storage_utils.dart";
+import "../common/providers/completed_routes_provider.dart";
 import "../features/dashboard/dashboard_page.dart";
 import "../features/debug_playground/debug_playground.dart";
 import "../features/error/error_page.dart";
@@ -37,14 +37,13 @@ class MyApp extends StatelessWidget {
 }
 
 class _EagerInitialization extends ConsumerWidget {
-  const _EagerInitialization({required this.child});
   final Widget child;
+
+  const _EagerInitialization({required this.child});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await syncLocalWithRemote(ref);
-    });
+    ref.watch(completedRoutesProvider);
 
     return child;
   }
