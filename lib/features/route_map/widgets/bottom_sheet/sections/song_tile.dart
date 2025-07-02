@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../../../common/models/song.dart";
+import "../../../../../app/config/ui_config.dart";
+import "../../../../../app/theme/app_theme.dart";
+import "../../../../../common/models/song.dart";
 
 class SongTile extends StatelessWidget {
   const SongTile({super.key, required this.listIndex, required this.song});
@@ -17,7 +17,7 @@ class SongTile extends StatelessWidget {
       children: [
         Column(
           mainAxisSize: MainAxisSize.min,
-          spacing: 4,
+          spacing: AppPaddings.nano,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 1),

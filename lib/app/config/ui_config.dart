@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:latlong2/latlong.dart";
 
 abstract class AppPaddings {
   static const medium = 20.0;
@@ -10,6 +11,7 @@ abstract class AppPaddings {
 
 abstract class AppRadius {
   static const small = 12.0;
+  static const big = 20.0;
 }
 
 abstract class BottomSheetConfig {
@@ -19,7 +21,7 @@ abstract class BottomSheetConfig {
   // sheet content percent
   static const fullSizePercent = 0.45;
   static const halfSizePercent = 0.25;
-  static const hiddenSizePercent = 0.03;
+  static const hiddenSizePercent = 0.04;
   static const tolerance = 0.01;
 }
 
@@ -29,10 +31,23 @@ abstract class BottomSheetHeaderConfig {
 
   // controls
   static const headerWithControls = 100.0;
-  static const headerWithoutControls = 40.0;
+  static const headerWithoutControls = 46.0;
   static const controlsSpacing = 20.0;
 
   static const roundedTopRadius = 15.0;
+}
+
+abstract final class SelectRouteConfig {
+  static const contentPadding = 5.0;
+  static const iconSize = 20.0;
+  static const smallFontSize = 10.0;
+}
+
+abstract final class LandmarksSectionConfig {
+  static const contentPadding = 5.0;
+
+  // landmark item
+  static const landmarkItemSpacing = 20.0;
 }
 
 abstract final class PlaylistInfoConfig {
@@ -117,6 +132,8 @@ abstract final class MapConfig {
   static const spaceLen = 8.0;
   static const unvisitedColor = Colors.grey;
   static const inactiveColor = Colors.grey;
+
+  static const wroclawCenter = LatLng(51.1079, 17.0325);
 }
 
 abstract final class StatInfoCompactConfig {

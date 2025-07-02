@@ -46,7 +46,7 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
       if (shouldTrigger) {
         ref.read(sheetTriggerProvider.notifier).state = false;
         await controller.animateTo(
-          BottomSheetConfig.hiddenSizePercent,
+          ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );

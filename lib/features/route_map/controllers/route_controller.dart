@@ -95,6 +95,10 @@ int calculateLineChangeFromLandmarksLatLng({
   required IList<LatLng> route,
   required int visited,
 }) {
+  if (landmarks.isEmpty) {
+    return 0;
+  }
+
   final index = visited.clamp(1, landmarks.length) - 1;
   final target = landmarks[index].location;
   return route.indexWhere((point) => latLngEqual(point, target)) + 1;

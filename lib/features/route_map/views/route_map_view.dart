@@ -1,26 +1,20 @@
-import "package:flutter/material.dart" hide Route;
+import "dart:async";
+
+import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-import "../../../../common/data_source/mocks/mock_songs.dart";
-import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../../common/utils/location_service.dart";
-import "../../../common/widgets/main_action_button.dart";
-import "../../../common/widgets/map_bottom_sheet.dart";
-import "../../../common/widgets/secondary_action_button.dart";
-import "../widgets/bottom_sheet/playlist_info_section.dart";
-import "../widgets/bottom_sheet/route_info_section.dart";
+import "../providers/route_provider.dart";
+import "../widgets/bottom_sheet/route_bottom_sheet.dart";
+import "../widgets/bottom_sheet/select_route_bottom_sheet.dart";
 import "../widgets/map/route_map_widget.dart";
-import "../widgets/modals/end_route_modal.dart";
 import "../widgets/progress_bar/route_progress_bar.dart";
 
 class RouteMapView extends ConsumerStatefulWidget {
-  const RouteMapView({super.key, required this.route});
-
-  final Route route;
+  const RouteMapView({super.key});
 
   @override
   RouteMapViewState createState() => RouteMapViewState();
@@ -49,6 +43,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
 
   @override
   Widget build(BuildContext context) {
+    final route = ref.watch(routeProvider);
+
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
         setState(() => _currentSheetMode = next);
@@ -61,38 +57,24 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       }
     });
 
+    if (route == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(context.l10n.choose_route),
+          foregroundColor: context.colorScheme.onPrimary,
+          backgroundColor: context.colorScheme.primary,
+        ),
+        body: Stack(
+          children: [RouteMapWidget(active: _currentSheetState == SheetState.hidden), SelectRouteBottomSheet()],
+        ),
+      );
+    }
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(key: _mapKey, route: widget.route, active: _currentSheetState == SheetState.hidden),
-
-          RouteProgressBar(landmarks: widget.route.landmarks),
-          MapBottomSheet(
-            button: MainActionButton(
-              text: context.l10n.end_route,
-              backgroundColor: context.colorScheme.error,
-              onPressed: () async {
-                ref.read(sheetTriggerProvider.notifier).state = true;
-                await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
-              },
-            ),
-            controls: Row(
-              spacing: BottomSheetHeaderConfig.controlsSpacing,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SecondaryActionButton(
-                  onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.half,
-                  text: context.l10n.route_description,
-                ),
-                SecondaryActionButton(
-                  onPressed: () => ref.read(sheetModeProvider.notifier).state = SheetMode.expanded,
-                  text: context.l10n.playlist,
-                ),
-              ],
-            ),
-            child:
-                _currentSheetMode == SheetMode.half ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
-          ),
+          RouteMapWidget(route: route, active: _currentSheetState == SheetState.hidden),
+          RouteProgressBar(landmarks: route.landmarks),
+          const RouteBottomSheet(),
           Positioned(
             top: 112,
             right: 12,
