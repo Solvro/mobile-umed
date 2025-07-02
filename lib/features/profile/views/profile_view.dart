@@ -1,24 +1,29 @@
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
+import "../../../common/data_source/mocks/mock_routes.dart";
 import "../../../common/data_source/mocks/mock_stats.dart";
+import "../../../common/parsers/completed_routes_stats_converter.dart";
+import "../../../common/providers/completed_routes_provider.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
 import "../../../common/widgets/profile/horizontal_stat_card_list/horizontal_card_list.dart";
 import "../../../common/widgets/profile/progress_bar.dart";
-import "./../../../common/data_source/mocks/mock_routes.dart";
 
-class ProfileView extends StatefulWidget {
+class ProfileView extends ConsumerStatefulWidget {
   const ProfileView({super.key, required this.title});
   final String title;
   @override
-  State<ProfileView> createState() => _ProfileViewState();
+  ConsumerState<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> {
+class _ProfileViewState extends ConsumerState<ProfileView> {
   @override
   Widget build(BuildContext context) {
+    final completedRoutes = ref.watch(completedRoutesProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.common_finished_routes_title, style: context.textTheme.headlineLarge),
@@ -45,7 +50,11 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: AppPaddings.medium),
             SectionHeader(context.l10n.achievements_statistics),
-            StatListWidget(stats: mockStats),
+            completedRoutes.when(
+              data: (data) => StatListWidget(stats: convertCompletedRoutesToStats(data)),
+              error: (error, stack) => const Center(child: Text("Sorry")),
+              loading: CircularProgressIndicator.new,
+            ),
             const SizedBox(height: AppPaddings.medium),
             SectionHeader(context.l10n.achievements_achievements),
             const SizedBox(height: AppPaddings.tinySmall),

@@ -86,6 +86,12 @@ class TestProviderWidget extends ConsumerWidget {
           },
           child: const Text("Complete route 2"),
         ),
+        OutlinedButton(
+          onPressed: () async {
+            await ref.read(completedRoutesProvider.notifier).resetAllProgress();
+          },
+          child: const Text("Clear completed routes"),
+        ),
         completed.when(
           data: (data) => Text("Completed:\n$data"),
           loading: CircularProgressIndicator.new,

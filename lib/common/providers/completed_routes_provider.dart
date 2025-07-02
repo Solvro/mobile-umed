@@ -32,9 +32,8 @@ class CompletedRoutesNotifier extends AsyncNotifier<List<CompletedRoute>> {
         await box.delete(key);
       }
     } catch (_) {
-      // If syncing fails, skip it (maybe offline)
+      // If syncing fails, skip
     }
-    // final localRoutes = await ;
     return _getAllCompletedRoutes();
   }
 
@@ -43,32 +42,22 @@ class CompletedRoutesNotifier extends AsyncNotifier<List<CompletedRoute>> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await box.add(route.toJson());
-      return [...state.value ?? [], route];
+      // return [...state.value ?? [], route];
+      return _getAllCompletedRoutes();
+    });
+  }
+
+  Future<void> resetAllProgress() async {
+    final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      await box.clear();
+      return _getAllCompletedRoutes();
     });
   }
 
   Future<List<CompletedRoute>> _getAllCompletedRoutes() async {
     final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
     return box.values.map((val) => CompletedRoute.fromJson(Map<String, dynamic>.from(val))).toList();
-  }
-
-  Map<String, dynamic> getOverviewStats() {
-    final routes = state.value ?? [];
-
-    final double sumDistance = routes.fold(0, (sum, route) => sum + route.distance);
-    final double sumTime = routes.fold(0, (sum, route) => sum + route.time);
-    final int sumCalories = routes.fold(0, (sum, route) => sum + route.calories);
-    final int sumWater = routes.fold(0, (sum, route) => sum + route.water);
-    final double avgTempo =
-        // ignore: prefer_int_literals
-        routes.isNotEmpty ? routes.fold(0.0, (sum, route) => sum + route.tempo) / routes.length : 0.0;
-
-    return {
-      "sum_distance": sumDistance,
-      "sum_time": sumTime,
-      "sum_calories": sumCalories,
-      "sum_water": sumWater,
-      "avg_tempo": avgTempo,
-    };
   }
 }
