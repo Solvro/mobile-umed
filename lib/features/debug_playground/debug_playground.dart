@@ -80,11 +80,24 @@ class TestProviderWidget extends ConsumerWidget {
               distance: 8,
               calories: 450,
               time: 42,
-              tempo: 5.2,
             );
             await ref.read(completedRoutesProvider.notifier).addCompletedRoute(route);
           },
           child: const Text("Complete route 2"),
+        ),
+        OutlinedButton(
+          onPressed: () async {
+            final route = CompletedRoute(
+              dateCompleted: DateTime.now(),
+              routeId: 4,
+              water: 1600,
+              distance: 8.4,
+              calories: 450,
+              time: 42,
+            );
+            await ref.read(completedRoutesProvider.notifier).addCompletedRoute(route);
+          },
+          child: const Text("Complete route 4"),
         ),
         OutlinedButton(
           onPressed: () async {

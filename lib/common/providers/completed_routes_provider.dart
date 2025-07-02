@@ -13,27 +13,14 @@ class CompletedRoutesNotifier extends AsyncNotifier<List<CompletedRoute>> {
   @override
   Future<List<CompletedRoute>> build() async {
     await Hive.openBox<Map<dynamic, dynamic>>(completedRoutesBoxName);
+    final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
     try {
       final remoteRoutes = await ref.read(fetchAllRoutesProvider.future);
-      final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
       final remoteRouteIds = remoteRoutes.map((r) => r.id).toSet();
-      final keysToDelete = <dynamic>[];
-      for (final key in box.keys) {
-        final json = box.get(key);
-        if (json != null) {
-          final map = Map<String, dynamic>.from(json);
-          final routeId = map["routeId"];
-          if (routeId != null && !remoteRouteIds.contains(routeId)) {
-            keysToDelete.add(key);
-          }
-        }
-      }
-      for (final key in keysToDelete) {
+      for (final key in _getKeysToDelete(box, remoteRouteIds)) {
         await box.delete(key);
       }
-    } catch (_) {
-      // If syncing fails, skip
-    }
+    } on Exception catch (_) {}
     return _getAllCompletedRoutes();
   }
 
@@ -42,7 +29,6 @@ class CompletedRoutesNotifier extends AsyncNotifier<List<CompletedRoute>> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await box.add(route.toJson());
-      // return [...state.value ?? [], route];
       return _getAllCompletedRoutes();
     });
   }
@@ -59,5 +45,19 @@ class CompletedRoutesNotifier extends AsyncNotifier<List<CompletedRoute>> {
   Future<List<CompletedRoute>> _getAllCompletedRoutes() async {
     final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
     return box.values.map((val) => CompletedRoute.fromJson(Map<String, dynamic>.from(val))).toList();
+  }
+
+  List<dynamic> _getKeysToDelete(Box<Map<dynamic, dynamic>> box, Set<int> remoteRouteIds) {
+    final keysToDelete = <dynamic>[];
+    for (final key in box.keys) {
+      final json = box.get(key);
+      if (json != null) {
+        final routeId = Map<String, dynamic>.from(json)["routeId"];
+        if (routeId != null && !remoteRouteIds.contains(routeId)) {
+          keysToDelete.add(key);
+        }
+      }
+    }
+    return keysToDelete;
   }
 }

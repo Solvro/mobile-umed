@@ -52,7 +52,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             SectionHeader(context.l10n.achievements_statistics),
             completedRoutes.when(
               data: (data) => StatListWidget(stats: convertCompletedRoutesToStats(data)),
-              error: (error, stack) => const Center(child: Text("Sorry")),
+              error: (error, stack) => Center(child: Text(context.l10n.errors_stats)),
               loading: CircularProgressIndicator.new,
             ),
             const SizedBox(height: AppPaddings.medium),

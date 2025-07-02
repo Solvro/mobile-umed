@@ -36,6 +36,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Row(
+        spacing: AppPaddings.nano,
         children: [
           Expanded(
             child: Column(

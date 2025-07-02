@@ -13,7 +13,7 @@ class RouteStat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 40,
+      width: SelectRouteConfig.statWidth,
       child: Column(
         children: [
           icon,
@@ -22,6 +22,7 @@ class RouteStat extends StatelessWidget {
             comment,
             style: context.textTheme.bodySmall?.copyWith(fontSize: SelectRouteConfig.smallFontSize),
             textAlign: TextAlign.center,
+            softWrap: true,
           ),
         ],
       ),

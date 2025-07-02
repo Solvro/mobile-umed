@@ -12,7 +12,6 @@ abstract class CompletedRoute with _$CompletedRoute {
     required double distance,
     required int calories,
     required int time,
-    required double tempo,
   }) = _CompletedRoute;
 
   factory CompletedRoute.fromJson(Map<String, dynamic> json) => _$CompletedRouteFromJson(json);
