@@ -1,7 +1,9 @@
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
 
+import "../common/providers/completed_routes_provider.dart";
 import "../features/dashboard/dashboard_page.dart";
 import "../features/debug_playground/debug_playground.dart";
 import "../features/error/error_page.dart";
@@ -21,13 +23,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO(tomasz-trela): move this to logic layer
     final appTheme = AppTheme();
-    return MaterialApp.router(
-      title: "Flutter Demo",
-      theme: appTheme.light,
-      darkTheme: appTheme.dark,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      routerConfig: _router,
+    return _EagerInitialization(
+      child: MaterialApp.router(
+        title: "Flutter Demo",
+        theme: appTheme.light,
+        darkTheme: appTheme.dark,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        routerConfig: _router,
+      ),
     );
+  }
+}
+
+class _EagerInitialization extends ConsumerWidget {
+  final Widget child;
+
+  const _EagerInitialization({required this.child});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(completedRoutesProvider);
+
+    return child;
   }
 }

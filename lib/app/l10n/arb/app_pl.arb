@@ -43,6 +43,7 @@
   "errors_title": "Przepraszamy, wystąpił błąd",
   "errors_generic":  "Coś poszło nie tak",
   "errors_launch": "Wystąpił błąd podczas otwierania adresu",
+  "errors_stats": "Nie udało się załadować statystyk",
   "browse_routes": "Przegądaj trasy",
   "choose_route": "Wybierz trasę",
   "start_route": "Rozpocznij trasę!",

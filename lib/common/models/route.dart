@@ -35,16 +35,24 @@ extension RouteParamsDoubleX on double {
   }
 
   String inMilliliters() {
-    return "${toInt()}\nml";
+    return "${toInt()} ml";
   }
 }
 
 extension RouteParamsIntX on int {
   String inMinutes() {
-    return "$this\nmin";
+    return "$this min";
+  }
+
+  String inHours() {
+    return "${this / 60.0} h";
+  }
+
+  String inLiters() {
+    return "${this / 1000.0} l";
   }
 
   String inKcal() {
-    return "$this\nkcal";
+    return "$this kcal";
   }
 }

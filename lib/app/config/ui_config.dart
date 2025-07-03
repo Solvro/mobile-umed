@@ -41,6 +41,7 @@ abstract final class SelectRouteConfig {
   static const contentPadding = 5.0;
   static const iconSize = 20.0;
   static const smallFontSize = 10.0;
+  static const statWidth = 30.0;
 }
 
 abstract final class LandmarksSectionConfig {
