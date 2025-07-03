@@ -1,15 +1,14 @@
-import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:hive/hive.dart";
+import "package:riverpod_annotation/riverpod_annotation.dart";
 import "../../features/route_map/repository/route_map_repository.dart";
 import "../models/completed_route.dart";
 
+part "completed_routes_provider.g.dart";
+
 const String completedRoutesBoxName = "completed_routes";
 
-final completedRoutesProvider = AsyncNotifierProvider<CompletedRoutesNotifier, List<CompletedRoute>>(
-  CompletedRoutesNotifier.new,
-);
-
-class CompletedRoutesNotifier extends AsyncNotifier<List<CompletedRoute>> {
+@riverpod
+class CompletedRoutes extends _$CompletedRoutes {
   @override
   Future<List<CompletedRoute>> build() async {
     await Hive.openBox<Map<dynamic, dynamic>>(completedRoutesBoxName);
