@@ -10,8 +10,6 @@ import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
-import "../../../../app/l10n/arb/app_localizations.g.dart";
-import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/landmark.dart";
 import "../../../../common/models/route.dart";
@@ -25,6 +23,8 @@ import "../modals/route_completed_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
+final mapControllerProvider = Provider.autoDispose((ref) => MapController());
+
 class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, this.route, this.active = true});
 
@@ -37,12 +37,6 @@ class RouteMapWidget extends ConsumerStatefulWidget {
 }
 
 class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
-  final mapController = MapController();
-
-  void moveTo(LatLng latLng) {
-    mapController.move(latLng, 14);
-  }
-
   Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
     if (!mounted) {
       return;
@@ -64,14 +58,13 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   void initState() {
-    final l10n = context.l10n;
     if (Platform.isAndroid) {
       FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await MyFlutterForegroundTask.requestPermissions();
         await LocationService.requestPermissions();
         MyFlutterForegroundTask.initMyService();
-        await MyFlutterForegroundTask.startMyForegroundService(l10n);
+        await MyFlutterForegroundTask.startMyForegroundService();
         if (widget.route != null) {
           FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
         }
@@ -92,6 +85,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
       route: route?.route ?? IList<LatLng>(),
       visited: visitedCount,
     );
+    final mapController = ref.watch(mapControllerProvider);
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
@@ -187,13 +181,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   void dispose() {
-    mapController.dispose();
     super.dispose();
   }
 }
 
 class MyFlutterForegroundTask {
-  static Future<ServiceRequestResult> startMyForegroundService(AppLocalizations l10n) async {
+  static Future<ServiceRequestResult> startMyForegroundService() async {
     if (await FlutterForegroundTask.isRunningService) {
       return FlutterForegroundTask.restartService();
     } else {
