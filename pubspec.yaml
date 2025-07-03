@@ -32,8 +32,8 @@ dependencies:
   flutter_map_location_marker: ^10.1.0 
 
   #Models
-  freezed: ^3.0.6
-  freezed_annotation: ^3.0.0
+  freezed: ^3.1.0
+  freezed_annotation: ^3.1.0
   json_serializable: ^6.9.5
 
   #HTTP Client
