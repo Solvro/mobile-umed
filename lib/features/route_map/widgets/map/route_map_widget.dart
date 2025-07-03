@@ -1,5 +1,8 @@
+import "dart:io";
+
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
+import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
@@ -7,12 +10,18 @@ import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
+import "../../../../app/l10n/arb/app_localizations.g.dart";
+import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/landmark.dart";
 import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
+import "../../../../common/utils/location_service.dart";
 import "../../controllers/route_controller.dart";
+import "../../services/flutter_foreground_task.dart";
+import "../../services/task_handlers/route_backgroud_task_handler.dart";
 import "../modals/landmark_info_modal.dart";
+import "../modals/route_completed_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 
@@ -32,6 +41,44 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   void moveTo(LatLng latLng) {
     mapController.move(latLng, 14);
+  }
+
+  Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
+    if (!mounted) {
+      return;
+    }
+    if (data is String) {
+      final event = TaskEvent.fromString(data);
+      switch (event) {
+        case TaskEvent.nextLocationReached:
+          ref.read(visitedCountProvider.notifier).incrementVisited();
+        case TaskEvent.routeCompleted:
+          await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
+          await FlutterForegroundTask.stopService();
+          ref.read(visitedCountProvider.notifier).resetVisited();
+        case TaskEvent.error:
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    final l10n = context.l10n;
+    if (Platform.isAndroid) {
+      FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await MyFlutterForegroundTask.requestPermissions();
+        await LocationService.requestPermissions();
+        MyFlutterForegroundTask.initMyService();
+        await MyFlutterForegroundTask.startMyForegroundService(l10n);
+        if (widget.route != null) {
+          FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
+        }
+      });
+    }
+    // TODO(tomasz-trela): Implement iOS logic
+    super.initState();
   }
 
   @override
@@ -136,5 +183,61 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    mapController.dispose();
+    super.dispose();
+  }
+}
+
+class MyFlutterForegroundTask {
+  static Future<ServiceRequestResult> startMyForegroundService(AppLocalizations l10n) async {
+    if (await FlutterForegroundTask.isRunningService) {
+      return FlutterForegroundTask.restartService();
+    } else {
+      return FlutterForegroundTask.startService(
+        serviceId: 256,
+        notificationTitle: "Aplikacja działa w tle i monitoruje Twoją trasę",
+        notificationText: "Dotknij, aby wrócić do aplikacji",
+        notificationInitialRoute: "/",
+        callback: startCallback,
+      );
+    }
+  }
+
+  static void initMyService() {
+    FlutterForegroundTask.init(
+      androidNotificationOptions: AndroidNotificationOptions(
+        channelId: "foreground_service",
+        channelName: "Foreground Service Notification",
+        channelDescription: "This notification appears when the foreground service is running.",
+        onlyAlertOnce: true,
+      ),
+      iosNotificationOptions: const IOSNotificationOptions(showNotification: false),
+      foregroundTaskOptions: ForegroundTaskOptions(
+        eventAction: ForegroundTaskEventAction.nothing(),
+        autoRunOnBoot: true,
+        autoRunOnMyPackageReplaced: true,
+        allowWifiLock: true,
+      ),
+    );
+  }
+
+  static Future<void> requestPermissions() async {
+    final notificationPermission = await FlutterForegroundTask.checkNotificationPermission();
+    if (notificationPermission != NotificationPermission.granted) {
+      await FlutterForegroundTask.requestNotificationPermission();
+    }
+
+    if (Platform.isAndroid) {
+      if (!await FlutterForegroundTask.isIgnoringBatteryOptimizations) {
+        await FlutterForegroundTask.requestIgnoreBatteryOptimization();
+      }
+      if (!await FlutterForegroundTask.canScheduleExactAlarms) {
+        await FlutterForegroundTask.openAlarmsAndRemindersSettings();
+      }
+    }
   }
 }
