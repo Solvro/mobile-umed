@@ -24,13 +24,11 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   late SheetMode _currentSheetMode;
   late SheetState _currentSheetState;
 
-  final GlobalKey<RouteMapWidgetState> _mapKey = GlobalKey();
-
   Future<void> _centerToUserLocation() async {
     final latLng = await LocationService.getCurrentLatLng();
 
     if (latLng != null) {
-      _mapKey.currentState?.moveTo(latLng);
+      ref.read(mapControllerProvider).move(latLng, 14);
     }
   }
 
@@ -76,7 +74,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),
           Positioned(
-            top: 112,
+            top: 75,
             right: 12,
             child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),
