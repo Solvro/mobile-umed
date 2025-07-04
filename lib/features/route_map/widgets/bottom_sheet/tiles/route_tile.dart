@@ -35,6 +35,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      onExpansionChanged: (value) => {ref.read(selectedRoute.notifier).state = value ? widget.route : null},
       title: Row(
         spacing: AppPaddings.nano,
         children: [
