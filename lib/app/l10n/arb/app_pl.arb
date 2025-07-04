@@ -68,5 +68,7 @@
   "checkpoint_type": "Miejsce warte uwagi",
   "description": "Opis",
   "read_more": "  Czytaj więcej",
-  "hide": "  Ukryj"
+  "hide": "  Ukryj",
+  "null_text": "Brak",
+  "checkpoint": "Punkt kontrolny"
 }

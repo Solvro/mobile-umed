@@ -14,7 +14,7 @@ class LandmarkInfoModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InfoModal(
-      title: landmark.name,
+      title: context.l10n.checkpoint,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -40,7 +40,8 @@ class LandmarkInfoModal extends StatelessWidget {
                   Expanded(
                     child: LabelValuePair(
                       label: context.l10n.date_of_creation,
-                      value: landmark.dateOfCreation.toString(),
+                      value:
+                          landmark.dateOfCreation == null ? context.l10n.null_text : landmark.dateOfCreation.toString(),
                     ),
                   ),
                 ],
