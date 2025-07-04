@@ -28,40 +28,50 @@ final mockData = [
     estimatedTime: 130,
     landmarks:
         [
-          const Landmark(
+          Landmark(
             id: 1,
             name: "Summit",
             description: "The peak of the trail",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1079, 17.0385),
+            location: const LatLng(51.1079, 17.0385),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: "Designer 1",
           ),
-          const Landmark(
+          Landmark(
             id: 6,
             name: "Old Town",
             description: "Historic center of Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1094, 17.0325),
+            location: const LatLng(51.1094, 17.0325),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 7,
             name: "Centennial Hall",
             description: "A historic building in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1066, 17.0777),
+            location: const LatLng(51.1066, 17.0777),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: "Designer 2",
           ),
-          const Landmark(
+          Landmark(
             id: 8,
             name: "Wrocław Zoo",
             description: "A popular zoo in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1045, 17.0748),
+            location: const LatLng(51.1045, 17.0748),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 9,
             name: "Japanese Garden",
             description: "A serene garden in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1054, 17.0782),
+            location: const LatLng(51.1054, 17.0782),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
         ].lock,
     playlist: mockPlaylist,
@@ -84,40 +94,50 @@ final mockData = [
     estimatedTime: 200,
     landmarks:
         [
-          const Landmark(
+          Landmark(
             id: 2,
             name: "Creek",
             description: "A small creek",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1079, 17.0385),
+            location: const LatLng(51.1079, 17.0385),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 10,
             name: "Market Square",
             description: "The main square in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1102, 17.0316),
+            location: const LatLng(51.1102, 17.0316),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 11,
             name: "Ostrów Tumski",
             description: "The oldest part of Wrocław",
             type: LandmarkType.pulsometer,
-            location: LatLng(51.1142, 17.0465),
+            location: const LatLng(51.1142, 17.0465),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 12,
             name: "Hydropolis",
             description: "A water knowledge center",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1027, 17.0465),
+            location: const LatLng(51.1027, 17.0465),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 13,
             name: "Botanical Garden",
             description: "A beautiful garden in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1140, 17.0460),
+            location: const LatLng(51.1140, 17.0460),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
         ].lock,
     playlist: mockPlaylist,
@@ -140,40 +160,50 @@ final mockData = [
     estimatedTime: 120,
     landmarks:
         [
-          const Landmark(
+          Landmark(
             id: 4,
             name: "Lighthouse",
             description: "A tall lighthouse",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1079, 17.0385),
+            location: const LatLng(51.1079, 17.0385),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 14,
             name: "National Museum",
             description: "A museum in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1091, 17.0439),
+            location: const LatLng(51.1091, 17.0439),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 15,
             name: "Wrocław Fountain",
             description: "A multimedia fountain",
             type: LandmarkType.pulsometer,
-            location: LatLng(51.1063, 17.0767),
+            location: const LatLng(51.1063, 17.0767),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 16,
             name: "Sky Tower",
             description: "A skyscraper in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.0965, 17.0240),
+            location: const LatLng(51.0965, 17.0240),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
-          const Landmark(
+          Landmark(
             id: 17,
             name: "Grunwald Bridge",
             description: "A historic bridge in Wrocław",
             type: LandmarkType.checkpoint,
-            location: LatLng(51.1097, 17.0489),
+            location: const LatLng(51.1097, 17.0489),
+            dateOfCreation: DateTime.utc(2025, 6, 17, 12),
+            designer: null,
           ),
         ].lock,
     playlist: mockPlaylist,
