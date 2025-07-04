@@ -16,10 +16,10 @@ import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
 import "../../../../common/utils/location_service.dart";
 import "../../controllers/route_controller.dart";
+import "../../modals/landmark_info_modal.dart";
+import "../../modals/route_completed_modal.dart";
 import "../../services/flutter_foreground_task.dart";
 import "../../services/task_handlers/route_background_task_handler.dart";
-import "../modals/landmark_info_modal.dart";
-import "../modals/route_completed_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 

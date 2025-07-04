@@ -13,6 +13,8 @@ abstract class Landmark with _$Landmark {
     required String name,
     required String description,
     required LandmarkType type,
+    required DateTime? dateOfCreation,
+    required String? designer,
     @LatLngConverter() required LatLng location,
   }) = _Landmark;
 

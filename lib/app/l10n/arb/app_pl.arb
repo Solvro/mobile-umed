@@ -58,5 +58,15 @@
     }
   },
   "keep_on_browsing": "Przegądaj dalej",
-  "start": "Rozpocznij"
+  "start": "Rozpocznij",
+  "name": "Nazwa",
+  "date_of_creation": "Data powstania",
+  "designer": "Projektant",
+  "unknown_designer": "Nieznany",
+  "type": "Rodzaj",
+  "pulsometer_type": "Pulsometr",
+  "checkpoint_type": "Miejsce warte uwagi",
+  "description": "Opis",
+  "read_more": "  Czytaj więcej",
+  "hide": "  Ukryj"
 }

@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
-import "../../../../app/assets/assets.gen.dart";
-import "../../../../app/config/ui_config.dart";
-import "../../../../app/l10n/l10n.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../../../common/widgets/info_modal.dart";
+import "../../../app/assets/assets.gen.dart";
+import "../../../app/config/ui_config.dart";
+import "../../../app/l10n/l10n.dart";
+import "../../../app/theme/app_theme.dart";
+import "../../../common/widgets/info_modal.dart";
 import "stat_info_compact.dart";
 
 class RouteCompletedModal extends StatelessWidget {
