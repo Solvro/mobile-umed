@@ -51,3 +51,9 @@ git-crypt-key
 *.g.dart
 *.freezed.dart
 *.gen.dart
+
+# FVM Version Cache
+.fvm/
+
+#VS Code
+.vscode/

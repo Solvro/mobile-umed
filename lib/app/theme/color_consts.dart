@@ -9,4 +9,5 @@ abstract class ColorConsts {
   static const onyx = Color(0xFF0F0F0F); // Onyx
   static const dimGray = Color(0xFF6B6B6B); // Dim Gray
   static const borderGray = Color(0xFFEBEBEB); // Light Gray
+  static const mistGray = Color(0xFFD9D9D9);
 }
