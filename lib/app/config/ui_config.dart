@@ -214,3 +214,10 @@ abstract final class ErrorWidgetConfig {
   static const iconSize = 80.0;
   static const buttonOutsidePadding = 60.0;
 }
+
+abstract final class ShimmerConfig {
+  static const milisecounds500 = 500; // in milliseconds
+  static const shimmerKey = "shimmer";
+  static const listKey = "list";
+  static const profileRoutesKey = "profile_routes";
+}

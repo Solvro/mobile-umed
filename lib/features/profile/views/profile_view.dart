@@ -41,6 +41,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             const SizedBox(height: AppPaddings.medium),
             SectionHeader(context.l10n.home_nearest_to_you),
             RouteListWidget(
+              key: const ValueKey(ShimmerConfig.profileRoutesKey),
               routes: mockData,
               onRouteTap: (route) {
                 // TODO(eTraveler04): add action
