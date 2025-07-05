@@ -13,65 +13,57 @@ class LandmarkInfoModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final infoWidgets = [
+      LabelValuePair(label: context.l10n.name, value: "${landmark.name}bajla ela cala sala tanczy"),
+      LabelValuePair(
+        label: context.l10n.type,
+        value: landmark.type == LandmarkType.checkpoint ? context.l10n.checkpoint_type : context.l10n.pulsometer_type,
+      ),
+      if (landmark.dateOfCreation != null)
+        LabelValuePair(label: context.l10n.date_of_creation, value: landmark.dateOfCreation.toString()),
+      if (landmark.designer != null) LabelValuePair(label: context.l10n.designer, value: landmark.designer!),
+    ];
+
+    final List<Widget> infoRows = [];
+    for (var i = 0; i < infoWidgets.length; i += 2) {
+      infoRows.add(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppPaddings.small,
+          children: [
+            Expanded(child: infoWidgets[i]),
+            if (i + 1 < infoWidgets.length) Expanded(child: infoWidgets[i + 1]) else const Expanded(child: SizedBox()),
+          ],
+        ),
+      );
+    }
+
     return InfoModal(
       title: context.l10n.checkpoint,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
 
-          ClipRRect(
-            borderRadius: BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
-            child: const CachedImage(
-              //for now there is no image url property in the landmark model
-              "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
+            ClipRRect(
+              borderRadius: BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
+              child: const CachedImage(
+                //for now there is no image url property in the landmark model
+                "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
+              ),
             ),
-          ),
 
-          const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
+            const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
 
-          Column(
-            spacing: AppPaddings.tiny,
-            children: [
-              Row(
-                spacing: AppPaddings.tiny,
-                children: [
-                  Expanded(child: LabelValuePair(label: context.l10n.name, value: landmark.name)),
-                  Expanded(
-                    child: LabelValuePair(
-                      label: context.l10n.date_of_creation,
-                      value:
-                          landmark.dateOfCreation == null ? context.l10n.null_text : landmark.dateOfCreation.toString(),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                spacing: AppPaddings.tiny,
-                children: [
-                  Expanded(
-                    child: LabelValuePair(
-                      label: context.l10n.type,
-                      value:
-                          landmark.type == LandmarkType.checkpoint
-                              ? context.l10n.checkpoint_type
-                              : context.l10n.pulsometer_type,
-                    ),
-                  ),
-                  Expanded(
-                    child: LabelValuePair(
-                      label: context.l10n.designer,
-                      value: landmark.designer ?? context.l10n.unknown_designer,
-                    ),
-                  ),
-                ],
-              ),
-              LabelValuePair(label: context.l10n.description, value: landmark.description),
-            ],
-          ),
+            Column(
+              spacing: AppPaddings.tiny,
+              children: [...infoRows, LabelValuePair(label: context.l10n.description, value: landmark.description)],
+            ),
 
-          const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
-        ],
+            const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
+          ],
+        ),
       ),
     );
   }
