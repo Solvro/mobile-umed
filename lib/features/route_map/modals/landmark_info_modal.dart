@@ -14,11 +14,8 @@ class LandmarkInfoModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final infoWidgets = [
-      LabelValuePair(label: context.l10n.name, value: "${landmark.name}bajla ela cala sala tanczy"),
-      LabelValuePair(
-        label: context.l10n.type,
-        value: landmark.type == LandmarkType.checkpoint ? context.l10n.checkpoint_type : context.l10n.pulsometer_type,
-      ),
+      LabelValuePair(label: context.l10n.name, value: landmark.name),
+      LabelValuePair(label: context.l10n.type, value: landmark.type.toText(context)),
       if (landmark.dateOfCreation != null)
         LabelValuePair(label: context.l10n.date_of_creation, value: landmark.dateOfCreation.toString()),
       if (landmark.designer != null) LabelValuePair(label: context.l10n.designer, value: landmark.designer!),
