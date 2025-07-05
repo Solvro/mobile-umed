@@ -199,7 +199,8 @@ abstract final class ErrorWidgetConfig {
 
 abstract final class ShimmerConfig {
   static const milisecounds500 = 500; // in milliseconds
-  static const shimmerKey = "shimmer";
-  static const listKey = "list";
-  static const profileRoutesKey = "profile_routes";
+  static const shimmerKey = ValueKey("shimmer");
+  static const listKey = ValueKey("list");
+  static const creatorKey = ValueKey("creator");
+  static const profileRoutesKey = ValueKey("profile_routes");
 }

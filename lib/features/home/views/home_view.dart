@@ -1,12 +1,10 @@
-import "dart:async";
-
 import "package:flutter/material.dart";
-import "package:shimmer/shimmer.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
+import "../../../common/widgets/common/shimmer/horizontal_routes_shimmer.dart";
 import "../../../common/widgets/home/button_row.dart";
 import "../../../common/widgets/home/start_route_button.dart";
 import "./../../../common/data_source/mocks/mock_routes.dart";
@@ -20,25 +18,11 @@ class MyHomeView extends StatefulWidget {
 }
 
 class _MyHomeViewState extends State<MyHomeView> {
-  bool isLoading = true;
+  bool isLoading = false; // TODO(BombardierBulge): replace with actual loading state management
 
   @override
   void initState() {
     super.initState();
-    unawaited(_loadData());
-  }
-
-  Future<void> _loadData() async {
-    // test animacji shimmer
-    await fetchRoutes();
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  Future<void> fetchRoutes() async {
-    // czas dla animacji shimmer do testów
-    await Future.delayed(const Duration(seconds: 2));
   }
 
   @override
@@ -61,9 +45,9 @@ class _MyHomeViewState extends State<MyHomeView> {
               duration: const Duration(milliseconds: ShimmerConfig.milisecounds500),
               child:
                   isLoading
-                      ? const RouteListShimmer(key: ValueKey(ShimmerConfig.shimmerKey))
+                      ? const RouteListShimmer(key: ShimmerConfig.shimmerKey)
                       : RouteListWidget(
-                        key: const ValueKey(ShimmerConfig.listKey),
+                        key: ShimmerConfig.listKey,
                         routes: mockData,
                         onRouteTap: (route) {
                           // TODO(eTraveler04): add action
@@ -78,36 +62,6 @@ class _MyHomeViewState extends State<MyHomeView> {
             const SizedBox(height: HomeViewConfig.commonGap),
             HomeButtonsRow(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// widget shimmera
-class RouteListShimmer extends StatelessWidget {
-  const RouteListShimmer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
-      child: SizedBox(
-        height: RouteListConfig.height,
-        child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: 3,
-            separatorBuilder: (_, __) => const SizedBox(width: AppPaddings.tinySmall),
-            itemBuilder:
-                (_, __) => Container(
-                  width: RouteListConfig.itemWidth,
-                  height: RouteListConfig.height,
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
-                ),
-          ),
         ),
       ),
     );

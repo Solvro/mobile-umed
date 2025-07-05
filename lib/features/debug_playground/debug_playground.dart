@@ -1,13 +1,19 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
+import "../../../../app/config/ui_config.dart";
 import "../../app/app.dart";
+import "../../common/data_source/mocks/mock_routes.dart";
+import "../../common/models/creator.dart";
+import "../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
+import "../../common/widgets/common/shimmer/creator_title_shimmer.dart";
+import "../../common/widgets/common/shimmer/horizontal_routes_shimmer.dart";
+import "../../features/info/widgets/creator_tile.dart";
 import "../route_map/repository/route_map_repository.dart";
 import "../route_map/widgets/modals/route_completed_modal.dart";
 
 class DebugPlayground extends StatelessWidget {
   const DebugPlayground({super.key});
-
   static const String routeName = "/debug_playground";
 
   @override
@@ -31,6 +37,8 @@ class DebugPlayground extends StatelessWidget {
               onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
               child: const Text("Error Page"),
             ),
+            const Text("Test Shimmera"),
+            const ShimmerTestWidget(),
             const TestProviderWidget(),
           ],
         ),
@@ -59,6 +67,65 @@ class TestProviderWidget extends ConsumerWidget {
           data: (route) => Text("\nRoute 2:\n$route"),
           loading: CircularProgressIndicator.new,
           error: (e, _) => Text("Error: $e"),
+        ),
+      ],
+    );
+  }
+}
+
+// Dodaj definicję ShimmerTestWidget poniżej klasy DebugPlayground (lub w osobnym pliku)
+class ShimmerTestWidget extends StatefulWidget {
+  const ShimmerTestWidget({super.key});
+
+  @override
+  State<ShimmerTestWidget> createState() => _ShimmerTestWidgetState();
+}
+
+class _ShimmerTestWidgetState extends State<ShimmerTestWidget> {
+  bool isLoading = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final mockRoutes = mockData;
+    const mockCreator = Creator(
+      id: 1,
+      firstName: "Jan",
+      lastName: "Kowalski",
+      imageUrl: "",
+      role: "Developer",
+      sort: 0,
+    );
+
+    return Column(
+      children: [
+        const SizedBox(height: 4),
+        SwitchListTile(
+          title: const Text("Przełącz ładowanie"),
+          value: isLoading,
+          onChanged: (val) => setState(() => isLoading = val),
+        ),
+        const SizedBox(height: 16),
+        const Text("Shimmer dla listy tras"),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: ShimmerConfig.milisecounds500),
+          child:
+              isLoading
+                  ? const RouteListShimmer(key: ShimmerConfig.shimmerKey)
+                  : RouteListWidget(
+                    key: ShimmerConfig.listKey,
+                    routes: mockRoutes,
+                    onRouteTap: (_) {},
+                    icon: Icons.arrow_forward_ios,
+                  ),
+        ),
+        const SizedBox(height: 32),
+        const Text("Shimmer twórcy"),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: ShimmerConfig.milisecounds500),
+          child:
+              isLoading
+                  ? const CreatorTileShimmer(key: ShimmerConfig.shimmerKey)
+                  : const CreatorTile(mockCreator, key: ShimmerConfig.creatorKey),
         ),
       ],
     );
