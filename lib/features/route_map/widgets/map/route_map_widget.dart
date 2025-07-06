@@ -99,7 +99,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
                 RouteSelectionsPolyline(
-                  locations: widget.optionalRoutes!.asList().map((route) => route.route).toIList(),
+                  locations: (widget.optionalRoutes?.asList() ?? []).map((route) => route.route).toIList(),
                   selected: selectedProvider,
                   selectedColor: context.colorScheme.primary,
                   notSelectedColor: MapConfig.unvisitedColor,
