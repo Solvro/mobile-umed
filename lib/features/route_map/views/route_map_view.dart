@@ -72,18 +72,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
               AsyncLoading() => const CircularProgressIndicator(),
               _ => Center(child: Text(context.l10n.errors_generic)),
             },
-            Positioned.fill(
-              child: IgnorePointer(
-                ignoring: _currentSheetState == SheetState.hidden,
-                child: Listener(
-                  behavior: HitTestBehavior.translucent,
-                  onPointerDown: (_) {
-                    ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-                    ref.read(sheetTriggerProvider.notifier).state = true;
-                  },
-                ),
-              ),
-            ),
+            _SheetHidingHittest(currentSheetState: _currentSheetState),
             SelectRouteBottomSheet(),
           ],
         ),
@@ -93,18 +82,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       body: Stack(
         children: [
           RouteMapWidget(route: route, active: _currentSheetState == SheetState.hidden),
-          Positioned.fill(
-            child: IgnorePointer(
-              ignoring: _currentSheetState == SheetState.hidden,
-              child: Listener(
-                behavior: HitTestBehavior.translucent,
-                onPointerDown: (_) {
-                  ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-                  ref.read(sheetTriggerProvider.notifier).state = true;
-                },
-              ),
-            ),
-          ),
+          _SheetHidingHittest(currentSheetState: _currentSheetState),
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),
           Positioned(
@@ -113,6 +91,27 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
             child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SheetHidingHittest extends ConsumerWidget {
+  const _SheetHidingHittest({required this.currentSheetState});
+  final SheetState currentSheetState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Positioned.fill(
+      child: IgnorePointer(
+        ignoring: currentSheetState == SheetState.hidden,
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerDown: (_) {
+            ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+            ref.read(sheetTriggerProvider.notifier).state = true;
+          },
+        ),
       ),
     );
   }
