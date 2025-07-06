@@ -72,7 +72,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
               AsyncLoading() => const CircularProgressIndicator(),
               _ => Center(child: Text(context.l10n.errors_generic)),
             },
-            _SheetHidingHittest(currentSheetState: _currentSheetState),
+            _SheetHidingHitTest(currentSheetState: _currentSheetState),
             SelectRouteBottomSheet(),
           ],
         ),
@@ -82,7 +82,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       body: Stack(
         children: [
           RouteMapWidget(route: route, active: _currentSheetState == SheetState.hidden),
-          _SheetHidingHittest(currentSheetState: _currentSheetState),
+          _SheetHidingHitTest(currentSheetState: _currentSheetState),
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),
           Positioned(
@@ -96,8 +96,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   }
 }
 
-class _SheetHidingHittest extends ConsumerWidget {
-  const _SheetHidingHittest({required this.currentSheetState});
+class _SheetHidingHitTest extends ConsumerWidget {
+  const _SheetHidingHitTest({required this.currentSheetState});
   final SheetState currentSheetState;
 
   @override
