@@ -6,4 +6,4 @@ enum RouteDetailsOption { info, playlist }
 
 final routeProvider = StateProvider<Route?>((ref) => null);
 
-final selectedRoute = StateProvider<Route?>((ref) => null);
+final selectedRouteProvider = StateProvider<Route?>((ref) => null);

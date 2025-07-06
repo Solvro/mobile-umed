@@ -1,5 +1,5 @@
 import "dart:async";
-import "package:flutter/material.dart" hide Route;
+import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
@@ -69,7 +69,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
                 active: _currentSheetState == SheetState.hidden,
                 optionalRoutes: value,
               ),
-              _ => const CircularProgressIndicator(),
+              AsyncLoading() => const CircularProgressIndicator(),
+              _ => Center(child: Text(context.l10n.errors_generic)),
             },
             SelectRouteBottomSheet(),
           ],

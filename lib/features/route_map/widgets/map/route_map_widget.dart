@@ -81,7 +81,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
-    final selectedProvider = ref.watch(selectedRoute);
+    final selectedProvider = ref.watch(selectedRouteProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
     final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
       landmarks: landmarks,
