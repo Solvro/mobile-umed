@@ -1,13 +1,12 @@
 import "dart:async";
-
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../../common/utils/location_service.dart";
 import "../providers/route_provider.dart";
+import "../repository/route_map_repository.dart";
 import "../widgets/bottom_sheet/route_bottom_sheet.dart";
 import "../widgets/bottom_sheet/select_route_bottom_sheet.dart";
 import "../widgets/map/route_map_widget.dart";
@@ -42,6 +41,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
   @override
   Widget build(BuildContext context) {
     final route = ref.watch(routeProvider);
+    final allRoutesAsync = ref.watch(fetchAllRoutesProvider);
 
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
@@ -63,7 +63,17 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           backgroundColor: context.colorScheme.primary,
         ),
         body: Stack(
-          children: [RouteMapWidget(active: _currentSheetState == SheetState.hidden), SelectRouteBottomSheet()],
+          children: [
+            switch (allRoutesAsync) {
+              AsyncData(:final value) => RouteMapWidget(
+                active: _currentSheetState == SheetState.hidden,
+                optionalRoutes: value,
+              ),
+              AsyncLoading() => const CircularProgressIndicator(),
+              _ => Center(child: Text(context.l10n.errors_generic)),
+            },
+            SelectRouteBottomSheet(),
+          ],
         ),
       );
     }

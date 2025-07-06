@@ -16,20 +16,22 @@ import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
 import "../../../../common/utils/location_service.dart";
 import "../../controllers/route_controller.dart";
+import "../../providers/route_provider.dart";
 import "../../services/flutter_foreground_task.dart";
 import "../../services/task_handlers/route_background_task_handler.dart";
 import "../modals/landmark_info_modal.dart";
 import "../modals/route_completed_modal.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
+import "route_selections_polyline.dart";
 
 final mapControllerProvider = Provider.autoDispose((ref) => MapController());
 
 class RouteMapWidget extends ConsumerStatefulWidget {
-  const RouteMapWidget({super.key, this.route, this.active = true});
+  const RouteMapWidget({super.key, this.route, this.optionalRoutes, this.active = true});
 
   final Route? route;
-
+  final IList<Route>? optionalRoutes;
   final bool active;
 
   @override
@@ -79,6 +81,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
+    final selectedProvider = ref.watch(selectedRouteProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
     final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
       landmarks: landmarks,
@@ -89,11 +92,19 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
-        landmarks.isEmpty
+        route == null
             ? FlutterMap(
               options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
               mapController: mapController,
-              children: [TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19)],
+              children: [
+                TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
+                RouteSelectionsPolyline(
+                  locations: (widget.optionalRoutes?.asList() ?? []).map((route) => route.route).toIList(),
+                  selected: selectedProvider,
+                  selectedColor: context.colorScheme.primary,
+                  notSelectedColor: MapConfig.unvisitedColor,
+                ),
+              ],
             )
             : FlutterMap(
               mapController: mapController,
@@ -101,7 +112,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
                 RouteMapPolyline(
-                  locations: route!.route,
+                  locations: route.route,
                   doneColor: context.colorScheme.primary,
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,

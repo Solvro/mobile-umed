@@ -1,7 +1,6 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
-
 import "../../../../../app/app.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
@@ -33,6 +32,7 @@ class StartRouteModal extends ConsumerWidget {
         onPressed: () {
           ref.read(routeProvider.notifier).state = route;
           ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+          ref.read(selectedRouteProvider.notifier).state = null;
           context.router.pop();
         },
       ),

@@ -9,6 +9,8 @@ PODS:
     - FlutterMacOS
   - native_device_orientation (0.0.1):
     - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -27,6 +29,7 @@ DEPENDENCIES:
   - flutter_rotation_sensor (from `.symlinks/plugins/flutter_rotation_sensor/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/darwin`)
   - native_device_orientation (from `.symlinks/plugins/native_device_orientation/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
@@ -43,6 +46,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geolocator_apple/darwin"
   native_device_orientation:
     :path: ".symlinks/plugins/native_device_orientation/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
@@ -54,14 +59,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_foreground_task: a159d2c2173b33699ddb3e6c2a067045d7cebb89
   flutter_rotation_sensor: bf55ead3f64f27207dacc5972fe8ebe932f3de0b
   geolocator_apple: ab36aa0e8b7d7a2d7639b3b4e48308394e8cef5e
   native_device_orientation: e3580675687d5034770da198f6839ebf2122ef94
+  package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
-  flutter_foreground_task: a159d2c2173b33699ddb3e6c2a067045d7cebb89
-  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
 
 PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
 
