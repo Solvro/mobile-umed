@@ -1,8 +1,7 @@
-import "package:flutter/material.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:latlong2/latlong.dart";
 
-import "../../app/l10n/l10n.dart";
+import "../../app/l10n/arb/app_localizations.g.dart";
 import "../parsers/latlng_converter.dart";
 
 part "landmark.freezed.dart";
@@ -26,7 +25,10 @@ abstract class Landmark with _$Landmark {
 enum LandmarkType { checkpoint, pulsometer }
 
 extension LandmarkTypeX on LandmarkType {
-  String toText(BuildContext context) {
-    return this == LandmarkType.checkpoint ? context.l10n.checkpoint_type : context.l10n.pulsometer_type;
+  String toText(AppLocalizations l10n) {
+    return switch (this) {
+      LandmarkType.pulsometer => l10n.pulsometer_type,
+      LandmarkType.checkpoint => l10n.checkpoint_type,
+    };
   }
 }
