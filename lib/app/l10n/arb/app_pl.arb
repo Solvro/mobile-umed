@@ -1,8 +1,11 @@
 {
   "@@locale": "pl",
+  "close": "Zamknij",
+  "description": "Opis",
+  "read_more": "  Czytaj więcej",
+  "hide": "  Ukryj",
   "route_description": "Opis trasy",
   "playlist": "Playlista",
-  "close": "Zamknij",
   "end_route": "Zakończ trasę",
   "keep_going": "Kontynuuj trasę!",
   "route_end_modal_title": "Czy na pewno chcesz zakończyć trasę?",
@@ -59,14 +62,12 @@
   },
   "keep_on_browsing": "Przegądaj dalej",
   "start": "Rozpocznij",
-  "name": "Nazwa",
-  "date_of_creation": "Data powstania",
-  "designer": "Projektant",
-  "type": "Rodzaj",
-  "pulsometer_type": "Pulsometr",
-  "checkpoint_type": "Miejsce warte uwagi",
-  "description": "Opis",
-  "read_more": "  Czytaj więcej",
-  "hide": "  Ukryj",
-  "checkpoint": "Punkt kontrolny"
+
+  "landmark_name": "Nazwa",
+  "landmark_date_of_creation": "Data powstania",
+  "landmark_designer": "Projektant",
+  "landmark_type": "Rodzaj",
+  "landmark_pulsometer_type": "Pulsometr",
+  "landmark_checkpoint_type": "Miejsce warte uwagi",
+  "landmark_checkpoint": "Punkt kontrolny"
 }

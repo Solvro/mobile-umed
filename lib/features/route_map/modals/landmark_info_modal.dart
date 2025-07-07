@@ -14,11 +14,11 @@ class LandmarkInfoModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final infoWidgets = [
-      LabelValuePair(label: context.l10n.name, value: landmark.name),
-      LabelValuePair(label: context.l10n.type, value: landmark.type.toText(context.l10n)),
+      LabelValuePair(label: context.l10n.landmark_name, value: landmark.name),
+      LabelValuePair(label: context.l10n.landmark_type, value: landmark.type.toText(context.l10n)),
       if (landmark.dateOfCreation != null)
-        LabelValuePair(label: context.l10n.date_of_creation, value: landmark.dateOfCreation.toString()),
-      if (landmark.designer != null) LabelValuePair(label: context.l10n.designer, value: landmark.designer!),
+        LabelValuePair(label: context.l10n.landmark_date_of_creation, value: landmark.dateOfCreation.toString()),
+      if (landmark.designer != null) LabelValuePair(label: context.l10n.landmark_designer, value: landmark.designer!),
     ];
 
     final List<Widget> infoRows = [];
@@ -36,7 +36,7 @@ class LandmarkInfoModal extends StatelessWidget {
     }
 
     return InfoModal(
-      title: context.l10n.checkpoint,
+      title: context.l10n.landmark_checkpoint,
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

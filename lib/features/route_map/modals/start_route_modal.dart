@@ -21,7 +21,6 @@ class StartRouteModal extends ConsumerWidget {
     return OptionsModal(
       title: context.l10n.start_route_modal_title(route.name),
       confirmButton: MainActionButton(
-        // backgroundColor: context.colorScheme.error,
         backgroundColor: ColorConsts.whiteGray,
         textColor: ColorConsts.dimGray,
         text: context.l10n.keep_on_browsing,

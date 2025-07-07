@@ -27,8 +27,8 @@ enum LandmarkType { checkpoint, pulsometer }
 extension LandmarkTypeX on LandmarkType {
   String toText(AppLocalizations l10n) {
     return switch (this) {
-      LandmarkType.pulsometer => l10n.pulsometer_type,
-      LandmarkType.checkpoint => l10n.checkpoint_type,
+      LandmarkType.pulsometer => l10n.landmark_pulsometer_type,
+      LandmarkType.checkpoint => l10n.landmark_checkpoint_type,
     };
   }
 }
