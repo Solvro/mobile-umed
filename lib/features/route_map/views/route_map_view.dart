@@ -72,6 +72,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
               AsyncLoading() => const CircularProgressIndicator(),
               _ => Center(child: Text(context.l10n.errors_generic)),
             },
+            _SheetHidingHitTest(currentSheetState: _currentSheetState),
             SelectRouteBottomSheet(),
           ],
         ),
@@ -81,6 +82,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
       body: Stack(
         children: [
           RouteMapWidget(route: route, active: _currentSheetState == SheetState.hidden),
+          _SheetHidingHitTest(currentSheetState: _currentSheetState),
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),
           Positioned(
@@ -89,6 +91,27 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
             child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SheetHidingHitTest extends ConsumerWidget {
+  const _SheetHidingHitTest({required this.currentSheetState});
+  final SheetState currentSheetState;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Positioned.fill(
+      child: IgnorePointer(
+        ignoring: currentSheetState == SheetState.hidden,
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerDown: (_) {
+            ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+            ref.read(sheetTriggerProvider.notifier).state = true;
+          },
+        ),
       ),
     );
   }
