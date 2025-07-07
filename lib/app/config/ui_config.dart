@@ -6,12 +6,15 @@ abstract class AppPaddings {
   static const small = 16.0;
   static const tinySmall = 10.0;
   static const tiny = 8.0;
+  static const nanoTiny = 6.0;
   static const nano = 4.0;
 }
 
 abstract class AppRadius {
   static const small = 12.0;
   static const big = 20.0;
+  static const tiny = 6.0;
+  static const nano = 4.0;
 }
 
 abstract class BottomSheetConfig {
@@ -213,4 +216,12 @@ abstract final class InfoSectionConfig {
 abstract final class ErrorWidgetConfig {
   static const iconSize = 80.0;
   static const buttonOutsidePadding = 60.0;
+}
+
+abstract final class ShimmerConfig {
+  static const millisecounds500 = 500;
+  static const shimmerKey = ValueKey("shimmer");
+  static const listKey = ValueKey("list");
+  static const creatorKey = ValueKey("creator");
+  static const profileRoutesKey = ValueKey("profile_routes");
 }
