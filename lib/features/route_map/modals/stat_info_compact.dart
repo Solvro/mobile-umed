@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
-import "../../../../app/config/ui_config.dart";
-import "../../../../app/theme/app_theme.dart";
+import "../../../app/config/ui_config.dart";
+import "../../../app/theme/app_theme.dart";
 
 class StatInfoCompact extends StatelessWidget {
   const StatInfoCompact({super.key, required this.title, required this.value, required this.icon, required this.color});
