@@ -60,11 +60,11 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
 
   @override
   void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (Platform.isAndroid) {
-        FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
+    
+      
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (Platform.isAndroid || Platform.isIOS) {
+        FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
         await MyFlutterForegroundTask.requestPermissions();
         await LocationService.requestPermissions();
         MyFlutterForegroundTask.initMyService();

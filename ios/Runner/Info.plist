@@ -49,6 +49,8 @@
 	<string>This app needs location access to center the map.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app needs location access to center the map.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs location access to center the map.</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.pravera.flutter_foreground_task.refresh</string>

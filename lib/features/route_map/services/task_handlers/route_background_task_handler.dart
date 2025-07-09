@@ -4,6 +4,7 @@ import "dart:collection";
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:latlong2/latlong.dart";
 
+import "../../../../app/config/ui_config.dart";
 import "../../../../common/models/landmark.dart";
 import "../../../../common/utils/location_service.dart";
 
@@ -16,16 +17,33 @@ class MyTaskHandler extends TaskHandler {
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
       if (latLng != null && locations.isNotEmpty) {
         const distance = Distance();
-        final meterDistance = distance.as(LengthUnit.Meter, locations.first.location, latLng);
-        if (meterDistance > 50) return;
+        Landmark? currentLandmark;
+
+        for (final Landmark location in locations) {
+          final meterDistance = distance.as(LengthUnit.Meter, location.location, latLng);
+          if (meterDistance <= LocalizationConfig.proximityThresholdInMeters) {
+            currentLandmark = location;
+            break;
+          }
+        }
+
+        if (currentLandmark == null) {
+          return;
+        }
+
+        while (currentLandmark != locations.first) {
+          FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
+
+          locations.removeFirst();
+        }
 
         FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
+        locations.removeFirst();
+
         await FlutterForegroundTask.updateService(
           notificationTitle: "Jesteś niedaleko celu",
           notificationText: "Jesteś niedaleko celu: ${locations.first.name}",
         );
-
-        locations.removeFirst();
 
         if (locations.isEmpty) {
           FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
