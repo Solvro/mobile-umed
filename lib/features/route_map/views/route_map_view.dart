@@ -78,6 +78,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
         ),
       );
     }
+
     return Scaffold(
       body: Stack(
         children: [

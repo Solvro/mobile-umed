@@ -60,8 +60,8 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   void initState() {
-    if (Platform.isAndroid) {
-      FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
+    if (Platform.isAndroid || Platform.isIOS) {
+      FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await MyFlutterForegroundTask.requestPermissions();
         await LocationService.requestPermissions();
