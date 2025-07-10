@@ -38,7 +38,7 @@ class RouteMapWidget extends ConsumerStatefulWidget {
   RouteMapWidgetState createState() => RouteMapWidgetState();
 }
 
-class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProviderStateMixin {
+class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBindingObserver, TickerProviderStateMixin {
   Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
     if (!mounted) {
       return;
@@ -51,7 +51,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
-          ref.read(visitedCountProvider.notifier).resetVisited();
+        // ref.read(visitedCountProvider.notifier).resetVisited();
         case TaskEvent.error:
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
       }
@@ -72,9 +72,23 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
         if (widget.route != null) {
           FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
         }
-      }
-      // TODO(tomasz-trela): Implement iOS logic
-    });
+      }});
+
+if (Platform.isIOS) {
+      WidgetsBinding.instance.addObserver(this);
+    }
+
+    super.initState();
+
+    }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      await LocationService.requestPermissions();
+    }
   }
 
   @override
