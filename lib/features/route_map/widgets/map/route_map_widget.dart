@@ -1,3 +1,4 @@
+import "dart:async";
 import "dart:io";
 
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
@@ -63,8 +64,8 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     if (Platform.isAndroid || Platform.isIOS) {
       FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await MyFlutterForegroundTask.requestPermissions();
         await LocationService.requestPermissions();
+        await MyFlutterForegroundTask.requestPermissions();
         MyFlutterForegroundTask.initMyService();
         await MyFlutterForegroundTask.startMyForegroundService();
         if (widget.route != null) {
