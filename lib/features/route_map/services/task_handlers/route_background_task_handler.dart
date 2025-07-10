@@ -40,11 +40,6 @@ class MyTaskHandler extends TaskHandler {
         FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
         locations.removeFirst();
 
-        await FlutterForegroundTask.updateService(
-          notificationTitle: "Jesteś niedaleko celu",
-          notificationText: "Jesteś niedaleko celu: ${locations.first.name}",
-        );
-
         if (locations.isEmpty) {
           FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
           await FlutterForegroundTask.updateService(
@@ -52,6 +47,11 @@ class MyTaskHandler extends TaskHandler {
             notificationText: "Gratulacje, dotarłeś do końca trasy!",
           );
           await _locationSubscription?.cancel();
+        } else {
+          await FlutterForegroundTask.updateService(
+            notificationTitle: "Jesteś niedaleko celu",
+            notificationText: "Jesteś niedaleko celu: ${locations.first.name}",
+          );
         }
       }
     });
