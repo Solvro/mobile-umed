@@ -54,6 +54,7 @@ git-crypt-key
 
 # FVM Version Cache
 .fvm/
+.flutter-plugins-dependencies
 
 #VS Code
 .vscode/
