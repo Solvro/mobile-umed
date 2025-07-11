@@ -1,5 +1,6 @@
 import "dart:async";
 import "package:flutter/material.dart";
+import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
@@ -19,30 +20,29 @@ class RouteMapView extends ConsumerStatefulWidget {
   RouteMapViewState createState() => RouteMapViewState();
 }
 
-class RouteMapViewState extends ConsumerState<RouteMapView> {
+class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderStateMixin {
+  late final AnimatedMapController _mapController;
+
   late SheetMode _currentSheetMode;
   late SheetState _currentSheetState;
-
-  Future<void> _centerToUserLocation() async {
-    final latLng = await LocationService.getCurrentLatLng();
-    if (latLng == null) return;
-
-    final animatedCtl = ref.read(animatedMapControllerProvider);
-    if (animatedCtl != null) {
-      await animatedCtl.animateTo(
-        dest: latLng,
-        zoom: 14,
-        duration: const Duration(milliseconds: 600),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
 
   @override
   void initState() {
     super.initState();
+    _mapController = AnimatedMapController(vsync: this);
     _currentSheetMode = ref.read(sheetModeProvider);
     _currentSheetState = ref.read(sheetStateProvider);
+  }
+
+  Future<void> _centerToUserLocation() async {
+    final latLng = await LocationService.getCurrentLatLng();
+    if (latLng == null) return;
+    await _mapController.animateTo(
+      dest: latLng,
+      zoom: 14,
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -73,6 +73,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           children: [
             switch (allRoutesAsync) {
               AsyncData(:final value) => RouteMapWidget(
+                controller: _mapController,
                 active: _currentSheetState == SheetState.hidden,
                 optionalRoutes: value,
               ),
@@ -88,7 +89,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     return Scaffold(
       body: Stack(
         children: [
-          RouteMapWidget(route: route, active: _currentSheetState == SheetState.hidden),
+          RouteMapWidget(controller: _mapController, route: route, active: _currentSheetState == SheetState.hidden),
           _SheetHidingHitTest(currentSheetState: _currentSheetState),
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),

@@ -26,11 +26,10 @@ import "route_map_marker.dart";
 import "route_map_polyline.dart";
 import "route_selections_polyline.dart";
 
-final animatedMapControllerProvider = StateProvider.autoDispose<AnimatedMapController?>((ref) => null);
-
 class RouteMapWidget extends ConsumerStatefulWidget {
-  const RouteMapWidget({super.key, this.route, this.optionalRoutes, this.active = true});
+  const RouteMapWidget({super.key, required this.controller, this.route, this.optionalRoutes, this.active = true});
 
+  final AnimatedMapController controller;
   final Route? route;
   final IList<Route>? optionalRoutes;
   final bool active;
@@ -40,8 +39,6 @@ class RouteMapWidget extends ConsumerStatefulWidget {
 }
 
 class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProviderStateMixin {
-  late final AnimatedMapController _animatedMapController;
-
   Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
     if (!mounted) {
       return;
@@ -65,10 +62,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
   void initState() {
     super.initState();
 
-    _animatedMapController = AnimatedMapController(vsync: this);
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.read(animatedMapControllerProvider.notifier).state = _animatedMapController;
       if (Platform.isAndroid) {
         FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
         await MyFlutterForegroundTask.requestPermissions();
@@ -101,11 +95,11 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
         route == null
             ? FlutterMap(
               options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
-              mapController: _animatedMapController.mapController,
+              mapController: widget.controller.mapController,
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
                 RouteSelectionsPolyline(
-                  locations: (widget.optionalRoutes?.asList() ?? []).map((route) => route.route).toIList(),
+                  locations: (widget.optionalRoutes?.asList() ?? []).map((r) => r.route).toIList(),
                   selected: selectedProvider,
                   selectedColor: context.colorScheme.primary,
                   notSelectedColor: MapConfig.unvisitedColor,
@@ -113,7 +107,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
               ],
             )
             : FlutterMap(
-              mapController: _animatedMapController.mapController,
+              mapController: widget.controller.mapController,
               options: MapOptions(initialCenter: landmarks.first.location),
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
@@ -138,10 +132,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
                       landmarks.asMap().entries.map((entry) {
                         final index = entry.key;
                         final landmark = entry.value;
-                        Alignment? alignment;
-                        if (index == 0 || index == landmarks.length - 1) {
-                          alignment = index == 0 ? Alignment.center : Alignment.topRight;
-                        }
+                        final Alignment alignment =
+                            index == 0
+                                ? Alignment.center
+                                : index == landmarks.length - 1
+                                ? Alignment.topRight
+                                : Alignment.topCenter;
                         return _buildMarkers(
                           context: context,
                           landmark: landmark,
@@ -149,14 +145,13 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
                           visitedCount: visitedCount,
                           active: widget.active,
                           totalLandmarks: landmarks.length,
-                          markerAlignment: alignment ?? Alignment.topCenter,
+                          markerAlignment: alignment,
                         );
                       }).toList(),
                 ),
               ],
             ),
-
-      AsyncError(:final error) => Center(child: Text("error: $error")),
+      AsyncError(:final error) => Center(child: Text("error: \$error")),
       _ => const Center(child: CircularProgressIndicator()),
     };
   }
@@ -181,7 +176,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
             active
                 ? () async => showDialog<LandmarkInfoModal>(
                   context: context,
-                  builder: (context) => LandmarkInfoModal(landmark: landmark),
+                  builder: (_) => LandmarkInfoModal(landmark: landmark),
                 )
                 : null,
         child: RouteMapMarker(
@@ -199,7 +194,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
   @override
   void dispose() {
     super.dispose();
-    _animatedMapController.dispose();
   }
 }
 
