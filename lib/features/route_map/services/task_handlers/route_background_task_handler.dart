@@ -5,33 +5,32 @@ import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/ui_config.dart";
-import "../../../../common/models/landmark.dart";
 import "../../../../common/utils/location_service.dart";
 
 class MyTaskHandler extends TaskHandler {
   StreamSubscription<LatLng?>? _locationSubscription;
-  Queue<Landmark> locations = Queue();
+  Queue<LatLng> locations = Queue();
 
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
       if (latLng != null && locations.isNotEmpty) {
         const distance = Distance();
-        Landmark? currentLandmark;
+        LatLng? currentLocation;
 
-        for (final Landmark location in locations) {
-          final meterDistance = distance.as(LengthUnit.Meter, location.location, latLng);
+        for (final LatLng location in locations) {
+          final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
           if (meterDistance <= LocalizationConfig.proximityThresholdInMeters) {
-            currentLandmark = location;
+            currentLocation = location;
             break;
           }
         }
 
-        if (currentLandmark == null) {
+        if (currentLocation == null) {
           return;
         }
 
-        while (currentLandmark != locations.first) {
+        while (currentLocation != locations.first) {
           FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
 
           locations.removeFirst();
@@ -50,7 +49,7 @@ class MyTaskHandler extends TaskHandler {
         } else {
           await FlutterForegroundTask.updateService(
             notificationTitle: "Jesteś niedaleko celu",
-            notificationText: "Jesteś niedaleko celu: ${locations.first.name}",
+            notificationText: "Dotarłeś do punktu: ${locations.first}",
           );
         }
       }
@@ -65,7 +64,7 @@ class MyTaskHandler extends TaskHandler {
   @override
   void onReceiveData(Object data) {
     if (data is List) {
-      locations = Queue.from(data.map((e) => Landmark.fromJson(e as Map<String, dynamic>)))..removeFirst();
+      locations = Queue.from(data.map((e) => LatLng.fromJson(e as Map<String, dynamic>)));
     }
   }
 
