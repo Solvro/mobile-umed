@@ -23,7 +23,7 @@ class DebugPlayground extends StatelessWidget {
           children: <Widget>[
             OutlinedButton(onPressed: () async => context.router.pushRouteMap(), child: const Text("RouteMap")),
             OutlinedButton(
-              onPressed: () async => context.router.pushRouteMapWithRoute(3),
+              onPressed: () async => context.router.pushRouteMap(id: 3),
               child: const Text("RouteMap with route"),
             ),
             OutlinedButton(

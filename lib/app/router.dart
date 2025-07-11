@@ -66,8 +66,15 @@ extension ContexRouterX on BuildContext {
 extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   void goProfile() => go(ProfilePage.routeName);
-  Future<void> pushRouteMap() async => push("${RouteMapPage.routeName}/");
-  Future<void> pushRouteMapWithRoute(int id) async => push("${RouteMapPage.routeName}/$id");
+  Future<void> pushRouteMap({int? id}) async {
+    await LocationService.requestPermissions();
+    await MyFlutterForegroundTask.requestPermissions();
+    if (id != null) {
+      await push("${RouteMapPage.routeName}/$id");
+    } else {
+      await push("${RouteMapPage.routeName}/");
+    }
+  }
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
   Future<void> pushFullScreenError(String message) async {
     await push("${ErrorPage.routeName}?message=${Uri.encodeComponent(message)}");

@@ -8,7 +8,6 @@ import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -58,7 +57,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
-        // ref.read(visitedCountProvider.notifier).resetVisited();
         case TaskEvent.error:
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
       }
@@ -72,14 +70,15 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         if (Platform.isAndroid || Platform.isIOS) {
           await LocationService.requestPermissions();
-        FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
-        await MyFlutterForegroundTask.requestPermissions();
-        MyFlutterForegroundTask.initMyService();
-        await MyFlutterForegroundTask.startMyForegroundService();
-        if (widget.route != null) {
-          FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
+          FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
+          await MyFlutterForegroundTask.requestPermissions();
+          MyFlutterForegroundTask.initMyService();
+          await MyFlutterForegroundTask.startMyForegroundService();
+          if (widget.route != null) {
+            FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
+          }
         }
-      }});
+      });
 
 if (Platform.isIOS) {
       WidgetsBinding.instance.addObserver(this);
@@ -145,7 +144,6 @@ if (Platform.isIOS) {
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
                   active: widget.active,
-                  visited: lineChangeIndex,
                   passedLocations: passedLocations,
                 ),
                 const CurrentLocationLayer(
