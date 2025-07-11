@@ -19,6 +19,7 @@ import "../../../../common/utils/location_service.dart";
 import "../../controllers/route_controller.dart";
 import "../../modals/landmark_info_modal.dart";
 import "../../modals/route_completed_modal.dart";
+import "../../providers/locations_provider.dart";
 import "../../providers/route_provider.dart";
 import "../../services/flutter_foreground_task.dart";
 import "../../services/task_handlers/route_background_task_handler.dart";
@@ -48,7 +49,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
       final event = TaskEvent.fromString(data);
       switch (event) {
         case TaskEvent.nextLocationReached:
-          ref.read(visitedCountProvider.notifier).incrementVisited();
+          final locationIndex = ref.read(passedLocationsProvider);
+          final nextLandmarkIndex = ref.read(visitedCountProvider);
+          if (widget.route!.route[locationIndex] == widget.route!.landmarks[nextLandmarkIndex].location) {
+            ref.read(visitedCountProvider.notifier).incrementVisited();
+          }
+          ref.read(passedLocationsProvider.notifier).state++;
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
@@ -69,7 +75,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
         MyFlutterForegroundTask.initMyService();
         await MyFlutterForegroundTask.startMyForegroundService();
         if (widget.route != null) {
-          FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
+          FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
         }
       });
     }
@@ -96,6 +102,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
     final selectedProvider = ref.watch(selectedRouteProvider);
+    final passedLocations = ref.watch(passedLocationsProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
     final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
       landmarks: landmarks,
@@ -132,6 +139,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
                   inactiveColor: MapConfig.inactiveColor,
                   active: widget.active,
                   visited: lineChangeIndex,
+                  passedLocations: passedLocations,
                 ),
                 const CurrentLocationLayer(
                   style: LocationMarkerStyle(
@@ -179,6 +187,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     required Alignment markerAlignment,
   }) {
     return Marker(
+      key: ValueKey("marker_${landmark.id}_$visitedCount"),
       alignment: markerAlignment,
       width: MapConfig.markerSize,
       height: MapConfig.markerSize,
@@ -202,11 +211,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
 
