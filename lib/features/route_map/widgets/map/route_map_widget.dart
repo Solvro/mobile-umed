@@ -4,6 +4,7 @@ import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_map/flutter_map.dart";
+import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
@@ -25,7 +26,7 @@ import "route_map_marker.dart";
 import "route_map_polyline.dart";
 import "route_selections_polyline.dart";
 
-final mapControllerProvider = Provider.autoDispose((ref) => MapController());
+final animatedMapControllerProvider = StateProvider.autoDispose<AnimatedMapController?>((ref) => null);
 
 class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, this.route, this.optionalRoutes, this.active = true});
@@ -38,7 +39,9 @@ class RouteMapWidget extends ConsumerStatefulWidget {
   RouteMapWidgetState createState() => RouteMapWidgetState();
 }
 
-class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
+class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProviderStateMixin {
+  late final AnimatedMapController _animatedMapController;
+
   Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
     if (!mounted) {
       return;
@@ -60,9 +63,14 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   void initState() {
-    if (Platform.isAndroid) {
-      FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
+    super.initState();
+
+    _animatedMapController = AnimatedMapController(vsync: this);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(animatedMapControllerProvider.notifier).state = _animatedMapController;
+      if (Platform.isAndroid) {
+        FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
         await MyFlutterForegroundTask.requestPermissions();
         await LocationService.requestPermissions();
         MyFlutterForegroundTask.initMyService();
@@ -70,10 +78,9 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
         if (widget.route != null) {
           FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
         }
-      });
-    }
-    // TODO(tomasz-trela): Implement iOS logic
-    super.initState();
+      }
+      // TODO: Implementuj logikę iOS, gdy będziesz gotowy
+    });
   }
 
   @override
@@ -88,14 +95,13 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
       route: route?.route ?? IList<LatLng>(),
       visited: visitedCount,
     );
-    final mapController = ref.watch(mapControllerProvider);
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
         route == null
             ? FlutterMap(
               options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
-              mapController: mapController,
+              mapController: _animatedMapController.mapController,
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
                 RouteSelectionsPolyline(
@@ -107,7 +113,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
               ],
             )
             : FlutterMap(
-              mapController: mapController,
+              mapController: _animatedMapController.mapController,
               options: MapOptions(initialCenter: landmarks.first.location),
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
@@ -193,6 +199,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
   @override
   void dispose() {
     super.dispose();
+    _animatedMapController.dispose();
   }
 }
 
