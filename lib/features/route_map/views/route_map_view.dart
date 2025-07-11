@@ -78,6 +78,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
         ),
       );
     }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -86,7 +87,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
           RouteProgressBar(landmarks: route.landmarks),
           const RouteBottomSheet(),
           Positioned(
-            top: 75,
+            top: 106,
             right: 12,
             child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
           ),

@@ -11,22 +11,22 @@ class RouteMapPolyline extends StatelessWidget {
     required this.doneColor,
     required this.notDoneColor,
     required this.inactiveColor,
-    required this.visited,
+    required this.passedLocations,
     required this.active,
   });
   final IList<LatLng> locations;
   final Color doneColor;
   final Color notDoneColor;
   final Color inactiveColor;
-  final int visited;
+  final int passedLocations;
   final bool active;
 
   @override
   Widget build(BuildContext context) {
     if (locations.isEmpty) return PolylineLayer(polylines: [Polyline(points: [])]);
-    final divider = visited.clamp(1, locations.length);
-    final doneLocations = locations.sublist(0, divider);
-    final notDoneLocations = locations.sublist(divider - 1);
+
+    final doneLocations = locations.sublist(0, passedLocations + 1);
+    final notDoneLocations = locations.sublist(passedLocations);
 
     return PolylineLayer(
       polylines: [

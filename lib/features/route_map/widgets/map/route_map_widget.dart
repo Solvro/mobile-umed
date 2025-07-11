@@ -1,3 +1,4 @@
+import "dart:async";
 import "dart:io";
 
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
@@ -6,7 +7,6 @@ import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -18,6 +18,7 @@ import "../../../../common/utils/location_service.dart";
 import "../../controllers/route_controller.dart";
 import "../../modals/landmark_info_modal.dart";
 import "../../modals/route_completed_modal.dart";
+import "../../providers/locations_provider.dart";
 import "../../providers/route_provider.dart";
 import "../../services/flutter_foreground_task.dart";
 import "../../services/task_handlers/route_background_task_handler.dart";
@@ -38,7 +39,7 @@ class RouteMapWidget extends ConsumerStatefulWidget {
   RouteMapWidgetState createState() => RouteMapWidgetState();
 }
 
-class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
+class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBindingObserver {
   Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
     if (!mounted) {
       return;
@@ -47,11 +48,15 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
       final event = TaskEvent.fromString(data);
       switch (event) {
         case TaskEvent.nextLocationReached:
-          ref.read(visitedCountProvider.notifier).incrementVisited();
+          final locationIndex = ref.read(passedLocationsProvider);
+          final nextLandmarkIndex = ref.read(visitedCountProvider);
+          if (widget.route!.route[locationIndex] == widget.route!.landmarks[nextLandmarkIndex].location) {
+            ref.read(visitedCountProvider.notifier).incrementVisited();
+          }
+          ref.read(passedLocationsProvider.notifier).state++;
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
-          ref.read(visitedCountProvider.notifier).resetVisited();
         case TaskEvent.error:
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
       }
@@ -60,20 +65,31 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   void initState() {
-    if (Platform.isAndroid) {
-      FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
+    if (Platform.isAndroid || Platform.isIOS) {
+      FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await MyFlutterForegroundTask.requestPermissions();
-        await LocationService.requestPermissions();
         MyFlutterForegroundTask.initMyService();
         await MyFlutterForegroundTask.startMyForegroundService();
         if (widget.route != null) {
-          FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
+          FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
         }
       });
     }
-    // TODO(tomasz-trela): Implement iOS logic
+
+    if (Platform.isIOS) {
+      WidgetsBinding.instance.addObserver(this);
+    }
+
     super.initState();
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      await LocationService.requestPermissions();
+    }
   }
 
   @override
@@ -82,12 +98,8 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
     final selectedProvider = ref.watch(selectedRouteProvider);
+    final passedLocations = ref.watch(passedLocationsProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
-    final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
-      landmarks: landmarks,
-      route: route?.route ?? IList<LatLng>(),
-      visited: visitedCount,
-    );
     final mapController = ref.watch(mapControllerProvider);
 
     return switch (tileProvider) {
@@ -117,7 +129,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
                   active: widget.active,
-                  visited: lineChangeIndex,
+                  passedLocations: passedLocations,
                 ),
                 const CurrentLocationLayer(
                   style: LocationMarkerStyle(
@@ -165,6 +177,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
     required Alignment markerAlignment,
   }) {
     return Marker(
+      key: ValueKey("marker_${landmark.id}_$visitedCount"),
       alignment: markerAlignment,
       width: MapConfig.markerSize,
       height: MapConfig.markerSize,
@@ -188,11 +201,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
 
