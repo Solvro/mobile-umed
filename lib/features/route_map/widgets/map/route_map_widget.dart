@@ -92,12 +92,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
 
   @override
   Widget build(BuildContext context) {
-    for (final Landmark coordinate in widget.route!.landmarks) {
-      debugPrint("Landmark: $coordinate");
-    }
-    for (final LatLng coordinate in widget.route!.route) {
-      debugPrint("Coords: $coordinate");
-    }
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
