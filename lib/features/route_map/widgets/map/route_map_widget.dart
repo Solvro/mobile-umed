@@ -7,7 +7,6 @@ import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -58,7 +57,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
-        // ref.read(visitedCountProvider.notifier).resetVisited();
         case TaskEvent.error:
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
       }
@@ -70,8 +68,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     if (Platform.isAndroid || Platform.isIOS) {
       FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await LocationService.requestPermissions();
-        await MyFlutterForegroundTask.requestPermissions();
         MyFlutterForegroundTask.initMyService();
         await MyFlutterForegroundTask.startMyForegroundService();
         if (widget.route != null) {
@@ -104,11 +100,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     final selectedProvider = ref.watch(selectedRouteProvider);
     final passedLocations = ref.watch(passedLocationsProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
-    final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
-      landmarks: landmarks,
-      route: route?.route ?? IList<LatLng>(),
-      visited: visitedCount,
-    );
     final mapController = ref.watch(mapControllerProvider);
 
     return switch (tileProvider) {
@@ -138,7 +129,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
                   notDoneColor: MapConfig.unvisitedColor,
                   inactiveColor: MapConfig.inactiveColor,
                   active: widget.active,
-                  visited: lineChangeIndex,
                   passedLocations: passedLocations,
                 ),
                 const CurrentLocationLayer(
