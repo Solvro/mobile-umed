@@ -27,37 +27,16 @@ class RouteMapViewState extends ConsumerState<RouteMapView> {
     final latLng = await LocationService.getCurrentLatLng();
     if (latLng == null) return;
 
-    // 1) Pobierz cały AnimatedMapController, a nie MapController
     final animatedCtl = ref.read(animatedMapControllerProvider);
-    if (animatedCtl == null) {
-      // na wszelki wypadek możesz zalogować lub dać return
-      debugPrint('AnimatedMapController jeszcze nie zainicjalizowany');
-      return;
+    if (animatedCtl != null) {
+      await animatedCtl.animateTo(
+        dest: latLng,
+        zoom: 14,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
+      );
     }
-
-    // 2) Użyj metody animowanej:
-    await animatedCtl.centerOnPoint(
-      latLng,
-      zoom: 14,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeInOut,
-    );
   }
-
-  // Future<void> _centerToUserLocation() async {
-  //   final latLng = await LocationService.getCurrentLatLng();
-  //   if (latLng == null) return;
-
-  //   final animatedCtl = ref.read(animatedMapControllerProvider);
-  //   if (animatedCtl != null) {
-  //     await animatedCtl.animateTo(
-  //       dest: latLng,
-  //       zoom: 14,
-  //       duration: const Duration(milliseconds: 600),
-  //       curve: Curves.easeInOut,
-  //     );
-  //   }
-  // }
 
   @override
   void initState() {
