@@ -17,6 +17,11 @@ abstract class AppRadius {
   static const nano = 4.0;
 }
 
+abstract class AppFontSizes {
+  static const medium = 16.0;
+  static const small = 10.0;
+}
+
 abstract class BottomSheetConfig {
   // fixed button
   static const fixedBottomSpace = 95.0;
@@ -36,14 +41,12 @@ abstract class BottomSheetHeaderConfig {
   static const headerWithControls = 100.0;
   static const headerWithoutControls = 46.0;
   static const controlsSpacing = 20.0;
-
   static const roundedTopRadius = 15.0;
 }
 
 abstract final class SelectRouteConfig {
   static const contentPadding = 5.0;
   static const iconSize = 20.0;
-  static const smallFontSize = 10.0;
   static const statWidth = 30.0;
 }
 

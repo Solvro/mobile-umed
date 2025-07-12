@@ -1,5 +1,6 @@
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
+
 import "../../../../../app/assets/assets.gen.dart";
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/l10n/l10n.dart";
@@ -8,8 +9,8 @@ import "../../../../../app/theme/color_consts.dart";
 import "../../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../../../common/models/route.dart";
 import "../../../../../common/widgets/secondary_action_button.dart";
+import "../../../modals/start_route_modal.dart";
 import "../../../providers/route_provider.dart";
-import "../../modals/start_route_modal.dart";
 import "../sections/landmarks_section.dart";
 import "../sections/playlist_info_section.dart";
 import "route_stat.dart";

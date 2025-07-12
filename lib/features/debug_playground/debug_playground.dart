@@ -2,13 +2,11 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
-
 import "../../common/models/completed_route.dart";
 import "../../common/providers/completed_routes_provider.dart";
-
 import "../route_map/controllers/route_controller.dart";
+import "../route_map/modals/route_completed_modal.dart";
 import "../route_map/repository/route_map_repository.dart";
-import "../route_map/widgets/modals/route_completed_modal.dart";
 import "widgets/shimmer_test_widget.dart";
 
 class DebugPlayground extends StatelessWidget {

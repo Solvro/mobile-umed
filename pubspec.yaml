@@ -73,6 +73,7 @@ dependencies:
 
   # others
   flutter_foreground_task: ^9.1.0
+  readmore: ^3.0.0
 
 dev_dependencies:
   flutter_test:
