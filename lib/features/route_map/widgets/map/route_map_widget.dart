@@ -78,6 +78,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
   }
 
   @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
