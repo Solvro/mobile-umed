@@ -73,7 +73,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
           FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
         }
       }
-      // TODO: Implementuj logikę iOS, gdy będziesz gotowy
+      // TODO(tomasz-trela): Implement iOS logic
     });
   }
 
@@ -151,7 +151,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
                 ),
               ],
             ),
-      AsyncError(:final error) => const Center(child: Text(r"error: $error")),
+      AsyncError(:final error) => Center(child: Text("error: $error")),
       _ => const Center(child: CircularProgressIndicator()),
     };
   }
