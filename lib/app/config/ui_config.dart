@@ -211,6 +211,13 @@ abstract final class InfoSectionConfig {
   // creator tile
   static const creatorTileWidth = 190.0;
   static const creatorTileHeight = 280.0;
+  static const creatorShimmerPhotoHeight = 160.0;
+  static const creatorShimmerNameHeight = 18.0;
+  static const creatorShimmerNameWidth = 100.0;
+  static const creatorShimmerRoleHeight = 14.0;
+  static const creatorShimmerRoleWidth = 60.0;
+  static const creatorShimmerSocialsHeight = 24.0;
+  static const creatorShimmerSocialsWidth = 80.0;
 }
 
 abstract final class ErrorWidgetConfig {
@@ -224,4 +231,6 @@ abstract final class ShimmerConfig {
   static const listKey = ValueKey("list");
   static const creatorKey = ValueKey("creator");
   static const profileRoutesKey = ValueKey("profile_routes");
+  static final baseColor = Colors.grey.shade300;
+  static final highlightColor = Colors.grey.shade100;
 }

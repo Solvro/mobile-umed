@@ -13,8 +13,8 @@ class RouteListShimmer extends StatelessWidget {
       child: SizedBox(
         height: RouteListConfig.height,
         child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: ShimmerConfig.baseColor,
+          highlightColor: ShimmerConfig.highlightColor,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: 3,

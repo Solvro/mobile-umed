@@ -32,13 +32,13 @@ class CreatorTileShimmer extends StatelessWidget {
         height: InfoSectionConfig.creatorTileHeight,
         width: InfoSectionConfig.creatorTileWidth,
         child: Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          baseColor: ShimmerConfig.baseColor,
+          highlightColor: ShimmerConfig.highlightColor,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                height: 160,
+                height: InfoSectionConfig.creatorShimmerPhotoHeight,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -47,20 +47,20 @@ class CreatorTileShimmer extends StatelessWidget {
               ),
               const SizedBox(height: AppPaddings.medium),
               Container(
-                height: 18,
-                width: 100,
+                height: InfoSectionConfig.creatorShimmerNameHeight,
+                width: InfoSectionConfig.creatorShimmerNameWidth,
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.nano)),
               ),
               const SizedBox(height: AppPaddings.nanoTiny),
               Container(
-                height: 14,
-                width: 60,
+                height: InfoSectionConfig.creatorShimmerRoleHeight,
+                width: InfoSectionConfig.creatorShimmerRoleWidth,
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.nano)),
               ),
               const SizedBox(height: AppPaddings.small),
               Container(
-                height: 24,
-                width: 80,
+                height: InfoSectionConfig.creatorShimmerSocialsHeight,
+                width: InfoSectionConfig.creatorShimmerSocialsWidth,
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.tiny)),
               ),
               const SizedBox(height: AppPaddings.tiny),
