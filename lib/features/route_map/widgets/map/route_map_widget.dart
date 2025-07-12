@@ -4,6 +4,7 @@ import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_map/flutter_map.dart";
+import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
@@ -25,11 +26,10 @@ import "route_map_marker.dart";
 import "route_map_polyline.dart";
 import "route_selections_polyline.dart";
 
-final mapControllerProvider = Provider.autoDispose((ref) => MapController());
-
 class RouteMapWidget extends ConsumerStatefulWidget {
-  const RouteMapWidget({super.key, this.route, this.optionalRoutes, this.active = true});
+  const RouteMapWidget({super.key, required this.controller, this.route, this.optionalRoutes, this.active = true});
 
+  final AnimatedMapController controller;
   final Route? route;
   final IList<Route>? optionalRoutes;
   final bool active;
@@ -38,7 +38,7 @@ class RouteMapWidget extends ConsumerStatefulWidget {
   RouteMapWidgetState createState() => RouteMapWidgetState();
 }
 
-class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
+class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProviderStateMixin {
   Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
     if (!mounted) {
       return;
@@ -60,9 +60,11 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
 
   @override
   void initState() {
-    if (Platform.isAndroid) {
-      FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (Platform.isAndroid) {
+        FlutterForegroundTask.addTaskDataCallback((data) => _onReceiveTaskData(data, ref));
         await MyFlutterForegroundTask.requestPermissions();
         await LocationService.requestPermissions();
         MyFlutterForegroundTask.initMyService();
@@ -70,10 +72,15 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
         if (widget.route != null) {
           FlutterForegroundTask.sendDataToTask(widget.route!.landmarks.map((e) => e.toJson()).toList());
         }
-      });
-    }
-    // TODO(tomasz-trela): Implement iOS logic
-    super.initState();
+      }
+      // TODO(tomasz-trela): Implement iOS logic
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -88,18 +95,17 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
       route: route?.route ?? IList<LatLng>(),
       visited: visitedCount,
     );
-    final mapController = ref.watch(mapControllerProvider);
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
         route == null
             ? FlutterMap(
               options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
-              mapController: mapController,
+              mapController: widget.controller.mapController,
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
                 RouteSelectionsPolyline(
-                  locations: (widget.optionalRoutes?.asList() ?? []).map((route) => route.route).toIList(),
+                  locations: (widget.optionalRoutes?.asList() ?? []).map((r) => r.route).toIList(),
                   selected: selectedProvider,
                   selectedColor: context.colorScheme.primary,
                   notSelectedColor: MapConfig.unvisitedColor,
@@ -107,7 +113,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
               ],
             )
             : FlutterMap(
-              mapController: mapController,
+              mapController: widget.controller.mapController,
               options: MapOptions(initialCenter: landmarks.first.location),
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
@@ -132,10 +138,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
                       landmarks.asMap().entries.map((entry) {
                         final index = entry.key;
                         final landmark = entry.value;
-                        Alignment? alignment;
-                        if (index == 0 || index == landmarks.length - 1) {
-                          alignment = index == 0 ? Alignment.center : Alignment.topRight;
-                        }
+                        final Alignment alignment =
+                            index == 0
+                                ? Alignment.center
+                                : index == landmarks.length - 1
+                                ? Alignment.topRight
+                                : Alignment.topCenter;
                         return _buildMarkers(
                           context: context,
                           landmark: landmark,
@@ -143,13 +151,12 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
                           visitedCount: visitedCount,
                           active: widget.active,
                           totalLandmarks: landmarks.length,
-                          markerAlignment: alignment ?? Alignment.topCenter,
+                          markerAlignment: alignment,
                         );
                       }).toList(),
                 ),
               ],
             ),
-
       AsyncError(:final error) => Center(child: Text("error: $error")),
       _ => const Center(child: CircularProgressIndicator()),
     };
@@ -175,7 +182,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
             active
                 ? () async => showDialog<LandmarkInfoModal>(
                   context: context,
-                  builder: (context) => LandmarkInfoModal(landmark: landmark),
+                  builder: (_) => LandmarkInfoModal(landmark: landmark),
                 )
                 : null,
         child: RouteMapMarker(
@@ -188,11 +195,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
 
