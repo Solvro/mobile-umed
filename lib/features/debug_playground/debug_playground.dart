@@ -7,10 +7,10 @@ import "../../common/providers/completed_routes_provider.dart";
 import "../route_map/controllers/route_controller.dart";
 import "../route_map/modals/route_completed_modal.dart";
 import "../route_map/repository/route_map_repository.dart";
+import "widgets/shimmer_test_widget.dart";
 
 class DebugPlayground extends StatelessWidget {
   const DebugPlayground({super.key});
-
   static const String routeName = "/debug_playground";
 
   @override
@@ -38,6 +38,8 @@ class DebugPlayground extends StatelessWidget {
               onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
               child: const Text("Error Page"),
             ),
+            const Text("Test Shimmera"),
+            const ShimmerTestWidget(),
             const TestProviderWidget(),
           ],
         ),

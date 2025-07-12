@@ -18,6 +18,7 @@ class RouteListWidget extends StatelessWidget {
     this.height = RouteListConfig.height,
     this.itemWidth = RouteListConfig.itemWidth,
     this.sideMargin = RouteListConfig.defaultSideMargin,
+    super.key,
   });
 
   @override

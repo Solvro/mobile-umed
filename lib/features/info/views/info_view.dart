@@ -7,7 +7,7 @@ import "../../../common/models/creator.dart";
 import "../../../common/models/info_section.dart";
 import "../../../common/utils/url_launcher.dart";
 import "../../../common/widgets/main_action_button.dart";
-import "../widgets/creator_tile.dart";
+import "../widgets/creator_tile/creator_tile.dart";
 import "../widgets/section_title.dart";
 import "../widgets/socials_section.dart";
 import "../widgets/text_info_tile.dart";
@@ -83,7 +83,7 @@ class _InfoSectionWidgetState extends State<InfoSectionWidget> {
                         (infoSection.socials != null && infoSection.socials!.onlyWeb)
                             ? MainActionButton(
                               text: context.l10n.info_more_info,
-                              onPressed: () => _tryLaunchUrl(infoSection.socials!.webUrl!),
+                              onPressed: () async => _tryLaunchUrl(infoSection.socials!.webUrl!),
                             )
                             : SocialsSection(compact: false, socials: infoSection.socials!),
                   )
