@@ -42,7 +42,7 @@ dependencies:
   dio: ^5.8.0+1
 
   # Redirects
-  url_launcher: ^6.2.3
+  url_launcher: ^6.3.2
 
   #Widgets
   cupertino_icons: ^1.0.8
