@@ -151,7 +151,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
                 ),
               ],
             ),
-      AsyncError(:final error) => Center(child: Text("error: \$error")),
+      AsyncError(:final error) => const Center(child: Text(r"error: $error")),
       _ => const Center(child: CircularProgressIndicator()),
     };
   }
@@ -189,11 +189,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with TickerProvi
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
 
