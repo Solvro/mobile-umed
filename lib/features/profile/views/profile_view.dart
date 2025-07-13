@@ -37,7 +37,6 @@ class ProfileView extends ConsumerWidget {
             SectionHeader(context.l10n.common_finished_routes),
             const ProgressBar(progress: 0.67123),
             const SizedBox(height: AppPaddings.tiny),
-            // SectionHeader(context.l10n.achievements_ended_routes),
             RouteListWidget(
               routes: routes,
               onRouteTap: (route) => context.router.pushRouteMapWithRoute(route.id),
