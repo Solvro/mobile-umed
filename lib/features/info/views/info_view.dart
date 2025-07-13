@@ -38,30 +38,13 @@ class InfoView extends StatelessWidget {
   }
 }
 
-class InfoSectionWidget extends StatefulWidget {
+class InfoSectionWidget extends StatelessWidget {
   const InfoSectionWidget({super.key, required this.infoSection});
 
   final InfoSection infoSection;
 
   @override
-  State<InfoSectionWidget> createState() => _InfoSectionWidgetState();
-}
-
-class _InfoSectionWidgetState extends State<InfoSectionWidget> {
-  Future<void> _tryLaunchUrl(String url) async {
-    try {
-      await customLaunchUrl(url, context.l10n.errors_launch);
-    } on Exception catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.toString()), backgroundColor: Theme.of(context).colorScheme.error));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final infoSection = widget.infoSection;
     return ListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -83,7 +66,7 @@ class _InfoSectionWidgetState extends State<InfoSectionWidget> {
                         (infoSection.socials != null && infoSection.socials!.onlyWeb)
                             ? MainActionButton(
                               text: context.l10n.info_more_info,
-                              onPressed: () async => _tryLaunchUrl(infoSection.socials!.webUrl!),
+                              onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
                             )
                             : SocialsSection(compact: false, socials: infoSection.socials!),
                   )

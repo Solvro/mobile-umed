@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
+import "../../../app/app.dart";
 import "../../../common/widgets/common/button_styles.dart";
 
 class StartRouteButton extends StatelessWidget {
@@ -11,9 +12,7 @@ class StartRouteButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
       child: ElevatedButton(
         style: sharedCardButtonStyle(context),
-        onPressed: () {
-          // TODO(eTraveler04): add action "begin you walk"
-        },
+        onPressed: context.router.pushRouteMap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small),
           child: Row(

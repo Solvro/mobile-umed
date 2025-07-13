@@ -1,22 +1,20 @@
-import "package:flutter/material.dart";
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
+import "package:flutter/material.dart" hide Route;
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
+import "../../../app/app.dart";
 import "../../../app/theme/app_theme.dart";
+import "../../../common/models/route.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
 import "../../../common/widgets/home/button_row.dart";
 import "../../../common/widgets/home/start_route_button.dart";
-import "./../../../common/data_source/mocks/mock_routes.dart";
 
-class MyHomeView extends StatefulWidget {
-  const MyHomeView({super.key, required this.title});
-  final String title;
+class HomeView extends StatelessWidget {
+  const HomeView({super.key, required this.routes});
 
-  @override
-  State<MyHomeView> createState() => _MyHomeViewState();
-}
+  final IList<Route> routes;
 
-class _MyHomeViewState extends State<MyHomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +30,8 @@ class _MyHomeViewState extends State<MyHomeView> {
           const SizedBox(height: AppPaddings.tinySmall),
           SectionHeader(context.l10n.home_nearest_to_you),
           RouteListWidget(
-            routes: mockData,
-            onRouteTap: (route) {
-              // TODO(eTraveler04): add action
-            },
+            routes: routes,
+            onRouteTap: (route) => context.router.pushRouteMapWithRoute(route.id),
             sideMargin: HomeViewConfig.sideMargin,
             icon: Icons.arrow_forward_ios,
           ),

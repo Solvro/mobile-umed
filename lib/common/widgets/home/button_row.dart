@@ -2,7 +2,9 @@ import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
+import "../../../app/app.dart";
 import "../../../common/widgets/common/vertical_button.dart";
+import "../../utils/url_launcher.dart";
 
 class HomeButtonsRow extends StatelessWidget {
   @override
@@ -19,9 +21,7 @@ class HomeButtonsRow extends StatelessWidget {
                 label: context.l10n.common_finished_routes,
                 icon: Icons.auto_graph,
                 iconColor: context.colorScheme.primary,
-                onPressed: () {
-                  // TODO(eTraveler04): add action "finished_routes"
-                },
+                onPressed: context.router.goProfile,
               ),
             ),
             const SizedBox(width: HomeViewConfig.commonGap),
@@ -30,9 +30,7 @@ class HomeButtonsRow extends StatelessWidget {
                 label: context.l10n.home_learn_more,
                 icon: Icons.public,
                 iconColor: context.colorScheme.primary,
-                onPressed: () {
-                  // TODO(eTraveler04): add action "learn_more"
-                },
+                onPressed: () => customLaunchUrl("https://umed.solvro.pl/"),
               ),
             ),
           ],

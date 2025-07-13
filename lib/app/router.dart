@@ -65,6 +65,7 @@ extension ContexRouterX on BuildContext {
 
 extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
+  void goProfile() => go(ProfilePage.routeName);
   Future<void> pushRouteMap() async => push("${RouteMapPage.routeName}/");
   Future<void> pushRouteMapWithRoute(int id) async => push("${RouteMapPage.routeName}/$id");
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
