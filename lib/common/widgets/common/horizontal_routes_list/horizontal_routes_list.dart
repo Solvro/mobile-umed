@@ -1,10 +1,11 @@
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "../../../../app/config/ui_config.dart";
 import "../../../models/route.dart";
 import "route_card.dart";
 
 class RouteListWidget extends StatelessWidget {
-  final List<Route> routes;
+  final IList<Route> routes;
   final void Function(Route) onRouteTap;
   final double height;
   final double itemWidth;

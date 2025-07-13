@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
@@ -7,9 +8,9 @@ import "../../../common/widgets/main_action_button.dart";
 
 class FullScreenErrorView extends StatelessWidget {
   final String? message;
-  final VoidCallback onBackToHome;
+  final VoidCallback? onBackToHome;
 
-  const FullScreenErrorView({super.key, this.message, required this.onBackToHome});
+  const FullScreenErrorView({super.key, this.message, this.onBackToHome});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class FullScreenErrorView extends StatelessWidget {
             const SizedBox(height: AppPaddings.medium),
             Padding(
               padding: const EdgeInsetsGeometry.symmetric(horizontal: ErrorWidgetConfig.buttonOutsidePadding),
-              child: MainActionButton(onPressed: onBackToHome, text: context.l10n.errors_back),
+              child: MainActionButton(onPressed: onBackToHome ?? context.router.goHome, text: context.l10n.errors_back),
             ),
           ],
         ),

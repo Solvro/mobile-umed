@@ -1,3 +1,4 @@
+import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../common/data_source/mocks/mock_routes.dart";
@@ -37,7 +38,7 @@ class _ShimmerTestWidgetState extends State<ShimmerTestWidget> {
           shimmer: const RouteListShimmer(key: ShimmerConfig.shimmerKey),
           child: RouteListWidget(
             key: ShimmerConfig.listKey,
-            routes: mockRoutes,
+            routes: mockRoutes.lock,
             onRouteTap: (_) {},
             icon: Icons.arrow_forward_ios,
           ),
