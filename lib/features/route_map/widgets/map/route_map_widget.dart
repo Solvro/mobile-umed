@@ -8,6 +8,7 @@ import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:latlong2/latlong.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -16,7 +17,7 @@ import "../../../../common/models/landmark.dart";
 import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
 import "../../../../common/utils/location_service.dart";
-import "../../controllers/route_controller.dart";
+import "../../controllers/route_controller.dart" hide Distance;
 import "../../modals/landmark_info_modal.dart";
 import "../../modals/route_completed_modal.dart";
 import "../../providers/locations_provider.dart";
@@ -50,9 +51,16 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
         case TaskEvent.nextLocationReached:
           final locationIndex = ref.read(passedLocationsProvider);
           final nextLandmarkIndex = ref.read(visitedCountProvider);
-          if (widget.route!.route[locationIndex] == widget.route!.landmarks[nextLandmarkIndex].location) {
+
+          final distnaceInMeters = const Distance().as(
+            LengthUnit.Meter,
+            widget.route!.route[locationIndex],
+            widget.route!.landmarks[nextLandmarkIndex].location,
+          );
+          if (distnaceInMeters <= LocalizationConfig.proximityThresholdInMeters) {
             ref.read(visitedCountProvider.notifier).incrementVisited();
           }
+
           ref.read(passedLocationsProvider.notifier).state++;
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());

@@ -75,6 +75,7 @@ extension RouterX on GoRouter {
       await push("${RouteMapPage.routeName}/");
     }
   }
+
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
   Future<void> pushFullScreenError(String message) async {
     await push("${ErrorPage.routeName}?message=${Uri.encodeComponent(message)}");
