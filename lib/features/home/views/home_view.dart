@@ -7,8 +7,8 @@ import "../../../app/theme/app_theme.dart";
 import "../../../common/models/route.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
-import "../../../common/widgets/home/button_row.dart";
-import "../../../common/widgets/home/start_route_button.dart";
+import "../widgets/button_row.dart";
+import "../widgets/start_route_button.dart";
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key, required this.routes});
@@ -25,7 +25,12 @@ class HomeView extends StatelessWidget {
       ),
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: AppPaddings.tinySmall, vertical: AppPaddings.tinySmall),
+        padding: const EdgeInsets.only(
+          top: AppPaddings.tinySmall,
+          left: AppPaddings.tinySmall,
+          right: AppPaddings.tinySmall,
+          bottom: AppPaddings.veryLarge,
+        ),
         children: [
           const SizedBox(height: AppPaddings.tinySmall),
           SectionHeader(context.l10n.home_nearest_to_you),

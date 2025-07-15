@@ -2,6 +2,9 @@ import "package:flutter/material.dart";
 import "package:latlong2/latlong.dart";
 
 abstract class AppPaddings {
+  static const veryLarge = 140.0;
+  static const large = 50.0;
+  static const big = 30.0;
   static const medium = 20.0;
   static const small = 16.0;
   static const tinySmall = 10.0;

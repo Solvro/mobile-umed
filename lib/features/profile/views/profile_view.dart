@@ -11,8 +11,8 @@ import "../../../common/parsers/completed_routes_stats_converter.dart";
 import "../../../common/providers/completed_routes_provider.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
-import "../../../common/widgets/profile/horizontal_stat_card_list/horizontal_card_list.dart";
-import "../../../common/widgets/profile/progress_bar.dart";
+import "../widgets/horizontal_stat_card_list/horizontal_card_list.dart";
+import "../widgets/progress_bar.dart";
 
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key, required this.routes});
@@ -29,7 +29,12 @@ class ProfileView extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: AppPaddings.tinySmall, vertical: AppPaddings.tinySmall),
+        padding: const EdgeInsets.only(
+          top: AppPaddings.tinySmall,
+          left: AppPaddings.tinySmall,
+          right: AppPaddings.tinySmall,
+          bottom: AppPaddings.veryLarge,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,7 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
-import "../../../models/stats.dart";
+import "../../../../common/models/stats.dart";
 import "card.dart";
 
 class StatListWidget extends StatelessWidget {
