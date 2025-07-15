@@ -54,7 +54,5 @@ Future<({IList<Creator> creators, IList<InfoSection> infoSections})> fetchCreato
     ),
   ]);
 
-  await Future.delayed(const Duration(milliseconds: 5000)); // Simulate network delay
-
   return (creators: results[0] as IList<Creator>, infoSections: results[1] as IList<InfoSection>);
 }
