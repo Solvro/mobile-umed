@@ -5,6 +5,7 @@ import "../../app/app.dart";
 import "../../common/models/route.dart";
 import "../../common/providers/bottom_sheet_providers.dart";
 import "../error/error_page.dart";
+import "controllers/route_controller.dart";
 import "providers/locations_provider.dart";
 import "providers/route_provider.dart";
 import "repository/route_map_repository.dart";
@@ -20,6 +21,7 @@ class RouteMapPage extends ConsumerWidget {
     ref.read(routeProvider.notifier).state = route;
     ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
     ref.read(passedLocationsProvider.notifier).state = 0;
+    ref.read(visitedCountProvider.notifier).resetVisited();
   }
 
   @override
