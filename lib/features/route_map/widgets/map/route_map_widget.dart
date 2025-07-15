@@ -65,28 +65,25 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
 
   @override
   void initState() {
-    
-      
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        if (Platform.isAndroid || Platform.isIOS) {
-          await LocationService.requestPermissions();
-          FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
-          await MyFlutterForegroundTask.requestPermissions();
-          MyFlutterForegroundTask.initMyService();
-          await MyFlutterForegroundTask.startMyForegroundService();
-          if (widget.route != null) {
-            FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
-          }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (Platform.isAndroid || Platform.isIOS) {
+        await LocationService.requestPermissions();
+        FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
+        await MyFlutterForegroundTask.requestPermissions();
+        MyFlutterForegroundTask.initMyService();
+        await MyFlutterForegroundTask.startMyForegroundService();
+        if (widget.route != null) {
+          FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
         }
-      });
+      }
+    });
 
-if (Platform.isIOS) {
+    if (Platform.isIOS) {
       WidgetsBinding.instance.addObserver(this);
     }
 
     super.initState();
-
-    }
+  }
 
   @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
@@ -111,11 +108,6 @@ if (Platform.isIOS) {
     final selectedProvider = ref.watch(selectedRouteProvider);
     final passedLocations = ref.watch(passedLocationsProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
-    final lineChangeIndex = calculateLineChangeFromLandmarksLatLng(
-      landmarks: landmarks,
-      route: route?.route ?? IList<LatLng>(),
-      visited: visitedCount,
-    );
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
