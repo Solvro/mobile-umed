@@ -115,7 +115,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
-    final selectedProvider = ref.watch(selectedRouteProvider);
+    final selectedRoutes = ref.watch(selectedRoutesProvider);
     final passedLocations = ref.watch(passedLocationsProvider);
     final landmarks = route?.landmarks ?? const IListConst([]);
 
@@ -129,7 +129,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
                 RouteSelectionsPolyline(
                   locations: (widget.optionalRoutes?.asList() ?? []).map((r) => r.route).toIList(),
-                  selected: selectedProvider,
+                  selected: selectedRoutes.isNotEmpty ? selectedRoutes.last : null,
                   selectedColor: context.colorScheme.primary,
                   notSelectedColor: MapConfig.unvisitedColor,
                 ),

@@ -22,6 +22,7 @@ class RouteMapPage extends ConsumerWidget {
     ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
+    ref.read(selectedRoutesProvider.notifier).state = [];
   }
 
   @override

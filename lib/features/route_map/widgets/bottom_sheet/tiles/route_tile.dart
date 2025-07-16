@@ -38,7 +38,15 @@ class RouteTileState extends ConsumerState<RouteTile> {
     final route = widget.route;
 
     return ExpansionTile(
-      onExpansionChanged: (value) => ref.read(selectedRouteProvider.notifier).state = value ? route : null,
+      onExpansionChanged: (isExpanding) {
+        final currentSelectedRoutes = ref.read(selectedRoutesProvider);
+        if (isExpanding) {
+          ref.read(selectedRoutesProvider.notifier).state = [...currentSelectedRoutes, route];
+        } else {
+          ref.read(selectedRoutesProvider.notifier).state =
+              currentSelectedRoutes.where((routeElement) => routeElement != route).toList();
+        }
+      },
       title: Row(
         spacing: AppPaddings.nano,
         children: [

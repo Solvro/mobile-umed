@@ -31,7 +31,6 @@ class StartRouteModal extends ConsumerWidget {
         onPressed: () {
           ref.read(routeProvider.notifier).state = route;
           ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-          ref.read(selectedRouteProvider.notifier).state = null;
           context.router.pop();
         },
       ),
