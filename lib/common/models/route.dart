@@ -16,12 +16,12 @@ abstract class Route with _$Route {
   const factory Route({
     required int id,
     required String name,
-    required String description,
+    required String? description,
     required int? calories,
     required double distance,
     required double? waterDemand,
-    required int estimatedTime,
-    required Playlist playlist,
+    required int? estimatedTime,
+    required Playlist? playlist,
     @LatLngListConverter() required IList<LatLng> route,
     @LandmarkListConverter() required IList<Landmark> landmarks,
   }) = _Route;

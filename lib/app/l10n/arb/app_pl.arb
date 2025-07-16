@@ -51,16 +51,7 @@
   "browse_routes": "Przegądaj trasy",
   "choose_route": "Wybierz trasę",
   "start_route": "Rozpocznij trasę!",
-  "start_route_modal_title": "Czy na pewno chcesz rozpocząć trasę {route_name}?",
-  "@start_route_modal_title": {
-    "description": "Title or modal asking for starting the route",
-    "placeholders": {
-      "route_name": {
-        "type": "String",
-        "example": "Mountain trail"
-      }
-    }
-  },
+  "start_route_modal_title": "Czy na pewno chcesz rozpocząć tę trasę?",
   "keep_on_browsing": "Przegądaj dalej",
   "start": "Rozpocznij",
 
