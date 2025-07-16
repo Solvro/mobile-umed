@@ -50,6 +50,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
     final route = ref.watch(routeProvider);
     final allRoutesAsync = ref.watch(fetchAllRoutesProvider);
 
+    debugPrint("Trigger");
+
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
         setState(() => _currentSheetMode = next);
@@ -61,6 +63,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
         setState(() => _currentSheetState = next);
       }
     });
+
+    debugPrint("Trigger2");
 
     if (route == null) {
       return Scaffold(
