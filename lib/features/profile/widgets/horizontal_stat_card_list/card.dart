@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
-import "../../../models/stats.dart";
+import "../../../../common/models/stats.dart";
 
 class StatCard extends StatelessWidget {
   final Stats stat;
