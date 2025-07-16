@@ -3,7 +3,7 @@ import "package:flutter_svg/flutter_svg.dart";
 
 import "../../../../app/assets/assets.gen.dart";
 import "../../../../app/config/ui_config.dart";
-import "../../../../common/models/landmark.dart";
+import "../../../../common/models/checkpoint.dart";
 
 class RouteMapMarker extends StatelessWidget {
   const RouteMapMarker({

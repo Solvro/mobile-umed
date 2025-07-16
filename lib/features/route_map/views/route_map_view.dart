@@ -50,8 +50,6 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
     final route = ref.watch(routeProvider);
     final allRoutesAsync = ref.watch(fetchAllRoutesProvider);
 
-    debugPrint("Trigger");
-
     ref.listen<SheetMode>(sheetModeProvider, (previous, next) {
       if (next != _currentSheetMode) {
         setState(() => _currentSheetMode = next);
@@ -63,8 +61,6 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
         setState(() => _currentSheetState = next);
       }
     });
-
-    debugPrint("Trigger2");
 
     if (route == null) {
       return Scaffold(
@@ -96,7 +92,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
         children: [
           RouteMapWidget(controller: _mapController, route: route, active: _currentSheetState == SheetState.hidden),
           _SheetHidingHitTest(currentSheetState: _currentSheetState),
-          RouteProgressBar(landmarks: route.landmarks),
+          RouteProgressBar(checkpoints: route.checkpoints),
           const RouteBottomSheet(),
           Positioned(
             top: 106,

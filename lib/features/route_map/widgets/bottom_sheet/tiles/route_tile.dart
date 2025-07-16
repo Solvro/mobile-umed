@@ -119,7 +119,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
           ),
         ),
         if (_chosenOption == RouteDetailsOption.info)
-          LandmarksSection(landmarks: route.landmarks)
+          LandmarksSection(checkpoints: route.checkpoints)
         else
           PlaylistInfoSection(songs: mockSongs),
       ],

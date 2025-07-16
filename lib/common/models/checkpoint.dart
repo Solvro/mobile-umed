@@ -4,12 +4,12 @@ import "package:latlong2/latlong.dart";
 import "../../app/l10n/arb/app_localizations.g.dart";
 import "../parsers/latlng_converter.dart";
 
-part "landmark.freezed.dart";
-part "landmark.g.dart";
+part "checkpoint.freezed.dart";
+part "checkpoint.g.dart";
 
 @freezed
-abstract class Landmark with _$Landmark {
-  const factory Landmark({
+abstract class Checkpoint with _$Checkpoint {
+  const factory Checkpoint({
     required int id,
     required String name,
     required String description,
@@ -17,18 +17,20 @@ abstract class Landmark with _$Landmark {
     required DateTime? dateOfCreation,
     required String? designer,
     @LatLngConverter() required LatLng location,
-  }) = _Landmark;
+  }) = _Checkpoint;
 
-  factory Landmark.fromJson(Map<String, dynamic> json) => _$LandmarkFromJson(json);
+  factory Checkpoint.fromJson(Map<String, dynamic> json) => _$CheckpointFromJson(json);
 }
 
-enum LandmarkType { checkpoint, pulsometer }
+enum LandmarkType { start, checkpoint, pulsometer, finish }
 
 extension LandmarkTypeX on LandmarkType {
   String toText(AppLocalizations l10n) {
     return switch (this) {
+      LandmarkType.start => l10n.landmark_start_type,
       LandmarkType.pulsometer => l10n.landmark_pulsometer_type,
       LandmarkType.checkpoint => l10n.landmark_checkpoint_type,
+      LandmarkType.finish => l10n.landmark_finish_type,
     };
   }
 }

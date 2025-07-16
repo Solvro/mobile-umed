@@ -13,7 +13,7 @@ import "package:latlong2/latlong.dart";
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
-import "../../../../common/models/landmark.dart";
+import "../../../../common/models/checkpoint.dart";
 import "../../../../common/models/route.dart";
 import "../../../../common/providers/cache_tile.dart";
 import "../../../../common/utils/location_service.dart";
@@ -57,7 +57,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
           final distnaceInMeters = distance.as(
             LengthUnit.Meter,
             widget.route!.route[locationIndex],
-            widget.route!.landmarks[nextLandmarkIndex].location,
+            widget.route!.checkpoints[nextLandmarkIndex].location,
           );
           if (distnaceInMeters <= LocalizationConfig.proximityThresholdInMeters) {
             ref.read(visitedCountProvider.notifier).incrementVisited();
@@ -117,7 +117,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     final visitedCount = ref.watch(visitedCountProvider);
     final selectedRoutes = ref.watch(selectedRoutesProvider);
     final passedLocations = ref.watch(passedLocationsProvider);
-    final landmarks = route?.landmarks ?? const IListConst([]);
+    final landmarks = route?.checkpoints ?? const IListConst([]);
 
     return switch (tileProvider) {
       AsyncData(:final value) =>
@@ -187,7 +187,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
 
   Marker _buildMarkers({
     required BuildContext context,
-    required Landmark landmark,
+    required Checkpoint landmark,
     required int index,
     required int visitedCount,
     required bool active,
@@ -206,7 +206,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
             active
                 ? () async => showDialog<LandmarkInfoModal>(
                   context: context,
-                  builder: (_) => LandmarkInfoModal(landmark: landmark),
+                  builder: (_) => LandmarkInfoModal(checkpoint: landmark),
                 )
                 : null,
         child: RouteMapMarker(

@@ -59,7 +59,9 @@
   "landmark_date_of_creation": "Data powstania",
   "landmark_designer": "Projektant",
   "landmark_type": "Rodzaj",
+  "landmark_start_type": "Start",
   "landmark_pulsometer_type": "Pulsometr",
   "landmark_checkpoint_type": "Miejsce warte uwagi",
+  "landmark_finish_type": "Koniec",
   "landmark_checkpoint": "Punkt kontrolny"
 }

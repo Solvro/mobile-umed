@@ -3,7 +3,7 @@ import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:latlong2/latlong.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
-import "../../../common/models/landmark.dart";
+import "../../../common/models/checkpoint.dart";
 
 part "route_controller.g.dart";
 
@@ -91,15 +91,15 @@ bool latLngEqual(LatLng a, LatLng b, {double tolerance = 0.0003}) {
 }
 
 int calculateLineChangeFromLandmarksLatLng({
-  required IList<Landmark> landmarks,
+  required IList<Checkpoint> checkpoints,
   required IList<LatLng> route,
   required int visited,
 }) {
-  if (landmarks.isEmpty) {
+  if (checkpoints.isEmpty) {
     return 0;
   }
 
-  final index = visited.clamp(1, landmarks.length) - 1;
-  final target = landmarks[index].location;
+  final index = visited.clamp(1, checkpoints.length) - 1;
+  final target = checkpoints[index].location;
   return route.indexWhere((point) => latLngEqual(point, target)) + 1;
 }
