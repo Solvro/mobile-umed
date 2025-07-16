@@ -4,6 +4,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
 
 import "../common/providers/completed_routes_provider.dart";
+import "../common/utils/location_service.dart";
 import "../features/dashboard/dashboard_page.dart";
 import "../features/debug_playground/debug_playground.dart";
 import "../features/error/error_page.dart";
@@ -11,6 +12,7 @@ import "../features/home/home_page.dart";
 import "../features/info/info_page.dart";
 import "../features/profile/profile_page.dart";
 import "../features/route_map/route_map_page.dart";
+import "../features/route_map/widgets/map/route_map_widget.dart";
 import "l10n/arb/app_localizations.g.dart";
 import "theme/app_theme.dart";
 

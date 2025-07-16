@@ -146,6 +146,10 @@ abstract final class MapConfig {
   static const wroclawCenter = LatLng(51.1079, 17.0325);
 }
 
+abstract final class LocalizationConfig {
+  static const proximityThresholdInMeters = 15.0;
+}
+
 abstract final class StatInfoCompactConfig {
   static const circleSize = 44.0;
   static const boxRad = 32.0;

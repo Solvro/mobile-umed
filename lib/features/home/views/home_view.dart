@@ -36,7 +36,7 @@ class HomeView extends StatelessWidget {
           SectionHeader(context.l10n.home_nearest_to_you),
           RouteListWidget(
             routes: routes,
-            onRouteTap: (route) => context.router.pushRouteMapWithRoute(route.id),
+            onRouteTap: (route) => context.router.pushRouteMap(id: route.id),
             sideMargin: HomeViewConfig.sideMargin,
             icon: Icons.arrow_forward_ios,
           ),
