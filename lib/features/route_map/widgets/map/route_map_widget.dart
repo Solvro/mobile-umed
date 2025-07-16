@@ -28,6 +28,8 @@ import "route_map_marker.dart";
 import "route_map_polyline.dart";
 import "route_selections_polyline.dart";
 
+const distance = Distance();
+
 class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, required this.controller, this.route, this.optionalRoutes, this.active = true});
 
@@ -52,7 +54,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
           final locationIndex = ref.read(passedLocationsProvider);
           final nextLandmarkIndex = ref.read(visitedCountProvider);
 
-          final distnaceInMeters = const Distance().as(
+          final distnaceInMeters = distance.as(
             LengthUnit.Meter,
             widget.route!.route[locationIndex],
             widget.route!.landmarks[nextLandmarkIndex].location,
