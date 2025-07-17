@@ -56,7 +56,13 @@ class LandmarkInfoModal extends StatelessWidget {
 
             Column(
               spacing: AppPaddings.tiny,
-              children: [...infoRows, LabelValuePair(label: context.l10n.description, value: checkpoint.description)],
+              children: [
+                ...infoRows,
+                LabelValuePair(
+                  label: context.l10n.description,
+                  value: checkpoint.description ?? context.l10n.landmark_no_description,
+                ),
+              ],
             ),
 
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),

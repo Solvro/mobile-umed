@@ -12,7 +12,7 @@ abstract class Checkpoint with _$Checkpoint {
   const factory Checkpoint({
     required int id,
     required String name,
-    required String description,
+    required String? description,
     required LandmarkType type,
     required DateTime? dateOfCreation,
     required String? designer,

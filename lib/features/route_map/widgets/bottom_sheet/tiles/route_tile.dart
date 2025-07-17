@@ -118,6 +118,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
             ],
           ),
         ),
+        const SizedBox(height: AppPaddings.small),
         if (_chosenOption == RouteDetailsOption.info)
           LandmarksSection(checkpoints: route.checkpoints)
         else

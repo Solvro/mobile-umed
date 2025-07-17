@@ -15,6 +15,7 @@ class LandmarkItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       spacing: CheckpointsSectionConfig.landmarkItemSpacing,
       children: [
         ListLabel(index: listIndex),
@@ -22,7 +23,10 @@ class LandmarkItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 2,
-            children: [Text(checkpoint.name, style: context.textTheme.headlineSmall), Text(checkpoint.description)],
+            children: [
+              Text(checkpoint.name, style: context.textTheme.headlineSmall),
+              if (checkpoint.description != null) Text(checkpoint.description!),
+            ],
           ),
         ),
       ],

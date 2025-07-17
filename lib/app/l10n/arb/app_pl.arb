@@ -63,5 +63,6 @@
   "landmark_pulsometer_type": "Pulsometr",
   "landmark_checkpoint_type": "Miejsce warte uwagi",
   "landmark_finish_type": "Koniec",
-  "landmark_checkpoint": "Punkt kontrolny"
+  "landmark_checkpoint": "Punkt kontrolny",
+  "landmark_no_description": "Brak opisu"
 }
