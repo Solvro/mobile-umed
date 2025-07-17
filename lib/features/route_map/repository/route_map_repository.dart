@@ -18,7 +18,8 @@ Future<IList<Route>> fetchAllRoutes(Ref ref) async {
     "landmarks.landmarks_id.type.*,"
     "playlist.*,"
     "playlist.songs.songs_id.*,"
-    "route.location_id.*",
+    "route.location_id.*"
+    "&deep[route][_limit]=-1",
   );
   final data = response.data!["data"] as List<dynamic>;
   return data.map((e) => Route.fromJson(e as Map<String, dynamic>)).toList().lock;
