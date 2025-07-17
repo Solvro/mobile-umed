@@ -11,7 +11,14 @@ part "route_map_repository.g.dart";
 Future<IList<Route>> fetchAllRoutes(Ref ref) async {
   final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>(
-    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*,playlist.*,playlist.songs.songs_id.*,route.location_id.*",
+    "items/routes"
+    "?fields=*,"
+    "landmarks.landmarks_id.*,"
+    "landmarks.landmarks_id.location.*,"
+    "landmarks.landmarks_id.type.*,"
+    "playlist.*,"
+    "playlist.songs.songs_id.*,"
+    "route.location_id.*",
   );
   final data = response.data!["data"] as List<dynamic>;
   return data.map((e) => Route.fromJson(e as Map<String, dynamic>)).toList().lock;
