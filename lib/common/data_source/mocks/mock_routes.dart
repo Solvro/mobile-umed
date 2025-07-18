@@ -1,7 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:latlong2/latlong.dart";
 
-import "../../models/landmark.dart";
+import "../../models/checkpoint.dart";
 import "../../models/playlist.dart";
 import "../../models/route.dart";
 import "../../models/song.dart";
@@ -26,9 +26,9 @@ final mockData = [
     distance: 10.5,
     waterDemand: 400,
     estimatedTime: 130,
-    landmarks:
+    checkpoints:
         [
-          Landmark(
+          Checkpoint(
             id: 1,
             name: "Summit",
             description: "The peak of the trail",
@@ -37,7 +37,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: "Designer 1",
           ),
-          Landmark(
+          Checkpoint(
             id: 6,
             name: "Old Town",
             description: "Historic center of Wrocław",
@@ -46,7 +46,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 7,
             name: "Centennial Hall",
             description: "A historic building in Wrocław",
@@ -55,7 +55,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: "Designer 2",
           ),
-          Landmark(
+          Checkpoint(
             id: 8,
             name: "Wrocław Zoo",
             description: "A popular zoo in Wrocław",
@@ -64,7 +64,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 9,
             name: "Japanese Garden",
             description: "A serene garden in Wrocław",
@@ -92,9 +92,9 @@ final mockData = [
     distance: 5.2,
     waterDemand: 500,
     estimatedTime: 200,
-    landmarks:
+    checkpoints:
         [
-          Landmark(
+          Checkpoint(
             id: 2,
             name: "Creek",
             description: "A small creek",
@@ -103,7 +103,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 10,
             name: "Market Square",
             description: "The main square in Wrocław",
@@ -112,7 +112,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 11,
             name: "Ostrów Tumski",
             description: "The oldest part of Wrocław",
@@ -121,7 +121,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 12,
             name: "Hydropolis",
             description: "A water knowledge center",
@@ -130,7 +130,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 13,
             name: "Botanical Garden",
             description: "A beautiful garden in Wrocław",
@@ -158,9 +158,9 @@ final mockData = [
     distance: 8,
     waterDemand: 150.5,
     estimatedTime: 120,
-    landmarks:
+    checkpoints:
         [
-          Landmark(
+          Checkpoint(
             id: 4,
             name: "Lighthouse",
             description: "A tall lighthouse",
@@ -169,7 +169,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 14,
             name: "National Museum",
             description: "A museum in Wrocław",
@@ -178,7 +178,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 15,
             name: "Wrocław Fountain",
             description: "A multimedia fountain",
@@ -187,7 +187,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 16,
             name: "Sky Tower",
             description: "A skyscraper in Wrocław",
@@ -196,7 +196,7 @@ final mockData = [
             dateOfCreation: DateTime.utc(2025, 6, 17, 12),
             designer: null,
           ),
-          Landmark(
+          Checkpoint(
             id: 17,
             name: "Grunwald Bridge",
             description: "A historic bridge in Wrocław",

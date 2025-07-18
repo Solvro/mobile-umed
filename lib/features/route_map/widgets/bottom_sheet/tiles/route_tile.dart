@@ -35,8 +35,18 @@ class RouteTileState extends ConsumerState<RouteTile> {
 
   @override
   Widget build(BuildContext context) {
+    final route = widget.route;
+
     return ExpansionTile(
-      onExpansionChanged: (value) => ref.read(selectedRouteProvider.notifier).state = value ? widget.route : null,
+      onExpansionChanged: (isExpanding) {
+        final currentSelectedRoutes = ref.read(selectedRoutesProvider);
+        if (isExpanding) {
+          ref.read(selectedRoutesProvider.notifier).state = [...currentSelectedRoutes, route];
+        } else {
+          ref.read(selectedRoutesProvider.notifier).state =
+              currentSelectedRoutes.where((routeElement) => routeElement != route).toList();
+        }
+      },
       title: Row(
         spacing: AppPaddings.nano,
         children: [
@@ -44,24 +54,26 @@ class RouteTileState extends ConsumerState<RouteTile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.route.name, style: context.textTheme.headlineSmall?.copyWith(fontSize: 22)),
+                Text(route.name, style: context.textTheme.headlineSmall?.copyWith(fontSize: 22)),
                 const SizedBox(height: 6),
-                Text(widget.route.distance.inKilometers()),
+                Text(route.distance.inKilometers()),
               ],
             ),
           ),
           RouteStat(
             icon: Assets.icons.water.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
-            comment: (widget.route.waterDemand ?? 0).inMilliliters(),
+            comment: (route.waterDemand ?? 0).inMilliliters(),
           ),
-          RouteStat(
-            icon: Assets.icons.time.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
-            comment: widget.route.estimatedTime.inMinutes(),
-          ),
-          RouteStat(
-            icon: Assets.icons.kcal.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
-            comment: (widget.route.calories ?? 0).inKcal(),
-          ),
+          if (route.estimatedTime != null)
+            RouteStat(
+              icon: Assets.icons.time.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+              comment: route.estimatedTime!.inMinutes(),
+            ),
+          if (route.calories != null)
+            RouteStat(
+              icon: Assets.icons.kcal.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+              comment: (route.calories ?? 0).inKcal(),
+            ),
         ],
       ),
       children: [
@@ -69,10 +81,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
           padding: const EdgeInsets.all(AppPaddings.tinySmall),
           child: SecondaryActionButton(
             onPressed: () async {
-              await showDialog<StartRouteModal>(
-                context: context,
-                builder: (context) => StartRouteModal(route: widget.route),
-              );
+              await showDialog<StartRouteModal>(context: context, builder: (context) => StartRouteModal(route: route));
             },
             text: context.l10n.start_route,
           ),
@@ -109,8 +118,9 @@ class RouteTileState extends ConsumerState<RouteTile> {
             ],
           ),
         ),
+        const SizedBox(height: AppPaddings.small),
         if (_chosenOption == RouteDetailsOption.info)
-          LandmarksSection(landmarks: widget.route.landmarks)
+          LandmarksSection(checkpoints: route.checkpoints)
         else
           PlaylistInfoSection(songs: mockSongs),
       ],

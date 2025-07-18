@@ -1,24 +1,25 @@
 import "package:flutter/material.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
-import "../../../common/models/landmark.dart";
+import "../../../common/models/checkpoint.dart";
 import "../../../common/widgets/cached_image.dart";
 import "../../../common/widgets/common/label_value_pair.dart";
 import "../../../common/widgets/info_modal.dart";
 
 class LandmarkInfoModal extends StatelessWidget {
-  final Landmark landmark;
+  final Checkpoint checkpoint;
 
-  const LandmarkInfoModal({super.key, required this.landmark});
+  const LandmarkInfoModal({super.key, required this.checkpoint});
 
   @override
   Widget build(BuildContext context) {
     final infoWidgets = [
-      LabelValuePair(label: context.l10n.landmark_name, value: landmark.name),
-      LabelValuePair(label: context.l10n.landmark_type, value: landmark.type.toText(context.l10n)),
-      if (landmark.dateOfCreation != null)
-        LabelValuePair(label: context.l10n.landmark_date_of_creation, value: landmark.dateOfCreation.toString()),
-      if (landmark.designer != null) LabelValuePair(label: context.l10n.landmark_designer, value: landmark.designer!),
+      LabelValuePair(label: context.l10n.landmark_name, value: checkpoint.name),
+      LabelValuePair(label: context.l10n.landmark_type, value: checkpoint.type.toText(context.l10n)),
+      if (checkpoint.dateOfCreation != null)
+        LabelValuePair(label: context.l10n.landmark_date_of_creation, value: checkpoint.dateOfCreation.toString()),
+      if (checkpoint.designer != null)
+        LabelValuePair(label: context.l10n.landmark_designer, value: checkpoint.designer!),
     ];
 
     final List<Widget> infoRows = [];
@@ -55,7 +56,13 @@ class LandmarkInfoModal extends StatelessWidget {
 
             Column(
               spacing: AppPaddings.tiny,
-              children: [...infoRows, LabelValuePair(label: context.l10n.description, value: landmark.description)],
+              children: [
+                ...infoRows,
+                LabelValuePair(
+                  label: context.l10n.description,
+                  value: checkpoint.description ?? context.l10n.landmark_no_description,
+                ),
+              ],
             ),
 
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),

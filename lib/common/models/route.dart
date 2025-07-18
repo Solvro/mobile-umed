@@ -4,7 +4,7 @@ import "package:latlong2/latlong.dart";
 
 import "../parsers/landmark_list_converter.dart";
 import "../parsers/latlng_list_converter.dart";
-import "landmark.dart";
+import "checkpoint.dart";
 import "playlist.dart";
 
 part "route.freezed.dart";
@@ -16,14 +16,14 @@ abstract class Route with _$Route {
   const factory Route({
     required int id,
     required String name,
-    required String description,
+    required String? description,
     required int? calories,
     required double distance,
     required double? waterDemand,
-    required int estimatedTime,
-    required Playlist playlist,
+    required int? estimatedTime,
+    required Playlist? playlist,
     @LatLngListConverter() required IList<LatLng> route,
-    @LandmarkListConverter() required IList<Landmark> landmarks,
+    @JsonKey(name: "landmarks") @LandmarkListConverter() required IList<Checkpoint> checkpoints,
   }) = _Route;
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);

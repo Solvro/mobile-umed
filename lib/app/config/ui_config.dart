@@ -53,7 +53,7 @@ abstract final class SelectRouteConfig {
   static const statWidth = 30.0;
 }
 
-abstract final class LandmarksSectionConfig {
+abstract final class CheckpointsSectionConfig {
   static const contentPadding = 5.0;
 
   // landmark item

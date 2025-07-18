@@ -19,7 +19,7 @@ class StartRouteModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return OptionsModal(
-      title: context.l10n.start_route_modal_title(route.name),
+      title: route.name,
       confirmButton: MainActionButton(
         backgroundColor: ColorConsts.whiteGray,
         textColor: ColorConsts.dimGray,
@@ -31,12 +31,11 @@ class StartRouteModal extends ConsumerWidget {
         onPressed: () {
           ref.read(routeProvider.notifier).state = route;
           ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-          ref.read(selectedRouteProvider.notifier).state = null;
           context.router.pop();
         },
       ),
       child: Text(
-        route.description,
+        route.description != null ? route.description! : context.l10n.start_route_modal_title,
         textAlign: TextAlign.start,
         style: context.textTheme.bodyMedium?.copyWith(fontSize: 14),
       ),

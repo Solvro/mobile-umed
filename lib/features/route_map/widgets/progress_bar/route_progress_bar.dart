@@ -4,19 +4,19 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
-import "../../../../common/models/landmark.dart";
+import "../../../../common/models/checkpoint.dart";
 import "../../controllers/route_controller.dart";
 import "route_progress_bar_icon.dart";
 import "route_progress_bar_line.dart";
 
 class RouteProgressBar extends ConsumerWidget {
-  final IList<Landmark> landmarks;
+  final IList<Checkpoint> checkpoints;
 
-  const RouteProgressBar({super.key, required this.landmarks});
+  const RouteProgressBar({super.key, required this.checkpoints});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final total = landmarks.length;
+    final total = checkpoints.length;
     if (total <= 1) return const SizedBox();
 
     final visitedCount = ref.watch(visitedCountProvider);
@@ -34,7 +34,7 @@ class RouteProgressBar extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.horizontalPadding),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(landmarks.length * 2 - 1, (i) {
+              children: List.generate(checkpoints.length * 2 - 1, (i) {
                 if (i.isEven) {
                   final index = i ~/ 2;
                   final isVisited = index < visitedCount;
