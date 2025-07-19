@@ -85,7 +85,6 @@ class BottomDiagonalClipper extends CustomClipper<Path> {
     final path = Path();
     path.moveTo(0, 0);
     path.lineTo(size.width / 2 + 50, 0);
-    // path.lineTo((size.width / 2) + 25, size.height / 2);
     path.lineTo(size.width / 2, size.height);
     path.lineTo(0, size.height);
     path.close();
