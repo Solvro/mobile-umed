@@ -15,13 +15,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).colorScheme.onSecondary,
+      color: context.colorScheme.onSecondary,
       elevation: 4,
       shadowColor: const Color.fromRGBO(0, 0, 0, 0.10),
       child: SafeArea(
         child: Container(
           height: preferredSize.height - AppPaddings.small,
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.onSecondary),
+          decoration: BoxDecoration(color: context.colorScheme.onSecondary),
           padding: const EdgeInsets.symmetric(horizontal: AppPaddings.big),
           child: Stack(
             alignment: Alignment.center,
@@ -37,18 +37,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: context.colorScheme.secondary),
-                    ),
-                    Text(
-                      subtitle,
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: context.colorScheme.secondary),
-                    ),
-                  ],
+                child: Text(
+                  "$title\n$subtitle",
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: context.colorScheme.secondary),
+                  textAlign: TextAlign.center,
                 ),
               ),
               if (actions != null)
