@@ -85,7 +85,7 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   flutter_lints: ^6.0.0
   envied_generator: ^1.1.1
-  flutter_gen_runner: ^5.10.0
+  flutter_gen_runner: ^5.11.0
 
 flutter_gen:
   output: lib/app/assets/
