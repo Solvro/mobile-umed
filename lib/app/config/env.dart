@@ -6,4 +6,7 @@ part "env.g.dart";
 abstract class Env {
   @EnviedField()
   static final String apiUrl = _Env.apiUrl;
+
+  @EnviedField()
+  static final String bugsinkDsn = _Env.bugsinkDsn;
 }
