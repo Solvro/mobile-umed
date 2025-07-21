@@ -25,19 +25,13 @@ class HomeView extends StatelessWidget {
       ),
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.only(
-          top: AppPaddings.tinySmall,
-          left: AppPaddings.tinySmall,
-          right: AppPaddings.tinySmall,
-          bottom: AppPaddings.veryLarge,
-        ),
+        padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [
           const SizedBox(height: AppPaddings.tinySmall),
           SectionHeader(context.l10n.home_nearest_to_you),
           RouteListWidget(
             routes: routes,
             onRouteTap: (route) => context.router.pushRouteMap(id: route.id),
-            sideMargin: HomeViewConfig.sideMargin,
             icon: Icons.arrow_forward_ios,
           ),
           const SizedBox(height: HomeViewConfig.commonGap),
