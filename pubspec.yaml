@@ -46,7 +46,8 @@ dependencies:
 
   #Widgets
   cupertino_icons: ^1.0.8
-  flutter_svg: ^2.2.0 
+  flutter_svg: ^2.2.0
+  wiredash: ^2.5.0
 
   #Code Generation
   build_runner: ^2.5.4

@@ -9,4 +9,8 @@ abstract class Env {
 
   @EnviedField()
   static final String bugsinkDsn = _Env.bugsinkDsn;
+  static final String wiredashProjectId = _Env.wiredashProjectId;
+
+  @EnviedField()
+  static final String wiredashSecretKey = _Env.wiredashSecretKey;
 }
