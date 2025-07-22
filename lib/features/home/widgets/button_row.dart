@@ -11,7 +11,7 @@ class HomeButtonsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
+      padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium),
       child: SizedBox(
         height: VerticalButtonConfig.cardMinimumHeight,
         child: Row(

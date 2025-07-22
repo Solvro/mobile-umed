@@ -18,32 +18,30 @@ class RouteListWidget extends StatelessWidget {
     required this.icon,
     this.height = RouteListConfig.height,
     this.itemWidth = RouteListConfig.itemWidth,
-    this.sideMargin = RouteListConfig.defaultSideMargin,
+    this.sideMargin = AppPaddings.medium,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: sideMargin),
-      child: SizedBox(
-        height: height,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: routes.length,
-          separatorBuilder: (_, __) => const SizedBox(width: AppPaddings.tinySmall),
-          itemBuilder: (_, index) {
-            final route = routes[index];
-            return RouteCard(
-              key: ValueKey(route.id),
-              route: route,
-              onTap: () => onRouteTap(route),
-              width: itemWidth,
-              height: height,
-              icon: icon,
-            );
-          },
-        ),
+    return SizedBox(
+      height: height,
+      child: ListView.separated(
+        padding: EdgeInsets.symmetric(horizontal: sideMargin),
+        scrollDirection: Axis.horizontal,
+        itemCount: routes.length,
+        separatorBuilder: (_, __) => const SizedBox(width: AppPaddings.tinySmall),
+        itemBuilder: (_, index) {
+          final route = routes[index];
+          return RouteCard(
+            key: ValueKey(route.id),
+            route: route,
+            onTap: () => onRouteTap(route),
+            width: itemWidth,
+            height: height,
+            icon: icon,
+          );
+        },
       ),
     );
   }
