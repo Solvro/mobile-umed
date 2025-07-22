@@ -33,16 +33,6 @@ class RouteCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Container(color: context.colorScheme.onSecondary),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: ClipPath(
-                  clipper: RightDiagonalClipper(),
-                  child: Container(height: RouteListConfig.clipperHeight, color: context.colorScheme.tertiary),
-                ),
-              ),
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -84,25 +74,9 @@ class BottomDiagonalClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
     path.moveTo(0, 0);
-    path.lineTo(size.width / 2 + 50, 0);
-    path.lineTo(size.width / 2, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
-}
-
-class RightDiagonalClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(size.width / 2 + 50, 0);
     path.lineTo(size.width, 0);
     path.lineTo(size.width, size.height);
-    path.lineTo(size.width / 2, size.height);
+    path.lineTo(0, size.height);
     path.close();
     return path;
   }
