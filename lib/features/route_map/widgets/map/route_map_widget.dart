@@ -209,14 +209,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
                   builder: (_) => LandmarkInfoModal(checkpoint: landmark),
                 )
                 : null,
-        child: RouteMapMarker(
-          type: landmark.type,
-          active: active,
-          start: index == 0,
-          finish: index == totalLandmarks - 1,
-          visited: visitedCount - 1 >= index,
-          order: index,
-        ),
+        child: RouteMapMarker(type: landmark.type, active: active, visited: visitedCount - 1 >= index, order: index),
       ),
     );
   }

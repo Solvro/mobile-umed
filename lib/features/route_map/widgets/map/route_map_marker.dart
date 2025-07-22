@@ -6,20 +6,10 @@ import "../../../../app/config/ui_config.dart";
 import "../../../../common/models/checkpoint.dart";
 
 class RouteMapMarker extends StatelessWidget {
-  const RouteMapMarker({
-    super.key,
-    required this.type,
-    required this.active,
-    this.start = false,
-    this.finish = false,
-    this.visited = false,
-    this.order,
-  });
+  const RouteMapMarker({super.key, required this.type, required this.active, this.visited = false, this.order});
 
   final LandmarkType type;
   final bool active;
-  final bool start;
-  final bool finish;
   final bool visited;
   final int? order;
 
