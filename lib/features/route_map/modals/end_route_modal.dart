@@ -1,6 +1,4 @@
 import "package:flutter/material.dart";
-
-import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
@@ -19,11 +17,15 @@ class EndRouteModal extends StatelessWidget {
         backgroundColor: context.colorScheme.error,
         text: context.l10n.end_route,
         onPressed: () {
-          context.router.pop();
-          context.router.pop();
+          Navigator.of(context).pop(true);
         },
       ),
-      cancelButton: MainActionButton(text: context.l10n.keep_going, onPressed: context.router.pop),
+      cancelButton: MainActionButton(
+        text: context.l10n.keep_going,
+        onPressed: () {
+          Navigator.of(context).pop(false);
+        },
+      ),
       child: Column(
         children: [
           Text(context.l10n.route_end_modal_helper, textAlign: TextAlign.start, overflow: TextOverflow.fade),
