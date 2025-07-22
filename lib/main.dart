@@ -7,6 +7,7 @@ import "package:path_provider/path_provider.dart";
 import "package:sentry_flutter/sentry_flutter.dart";
 import "app/app.dart";
 import "app/config/env.dart";
+import "app/wiredash.dart";
 import "common/utils/location_service.dart";
 import "features/route_map/widgets/map/route_map_widget.dart";
 
@@ -32,4 +33,4 @@ Future<void> _requestPermissions() async {
   await MyFlutterForegroundTask.requestPermissions();
 }
 
-void runMyApp() => runApp(const ProviderScope(child: WithForegroundTask(child: MyApp())));
+void runMyApp() => runApp(const ProviderScope(child: ProdWiredash(child: WithForegroundTask(child: MyApp()))));
