@@ -6,4 +6,13 @@ part "env.g.dart";
 abstract class Env {
   @EnviedField()
   static final String apiUrl = _Env.apiUrl;
+
+  @EnviedField()
+  static final String bugsinkDsn = _Env.bugsinkDsn;
+
+  @EnviedField()
+  static final String wiredashProjectId = _Env.wiredashProjectId;
+
+  @EnviedField()
+  static final String wiredashSecretKey = _Env.wiredashSecretKey;
 }

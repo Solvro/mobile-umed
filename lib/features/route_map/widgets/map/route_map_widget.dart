@@ -1,6 +1,5 @@
 import "dart:async";
 import "dart:io";
-
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
@@ -9,7 +8,6 @@ import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
-
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
@@ -102,12 +100,6 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     if (state == AppLifecycleState.resumed) {
       await LocationService.requestPermissions();
     }
-  }
-
-  @override
-  void dispose() {
-    widget.controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -209,14 +201,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
                   builder: (_) => LandmarkInfoModal(checkpoint: landmark),
                 )
                 : null,
-        child: RouteMapMarker(
-          type: landmark.type,
-          active: active,
-          start: index == 0,
-          finish: index == totalLandmarks - 1,
-          visited: visitedCount - 1 >= index,
-          order: index,
-        ),
+        child: RouteMapMarker(type: landmark.type, active: active, visited: visitedCount - 1 >= index, order: index),
       ),
     );
   }

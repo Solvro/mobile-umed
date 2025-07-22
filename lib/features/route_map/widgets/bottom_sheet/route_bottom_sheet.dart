@@ -2,7 +2,7 @@ import "dart:async";
 
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
+import "package:go_router/go_router.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
@@ -46,7 +46,11 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         backgroundColor: context.colorScheme.error,
         onPressed: () async {
           ref.read(sheetTriggerProvider.notifier).state = true;
-          await showDialog<EndRouteModal>(context: context, builder: (context) => const EndRouteModal());
+          final bool shouldPop =
+              await showDialog<bool>(context: context, builder: (context) => const EndRouteModal()) ?? false;
+          if (context.mounted && shouldPop) {
+            context.pop();
+          }
         },
       ),
       controls: Row(

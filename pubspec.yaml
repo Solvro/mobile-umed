@@ -46,7 +46,8 @@ dependencies:
 
   #Widgets
   cupertino_icons: ^1.0.8
-  flutter_svg: ^2.2.0 
+  flutter_svg: ^2.2.0
+  wiredash: ^2.5.0
 
   #Code Generation
   build_runner: ^2.5.4
@@ -75,6 +76,7 @@ dependencies:
   # others
   flutter_foreground_task: ^9.1.0
   readmore: ^3.0.0
+  sentry_flutter: ^9.4.1
 
 dev_dependencies:
   flutter_test:
@@ -85,7 +87,7 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   flutter_lints: ^6.0.0
   envied_generator: ^1.1.1
-  flutter_gen_runner: ^5.10.0
+  flutter_gen_runner: ^5.11.0
 
 flutter_gen:
   output: lib/app/assets/

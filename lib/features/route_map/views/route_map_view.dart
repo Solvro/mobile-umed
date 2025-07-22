@@ -6,6 +6,8 @@ import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../../common/utils/location_service.dart";
+import "../../../common/utils/modal_before_exiting.dart";
+import "../modals/end_route_modal.dart";
 import "../providers/route_provider.dart";
 import "../repository/route_map_repository.dart";
 import "../widgets/bottom_sheet/route_bottom_sheet.dart";
@@ -34,9 +36,15 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
     _currentSheetState = ref.read(sheetStateProvider);
   }
 
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
+  }
+
   Future<void> _centerToUserLocation() async {
     final latLng = await LocationService.getCurrentLatLng();
-    if (latLng == null) return;
+    if (latLng == null || !mounted) return;
     await _mapController.animateTo(
       dest: latLng,
       zoom: 14,
@@ -86,20 +94,22 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
         ),
       );
     }
-
-    return Scaffold(
-      body: Stack(
-        children: [
-          RouteMapWidget(controller: _mapController, route: route, active: _currentSheetState == SheetState.hidden),
-          _SheetHidingHitTest(currentSheetState: _currentSheetState),
-          RouteProgressBar(checkpoints: route.checkpoints),
-          const RouteBottomSheet(),
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 56,
-            right: 16,
-            child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
-          ),
-        ],
+    return ModalBeforeExiting(
+      modal: const EndRouteModal(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            RouteMapWidget(controller: _mapController, route: route, active: _currentSheetState == SheetState.hidden),
+            _SheetHidingHitTest(currentSheetState: _currentSheetState),
+            RouteProgressBar(checkpoints: route.checkpoints),
+            const RouteBottomSheet(),
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 56,
+              right: 16,
+              child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
+            ),
+          ],
+        ),
       ),
     );
   }

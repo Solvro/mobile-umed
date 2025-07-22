@@ -6,20 +6,10 @@ import "../../../../app/config/ui_config.dart";
 import "../../../../common/models/checkpoint.dart";
 
 class RouteMapMarker extends StatelessWidget {
-  const RouteMapMarker({
-    super.key,
-    required this.type,
-    required this.active,
-    this.start = false,
-    this.finish = false,
-    this.visited = false,
-    this.order,
-  });
+  const RouteMapMarker({super.key, required this.type, required this.active, this.visited = false, this.order});
 
   final LandmarkType type;
   final bool active;
-  final bool start;
-  final bool finish;
   final bool visited;
   final int? order;
 
@@ -29,16 +19,16 @@ class RouteMapMarker extends StatelessWidget {
     late final bool isTextMarker;
     final orderValue = order?.toString() ?? "";
 
-    (icon, isTextMarker) = switch ((start, finish, type, active, visited)) {
-      (true, _, _, true, _) => (Assets.icons.startActive.svg(), false),
-      (true, _, _, false, _) => (Assets.icons.startInactive.svg(), false),
-      (_, true, _, true, _) => (Assets.icons.finishActive.svg(), false),
-      (_, true, _, false, _) => (Assets.icons.finishInactive.svg(), false),
-      (_, _, LandmarkType.pulsometer, true, true) => (Assets.icons.pulsometerVisited.svg(), false),
-      (_, _, LandmarkType.pulsometer, true, false) => (Assets.icons.pulsometerUnvisited.svg(), false),
-      (_, _, LandmarkType.pulsometer, false, _) => (Assets.icons.pulsometerInactive.svg(), false),
-      (_, _, LandmarkType.checkpoint, true, true) => (Assets.icons.checkpointVisited.svg(), true),
-      (_, _, LandmarkType.checkpoint, true, false) => (Assets.icons.checkpointUnvisited.svg(), true),
+    (icon, isTextMarker) = switch ((type, active, visited)) {
+      (LandmarkType.start, true, _) => (Assets.icons.startActive.svg(), false),
+      (LandmarkType.start, false, _) => (Assets.icons.startInactive.svg(), false),
+      (LandmarkType.finish, true, _) => (Assets.icons.finishActive.svg(), false),
+      (LandmarkType.finish, false, _) => (Assets.icons.finishInactive.svg(), false),
+      (LandmarkType.pulsometer, true, true) => (Assets.icons.pulsometerVisited.svg(), false),
+      (LandmarkType.pulsometer, true, false) => (Assets.icons.pulsometerUnvisited.svg(), false),
+      (LandmarkType.pulsometer, false, _) => (Assets.icons.pulsometerInactive.svg(), false),
+      (LandmarkType.checkpoint, true, true) => (Assets.icons.checkpointVisited.svg(), true),
+      (LandmarkType.checkpoint, true, false) => (Assets.icons.checkpointUnvisited.svg(), true),
       _ => (Assets.icons.checkpointInactive.svg(), true),
     };
 
