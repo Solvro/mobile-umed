@@ -17,7 +17,7 @@ void main() async {
   final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
   await _requestPermissions();
-  if (kDebugMode) {
+  if (!kReleaseMode) {
     return runMyApp();
   } else {
     await SentryFlutter.init((options) {
