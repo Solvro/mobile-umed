@@ -94,7 +94,6 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
         ),
       );
     }
-
     return ModalBeforeExiting(
       modal: const EndRouteModal(),
       child: Scaffold(
@@ -105,8 +104,8 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
             RouteProgressBar(checkpoints: route.checkpoints),
             const RouteBottomSheet(),
             Positioned(
-              top: 106,
-              right: 12,
+              top: MediaQuery.of(context).padding.top + 56,
+              right: 16,
               child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
             ),
           ],
