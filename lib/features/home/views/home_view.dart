@@ -24,6 +24,7 @@ class HomeView extends StatelessWidget {
         elevation: 0,
       ),
       body: ListView(
+        shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [

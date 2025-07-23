@@ -29,7 +29,7 @@ Future<IList<Route>> fetchAllRoutes(Ref ref) async {
 Future<Route> fetchRouteWithId(Ref ref, int id) async {
   final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>(
-    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*,playlist.*,playlist.songs.songs_id.*,route.location_id.*&filter[id][_eq]=$id",
+    "items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*,landmarks.landmarks_id.type.*,playlist.*,playlist.songs.songs_id.*,route.location_id.*&filter[id][_eq]=$id&deep[route][_limit]=-1",
   );
   final data = response.data!["data"] as List<dynamic>;
   return Route.fromJson(data[0] as Map<String, dynamic>);
