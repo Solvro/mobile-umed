@@ -247,5 +247,5 @@ abstract final class ShimmerConfig {
 
 abstract final class AppBarConfig {
   static const preferredSize = 90.0;
-  static const imageSize = 45.0;
+  static const imageSize = 55.0;
 }

@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../app/config/ui_config.dart";
 
@@ -33,7 +34,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                   height: AppBarConfig.imageSize,
                   decoration: const BoxDecoration(shape: BoxShape.circle),
                   clipBehavior: Clip.antiAlias,
-                  child: Image.asset("assets/images/temp_logo.png", fit: BoxFit.cover),
+                  child: SvgPicture.asset("assets/icons/logoNoBg.svg", fit: BoxFit.cover),
                 ),
               ),
               Center(
