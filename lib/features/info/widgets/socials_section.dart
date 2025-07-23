@@ -23,15 +23,15 @@ class SocialsSection extends StatelessWidget {
           mainAxisAlignment: compact ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
           children: [
             if (socials.webUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.webUrl!),
+              SocialIconButton(icon: Assets.icons.web.sized(compact: compact), url: socials.webUrl!),
             if (socials.githubUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.githubUrl!),
+              SocialIconButton(icon: Assets.icons.github.sized(compact: compact), url: socials.githubUrl!),
             if (socials.facebookUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.facebookUrl!),
+              SocialIconButton(icon: Assets.icons.fb.sized(compact: compact), url: socials.facebookUrl!),
             if (socials.linkedinUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.linkedinUrl!),
+              SocialIconButton(icon: Assets.icons.linkedin.sized(compact: compact), url: socials.linkedinUrl!),
             if (socials.emailAddress != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.emailAddress!),
+              SocialIconButton(icon: Assets.icons.mail.sized(compact: compact), url: socials.emailAddress!),
           ],
         ),
       ],
