@@ -18,5 +18,5 @@ final mockStats =
 final mockAchievements =
     [
       Stats(id: 5, value: "Turysta", iconCode: Icons.local_see.codePoint, iconColor: Colors.black.toARGB32()),
-      Stats(id: 6, value: "Sigma", iconCode: Icons.man_3.codePoint, iconColor: Colors.black.toARGB32()),
+      Stats(id: 6, value: "Sigma1", iconCode: Icons.man_3.codePoint, iconColor: Colors.black.toARGB32()),
     ].lock;
