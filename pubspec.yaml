@@ -76,7 +76,7 @@ dependencies:
   # others
   flutter_foreground_task: ^9.1.0
   readmore: ^3.0.0
-  sentry_flutter: ^9.4.1
+  sentry_flutter: ^9.5.0
 
 dev_dependencies:
   flutter_test:
