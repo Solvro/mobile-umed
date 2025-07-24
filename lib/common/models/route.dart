@@ -22,6 +22,7 @@ abstract class Route with _$Route {
     required double? waterDemand,
     required int? estimatedTime,
     required Playlist? playlist,
+    required String? image,
     @LatLngListConverter() required IList<LatLng> route,
     @JsonKey(name: "landmarks") @LandmarkListConverter() required IList<Checkpoint> checkpoints,
   }) = _Route;

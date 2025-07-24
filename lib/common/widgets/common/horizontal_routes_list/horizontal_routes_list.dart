@@ -27,6 +27,7 @@ class RouteListWidget extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ListView.separated(
+        clipBehavior: Clip.none,
         padding: EdgeInsets.symmetric(horizontal: sideMargin),
         scrollDirection: Axis.horizontal,
         itemCount: routes.length,
@@ -39,9 +40,9 @@ class RouteListWidget extends StatelessWidget {
             onTap: () => onRouteTap(route),
             width: itemWidth,
             height: height,
-            icon: icon,
           );
         },
+        shrinkWrap: true,
       ),
     );
   }
