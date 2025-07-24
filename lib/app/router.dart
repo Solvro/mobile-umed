@@ -69,6 +69,9 @@ extension RouterX on GoRouter {
   Future<void> pushRouteMap({int? id}) async {
     await LocationService.requestPermissions();
     await MyFlutterForegroundTask.requestPermissions();
+    MyFlutterForegroundTask.initMyService();
+    await MyFlutterForegroundTask.startMyForegroundService();
+
     if (id != null) {
       await push("${RouteMapPage.routeName}/$id");
     } else {

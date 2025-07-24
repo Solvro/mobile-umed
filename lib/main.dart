@@ -9,7 +9,7 @@ import "app/app.dart";
 import "app/config/env.dart";
 import "app/wiredash.dart";
 import "common/utils/location_service.dart";
-import "features/route_map/widgets/map/route_map_widget.dart";
+import "features/route_map/services/task_handlers/foreground_task_service.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
