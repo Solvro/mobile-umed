@@ -10,6 +10,7 @@ import "../../../../common/utils/location_service.dart";
 class MyTaskHandler extends TaskHandler {
   StreamSubscription<LatLng?>? _locationSubscription;
   Queue<LatLng> locations = Queue();
+  Queue<LatLng> checkpoints = Queue();
 
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
@@ -63,8 +64,18 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   void onReceiveData(Object data) {
-    if (data is List) {
-      locations = Queue.from(data.map((e) => LatLng.fromJson(e as Map<String, dynamic>)));
+    if (data is Map) {
+      if (data[ForegroundTaskKeys.locations] is List) {
+        locations = Queue.from(
+          (data[ForegroundTaskKeys.locations] as List).map((e) => LatLng.fromJson(e as Map<String, dynamic>)),
+        );
+      }
+
+      if (data[ForegroundTaskKeys.checkpoints] is List) {
+        checkpoints = Queue.from(
+          (data[ForegroundTaskKeys.checkpoints] as List).map((e) => LatLng.fromJson(e as Map<String, dynamic>)),
+        );
+      }
     }
   }
 
@@ -79,4 +90,9 @@ enum TaskEvent {
 
   factory TaskEvent.fromString(String value) =>
       TaskEvent.values.firstWhere((e) => e.name == value, orElse: () => TaskEvent.error);
+}
+
+abstract class ForegroundTaskKeys {
+  static const locations = "locations";
+  static const checkpoints = "checkpoints";
 }
