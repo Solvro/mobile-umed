@@ -41,7 +41,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref, context, route));
       FlutterForegroundTask.sendDataToTask({
         ForegroundTaskKeys.locations: route.route.map((element) => element.toJson()).toList(),
-        ForegroundTaskKeys.checkpoints: route.checkpoints.map((element) => element.location.toJson()).toList(),
+        ForegroundTaskKeys.checkpoints: route.checkpoints.map((element) => element.toJson()).toList(),
       });
     }
   }
@@ -51,21 +51,9 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       final event = TaskEvent.fromString(data);
       switch (event) {
         case TaskEvent.nextLocationReached:
-          // final locationIndex = ref.read(passedLocationsProvider);
-          final nextLandmarkIndex = ref.read(visitedCountProvider);
-
-          debugPrint("nextlocationIndex: $nextLandmarkIndex");
-
-          // final distnaceInMeters = distance.as(
-          //   LengthUnit.Meter,
-          //   route.route[locationIndex],
-          //   route.checkpoints[nextLandmarkIndex].location,
-          // );
-          // if (distnaceInMeters <= LocalizationConfig.proximityThresholdInMeters) {
-          //   ref.read(visitedCountProvider.notifier).incrementVisited();
-          // }
-
           ref.read(passedLocationsProvider.notifier).state++;
+        case TaskEvent.nextCheckpointReached:
+          ref.read(visitedCountProvider.notifier).incrementVisited();
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
