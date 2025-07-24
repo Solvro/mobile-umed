@@ -1,6 +1,7 @@
 import "package:flutter/material.dart" hide Route;
 import "../../../../../app/config/ui_config.dart";
 import "../../../../app/config/env.dart";
+import "../../../../app/theme/app_theme.dart";
 import "../../../models/route.dart";
 import "../../cached_image.dart";
 
@@ -20,8 +21,8 @@ class RouteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colorScheme = context.colorScheme;
 
     return SizedBox(
       width: width,
