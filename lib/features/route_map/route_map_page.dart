@@ -82,18 +82,14 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       }
     });
 
-    final route = ref.read(routeProvider);
-
-    if (widget.id == null || route != null) {
+    if (widget.id == null) {
       return const RouteMapView();
     }
 
     final routeAsync = ref.watch(fetchRouteWithIdProvider(widget.id!));
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (routeAsync is AsyncData) {
-        _initializeState(ref, route: routeAsync.value);
-      }
+    ref.listen<AsyncValue<Route>>(fetchRouteWithIdProvider(widget.id!), (prev, next) {
+      _initializeState(ref, route: next.value);
     });
 
     return switch (routeAsync) {
@@ -102,26 +98,4 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       _ => const Center(child: CircularProgressIndicator()),
     };
   }
-
-  // @override
-  // Widget build(BuildContext context, WidgetRef ref) {
-
-  //   if (id == null) {
-  //     return const RouteMapView();
-  //   }
-
-  //   final routeAsync = ref.watch(fetchRouteWithIdProvider(id!));
-
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     if (routeAsync is AsyncData) {
-  //       _initializeState(ref, route: routeAsync.value);
-  //     }
-  //   });
-
-  //   return switch (routeAsync) {
-  //     AsyncData() => const RouteMapView(),
-  //     AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
-  //     _ => const Center(child: CircularProgressIndicator()),
-  //   };
-  // }
 }

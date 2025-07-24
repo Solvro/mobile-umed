@@ -83,7 +83,7 @@ final mockData = [
           const LatLng(51.1045, 17.0748),
           const LatLng(51.1054, 17.0782),
         ].lock,
-    image: "",
+    image: null,
   ),
   Route(
     id: 2,

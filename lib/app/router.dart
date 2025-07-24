@@ -21,7 +21,7 @@ final _router = GoRouter(
       path: "${RouteMapPage.routeName}/:id",
       pageBuilder: (context, state) {
         final id = int.parse(state.pathParameters["id"]!);
-        return NoTransitionPage(child: RouteMapPage(id: id));
+        return NoTransitionPage(key: ValueKey("route_map_$id"), child: RouteMapPage(id: id));
       },
     ),
     StatefulShellRoute.indexedStack(
