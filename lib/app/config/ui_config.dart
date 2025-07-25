@@ -244,3 +244,8 @@ abstract final class ShimmerConfig {
   static final baseColor = Colors.grey.shade300;
   static final highlightColor = Colors.grey.shade100;
 }
+
+abstract final class AppBarConfig {
+  static const preferredSize = 90.0;
+  static const imageSize = 55.0;
+}

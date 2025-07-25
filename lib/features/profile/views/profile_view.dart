@@ -4,11 +4,11 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/app.dart";
-import "../../../app/theme/app_theme.dart";
 import "../../../common/data_source/mocks/mock_stats.dart";
 import "../../../common/models/route.dart";
 import "../../../common/parsers/completed_routes_stats_converter.dart";
 import "../../../common/providers/completed_routes_provider.dart";
+import "../../../common/widgets/common/app_bar.dart";
 import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/common/section_header.dart";
 import "../widgets/horizontal_stat_card_list/horizontal_card_list.dart";
@@ -23,9 +23,9 @@ class ProfileView extends ConsumerWidget {
     final completedRoutes = ref.watch(completedRoutesProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.common_finished_routes_title, style: context.textTheme.headlineLarge),
-        centerTitle: true,
+      appBar: CommonAppBar(
+        title: context.l10n.common_app_bar_title_one,
+        subtitle: context.l10n.common_app_bar_title_two,
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
