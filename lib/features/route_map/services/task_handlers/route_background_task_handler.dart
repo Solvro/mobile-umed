@@ -17,6 +17,20 @@ class MyTaskHandler extends TaskHandler {
   bool isLoop = false;
   int passed = 0;
 
+  void _checkCheckpointProximity() {
+    if (checkpoints.isNotEmpty &&
+        distance.as(LengthUnit.Meter, locations.first, checkpoints.first.location) <=
+            LocalizationConfig.coordProximityThresholdInMeters) {
+      FlutterForegroundTask.sendDataToMain(TaskEvent.nextCheckpointReached.name);
+
+      if (checkpoints.first.type == LandmarkType.finish) {
+        FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
+      }
+
+      checkpoints.removeFirst();
+    }
+  }
+
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
@@ -38,20 +52,14 @@ class MyTaskHandler extends TaskHandler {
         }
 
         while (currentLocation != locations.first) {
-          if (checkpoints.isNotEmpty &&
-              distance.as(LengthUnit.Meter, locations.first, checkpoints.first.location) <=
-                  LocalizationConfig.coordProximityThresholdInMeters) {
-            FlutterForegroundTask.sendDataToMain(TaskEvent.nextCheckpointReached.name);
-            if (checkpoints.first.type == LandmarkType.finish) {
-              FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
-            }
-            checkpoints.removeFirst();
-          }
+          _checkCheckpointProximity();
 
           FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
           locations.removeFirst();
           passed++;
         }
+
+        _checkCheckpointProximity();
 
         FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
         locations.removeFirst();
@@ -81,6 +89,9 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   void onReceiveData(Object data) {
+    passed = 0;
+    isLoop = false;
+
     if (data is Map) {
       if (data[ForegroundTaskKeys.locations] is List) {
         locations = Queue.from(
