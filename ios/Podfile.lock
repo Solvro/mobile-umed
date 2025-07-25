@@ -18,7 +18,6 @@ PODS:
     - FlutterMacOS
   - Sentry/HybridSDK (8.52.1)
   - sentry_flutter (9.5.0):
-  - sentry_flutter (9.5.0):
     - Flutter
     - FlutterMacOS
     - Sentry/HybridSDK (= 8.52.1)
