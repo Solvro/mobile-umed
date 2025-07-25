@@ -67,8 +67,13 @@ extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   void goProfile() => go(ProfilePage.routeName);
   Future<void> pushRouteMap({int? id}) async {
-    await LocationService.requestPermissions();
+    final locationHasPermissions = await LocationService.requestPermissions();
+
+    // TODO(24bartixx): no location permissions popup (or request)
+    if (!locationHasPermissions) return;
+
     await MyFlutterForegroundTask.requestPermissions();
+
     MyFlutterForegroundTask.initMyService();
     await MyFlutterForegroundTask.startMyForegroundService();
 
