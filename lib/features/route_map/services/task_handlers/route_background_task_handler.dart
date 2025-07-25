@@ -15,6 +15,7 @@ class MyTaskHandler extends TaskHandler {
   Queue<LatLng> locations = Queue();
   Queue<Checkpoint> checkpoints = Queue();
   bool isLoop = false;
+  int passed = 0;
 
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
@@ -22,9 +23,11 @@ class MyTaskHandler extends TaskHandler {
       if (latLng != null && locations.isNotEmpty) {
         LatLng? currentLocation;
 
-        for (final LatLng location in locations) {
+        final endIndex = (isLoop && passed <= 4) ? (locations.length - 4) : locations.length;
+
+        for (final LatLng location in locations.take(endIndex)) {
           final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
-          if (meterDistance <= LocalizationConfig.proximityThresholdInMeters) {
+          if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
             currentLocation = location;
             break;
           }
@@ -37,8 +40,7 @@ class MyTaskHandler extends TaskHandler {
         while (currentLocation != locations.first) {
           if (checkpoints.isNotEmpty &&
               distance.as(LengthUnit.Meter, locations.first, checkpoints.first.location) <=
-                  LocalizationConfig.proximityThresholdInMeters &&
-              (checkpoints.length > 1 || locations.length < 5)) {
+                  LocalizationConfig.coordProximityThresholdInMeters) {
             FlutterForegroundTask.sendDataToMain(TaskEvent.nextCheckpointReached.name);
             if (checkpoints.first.type == LandmarkType.finish) {
               FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
@@ -48,10 +50,12 @@ class MyTaskHandler extends TaskHandler {
 
           FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
           locations.removeFirst();
+          passed++;
         }
 
         FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
         locations.removeFirst();
+        passed++;
 
         if (locations.isEmpty) {
           FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
@@ -93,7 +97,7 @@ class MyTaskHandler extends TaskHandler {
       if (checkpoints.length > 1) {
         isLoop =
             distance.as(LengthUnit.Meter, checkpoints.first.location, checkpoints.last.location) <=
-            LocalizationConfig.proximityThresholdInMeters;
+            LocalizationConfig.loopProximityThresholdInMeters;
       }
     }
   }

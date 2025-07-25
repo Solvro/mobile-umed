@@ -147,7 +147,8 @@ abstract final class MapConfig {
 }
 
 abstract final class LocalizationConfig {
-  static const proximityThresholdInMeters = 8.0;
+  static const coordProximityThresholdInMeters = 8.0;
+  static const loopProximityThresholdInMeters = 100.0;
   static const distanceChangeFilter = 3;
 }
 
