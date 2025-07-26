@@ -41,8 +41,8 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       FlutterForegroundTask.addTaskDataCallback((data) async {
         if (!mounted) return;
 
-        final route = ref.read(routeProvider);
-        if (route != null) {
+        final currentRoute = ref.read(routeProvider);
+        if (currentRoute != null) {
           await _onReceiveTaskData(data, ref, context, route);
         }
       });
