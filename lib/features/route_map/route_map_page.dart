@@ -38,7 +38,15 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
     if (route != null) {
-      FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref, context, route));
+      FlutterForegroundTask.addTaskDataCallback((data) async {
+        if (!mounted) return;
+
+        final route = ref.read(routeProvider);
+        if (route != null) {
+          await _onReceiveTaskData(data, ref, context, route);
+        }
+      });
+
       FlutterForegroundTask.sendDataToTask({
         ForegroundTaskKeys.locations: route.route.map((element) => element.toJson()).toList(),
         ForegroundTaskKeys.checkpoints: route.checkpoints.map((element) => element.toJson()).toList(),
