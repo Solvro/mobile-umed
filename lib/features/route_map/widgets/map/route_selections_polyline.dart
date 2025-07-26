@@ -9,12 +9,12 @@ class RouteSelectionsPolyline extends StatelessWidget {
   const RouteSelectionsPolyline({
     super.key,
     required this.locations,
-    this.selected,
+    this.lastInteracted,
     required this.selectedColor,
     required this.notSelectedColor,
   });
   final IList<IList<LatLng>> locations;
-  final Route? selected;
+  final Route? lastInteracted;
   final Color selectedColor;
   final Color notSelectedColor;
 
@@ -28,8 +28,12 @@ class RouteSelectionsPolyline extends StatelessWidget {
           (element) =>
               Polyline(points: element.toList(), color: notSelectedColor, strokeWidth: MapConfig.unvisitedLineWidth),
         ),
-        if (selected != null)
-          Polyline(points: selected!.route.toList(), color: selectedColor, strokeWidth: MapConfig.visitedLineWidth),
+        if (lastInteracted != null)
+          Polyline(
+            points: lastInteracted!.route.toList(),
+            color: selectedColor,
+            strokeWidth: MapConfig.visitedLineWidth,
+          ),
       ],
     );
   }
