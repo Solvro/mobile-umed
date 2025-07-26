@@ -1,6 +1,6 @@
+import "dart:collection";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
 import "../../../../../app/assets/assets.gen.dart";
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/l10n/l10n.dart";
@@ -33,20 +33,22 @@ class RouteTileState extends ConsumerState<RouteTile> {
     _chosenOption = RouteDetailsOption.info;
   }
 
+  void updateExpandedRoutes(Route route, {bool shouldDelete = false}) {
+    final currentSelectedRoutes = ref.read(expandedRoutesProvider);
+    final updatedRoutes = LinkedHashSet<Route>.from(currentSelectedRoutes);
+    updatedRoutes.remove(route);
+    if (!shouldDelete) {
+      updatedRoutes.add(route);
+    }
+    ref.read(expandedRoutesProvider.notifier).state = updatedRoutes;
+  }
+
   @override
   Widget build(BuildContext context) {
     final route = widget.route;
 
     return ExpansionTile(
-      onExpansionChanged: (isExpanding) {
-        final currentSelectedRoutes = ref.read(selectedRoutesProvider);
-        if (isExpanding) {
-          ref.read(selectedRoutesProvider.notifier).state = [...currentSelectedRoutes, route];
-        } else {
-          ref.read(selectedRoutesProvider.notifier).state =
-              currentSelectedRoutes.where((routeElement) => routeElement != route).toList();
-        }
-      },
+      onExpansionChanged: (isExpanding) => updateExpandedRoutes(route, shouldDelete: !isExpanding),
       title: Row(
         spacing: AppPaddings.nano,
         children: [
@@ -95,6 +97,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
               Expanded(
                 child: SecondaryActionButton(
                   onPressed: () {
+                    updateExpandedRoutes(route);
                     setState(() => _chosenOption = RouteDetailsOption.info);
                   },
                   text: context.l10n.route_description,
@@ -106,6 +109,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
               Expanded(
                 child: SecondaryActionButton(
                   onPressed: () {
+                    updateExpandedRoutes(route);
                     setState(() => _chosenOption = RouteDetailsOption.playlist);
                   },
                   text: context.l10n.playlist,

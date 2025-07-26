@@ -1,8 +1,8 @@
+import "dart:collection";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
-
 import "../../app/app.dart";
 import "../../common/models/route.dart";
 import "../../common/providers/bottom_sheet_providers.dart";
@@ -33,7 +33,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
-    ref.read(selectedRoutesProvider.notifier).state = [];
+    ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
   }
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
