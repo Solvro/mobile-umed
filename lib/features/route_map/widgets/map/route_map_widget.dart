@@ -2,12 +2,10 @@ import "dart:async";
 import "dart:io";
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
-import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_map/flutter_map.dart";
 import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:latlong2/latlong.dart";
 import "../../../../app/config/flutter_map_config.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
@@ -17,16 +15,11 @@ import "../../../../common/providers/cache_tile.dart";
 import "../../../../common/utils/location_service.dart";
 import "../../controllers/route_controller.dart" hide Distance;
 import "../../modals/landmark_info_modal.dart";
-import "../../modals/route_completed_modal.dart";
 import "../../providers/locations_provider.dart";
 import "../../providers/route_provider.dart";
-import "../../services/flutter_foreground_task.dart";
-import "../../services/task_handlers/route_background_task_handler.dart";
 import "route_map_marker.dart";
 import "route_map_polyline.dart";
 import "route_selections_polyline.dart";
-
-const distance = Distance();
 
 class RouteMapWidget extends ConsumerStatefulWidget {
   const RouteMapWidget({super.key, required this.controller, this.route, this.active = true});
@@ -40,51 +33,8 @@ class RouteMapWidget extends ConsumerStatefulWidget {
 }
 
 class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBindingObserver, TickerProviderStateMixin {
-  Future<void> _onReceiveTaskData(Object data, WidgetRef ref) async {
-    if (!mounted) {
-      return;
-    }
-    if (data is String) {
-      final event = TaskEvent.fromString(data);
-      switch (event) {
-        case TaskEvent.nextLocationReached:
-          final locationIndex = ref.read(passedLocationsProvider);
-          final nextLandmarkIndex = ref.read(visitedCountProvider);
-
-          final distnaceInMeters = distance.as(
-            LengthUnit.Meter,
-            widget.route!.route[locationIndex],
-            widget.route!.checkpoints[nextLandmarkIndex].location,
-          );
-          if (distnaceInMeters <= LocalizationConfig.proximityThresholdInMeters) {
-            ref.read(visitedCountProvider.notifier).incrementVisited();
-          }
-
-          ref.read(passedLocationsProvider.notifier).state++;
-        case TaskEvent.routeCompleted:
-          await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
-          await FlutterForegroundTask.stopService();
-        case TaskEvent.error:
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
-      }
-    }
-  }
-
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (Platform.isAndroid || Platform.isIOS) {
-        await LocationService.requestPermissions();
-        FlutterForegroundTask.addTaskDataCallback((data) async => _onReceiveTaskData(data, ref));
-        await MyFlutterForegroundTask.requestPermissions();
-        MyFlutterForegroundTask.initMyService();
-        await MyFlutterForegroundTask.startMyForegroundService();
-        if (widget.route != null) {
-          FlutterForegroundTask.sendDataToTask(widget.route!.route.map((element) => element.toJson()).toList());
-        }
-      }
-    });
-
     if (Platform.isIOS) {
       WidgetsBinding.instance.addObserver(this);
     }
@@ -201,58 +151,8 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
                   builder: (_) => LandmarkInfoModal(checkpoint: landmark),
                 )
                 : null,
-        child: RouteMapMarker(type: landmark.type, active: active, visited: visitedCount - 1 >= index, order: index),
+        child: RouteMapMarker(type: landmark.type, active: active, visited: visitedCount > index, order: index),
       ),
     );
-  }
-}
-
-class MyFlutterForegroundTask {
-  static Future<ServiceRequestResult> startMyForegroundService() async {
-    if (await FlutterForegroundTask.isRunningService) {
-      return FlutterForegroundTask.restartService();
-    } else {
-      return FlutterForegroundTask.startService(
-        serviceId: 256,
-        notificationTitle: "Aplikacja działa w tle i monitoruje Twoją trasę",
-        notificationText: "Dotknij, aby wrócić do aplikacji",
-        notificationInitialRoute: "/",
-        callback: startCallback,
-      );
-    }
-  }
-
-  static void initMyService() {
-    FlutterForegroundTask.init(
-      androidNotificationOptions: AndroidNotificationOptions(
-        channelId: "foreground_service",
-        channelName: "Foreground Service Notification",
-        channelDescription: "This notification appears when the foreground service is running.",
-        onlyAlertOnce: true,
-      ),
-      iosNotificationOptions: const IOSNotificationOptions(showNotification: false),
-      foregroundTaskOptions: ForegroundTaskOptions(
-        eventAction: ForegroundTaskEventAction.nothing(),
-        autoRunOnBoot: true,
-        autoRunOnMyPackageReplaced: true,
-        allowWifiLock: true,
-      ),
-    );
-  }
-
-  static Future<void> requestPermissions() async {
-    final notificationPermission = await FlutterForegroundTask.checkNotificationPermission();
-    if (notificationPermission != NotificationPermission.granted) {
-      await FlutterForegroundTask.requestNotificationPermission();
-    }
-
-    if (Platform.isAndroid) {
-      if (!await FlutterForegroundTask.isIgnoringBatteryOptimizations) {
-        await FlutterForegroundTask.requestIgnoreBatteryOptimization();
-      }
-      if (!await FlutterForegroundTask.canScheduleExactAlarms) {
-        await FlutterForegroundTask.openAlarmsAndRemindersSettings();
-      }
-    }
   }
 }

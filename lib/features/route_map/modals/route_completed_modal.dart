@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
-import "../../../app/assets/assets.gen.dart";
+import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../common/widgets/info_modal.dart";
+import "../../../common/widgets/main_action_button.dart";
+import "../../../common/widgets/options_modal.dart";
+import "../../home/home_page.dart";
 import "stat_info_compact.dart";
 
 class RouteCompletedModal extends StatelessWidget {
@@ -11,11 +13,20 @@ class RouteCompletedModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InfoModal(
+    return OptionsModal(
       title: context.l10n.route_completed_modal_title,
-      decoration: Assets.icons.checkmark.svg(
-        width: RouteCompleteModalConfig.decorationSize,
-        height: RouteCompleteModalConfig.decorationSize,
+      confirmButton: MainActionButton(
+        backgroundColor: context.colorScheme.error,
+        text: context.l10n.route_completed_back_to_menu,
+        onPressed: () {
+          context.router.go(HomePage.routeName);
+        },
+      ),
+      cancelButton: MainActionButton(
+        text: context.l10n.route_completed_keep_browsing,
+        onPressed: () {
+          context.router.pop();
+        },
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

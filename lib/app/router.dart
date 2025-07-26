@@ -21,7 +21,7 @@ final _router = GoRouter(
       path: "${RouteMapPage.routeName}/:id",
       pageBuilder: (context, state) {
         final id = int.parse(state.pathParameters["id"]!);
-        return NoTransitionPage(child: RouteMapPage(id: id));
+        return NoTransitionPage(key: ValueKey("route_map_$id"), child: RouteMapPage(id: id));
       },
     ),
     StatefulShellRoute.indexedStack(
@@ -67,8 +67,16 @@ extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   void goProfile() => go(ProfilePage.routeName);
   Future<void> pushRouteMap({int? id}) async {
-    await LocationService.requestPermissions();
+    final locationHasPermissions = await LocationService.requestPermissions();
+
+    // TODO(24bartixx): no location permissions popup (or request)
+    if (!locationHasPermissions) return;
+
     await MyFlutterForegroundTask.requestPermissions();
+
+    MyFlutterForegroundTask.initMyService();
+    await MyFlutterForegroundTask.startMyForegroundService();
+
     if (id != null) {
       await push("${RouteMapPage.routeName}/$id");
     } else {

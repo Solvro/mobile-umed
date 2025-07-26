@@ -74,7 +74,7 @@ class Speed extends _$Speed {
 class VisitedCount extends _$VisitedCount {
   @override
   int build() {
-    return 1;
+    return 0;
   }
 
   void incrementVisited() {
@@ -82,7 +82,7 @@ class VisitedCount extends _$VisitedCount {
   }
 
   void resetVisited() {
-    state = 1;
+    state = 0;
   }
 }
 

@@ -1,6 +1,8 @@
 import "package:geolocator/geolocator.dart";
 import "package:latlong2/latlong.dart";
 
+import "../../app/config/ui_config.dart";
+
 class LocationService {
   static Future<bool> requestPermissions() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -45,6 +47,9 @@ class LocationService {
   }
 
   static Stream<LatLng?> getLocationStream() => Geolocator.getPositionStream(
-    locationSettings: const LocationSettings(accuracy: LocationAccuracy.high, distanceFilter: 5),
+    locationSettings: const LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: LocalizationConfig.distanceChangeFilter,
+    ),
   ).map((position) => LatLng(position.latitude, position.longitude));
 }

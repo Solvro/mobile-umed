@@ -12,6 +12,8 @@
   "route_end_modal_helper": "Zakończenie trasy spowoduje utracenie dotychczasowego postępu.",
   "route_completed_modal_title": "Gratulacje!",
   "route_completed_modal_helper": "Ukończyłeś trasę i możesz być z siebie dumny" ,
+  "route_completed_keep_browsing": "Podgląd trasy",
+  "route_completed_back_to_menu": "Powrót do menu",
   "stats": "Statystyki",
   "achievements": "Zdobyte Osiągnięcia",
   "covered_distance": "Przebyta odległość",
