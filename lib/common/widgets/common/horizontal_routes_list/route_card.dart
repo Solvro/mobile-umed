@@ -38,7 +38,9 @@ class RouteCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(child: CachedImage("${Env.apiUrl}assets/${route.image}")),
+              Expanded(
+                child: CachedImage((route.image?.isNotEmpty ?? false) ? "${Env.apiUrl}assets/${route.image}" : null),
+              ),
               Container(
                 color: colorScheme.primary,
                 padding: const EdgeInsets.all(AppPaddings.tinySmall),
