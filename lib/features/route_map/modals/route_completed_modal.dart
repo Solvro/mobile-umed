@@ -5,6 +5,7 @@ import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../../common/widgets/main_action_button.dart";
 import "../../../common/widgets/options_modal.dart";
+import "../../home/home_page.dart";
 import "stat_info_compact.dart";
 
 class RouteCompletedModal extends StatelessWidget {
@@ -18,9 +19,7 @@ class RouteCompletedModal extends StatelessWidget {
         backgroundColor: context.colorScheme.error,
         text: context.l10n.route_completed_back_to_menu,
         onPressed: () {
-          while (context.router.canPop()) {
-            context.router.pop();
-          }
+          context.router.go(HomePage.routeName);
         },
       ),
       cancelButton: MainActionButton(
