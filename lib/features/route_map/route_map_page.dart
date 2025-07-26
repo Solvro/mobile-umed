@@ -1,6 +1,6 @@
+import "dart:collection";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
-
 import "../../app/app.dart";
 import "../../common/models/route.dart";
 import "../../common/providers/bottom_sheet_providers.dart";
@@ -22,7 +22,7 @@ class RouteMapPage extends ConsumerWidget {
     ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
-    ref.read(selectedRoutesProvider.notifier).state = [];
+    ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
   }
 
   @override

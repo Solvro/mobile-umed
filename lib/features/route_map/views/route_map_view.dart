@@ -80,10 +80,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
         body: Stack(
           children: [
             switch (allRoutesAsync) {
-              AsyncData(:final value) => RouteMapWidget(
+              AsyncData() => RouteMapWidget(
                 controller: _mapController,
                 active: _currentSheetState == SheetState.hidden,
-                optionalRoutes: value,
               ),
               AsyncLoading() => const CircularProgressIndicator(),
               _ => Center(child: Text(context.l10n.errors_generic)),

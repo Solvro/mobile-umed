@@ -29,11 +29,10 @@ import "route_selections_polyline.dart";
 const distance = Distance();
 
 class RouteMapWidget extends ConsumerStatefulWidget {
-  const RouteMapWidget({super.key, required this.controller, this.route, this.optionalRoutes, this.active = true});
+  const RouteMapWidget({super.key, required this.controller, this.route, this.active = true});
 
   final AnimatedMapController controller;
   final Route? route;
-  final IList<Route>? optionalRoutes;
   final bool active;
 
   @override
@@ -107,7 +106,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
     final route = widget.route;
     final tileProvider = ref.watch(cacheTileProvider);
     final visitedCount = ref.watch(visitedCountProvider);
-    final selectedRoutes = ref.watch(selectedRoutesProvider);
+    final expandedRoutes = ref.watch(expandedRoutesProvider);
     final passedLocations = ref.watch(passedLocationsProvider);
     final landmarks = route?.checkpoints ?? const IListConst([]);
 
@@ -119,12 +118,13 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
               mapController: widget.controller.mapController,
               children: [
                 TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
-                RouteSelectionsPolyline(
-                  locations: (widget.optionalRoutes?.asList() ?? []).map((r) => r.route).toIList(),
-                  selected: selectedRoutes.isNotEmpty ? selectedRoutes.last : null,
-                  selectedColor: context.colorScheme.primary,
-                  notSelectedColor: MapConfig.unvisitedColor,
-                ),
+                if (expandedRoutes.isNotEmpty)
+                  RouteSelectionsPolyline(
+                    locations: expandedRoutes.asList().map((r) => r.route).toIList(),
+                    lastInteracted: expandedRoutes.last,
+                    selectedColor: context.colorScheme.primary,
+                    notSelectedColor: MapConfig.unvisitedColor,
+                  ),
               ],
             )
             : FlutterMap(
