@@ -214,7 +214,6 @@ abstract final class StatCardConfig {
 abstract final class InfoSectionConfig {
   // section title
   static const radius = 15.0;
-  static const sectionTitleDecorationSize = 25.0;
 
   // socials
   static const socialIconSize = 35.0;
