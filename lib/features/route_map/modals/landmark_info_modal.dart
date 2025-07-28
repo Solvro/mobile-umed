@@ -2,9 +2,9 @@ import "package:flutter/material.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/checkpoint.dart";
-import "../../../common/widgets/cached_image.dart";
-import "../../../common/widgets/common/label_value_pair.dart";
-import "../../../common/widgets/info_modal.dart";
+import "../../../common/widgets/image/cached_image.dart";
+import "../../../common/widgets/modals/info_modal.dart";
+import "../../../common/widgets/styling/label_value_pair.dart";
 
 class LandmarkInfoModal extends StatelessWidget {
   final Checkpoint checkpoint;

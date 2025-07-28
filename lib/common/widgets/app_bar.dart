@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../../app/config/ui_config.dart";
+import "../../../app/theme/app_theme.dart";
+import "../../app/config/ui_config.dart";
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

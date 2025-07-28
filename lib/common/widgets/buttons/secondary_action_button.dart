@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "../../app/config/ui_config.dart";
+import "../../../app/config/ui_config.dart";
 
 class SecondaryActionButton extends StatelessWidget {
   const SecondaryActionButton({

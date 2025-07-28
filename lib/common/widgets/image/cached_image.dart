@@ -1,7 +1,6 @@
 import "package:cached_network_image/cached_network_image.dart";
 import "package:flutter/material.dart";
-
-import "../../app/config/cached_image_config.dart";
+import "../../../app/config/cached_image_config.dart";
 import "no_image_placeholder.dart";
 
 class CachedImage extends StatelessWidget {

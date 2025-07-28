@@ -3,7 +3,7 @@ import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../app/app.dart";
-import "../../../common/widgets/common/button_styles.dart";
+import "../../../common/widgets/styling/button_styles.dart";
 
 class StartRouteButton extends StatelessWidget {
   @override

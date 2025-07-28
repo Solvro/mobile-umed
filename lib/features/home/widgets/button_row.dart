@@ -5,7 +5,7 @@ import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../app/app.dart";
 import "../../../common/utils/url_launcher.dart";
-import "../../../common/widgets/common/vertical_button.dart";
+import "../../../common/widgets/buttons/vertical_button.dart";
 
 class HomeButtonsRow extends StatelessWidget {
   @override

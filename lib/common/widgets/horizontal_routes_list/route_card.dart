@@ -1,9 +1,9 @@
 import "package:flutter/material.dart" hide Route;
-import "../../../../../app/config/ui_config.dart";
-import "../../../../app/config/env.dart";
-import "../../../../app/theme/app_theme.dart";
-import "../../../models/route.dart";
-import "../../cached_image.dart";
+import "../../../../app/config/ui_config.dart";
+import "../../../app/config/env.dart";
+import "../../../app/theme/app_theme.dart";
+import "../../models/route.dart";
+import "../image/cached_image.dart";
 
 class RouteCard extends StatelessWidget {
   final Route route;

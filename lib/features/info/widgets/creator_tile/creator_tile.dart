@@ -1,9 +1,8 @@
 import "package:flutter/material.dart";
-
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/creator.dart";
-import "../../../../common/widgets/cached_image.dart";
+import "../../../../common/widgets/image/cached_image.dart";
 import "../socials_section.dart";
 
 class CreatorTile extends StatelessWidget {

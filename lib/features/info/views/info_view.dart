@@ -1,14 +1,13 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
-
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/creator.dart";
 import "../../../common/models/info_section.dart";
 import "../../../common/utils/url_launcher.dart";
-import "../../../common/widgets/common/app_bar.dart";
-import "../../../common/widgets/common/section_header.dart";
-import "../../../common/widgets/main_action_button.dart";
+import "../../../common/widgets/app_bar.dart";
+import "../../../common/widgets/buttons/main_action_button.dart";
+import "../../../common/widgets/styling/section_header.dart";
 import "../widgets/creator_tile/creator_tile.dart";
 import "../widgets/socials_section.dart";
 import "../widgets/text_info_tile.dart";
