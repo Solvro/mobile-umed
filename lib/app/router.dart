@@ -69,8 +69,15 @@ extension RouterX on GoRouter {
   Future<void> pushRouteMap({int? id}) async {
     final locationHasPermissions = await LocationService.requestPermissions();
 
-    // TODO(24bartixx): no location permissions popup (or request)
-    if (!locationHasPermissions) return;
+    if (!locationHasPermissions) {
+      final locationServiceEnabled = await LocationService.isLocationServiceEnabled();
+      await showDialog<void>(
+        context: _rootNavigatorKey.currentContext!,
+        builder: (context) => locationServiceEnabled ? const AllowLocationAccessModal() : const EnableLocationModal(),
+      );
+
+      return;
+    }
 
     await MyFlutterForegroundTask.requestPermissions();
 

@@ -4,6 +4,7 @@
   "description": "Opis",
   "read_more": "  Czytaj więcej",
   "hide": "  Ukryj",
+
   "route_description": "Opis trasy",
   "playlist": "Playlista",
   "end_route": "Zakończ trasę",
@@ -14,6 +15,7 @@
   "route_completed_modal_helper": "Ukończyłeś trasę i możesz być z siebie dumny" ,
   "route_completed_keep_browsing": "Podgląd trasy",
   "route_completed_back_to_menu": "Powrót do menu",
+
   "stats": "Statystyki",
   "achievements": "Zdobyte Osiągnięcia",
   "covered_distance": "Przebyta odległość",
@@ -68,5 +70,11 @@
   "landmark_checkpoint_type": "Miejsce warte uwagi",
   "landmark_finish_type": "Koniec",
   "landmark_checkpoint": "Punkt kontrolny",
-  "landmark_no_description": "Brak opisu"
+  "landmark_no_description": "Brak opisu",
+
+  "enable_location_services": "Włącz usługi lokalizacyjne",
+  "enable_location_services_description": "Widok map w aplikacji wymaga dostępu do lokalizacji w celu śledzenia Twoich postępów na trasie. Włącz lokalizację na swoim urządzeniu.",
+  "allow_access_to_location": "Udziel aplikacji zgody na dostęp do lokalizacji",
+  "allow_access_to_location_description": "Widok map w aplikacji wymaga dostępu do lokalizacji w celu śledzenia Twoich postępów na trasie. Lokalizacja na urządzeniu jest włączona, ale aplikacja nie otrzymała zgody na dostęp. Wejdź w ustawienia > prywatność > lokalizacja i udziel aplikacji <<NAZWA>> zgody na dostęp."
+
 }
