@@ -38,7 +38,6 @@ class MyFlutterForegroundTask {
   }
 
   static Future<void> requestPermissions() async {
-    print("Requesting permissions for foreground task...");
     final notificationPermission = await FlutterForegroundTask.checkNotificationPermission();
     if (notificationPermission != NotificationPermission.granted) {
       await FlutterForegroundTask.requestNotificationPermission();
