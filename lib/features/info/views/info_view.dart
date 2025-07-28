@@ -57,12 +57,7 @@ class InfoSectionWidget extends StatelessWidget {
       children: [
         SectionHeader(infoSection.title),
         Padding(
-          padding: const EdgeInsets.only(
-            bottom: AppPaddings.medium,
-            top: AppPaddings.tiny,
-            left: AppPaddings.medium,
-            right: AppPaddings.medium,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: AppPaddings.nanoTiny, horizontal: AppPaddings.medium),
           child:
               infoSection.socials != null
                   ? TextInfoTile(
