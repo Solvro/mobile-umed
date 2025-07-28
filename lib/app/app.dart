@@ -5,8 +5,7 @@ import "package:go_router/go_router.dart";
 
 import "../common/providers/completed_routes_provider.dart";
 import "../common/utils/location_service.dart";
-import "../common/widgets/allow_location_access_modal.dart";
-import "../common/widgets/enable_location_modal.dart";
+import "../common/widgets/location_access_modal.dart";
 import "../features/dashboard/dashboard_page.dart";
 import "../features/debug_playground/debug_playground.dart";
 import "../features/error/error_page.dart";

@@ -73,9 +73,8 @@ extension RouterX on GoRouter {
       final locationServiceEnabled = await LocationService.isLocationServiceEnabled();
       await showDialog<void>(
         context: _rootNavigatorKey.currentContext!,
-        builder: (context) => locationServiceEnabled ? const AllowLocationAccessModal() : const EnableLocationModal(),
+        builder: (context) => LocationAccessModal(isLocationServiceEnabled: locationServiceEnabled),
       );
-
       return;
     }
 

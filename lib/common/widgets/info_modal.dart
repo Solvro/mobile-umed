@@ -7,10 +7,18 @@ import "../../app/theme/app_theme.dart";
 import "main_action_button.dart";
 
 class InfoModal extends StatelessWidget {
-  const InfoModal({super.key, required this.title, required this.child, this.onClose, this.decoration});
+  const InfoModal({
+    super.key,
+    required this.title,
+    required this.child,
+    this.backButtonText,
+    this.onClose,
+    this.decoration,
+  });
 
   final String title;
   final Widget child;
+  final String? backButtonText;
   final VoidCallback? onClose;
   final Widget? decoration;
 
@@ -42,7 +50,10 @@ class InfoModal extends StatelessWidget {
                 const SizedBox(height: AppPaddings.tinySmall),
                 Flexible(child: child),
 
-                MainActionButton(text: context.l10n.close, onPressed: onClose ?? () => context.router.pop()),
+                MainActionButton(
+                  text: backButtonText ?? context.l10n.close,
+                  onPressed: onClose ?? () => context.router.pop(),
+                ),
               ],
             ),
           ],

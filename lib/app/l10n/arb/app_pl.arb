@@ -75,6 +75,7 @@
   "enable_location_services": "Włącz usługi lokalizacyjne",
   "enable_location_services_description": "Widok map w aplikacji wymaga dostępu do lokalizacji w celu śledzenia Twoich postępów na trasie. Włącz lokalizację na swoim urządzeniu.",
   "allow_access_to_location": "Udziel aplikacji zgody na dostęp do lokalizacji",
-  "allow_access_to_location_description": "Widok map w aplikacji wymaga dostępu do lokalizacji w celu śledzenia Twoich postępów na trasie. Lokalizacja na urządzeniu jest włączona, ale aplikacja nie otrzymała zgody na dostęp. Wejdź w ustawienia > prywatność > lokalizacja i udziel aplikacji <<NAZWA>> zgody na dostęp."
+  "allow_access_to_location_description": "Widok map w aplikacji wymaga dostępu do lokalizacji w celu śledzenia Twoich postępów na trasie. Lokalizacja na urządzeniu jest włączona, ale aplikacja nie otrzymała zgody na dostęp. Wejdź w ustawienia > prywatność > lokalizacja i udziel aplikacji <<NAZWA>> zgody na dostęp.",
+  "go_to_location_settings": "Przejdź do ustawień"
 
 }
