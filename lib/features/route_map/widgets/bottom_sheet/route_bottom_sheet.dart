@@ -66,9 +66,8 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
                 });
               },
               text: context.l10n.route_description,
-              backgroundColor:
-                  _chosenOption == RouteDetailsOption.info ? ColorConsts.lightGreen : ColorConsts.whiteGray,
-              textColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+              backgroundColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.plumosa : ColorConsts.whiteGray,
+              textColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.plumosa,
             ),
           ),
           Expanded(
@@ -81,8 +80,8 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
               },
               text: context.l10n.playlist,
               backgroundColor:
-                  _chosenOption == RouteDetailsOption.playlist ? ColorConsts.lightGreen : ColorConsts.whiteGray,
-              textColor: _chosenOption == RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+                  _chosenOption == RouteDetailsOption.playlist ? ColorConsts.plumosa : ColorConsts.whiteGray,
+              textColor: _chosenOption == RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.plumosa,
             ),
           ),
         ],

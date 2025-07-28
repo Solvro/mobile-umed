@@ -15,13 +15,13 @@ class AppTheme implements AppThemeData {
   @override
   ThemeData get light => ThemeData(
     colorScheme: const ColorScheme.light(
-      primary: ColorConsts.lightGreen,
-      secondary: ColorConsts.green,
-      tertiary: ColorConsts.paleGreen,
+      primary: ColorConsts.plumosa,
+      secondary: ColorConsts.turtleLake,
+      tertiary: ColorConsts.blancTurtle,
       surface: ColorConsts.whiteGray,
       onPrimary: ColorConsts.whiteGray,
       onSecondary: Colors.white,
-      error: ColorConsts.red,
+      error: ColorConsts.lightOrange,
       onTertiary: ColorConsts.onyx,
     ),
     textTheme: _textTheme,
@@ -31,10 +31,10 @@ class AppTheme implements AppThemeData {
 
   static const _textTheme = TextTheme(
     headlineLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
-    headlineMedium: TextStyle(fontSize: 23, fontWeight: FontWeight.w400, color: ColorConsts.lightGreen),
+    headlineMedium: TextStyle(fontSize: 23, fontWeight: FontWeight.w400, color: ColorConsts.plumosa),
     headlineSmall: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
     titleMedium: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: ColorConsts.onyx),
-    titleSmall: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: ColorConsts.lightGreen),
+    titleSmall: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: ColorConsts.plumosa),
     bodyLarge: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.onyx, height: 1.2),
     bodyMedium: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorConsts.dimGray, height: 1.2),
     labelLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: ColorConsts.whiteGray),
@@ -46,7 +46,7 @@ class AppTheme implements AppThemeData {
   ElevatedButtonThemeData get _elevatedButtonTheme => ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       minimumSize: const Size(44, 44),
-      backgroundColor: ColorConsts.lightGreen,
+      backgroundColor: ColorConsts.plumosa,
       foregroundColor: ColorConsts.whiteGray,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),

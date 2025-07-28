@@ -102,8 +102,8 @@ class RouteTileState extends ConsumerState<RouteTile> {
                   },
                   text: context.l10n.route_description,
                   backgroundColor:
-                      _chosenOption != RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.lightGreen,
-                  textColor: _chosenOption != RouteDetailsOption.info ? ColorConsts.lightGreen : ColorConsts.whiteGray,
+                      _chosenOption != RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.plumosa,
+                  textColor: _chosenOption != RouteDetailsOption.info ? ColorConsts.plumosa : ColorConsts.whiteGray,
                 ),
               ),
               Expanded(
@@ -114,9 +114,8 @@ class RouteTileState extends ConsumerState<RouteTile> {
                   },
                   text: context.l10n.playlist,
                   backgroundColor:
-                      _chosenOption != RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.lightGreen,
-                  textColor:
-                      _chosenOption != RouteDetailsOption.playlist ? ColorConsts.lightGreen : ColorConsts.whiteGray,
+                      _chosenOption != RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.plumosa,
+                  textColor: _chosenOption != RouteDetailsOption.playlist ? ColorConsts.plumosa : ColorConsts.whiteGray,
                 ),
               ),
             ],
