@@ -29,6 +29,14 @@ class LocationService {
     return permission == LocationPermission.whileInUse || permission == LocationPermission.always;
   }
 
+  static Future<bool> isLocationServiceEnabled() async {
+    return Geolocator.isLocationServiceEnabled();
+  }
+
+  static Future<void> goToSettings() async {
+    await Geolocator.openLocationSettings();
+  }
+
   static Future<LatLng?> getCurrentLatLng() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) return null;
