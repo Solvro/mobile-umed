@@ -2,10 +2,9 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
-
 import "../common/providers/completed_routes_provider.dart";
 import "../common/utils/location_service.dart";
-import "../common/widgets/location_access_modal.dart";
+import "../common/widgets/modals/location_access_modal.dart";
 import "../features/dashboard/dashboard_page.dart";
 import "../features/debug_playground/debug_playground.dart";
 import "../features/error/error_page.dart";
