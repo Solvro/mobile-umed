@@ -7,6 +7,7 @@ abstract class ColorConsts {
   static const blancTurtle = Color(0xFFCCE4DC); // Blanc Turtle
   static const sunriseMint = Color(0xFF90D9C1); // Sunrise Mint
   static const leekRoot = Color(0xFFCCEEE2); // Leek Root
+  static const darkerGreen = Color(0xFF4C8F79); // Darker Green
   static const lightOrange = Color(0xFFE98629); // Light Orange
   static const lightTangerine = Color(0xFFFFAB5C); // Light Tangerine
   static const red = Color(0xFFD93B3A); // Jasper
