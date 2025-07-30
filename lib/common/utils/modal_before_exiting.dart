@@ -15,7 +15,9 @@ class ModalBeforeExiting extends StatelessWidget {
         if (didPop) {
           return;
         }
-        final bool shouldPop = await showDialog<bool>(context: context, builder: (context) => modal) ?? false;
+        final bool shouldPop = await showDialog<bool>(
+                context: context, builder: (context) => modal) ??
+            false;
         if (context.mounted && shouldPop) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (context.mounted) context.pop();

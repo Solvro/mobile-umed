@@ -6,6 +6,7 @@ enum SheetState { hidden, visible }
 
 final sheetModeProvider = StateProvider<SheetMode>((ref) => SheetMode.half);
 
-final sheetStateProvider = StateProvider<SheetState>((ref) => SheetState.hidden);
+final sheetStateProvider =
+    StateProvider<SheetState>((ref) => SheetState.hidden);
 
 final sheetTriggerProvider = StateProvider<bool>((ref) => false);

@@ -16,5 +16,6 @@ abstract class Socials with _$Socials {
     @Default(false) bool onlyWeb,
   }) = _Socials;
 
-  factory Socials.fromJson(Map<String, dynamic> json) => _$SocialsFromJson(json);
+  factory Socials.fromJson(Map<String, dynamic> json) =>
+      _$SocialsFromJson(json);
 }

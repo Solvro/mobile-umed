@@ -24,10 +24,12 @@ class MyFlutterForegroundTask {
       androidNotificationOptions: AndroidNotificationOptions(
         channelId: "foreground_service",
         channelName: "Foreground Service Notification",
-        channelDescription: "This notification appears when the foreground service is running.",
+        channelDescription:
+            "This notification appears when the foreground service is running.",
         onlyAlertOnce: true,
       ),
-      iosNotificationOptions: const IOSNotificationOptions(showNotification: false),
+      iosNotificationOptions:
+          const IOSNotificationOptions(showNotification: false),
       foregroundTaskOptions: ForegroundTaskOptions(
         eventAction: ForegroundTaskEventAction.nothing(),
         autoRunOnBoot: true,
@@ -38,7 +40,8 @@ class MyFlutterForegroundTask {
   }
 
   static Future<void> requestPermissions() async {
-    final notificationPermission = await FlutterForegroundTask.checkNotificationPermission();
+    final notificationPermission =
+        await FlutterForegroundTask.checkNotificationPermission();
     if (notificationPermission != NotificationPermission.granted) {
       await FlutterForegroundTask.requestNotificationPermission();
     }

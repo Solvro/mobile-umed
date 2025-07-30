@@ -19,7 +19,8 @@ abstract class Checkpoint with _$Checkpoint {
     @LatLngConverter() required LatLng location,
   }) = _Checkpoint;
 
-  factory Checkpoint.fromJson(Map<String, dynamic> json) => _$CheckpointFromJson(json);
+  factory Checkpoint.fromJson(Map<String, dynamic> json) =>
+      _$CheckpointFromJson(json);
 }
 
 enum LandmarkType { start, checkpoint, pulsometer, finish }

@@ -27,11 +27,13 @@ class RouteProgressBar extends ConsumerWidget {
       child: Container(
         decoration: _decoration(context.colorScheme.surface),
         width: double.infinity,
-        padding: const EdgeInsets.only(top: ProgressBarConfig.topPadding, bottom: AppPaddings.tinySmall),
+        padding: const EdgeInsets.only(
+            top: ProgressBarConfig.topPadding, bottom: AppPaddings.tinySmall),
         child: SafeArea(
           bottom: false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.horizontalPadding),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ProgressBarConfig.horizontalPadding),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(checkpoints.length * 2 - 1, (i) {
@@ -40,18 +42,26 @@ class RouteProgressBar extends ConsumerWidget {
                   final isVisited = index < visitedCount;
 
                   if (index == 0) {
-                    return RouteProgressBarIcon(start: true, done: true, color: context.colorScheme.primary);
+                    return RouteProgressBarIcon(
+                        start: true,
+                        done: true,
+                        color: context.colorScheme.primary);
                   }
 
                   if (index == total - 1) {
-                    return RouteProgressBarIcon(finish: true, done: isVisited, color: context.colorScheme.primary);
+                    return RouteProgressBarIcon(
+                        finish: true,
+                        done: isVisited,
+                        color: context.colorScheme.primary);
                   }
 
-                  return RouteProgressBarIcon(done: isVisited, color: context.colorScheme.primary);
+                  return RouteProgressBarIcon(
+                      done: isVisited, color: context.colorScheme.primary);
                 } else {
                   final lineIndex = (i - 1) ~/ 2;
                   final isVisited = lineIndex < visited - 1;
-                  return RouteProgressBarLine(color: context.colorScheme.primary, done: isVisited);
+                  return RouteProgressBarLine(
+                      color: context.colorScheme.primary, done: isVisited);
                 }
               }),
             ),
@@ -66,6 +76,11 @@ BoxDecoration _decoration(Color color) {
   return BoxDecoration(
     color: color,
     borderRadius: BorderRadius.circular(ProgressBarConfig.radius),
-    boxShadow: [BoxShadow(color: Colors.black.withAlpha(50), blurRadius: 8, offset: const Offset(0, 2))],
+    boxShadow: [
+      BoxShadow(
+          color: Colors.black.withAlpha(50),
+          blurRadius: 8,
+          offset: const Offset(0, 2))
+    ],
   );
 }

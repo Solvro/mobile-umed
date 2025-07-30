@@ -29,7 +29,8 @@ class CachedImage extends StatelessWidget {
       cacheManager: CachedImageConfig.cacheManagerInstance,
       placeholder: switch (loadingType) {
         LoadingType.noLoading => null,
-        LoadingType.circularProgressIndicator => (context, url) => const Center(child: CircularProgressIndicator()),
+        LoadingType.circularProgressIndicator => (context, url) =>
+            const Center(child: CircularProgressIndicator()),
       },
       errorWidget: (context, url, error) => NoImagePlaceholder(size: size),
       height: size?.height,

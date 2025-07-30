@@ -48,7 +48,8 @@ class RouteTileState extends ConsumerState<RouteTile> {
     final route = widget.route;
 
     return ExpansionTile(
-      onExpansionChanged: (isExpanding) => updateExpandedRoutes(route, shouldDelete: !isExpanding),
+      onExpansionChanged: (isExpanding) =>
+          updateExpandedRoutes(route, shouldDelete: !isExpanding),
       title: Row(
         spacing: AppPaddings.nano,
         children: [
@@ -56,24 +57,32 @@ class RouteTileState extends ConsumerState<RouteTile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(route.name, style: context.textTheme.headlineSmall?.copyWith(fontSize: 22)),
+                Text(route.name,
+                    style: context.textTheme.headlineSmall
+                        ?.copyWith(fontSize: 22)),
                 const SizedBox(height: 6),
                 Text(route.distance.inKilometers()),
               ],
             ),
           ),
           RouteStat(
-            icon: Assets.icons.water.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+            icon: Assets.icons.water.svg(
+                width: SelectRouteConfig.iconSize,
+                height: SelectRouteConfig.iconSize),
             comment: (route.waterDemand ?? 0).inMilliliters(),
           ),
           if (route.estimatedTime != null)
             RouteStat(
-              icon: Assets.icons.time.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+              icon: Assets.icons.time.svg(
+                  width: SelectRouteConfig.iconSize,
+                  height: SelectRouteConfig.iconSize),
               comment: route.estimatedTime!.inMinutes(),
             ),
           if (route.calories != null)
             RouteStat(
-              icon: Assets.icons.kcal.svg(width: SelectRouteConfig.iconSize, height: SelectRouteConfig.iconSize),
+              icon: Assets.icons.kcal.svg(
+                  width: SelectRouteConfig.iconSize,
+                  height: SelectRouteConfig.iconSize),
               comment: (route.calories ?? 0).inKcal(),
             ),
         ],
@@ -83,7 +92,9 @@ class RouteTileState extends ConsumerState<RouteTile> {
           padding: const EdgeInsets.all(AppPaddings.tinySmall),
           child: SecondaryActionButton(
             onPressed: () async {
-              await showDialog<StartRouteModal>(context: context, builder: (context) => StartRouteModal(route: route));
+              await showDialog<StartRouteModal>(
+                  context: context,
+                  builder: (context) => StartRouteModal(route: route));
             },
             text: context.l10n.start_route,
           ),
@@ -101,9 +112,12 @@ class RouteTileState extends ConsumerState<RouteTile> {
                     setState(() => _chosenOption = RouteDetailsOption.info);
                   },
                   text: context.l10n.route_description,
-                  backgroundColor:
-                      _chosenOption != RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.lightGreen,
-                  textColor: _chosenOption != RouteDetailsOption.info ? ColorConsts.lightGreen : ColorConsts.whiteGray,
+                  backgroundColor: _chosenOption != RouteDetailsOption.info
+                      ? ColorConsts.whiteGray
+                      : ColorConsts.lightGreen,
+                  textColor: _chosenOption != RouteDetailsOption.info
+                      ? ColorConsts.lightGreen
+                      : ColorConsts.whiteGray,
                 ),
               ),
               Expanded(
@@ -113,10 +127,12 @@ class RouteTileState extends ConsumerState<RouteTile> {
                     setState(() => _chosenOption = RouteDetailsOption.playlist);
                   },
                   text: context.l10n.playlist,
-                  backgroundColor:
-                      _chosenOption != RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.lightGreen,
-                  textColor:
-                      _chosenOption != RouteDetailsOption.playlist ? ColorConsts.lightGreen : ColorConsts.whiteGray,
+                  backgroundColor: _chosenOption != RouteDetailsOption.playlist
+                      ? ColorConsts.whiteGray
+                      : ColorConsts.lightGreen,
+                  textColor: _chosenOption != RouteDetailsOption.playlist
+                      ? ColorConsts.lightGreen
+                      : ColorConsts.whiteGray,
                 ),
               ),
             ],

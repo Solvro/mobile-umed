@@ -13,7 +13,8 @@ class CreatorTileShimmerList extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: count,
-        separatorBuilder: (context, index) => const SizedBox(width: AppPaddings.nano),
+        separatorBuilder: (context, index) =>
+            const SizedBox(width: AppPaddings.nano),
         itemBuilder: (context, index) => const CreatorTileShimmer(),
       ),
     );
@@ -26,7 +27,8 @@ class CreatorTileShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(InfoSectionConfig.radius)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(InfoSectionConfig.radius)),
       elevation: 4,
       child: SizedBox(
         height: InfoSectionConfig.creatorTileHeight,
@@ -42,26 +44,33 @@ class CreatorTileShimmer extends StatelessWidget {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(InfoSectionConfig.radius)),
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(InfoSectionConfig.radius)),
                 ),
               ),
               const SizedBox(height: AppPaddings.medium),
               Container(
                 height: InfoSectionConfig.creatorShimmerNameHeight,
                 width: InfoSectionConfig.creatorShimmerNameWidth,
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.nano)),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppRadius.nano)),
               ),
               const SizedBox(height: AppPaddings.nanoTiny),
               Container(
                 height: InfoSectionConfig.creatorShimmerRoleHeight,
                 width: InfoSectionConfig.creatorShimmerRoleWidth,
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.nano)),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppRadius.nano)),
               ),
               const SizedBox(height: AppPaddings.small),
               Container(
                 height: InfoSectionConfig.creatorShimmerSocialsHeight,
                 width: InfoSectionConfig.creatorShimmerSocialsWidth,
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.tiny)),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(AppRadius.tiny)),
               ),
               const SizedBox(height: AppPaddings.tiny),
             ],

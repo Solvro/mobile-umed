@@ -19,9 +19,12 @@ class FullScreenErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error, size: ErrorWidgetConfig.iconSize, color: context.colorScheme.error),
+            Icon(Icons.error,
+                size: ErrorWidgetConfig.iconSize,
+                color: context.colorScheme.error),
             const SizedBox(height: AppPaddings.small),
-            Text(context.l10n.errors_title, style: context.textTheme.headlineMedium),
+            Text(context.l10n.errors_title,
+                style: context.textTheme.headlineMedium),
             const SizedBox(height: AppPaddings.small),
             Text(
               message ?? context.l10n.errors_generic,
@@ -30,8 +33,11 @@ class FullScreenErrorView extends StatelessWidget {
             ),
             const SizedBox(height: AppPaddings.medium),
             Padding(
-              padding: const EdgeInsetsGeometry.symmetric(horizontal: ErrorWidgetConfig.buttonOutsidePadding),
-              child: MainActionButton(onPressed: onBackToHome ?? context.router.goHome, text: context.l10n.errors_back),
+              padding: const EdgeInsetsGeometry.symmetric(
+                  horizontal: ErrorWidgetConfig.buttonOutsidePadding),
+              child: MainActionButton(
+                  onPressed: onBackToHome ?? context.router.goHome,
+                  text: context.l10n.errors_back),
             ),
           ],
         ),

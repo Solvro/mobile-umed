@@ -5,7 +5,8 @@ import "../../../../../common/models/checkpoint.dart";
 import "../../../../../common/widgets/styling/list_label.dart";
 
 class LandmarkItem extends StatelessWidget {
-  const LandmarkItem({super.key, required this.listIndex, required this.checkpoint});
+  const LandmarkItem(
+      {super.key, required this.listIndex, required this.checkpoint});
 
   final int listIndex;
   final Checkpoint checkpoint;

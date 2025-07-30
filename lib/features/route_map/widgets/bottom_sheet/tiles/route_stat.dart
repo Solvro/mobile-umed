@@ -20,7 +20,8 @@ class RouteStat extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             comment,
-            style: context.textTheme.bodySmall?.copyWith(fontSize: AppFontSizes.small),
+            style: context.textTheme.bodySmall
+                ?.copyWith(fontSize: AppFontSizes.small),
             textAlign: TextAlign.center,
             softWrap: true,
           ),

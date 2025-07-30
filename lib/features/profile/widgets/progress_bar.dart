@@ -10,7 +10,8 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small, vertical: AppPaddings.tinySmall),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppPaddings.small, vertical: AppPaddings.tinySmall),
       child: Row(
         children: [
           Expanded(
@@ -19,7 +20,9 @@ class ProgressBar extends StatelessWidget {
                 Container(
                   height: ProfileProgressBarConfig.barHeight,
                   decoration: BoxDecoration(
-                    border: Border.all(color: ColorConsts.borderGray, width: ProfileProgressBarConfig.borderThickness),
+                    border: Border.all(
+                        color: ColorConsts.borderGray,
+                        width: ProfileProgressBarConfig.borderThickness),
                     borderRadius: BorderRadius.circular(AppRadius.small),
                   ),
                 ),
@@ -35,7 +38,8 @@ class ProgressBar extends StatelessWidget {
                       value: progress,
                       minHeight: ProfileProgressBarConfig.clipperHeight,
                       backgroundColor: context.colorScheme.onSecondary,
-                      valueColor: AlwaysStoppedAnimation<Color>(context.colorScheme.primary),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          context.colorScheme.primary),
                     ),
                   ),
                 ),
@@ -43,7 +47,8 @@ class ProgressBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: AppPaddings.tinySmall),
-          Text("${(progress * 100).toInt()}%", style: context.textTheme.headlineLarge),
+          Text("${(progress * 100).toInt()}%",
+              style: context.textTheme.headlineLarge),
         ],
       ),
     );

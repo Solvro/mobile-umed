@@ -7,7 +7,8 @@ import "../../app/config/ui_config.dart";
 import "widgets/nav_bar.dart";
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key, required this.navigationShell}) : super(key: key ?? const ValueKey("DashboardPage"));
+  const DashboardPage({Key? key, required this.navigationShell})
+      : super(key: key ?? const ValueKey("DashboardPage"));
 
   final StatefulNavigationShell navigationShell;
 
@@ -22,15 +23,18 @@ class DashboardPage extends StatelessWidget {
             left: 0,
             right: 0,
             child: SafeArea(
-              child: NavBar(onItemSelected: navigationShell.goBranch, selectedIndex: navigationShell.currentIndex),
+              child: NavBar(
+                  onItemSelected: navigationShell.goBranch,
+                  selectedIndex: navigationShell.currentIndex),
             ),
           ),
         ],
       ),
-      floatingActionButton:
-          kDebugMode
-              ? FloatingActionButton(onPressed: context.router.pushPlayground, child: const Icon(Icons.play_arrow))
-              : null,
+      floatingActionButton: kDebugMode
+          ? FloatingActionButton(
+              onPressed: context.router.pushPlayground,
+              child: const Icon(Icons.play_arrow))
+          : null,
     );
   }
 }

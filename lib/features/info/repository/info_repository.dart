@@ -29,12 +29,14 @@ Future<InfoSection> fetchInfoWithId(Ref ref, int id) async {
     dataEndpoint: "items/info_section/$id",
     fromJson: InfoSection.fromJson,
     getSocialId: (infoSection) => infoSection.socialUrls,
-    copyWithSocials: (infoSection, socials) => infoSection.copyWith(socials: socials),
+    copyWithSocials: (infoSection, socials) =>
+        infoSection.copyWith(socials: socials),
   );
 }
 
 @riverpod
-Future<({IList<Creator> creators, IList<InfoSection> infoSections})> fetchCreatorsAndInfos(Ref ref) async {
+Future<({IList<Creator> creators, IList<InfoSection> infoSections})>
+    fetchCreatorsAndInfos(Ref ref) async {
   final dio = await ref.read(dioClientProvider.future);
 
   final results = await Future.wait([
@@ -50,9 +52,13 @@ Future<({IList<Creator> creators, IList<InfoSection> infoSections})> fetchCreato
       dataEndpoint: "items/info_section",
       fromJson: InfoSection.fromJson,
       getSocialId: (infoSection) => infoSection.socialUrls,
-      copyWithSocials: (infoSection, socials) => infoSection.copyWith(socials: socials),
+      copyWithSocials: (infoSection, socials) =>
+          infoSection.copyWith(socials: socials),
     ),
   ]);
 
-  return (creators: results[0] as IList<Creator>, infoSections: results[1] as IList<InfoSection>);
+  return (
+    creators: results[0] as IList<Creator>,
+    infoSections: results[1] as IList<InfoSection>
+  );
 }

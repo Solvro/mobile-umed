@@ -46,8 +46,10 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         backgroundColor: context.colorScheme.error,
         onPressed: () async {
           ref.read(sheetTriggerProvider.notifier).state = true;
-          final bool shouldPop =
-              await showDialog<bool>(context: context, builder: (context) => const EndRouteModal()) ?? false;
+          final bool shouldPop = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => const EndRouteModal()) ??
+              false;
           if (context.mounted && shouldPop) {
             context.pop();
           }
@@ -66,9 +68,12 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
                 });
               },
               text: context.l10n.route_description,
-              backgroundColor:
-                  _chosenOption == RouteDetailsOption.info ? ColorConsts.lightGreen : ColorConsts.whiteGray,
-              textColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+              backgroundColor: _chosenOption == RouteDetailsOption.info
+                  ? ColorConsts.lightGreen
+                  : ColorConsts.whiteGray,
+              textColor: _chosenOption == RouteDetailsOption.info
+                  ? ColorConsts.whiteGray
+                  : ColorConsts.lightGreen,
             ),
           ),
           Expanded(
@@ -80,16 +85,19 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
                 });
               },
               text: context.l10n.playlist,
-              backgroundColor:
-                  _chosenOption == RouteDetailsOption.playlist ? ColorConsts.lightGreen : ColorConsts.whiteGray,
-              textColor: _chosenOption == RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.lightGreen,
+              backgroundColor: _chosenOption == RouteDetailsOption.playlist
+                  ? ColorConsts.lightGreen
+                  : ColorConsts.whiteGray,
+              textColor: _chosenOption == RouteDetailsOption.playlist
+                  ? ColorConsts.whiteGray
+                  : ColorConsts.lightGreen,
             ),
           ),
         ],
       ),
-
-      child:
-          (_chosenOption == RouteDetailsOption.info) ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
+      child: (_chosenOption == RouteDetailsOption.info)
+          ? const RouteInfoSection()
+          : PlaylistInfoSection(songs: mockSongs),
     );
   }
 }

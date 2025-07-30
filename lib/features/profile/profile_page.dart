@@ -17,7 +17,8 @@ class ProfilePage extends ConsumerWidget {
     return switch (provider) {
       AsyncData(:final value) => ProfileView(routes: value),
       AsyncError() => const FullScreenErrorView(),
-      _ => const Scaffold(body: Text("loading")), // TODO(tomasz-trela): add loading
+      _ => const Scaffold(
+          body: Text("loading")), // TODO(tomasz-trela): add loading
     };
   }
 }

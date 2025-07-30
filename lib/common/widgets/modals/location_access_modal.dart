@@ -6,14 +6,17 @@ import "../../utils/location_service.dart";
 import "info_modal.dart";
 
 class LocationAccessModal extends StatelessWidget {
-  const LocationAccessModal({super.key, required this.isLocationServiceEnabled});
+  const LocationAccessModal(
+      {super.key, required this.isLocationServiceEnabled});
 
   final bool isLocationServiceEnabled;
 
   @override
   Widget build(BuildContext context) {
     return InfoModal(
-      title: isLocationServiceEnabled ? context.l10n.allow_access_to_location : context.l10n.enable_location_services,
+      title: isLocationServiceEnabled
+          ? context.l10n.allow_access_to_location
+          : context.l10n.enable_location_services,
       backButtonText: context.l10n.go_to_location_settings,
       child: Padding(
         padding: const EdgeInsetsGeometry.all(AppPaddings.tinySmall),

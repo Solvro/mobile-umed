@@ -33,4 +33,5 @@ Future<void> _requestPermissions() async {
   await MyFlutterForegroundTask.requestPermissions();
 }
 
-void runMyApp() => runApp(const ProviderScope(child: ProdWiredash(child: WithForegroundTask(child: MyApp()))));
+void runMyApp() => runApp(const ProviderScope(
+    child: ProdWiredash(child: WithForegroundTask(child: MyApp()))));

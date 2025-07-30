@@ -2,7 +2,8 @@ import "package:flutter/material.dart" hide Route;
 import "../../../../app/config/ui_config.dart";
 
 class RouteProgressBarLine extends StatelessWidget {
-  const RouteProgressBarLine({super.key, required this.color, required this.done});
+  const RouteProgressBarLine(
+      {super.key, required this.color, required this.done});
   final Color color;
   final bool done;
 
@@ -13,9 +14,12 @@ class RouteProgressBarLine extends StatelessWidget {
         builder: (context, constraints) {
           return Container(
             height: ProgressBarConfig.lineHeight,
-            margin: const EdgeInsets.symmetric(horizontal: ProgressBarConfig.dotLinePadding),
+            margin: const EdgeInsets.symmetric(
+                horizontal: ProgressBarConfig.dotLinePadding),
             decoration: BoxDecoration(
-              color: done ? color : color.withAlpha(ProgressBarConfig.notDoneAlpha),
+              color: done
+                  ? color
+                  : color.withAlpha(ProgressBarConfig.notDoneAlpha),
               borderRadius: BorderRadius.circular(ProgressBarConfig.lineHeight),
             ),
           );

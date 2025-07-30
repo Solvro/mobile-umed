@@ -21,21 +21,23 @@ class DebugPlayground extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OutlinedButton(onPressed: () async => context.router.pushRouteMap(), child: const Text("RouteMap")),
+            OutlinedButton(
+                onPressed: () async => context.router.pushRouteMap(),
+                child: const Text("RouteMap")),
             OutlinedButton(
               onPressed: () async => context.router.pushRouteMap(id: 71),
               child: const Text("RouteMap with route"),
             ),
             OutlinedButton(
-              onPressed:
-                  () async => showDialog<RouteCompletedModal>(
-                    context: context,
-                    builder: (context) => const RouteCompletedModal(),
-                  ),
+              onPressed: () async => showDialog<RouteCompletedModal>(
+                context: context,
+                builder: (context) => const RouteCompletedModal(),
+              ),
               child: const Text("Route Completed Modal"),
             ),
             OutlinedButton(
-              onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
+              onPressed: () async => context.router.pushFullScreenError(
+                  "Oto testowy error. lorem ipsum i tak dalej"),
               child: const Text("Error Page"),
             ),
             const Text("Test Shimmera"),
@@ -83,7 +85,9 @@ class TestProviderWidget extends ConsumerWidget {
               calories: 450,
               time: 42,
             );
-            await ref.read(completedRoutesProvider.notifier).addCompletedRoute(route);
+            await ref
+                .read(completedRoutesProvider.notifier)
+                .addCompletedRoute(route);
           },
           child: const Text("Complete route 2"),
         ),
@@ -97,7 +101,9 @@ class TestProviderWidget extends ConsumerWidget {
               calories: 450,
               time: 42,
             );
-            await ref.read(completedRoutesProvider.notifier).addCompletedRoute(route);
+            await ref
+                .read(completedRoutesProvider.notifier)
+                .addCompletedRoute(route);
           },
           child: const Text("Complete route 4"),
         ),

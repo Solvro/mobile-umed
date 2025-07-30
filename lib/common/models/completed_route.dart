@@ -14,5 +14,6 @@ abstract class CompletedRoute with _$CompletedRoute {
     required int time,
   }) = _CompletedRoute;
 
-  factory CompletedRoute.fromJson(Map<String, dynamic> json) => _$CompletedRouteFromJson(json);
+  factory CompletedRoute.fromJson(Map<String, dynamic> json) =>
+      _$CompletedRouteFromJson(json);
 }

@@ -19,5 +19,6 @@ abstract class Creator with _$Creator {
     Socials? socials,
   }) = _Creator;
 
-  factory Creator.fromJson(Map<String, dynamic> json) => _$CreatorFromJson(json);
+  factory Creator.fromJson(Map<String, dynamic> json) =>
+      _$CreatorFromJson(json);
 }

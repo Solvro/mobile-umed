@@ -18,20 +18,34 @@ class SocialsSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!compact) Text(context.l10n.info_follow_us, style: context.textTheme.titleSmall),
+        if (!compact)
+          Text(context.l10n.info_follow_us,
+              style: context.textTheme.titleSmall),
         Row(
-          mainAxisAlignment: compact ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: compact
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceEvenly,
           children: [
             if (socials.webUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.webUrl!),
+              SocialIconButton(
+                  icon: Assets.icons.socialsWeb.sized(compact: compact),
+                  url: socials.webUrl!),
             if (socials.githubUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.githubUrl!),
+              SocialIconButton(
+                  icon: Assets.icons.socialsWeb.sized(compact: compact),
+                  url: socials.githubUrl!),
             if (socials.facebookUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.facebookUrl!),
+              SocialIconButton(
+                  icon: Assets.icons.socialsWeb.sized(compact: compact),
+                  url: socials.facebookUrl!),
             if (socials.linkedinUrl != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.linkedinUrl!),
+              SocialIconButton(
+                  icon: Assets.icons.socialsWeb.sized(compact: compact),
+                  url: socials.linkedinUrl!),
             if (socials.emailAddress != null)
-              SocialIconButton(icon: Assets.icons.socialsWeb.sized(compact: compact), url: socials.emailAddress!),
+              SocialIconButton(
+                  icon: Assets.icons.socialsWeb.sized(compact: compact),
+                  url: socials.emailAddress!),
           ],
         ),
       ],
@@ -41,7 +55,9 @@ class SocialsSection extends StatelessWidget {
 
 extension SvgGenImageX on SvgGenImage {
   SvgPicture sized({required bool compact}) {
-    final size = compact ? InfoSectionConfig.socialIconCompactSize : InfoSectionConfig.socialIconSize;
+    final size = compact
+        ? InfoSectionConfig.socialIconCompactSize
+        : InfoSectionConfig.socialIconSize;
     return this.svg(width: size, height: size);
   }
 }

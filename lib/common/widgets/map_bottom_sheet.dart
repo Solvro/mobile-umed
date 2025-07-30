@@ -6,7 +6,8 @@ import "../providers/bottom_sheet_providers.dart";
 import "styling/sheet_top_handle.dart";
 
 class MapBottomSheet extends ConsumerStatefulWidget {
-  const MapBottomSheet({super.key, required this.child, required this.button, this.controls});
+  const MapBottomSheet(
+      {super.key, required this.child, required this.button, this.controls});
   final Widget? controls;
   final Widget child;
   final Widget button;
@@ -16,17 +17,18 @@ class MapBottomSheet extends ConsumerStatefulWidget {
 }
 
 class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
-  final DraggableScrollableController controller = DraggableScrollableController();
+  final DraggableScrollableController controller =
+      DraggableScrollableController();
 
   @override
   void initState() {
     super.initState();
     controller.addListener(() {
       final currentPosition = controller.size;
-      ref.read(sheetStateProvider.notifier).state =
-          currentPosition < BottomSheetConfig.hiddenSizePercent + BottomSheetConfig.tolerance
-              ? SheetState.hidden
-              : SheetState.visible;
+      ref.read(sheetStateProvider.notifier).state = currentPosition <
+              BottomSheetConfig.hiddenSizePercent + BottomSheetConfig.tolerance
+          ? SheetState.hidden
+          : SheetState.visible;
     });
   }
 
@@ -39,14 +41,17 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final mode = ref.watch(sheetModeProvider);
-    final sheetPosition =
-        mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
+    final sheetPosition = mode == SheetMode.half
+        ? BottomSheetConfig.halfSizePercent
+        : BottomSheetConfig.fullSizePercent;
 
     ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
       if (shouldTrigger) {
         ref.read(sheetTriggerProvider.notifier).state = false;
         await controller.animateTo(
-          ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition,
+          ref.read(sheetStateProvider) == SheetState.hidden
+              ? BottomSheetConfig.hiddenSizePercent
+              : sheetPosition,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
@@ -99,9 +104,13 @@ class _BottomSheetDraggableArea extends StatelessWidget {
             child: CustomScrollView(
               controller: scrollController,
               slivers: [
-                SliverPersistentHeader(pinned: true, delegate: SheetTopHandle(controls: controls)),
+                SliverPersistentHeader(
+                    pinned: true, delegate: SheetTopHandle(controls: controls)),
                 SliverToBoxAdapter(
-                  child: Padding(padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium), child: child),
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppPaddings.medium),
+                      child: child),
                 ),
               ],
             ),
@@ -130,7 +139,9 @@ class _BottomSheetFixedButton extends StatelessWidget {
           top: false,
           child: Align(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tinySmall),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppPaddings.medium,
+                  vertical: AppPaddings.tinySmall),
               child: button,
             ),
           ),

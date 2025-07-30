@@ -29,13 +29,16 @@ class ProfileView extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
+        padding: const EdgeInsets.only(
+            top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: AppPaddings.medium),
             SectionHeader(context.l10n.common_finished_routes),
-            const ProgressBar(progress: 0.67123), // TODO(tomasz-trela): replace with real progress
+            const ProgressBar(
+                progress:
+                    0.67123), // TODO(tomasz-trela): replace with real progress
             const SizedBox(height: AppPaddings.tiny),
             RouteListWidget(
               routes: routes,
@@ -45,8 +48,10 @@ class ProfileView extends ConsumerWidget {
             const SizedBox(height: AppPaddings.medium),
             SectionHeader(context.l10n.achievements_statistics),
             switch (completedRoutes) {
-              AsyncData(:final value) => StatListWidget(stats: convertCompletedRoutesToStats(value)),
-              AsyncLoading() => const Center(child: CircularProgressIndicator()),
+              AsyncData(:final value) =>
+                StatListWidget(stats: convertCompletedRoutesToStats(value)),
+              AsyncLoading() =>
+                const Center(child: CircularProgressIndicator()),
               _ => Center(child: Text(context.l10n.errors_stats)),
             },
             const SizedBox(height: AppPaddings.medium),

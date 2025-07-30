@@ -12,7 +12,8 @@ class CreatorTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(InfoSectionConfig.radius)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(InfoSectionConfig.radius)),
       elevation: 4,
       child: SizedBox(
         height: InfoSectionConfig.creatorTileHeight,
@@ -21,9 +22,11 @@ class CreatorTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             CachedImage(creator.imageUrl),
-            Text("${creator.firstName} ${creator.lastName}", style: context.textTheme.bodyMedium),
+            Text("${creator.firstName} ${creator.lastName}",
+                style: context.textTheme.bodyMedium),
             Text(creator.role, style: context.textTheme.bodySmall),
-            if (creator.socials != null) SocialsSection(socials: creator.socials!),
+            if (creator.socials != null)
+              SocialsSection(socials: creator.socials!),
             const SizedBox(height: AppPaddings.tiny),
           ],
         ),

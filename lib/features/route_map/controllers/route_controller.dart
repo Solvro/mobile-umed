@@ -87,7 +87,8 @@ class VisitedCount extends _$VisitedCount {
 }
 
 bool latLngEqual(LatLng a, LatLng b, {double tolerance = 0.0003}) {
-  return (a.latitude - b.latitude).abs() < tolerance && (a.longitude - b.longitude).abs() < tolerance;
+  return (a.latitude - b.latitude).abs() < tolerance &&
+      (a.longitude - b.longitude).abs() < tolerance;
 }
 
 int calculateLineChangeFromLandmarksLatLng({

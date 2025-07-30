@@ -7,6 +7,7 @@ class NoImagePlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset("assets/images/no_image.png", width: size?.width, height: size?.height);
+    return Image.asset("assets/images/no_image.png",
+        width: size?.width, height: size?.height);
   }
 }

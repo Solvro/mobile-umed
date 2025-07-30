@@ -26,7 +26,8 @@ class LocationService {
     if (permission == LocationPermission.whileInUse) {
       permission = await Geolocator.requestPermission();
     }
-    return permission == LocationPermission.whileInUse || permission == LocationPermission.always;
+    return permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always;
   }
 
   static Future<bool> isLocationServiceEnabled() async {
@@ -55,9 +56,9 @@ class LocationService {
   }
 
   static Stream<LatLng?> getLocationStream() => Geolocator.getPositionStream(
-    locationSettings: const LocationSettings(
-      accuracy: LocationAccuracy.high,
-      distanceFilter: LocalizationConfig.distanceChangeFilter,
-    ),
-  ).map((position) => LatLng(position.latitude, position.longitude));
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          distanceFilter: LocalizationConfig.distanceChangeFilter,
+        ),
+      ).map((position) => LatLng(position.latitude, position.longitude));
 }

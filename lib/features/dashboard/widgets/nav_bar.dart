@@ -44,12 +44,16 @@ class _NavBarState extends State<NavBar> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small, vertical: AppPaddings.tiny),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppPaddings.small, vertical: AppPaddings.tiny),
           decoration: BoxDecoration(
             color: context.colorScheme.onSecondary,
             borderRadius: BorderRadius.circular(50),
             boxShadow: [
-              BoxShadow(color: context.colorScheme.onTertiary.withAlpha(30), blurRadius: 4, offset: const Offset(0, 2)),
+              BoxShadow(
+                  color: context.colorScheme.onTertiary.withAlpha(30),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2)),
             ],
           ),
           child: Row(
@@ -60,11 +64,10 @@ class _NavBarState extends State<NavBar> {
                 icon: _icons[index].$2,
                 iconSelected: _icons[index].$1,
                 isSelected: _selectedIndex == index,
-                onPressed:
-                    () => setState(() {
-                      _selectedIndex = index;
-                      widget.onItemSelected?.call(_selectedIndex);
-                    }),
+                onPressed: () => setState(() {
+                  _selectedIndex = index;
+                  widget.onItemSelected?.call(_selectedIndex);
+                }),
               ),
             ),
           ),
@@ -92,7 +95,8 @@ class _NavBarItem extends StatelessWidget {
     return IconButton(
       onPressed: onPressed,
       highlightColor: context.colorScheme.primary.withAlpha(30),
-      icon: Icon(isSelected ? iconSelected : icon, size: 26, color: context.colorScheme.secondary),
+      icon: Icon(isSelected ? iconSelected : icon,
+          size: 26, color: context.colorScheme.secondary),
     );
   }
 }

@@ -35,7 +35,9 @@ class StartRouteModal extends ConsumerWidget {
         },
       ),
       child: Text(
-        route.description != null ? route.description! : context.l10n.start_route_modal_title,
+        route.description != null
+            ? route.description!
+            : context.l10n.start_route_modal_title,
         textAlign: TextAlign.start,
         style: context.textTheme.bodyMedium?.copyWith(fontSize: 14),
       ),

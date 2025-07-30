@@ -4,7 +4,12 @@ import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 
 class StatInfoCompact extends StatelessWidget {
-  const StatInfoCompact({super.key, required this.title, required this.value, required this.icon, required this.color});
+  const StatInfoCompact(
+      {super.key,
+      required this.title,
+      required this.value,
+      required this.icon,
+      required this.color});
 
   final String title;
   final String value;
@@ -26,13 +31,14 @@ class StatInfoCompact extends StatelessWidget {
               padding: const EdgeInsets.all(StatInfoCompactConfig.boxPadding),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                border: Border.all(color: color, width: StatInfoCompactConfig.borderWidth),
-                borderRadius: BorderRadius.circular(StatInfoCompactConfig.boxRad),
+                border: Border.all(
+                    color: color, width: StatInfoCompactConfig.borderWidth),
+                borderRadius:
+                    BorderRadius.circular(StatInfoCompactConfig.boxRad),
               ),
               child: Text(value, style: context.textTheme.bodyMedium),
             ),
           ),
-
           Positioned(
             top: 0,
             left: 0,
@@ -42,14 +48,17 @@ class StatInfoCompact extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: context.colorScheme.surface,
-                border: Border.all(color: color, width: StatInfoCompactConfig.borderWidth),
+                border: Border.all(
+                    color: color, width: StatInfoCompactConfig.borderWidth),
               ),
               padding: const EdgeInsets.all(StatInfoCompactConfig.iconPadding),
               child: Icon(icon, color: color),
             ),
           ),
-
-          Positioned(top: 0, right: 0, child: Text(title, style: context.textTheme.bodySmall)),
+          Positioned(
+              top: 0,
+              right: 0,
+              child: Text(title, style: context.textTheme.bodySmall)),
         ],
       ),
     );

@@ -19,7 +19,8 @@ class StartRouteButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: AppPaddings.tiny),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: AppPaddings.tiny),
                 child: CircleAvatar(
                   radius: HomeViewConfig.circleAvatarRadius,
                   backgroundColor: context.colorScheme.primary,
@@ -31,7 +32,8 @@ class StartRouteButton extends StatelessWidget {
                 ),
               ),
               ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: HomeViewConfig.constrainedTextMaxWidth),
+                constraints: const BoxConstraints(
+                    maxWidth: HomeViewConfig.constrainedTextMaxWidth),
                 child: Text(
                   context.l10n.home_start_your_walk,
                   style: context.textTheme.headlineSmall,

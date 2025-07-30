@@ -15,7 +15,8 @@ class SelectRouteBottomSheet extends ConsumerStatefulWidget {
   SelectRouteBottomSheetState createState() => SelectRouteBottomSheetState();
 }
 
-class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> {
+class SelectRouteBottomSheetState
+    extends ConsumerState<SelectRouteBottomSheet> {
   @override
   void initState() {
     super.initState();
@@ -46,13 +47,14 @@ class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> 
         padding: const EdgeInsets.all(SelectRouteConfig.contentPadding),
         child: switch (routesAsync) {
           AsyncData(:final value) => ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            separatorBuilder: (context, index) => const Divider(height: 1, thickness: 1, color: ColorConsts.mistGray),
-            itemCount: value.length,
-            itemBuilder: (context, index) => RouteTile(route: value[index]),
-          ),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              separatorBuilder: (context, index) => const Divider(
+                  height: 1, thickness: 1, color: ColorConsts.mistGray),
+              itemCount: value.length,
+              itemBuilder: (context, index) => RouteTile(route: value[index]),
+            ),
           AsyncError(:final error) => Center(child: Text("Error: $error")),
           AsyncLoading() => const CircularProgressIndicator(),
           _ => const SizedBox.shrink(),

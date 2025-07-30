@@ -8,11 +8,14 @@ class SongsListConverter implements JsonConverter<IList<Song>, List<dynamic>> {
 
   @override
   IList<Song> fromJson(List<dynamic> json) {
-    final list =
-        json.map((e) => Song.fromJson((e as Map<String, dynamic>)["songs_id"] as Map<String, dynamic>)).toList();
+    final list = json
+        .map((e) => Song.fromJson(
+            (e as Map<String, dynamic>)["songs_id"] as Map<String, dynamic>))
+        .toList();
     return list.lock;
   }
 
   @override
-  List<dynamic> toJson(IList<Song> landmarks) => landmarks.map((e) => {"songs_id": e.toJson()}).toList();
+  List<dynamic> toJson(IList<Song> landmarks) =>
+      landmarks.map((e) => {"songs_id": e.toJson()}).toList();
 }

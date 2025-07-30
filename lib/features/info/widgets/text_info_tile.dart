@@ -4,7 +4,11 @@ import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 
 class TextInfoTile extends StatelessWidget {
-  const TextInfoTile({super.key, required this.title, required this.content, this.bottomActions});
+  const TextInfoTile(
+      {super.key,
+      required this.title,
+      required this.content,
+      this.bottomActions});
 
   final String title;
   final String content;
@@ -15,7 +19,6 @@ class TextInfoTile extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 4,
-
       child: Padding(
         padding: const EdgeInsets.all(AppPaddings.tiny),
         child: Column(

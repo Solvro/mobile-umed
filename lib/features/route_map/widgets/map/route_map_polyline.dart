@@ -23,10 +23,12 @@ class RouteMapPolyline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (locations.isEmpty) return PolylineLayer(polylines: [Polyline(points: [])]);
+    if (locations.isEmpty)
+      return PolylineLayer(polylines: [Polyline(points: [])]);
 
     final doneLocations = locations.sublist(0, passedLocations);
-    final notDoneLocations = locations.sublist(passedLocations == 0 ? passedLocations : passedLocations - 1);
+    final notDoneLocations = locations
+        .sublist(passedLocations == 0 ? passedLocations : passedLocations - 1);
 
     return PolylineLayer(
       polylines: [
@@ -41,7 +43,8 @@ class RouteMapPolyline extends StatelessWidget {
             points: notDoneLocations.toList(),
             color: active ? notDoneColor : inactiveColor,
             strokeWidth: MapConfig.unvisitedLineWidth,
-            pattern: StrokePattern.dashed(segments: const [MapConfig.dashLen, MapConfig.spaceLen]),
+            pattern: StrokePattern.dashed(
+                segments: const [MapConfig.dashLen, MapConfig.spaceLen]),
           ),
       ],
     );

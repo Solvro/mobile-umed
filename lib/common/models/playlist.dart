@@ -19,5 +19,6 @@ abstract class Playlist with _$Playlist {
     @SongsListConverter() required IList<Song> songs,
   }) = _Playlist;
 
-  factory Playlist.fromJson(Map<String, dynamic> json) => _$PlaylistFromJson(json);
+  factory Playlist.fromJson(Map<String, dynamic> json) =>
+      _$PlaylistFromJson(json);
 }
