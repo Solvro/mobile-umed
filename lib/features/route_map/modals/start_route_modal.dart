@@ -5,10 +5,10 @@ import "../../../../../app/app.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
 import "../../../../../common/models/route.dart";
-import "../../../../../common/widgets/main_action_button.dart";
-import "../../../../../common/widgets/options_modal.dart";
 import "../../../../app/theme/color_consts.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
+import "../../../common/widgets/buttons/main_action_button.dart";
+import "../../../common/widgets/modals/options_modal.dart";
 import "../providers/route_provider.dart";
 
 class StartRouteModal extends ConsumerWidget {

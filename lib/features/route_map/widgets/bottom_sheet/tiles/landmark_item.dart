@@ -1,9 +1,8 @@
 import "package:flutter/widgets.dart";
-
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/theme/app_theme.dart";
 import "../../../../../common/models/checkpoint.dart";
-import "../../../../../common/widgets/list_label.dart";
+import "../../../../../common/widgets/styling/list_label.dart";
 
 class LandmarkItem extends StatelessWidget {
   const LandmarkItem({super.key, required this.listIndex, required this.checkpoint});

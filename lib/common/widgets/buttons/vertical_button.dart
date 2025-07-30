@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
-import "button_styles.dart";
+import "../styling/button_styles.dart";
 
 class VerticalButton extends StatelessWidget {
   final String label;

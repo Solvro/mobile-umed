@@ -1,10 +1,9 @@
 import "package:flutter/material.dart";
-
-import "../../app/app.dart";
-import "../../app/config/ui_config.dart";
-import "../../app/l10n/l10n.dart";
-import "../../app/theme/app_theme.dart";
-import "main_action_button.dart";
+import "../../../app/app.dart";
+import "../../../app/config/ui_config.dart";
+import "../../../app/l10n/l10n.dart";
+import "../../../app/theme/app_theme.dart";
+import "../buttons/main_action_button.dart";
 
 class InfoModal extends StatelessWidget {
   const InfoModal({

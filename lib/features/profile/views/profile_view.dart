@@ -8,9 +8,9 @@ import "../../../common/data_source/mocks/mock_stats.dart";
 import "../../../common/models/route.dart";
 import "../../../common/parsers/completed_routes_stats_converter.dart";
 import "../../../common/providers/completed_routes_provider.dart";
-import "../../../common/widgets/common/app_bar.dart";
-import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
-import "../../../common/widgets/common/section_header.dart";
+import "../../../common/widgets/app_bar.dart";
+import "../../../common/widgets/horizontal_routes_list/horizontal_routes_list.dart";
+import "../../../common/widgets/styling/section_header.dart";
 import "../widgets/horizontal_stat_card_list/horizontal_card_list.dart";
 import "../widgets/progress_bar.dart";
 

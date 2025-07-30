@@ -1,10 +1,9 @@
 import "package:flutter/material.dart";
-
 import "../../../app/app.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../common/widgets/main_action_button.dart";
+import "../../../common/widgets/buttons/main_action_button.dart";
 
 class FullScreenErrorView extends StatelessWidget {
   final String? message;

@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "../../app/config/ui_config.dart";
-import "../../app/theme/app_theme.dart";
-import "main_action_button.dart";
+import "../../../app/config/ui_config.dart";
+import "../../../app/theme/app_theme.dart";
+import "../buttons/main_action_button.dart";
 
 class OptionsModal extends StatelessWidget {
   const OptionsModal({

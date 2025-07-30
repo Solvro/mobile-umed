@@ -8,7 +8,7 @@ import "../../../../../app/theme/app_theme.dart";
 import "../../../../../app/theme/color_consts.dart";
 import "../../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../../../common/models/route.dart";
-import "../../../../../common/widgets/secondary_action_button.dart";
+import "../../../../../common/widgets/buttons/secondary_action_button.dart";
 import "../../../modals/start_route_modal.dart";
 import "../../../providers/route_provider.dart";
 import "../sections/landmarks_section.dart";

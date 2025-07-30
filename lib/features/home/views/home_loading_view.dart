@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../common/widgets/common/section_header.dart";
 import "../../../common/widgets/shimmer/horizontal_list_shimmer.dart";
+import "../../../common/widgets/styling/section_header.dart";
 
 class HomeLoadingView extends StatelessWidget {
   const HomeLoadingView({super.key});

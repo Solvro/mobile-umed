@@ -3,7 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/theme/app_theme.dart";
 import "../providers/bottom_sheet_providers.dart";
-import "sheet_top_handle.dart";
+import "styling/sheet_top_handle.dart";
 
 class MapBottomSheet extends ConsumerStatefulWidget {
   const MapBottomSheet({super.key, required this.child, required this.button, this.controls});

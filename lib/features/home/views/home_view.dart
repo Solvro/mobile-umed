@@ -4,9 +4,9 @@ import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/app.dart";
 import "../../../common/models/route.dart";
-import "../../../common/widgets/common/app_bar.dart";
-import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
-import "../../../common/widgets/common/section_header.dart";
+import "../../../common/widgets/app_bar.dart";
+import "../../../common/widgets/horizontal_routes_list/horizontal_routes_list.dart";
+import "../../../common/widgets/styling/section_header.dart";
 import "../widgets/button_row.dart";
 import "../widgets/start_route_button.dart";
 
