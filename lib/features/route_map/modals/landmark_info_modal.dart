@@ -43,7 +43,6 @@ class LandmarkInfoModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
-
             ClipRRect(
               borderRadius: BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
               child: const CachedImage(
@@ -51,9 +50,7 @@ class LandmarkInfoModal extends StatelessWidget {
                 "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
               ),
             ),
-
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
-
             Column(
               spacing: AppPaddings.tiny,
               children: [
@@ -64,7 +61,6 @@ class LandmarkInfoModal extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
           ],
         ),

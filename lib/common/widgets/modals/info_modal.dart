@@ -48,7 +48,6 @@ class InfoModal extends StatelessWidget {
                 Text(title, style: context.textTheme.headlineMedium),
                 const SizedBox(height: AppPaddings.tinySmall),
                 Flexible(child: child),
-
                 MainActionButton(
                   text: backButtonText ?? context.l10n.close,
                   onPressed: onClose ?? () => context.router.pop(),

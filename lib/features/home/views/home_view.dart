@@ -22,7 +22,6 @@ class HomeView extends StatelessWidget {
         title: context.l10n.common_app_bar_title_one,
         subtitle: context.l10n.common_app_bar_title_two,
       ),
-
       body: ListView(
         shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),

@@ -87,7 +87,6 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
           ),
         ],
       ),
-
       child:
           (_chosenOption == RouteDetailsOption.info) ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
     );
