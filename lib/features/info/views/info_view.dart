@@ -1,14 +1,14 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
-
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/creator.dart";
 import "../../../common/models/info_section.dart";
 import "../../../common/utils/url_launcher.dart";
-import "../../../common/widgets/main_action_button.dart";
+import "../../../common/widgets/app_bar.dart";
+import "../../../common/widgets/buttons/main_action_button.dart";
+import "../../../common/widgets/styling/section_header.dart";
 import "../widgets/creator_tile/creator_tile.dart";
-import "../widgets/section_title.dart";
 import "../widgets/socials_section.dart";
 import "../widgets/text_info_tile.dart";
 
@@ -21,10 +21,15 @@ class InfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CommonAppBar(
+        title: context.l10n.common_app_bar_title_one,
+        subtitle: context.l10n.common_app_bar_title_two,
+      ),
       body: ListView(
+        padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [
           ...infoSections.map((section) => InfoSectionWidget(infoSection: section)),
-          SectionTitle(title: context.l10n.info_creators),
+          SectionHeader(context.l10n.info_creators),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
@@ -49,14 +54,9 @@ class InfoSectionWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        SectionTitle(title: infoSection.title),
+        SectionHeader(infoSection.title),
         Padding(
-          padding: const EdgeInsets.only(
-            bottom: AppPaddings.medium,
-            top: AppPaddings.tiny,
-            left: AppPaddings.medium,
-            right: AppPaddings.medium,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: AppPaddings.nanoTiny, horizontal: AppPaddings.medium),
           child:
               infoSection.socials != null
                   ? TextInfoTile(

@@ -15,7 +15,6 @@ class TextInfoTile extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 4,
-
       child: Padding(
         padding: const EdgeInsets.all(AppPaddings.tiny),
         child: Column(

@@ -21,7 +21,6 @@ class SongTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 1),
-
               child: Container(
                 height: PlaylistInfoConfig.songTileDotRad,
                 width: PlaylistInfoConfig.songTileDotRad,

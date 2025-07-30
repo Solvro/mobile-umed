@@ -2,9 +2,9 @@ import "package:flutter/material.dart";
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/checkpoint.dart";
-import "../../../common/widgets/cached_image.dart";
-import "../../../common/widgets/common/label_value_pair.dart";
-import "../../../common/widgets/info_modal.dart";
+import "../../../common/widgets/image/cached_image.dart";
+import "../../../common/widgets/modals/info_modal.dart";
+import "../../../common/widgets/styling/label_value_pair.dart";
 
 class LandmarkInfoModal extends StatelessWidget {
   final Checkpoint checkpoint;
@@ -43,7 +43,6 @@ class LandmarkInfoModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
-
             ClipRRect(
               borderRadius: BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
               child: const CachedImage(
@@ -51,9 +50,7 @@ class LandmarkInfoModal extends StatelessWidget {
                 "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
               ),
             ),
-
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
-
             Column(
               spacing: AppPaddings.tiny,
               children: [
@@ -64,7 +61,6 @@ class LandmarkInfoModal extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
           ],
         ),

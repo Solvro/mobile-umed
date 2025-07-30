@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../common/data_source/mocks/mock_routes.dart";
 import "../../../common/models/creator.dart";
-import "../../../common/widgets/common/horizontal_routes_list/horizontal_routes_list.dart";
+import "../../../common/widgets/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/shimmer/horizontal_list_shimmer.dart";
 import "../../../common/widgets/shimmer/shimmer_switcher.dart";
 import "../../info/widgets/creator_tile/creator_tile.dart";

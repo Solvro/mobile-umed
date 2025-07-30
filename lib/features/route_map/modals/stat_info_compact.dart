@@ -32,7 +32,6 @@ class StatInfoCompact extends StatelessWidget {
               child: Text(value, style: context.textTheme.bodyMedium),
             ),
           ),
-
           Positioned(
             top: 0,
             left: 0,
@@ -48,7 +47,6 @@ class StatInfoCompact extends StatelessWidget {
               child: Icon(icon, color: color),
             ),
           ),
-
           Positioned(top: 0, right: 0, child: Text(title, style: context.textTheme.bodySmall)),
         ],
       ),
