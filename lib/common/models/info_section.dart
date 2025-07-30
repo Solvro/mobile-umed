@@ -18,6 +18,5 @@ abstract class InfoSection with _$InfoSection {
     Socials? socials,
   }) = _InfoSection;
 
-  factory InfoSection.fromJson(Map<String, dynamic> json) =>
-      _$InfoSectionFromJson(json);
+  factory InfoSection.fromJson(Map<String, dynamic> json) => _$InfoSectionFromJson(json);
 }

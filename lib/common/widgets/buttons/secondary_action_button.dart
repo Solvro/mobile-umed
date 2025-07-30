@@ -19,21 +19,12 @@ class SecondaryActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chosenBgColor =
-        backgroundColor ?? Theme.of(context).colorScheme.primary;
-    final chosenTextColor =
-        textColor ?? Theme.of(context).colorScheme.onPrimary;
+    final chosenBgColor = backgroundColor ?? Theme.of(context).colorScheme.primary;
+    final chosenTextColor = textColor ?? Theme.of(context).colorScheme.onPrimary;
     return Container(
       decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.circular(ButtonsConfig.secondaryButtonShadowRadius),
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 4),
-              blurRadius: 2,
-              spreadRadius: 1)
-        ],
+        borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonShadowRadius),
+        boxShadow: const [BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 2, spreadRadius: 1)],
       ),
       width: double.infinity,
       child: ElevatedButton(
@@ -41,20 +32,16 @@ class SecondaryActionButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: chosenBgColor,
           foregroundColor: chosenTextColor,
-          shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ButtonsConfig.secondaryButtonRadius)),
           padding: EdgeInsets.symmetric(vertical: iconData == null ? 2 : 1),
         ),
-        child: _chooseButtonContent(
-            iconData: iconData, text: text, textColor: chosenTextColor),
+        child: _chooseButtonContent(iconData: iconData, text: text, textColor: chosenTextColor),
       ),
     );
   }
 }
 
-Widget _chooseButtonContent(
-    {IconData? iconData, String? text, Color? textColor}) {
+Widget _chooseButtonContent({IconData? iconData, String? text, Color? textColor}) {
   if (iconData == null && text == null) {
     return const SizedBox.shrink();
   } else if (iconData != null) {

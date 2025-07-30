@@ -43,13 +43,10 @@ class CompletedRoutes extends _$CompletedRoutes {
 
   Future<List<CompletedRoute>> _getAllCompletedRoutes() async {
     final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
-    return box.values
-        .map((val) => CompletedRoute.fromJson(Map<String, dynamic>.from(val)))
-        .toList();
+    return box.values.map((val) => CompletedRoute.fromJson(Map<String, dynamic>.from(val))).toList();
   }
 
-  List<dynamic> _getKeysToDelete(
-      Box<Map<dynamic, dynamic>> box, Set<int> remoteRouteIds) {
+  List<dynamic> _getKeysToDelete(Box<Map<dynamic, dynamic>> box, Set<int> remoteRouteIds) {
     final keysToDelete = <dynamic>[];
     for (final key in box.keys) {
       final json = box.get(key);

@@ -24,17 +24,12 @@ class SongTile extends StatelessWidget {
               child: Container(
                 height: PlaylistInfoConfig.songTileDotRad,
                 width: PlaylistInfoConfig.songTileDotRad,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: context.colorScheme.primary),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.primary),
                 alignment: Alignment.center,
-                child: Text(listIndex.toString(),
-                    style: TextStyle(color: context.colorScheme.onPrimary)),
+                child: Text(listIndex.toString(), style: TextStyle(color: context.colorScheme.onPrimary)),
               ),
             ),
-            Container(
-                height: PlaylistInfoConfig.songTileDotRad,
-                width: 4,
-                color: context.colorScheme.primary),
+            Container(height: PlaylistInfoConfig.songTileDotRad, width: 4, color: context.colorScheme.primary),
             const SizedBox(height: 1),
           ],
         ),

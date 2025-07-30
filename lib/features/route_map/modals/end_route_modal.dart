@@ -29,13 +29,11 @@ class EndRouteModal extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(context.l10n.route_end_modal_helper,
-              textAlign: TextAlign.start, overflow: TextOverflow.fade),
+          Text(context.l10n.route_end_modal_helper, textAlign: TextAlign.start, overflow: TextOverflow.fade),
           const SizedBox(height: AppPaddings.tinySmall),
           // Image placeholder
           ClipRRect(
-            borderRadius:
-                BorderRadius.circular(EndRouteModalConfig.imageRadius),
+            borderRadius: BorderRadius.circular(EndRouteModalConfig.imageRadius),
             child: const CachedImage(
               //for now there is no image url property in the landmark model
               "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",

@@ -36,8 +36,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
   }
 
-  void _initializeBackgroundTracking(
-      WidgetRef ref, BuildContext context, Route? route) {
+  void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
     if (route != null) {
       FlutterForegroundTask.addTaskDataCallback((data) async {
         if (!mounted) return;
@@ -49,16 +48,13 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       });
 
       FlutterForegroundTask.sendDataToTask({
-        ForegroundTaskKeys.locations:
-            route.route.map((element) => element.toJson()).toList(),
-        ForegroundTaskKeys.checkpoints:
-            route.checkpoints.map((element) => element.toJson()).toList(),
+        ForegroundTaskKeys.locations: route.route.map((element) => element.toJson()).toList(),
+        ForegroundTaskKeys.checkpoints: route.checkpoints.map((element) => element.toJson()).toList(),
       });
     }
   }
 
-  Future<void> _onReceiveTaskData(
-      Object data, WidgetRef ref, BuildContext context, Route route) async {
+  Future<void> _onReceiveTaskData(Object data, WidgetRef ref, BuildContext context, Route route) async {
     if (data is String) {
       final event = TaskEvent.fromString(data);
       switch (event) {
@@ -67,13 +63,10 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
         case TaskEvent.nextCheckpointReached:
           ref.read(visitedCountProvider.notifier).incrementVisited();
         case TaskEvent.routeCompleted:
-          await showDialog<RouteCompletedModal>(
-              context: context,
-              builder: (context) => const RouteCompletedModal());
+          await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
         case TaskEvent.error:
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Error: $data")));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
       }
     }
   }
@@ -103,15 +96,13 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
 
     final routeAsync = ref.watch(fetchRouteWithIdProvider(widget.id!));
 
-    ref.listen<AsyncValue<Route>>(fetchRouteWithIdProvider(widget.id!),
-        (prev, next) {
+    ref.listen<AsyncValue<Route>>(fetchRouteWithIdProvider(widget.id!), (prev, next) {
       _initializeState(ref, route: next.value);
     });
 
     return switch (routeAsync) {
       AsyncData() => const RouteMapView(),
-      AsyncError(:final error) => ErrorPage(
-          onBackToHome: context.router.goHome, message: error.toString()),
+      AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };
   }

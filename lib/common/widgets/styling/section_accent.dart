@@ -10,8 +10,7 @@ class SectionAccent extends StatelessWidget {
       height: SectionAccentConfig.height,
       decoration: BoxDecoration(
         color: context.colorScheme.primary,
-        borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
+        borderRadius: const BorderRadius.only(topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
     );
   }

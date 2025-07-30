@@ -24,9 +24,7 @@ abstract class Route with _$Route {
     required Playlist? playlist,
     required String? image,
     @LatLngListConverter() required IList<LatLng> route,
-    @JsonKey(name: "landmarks")
-    @LandmarkListConverter()
-    required IList<Checkpoint> checkpoints,
+    @JsonKey(name: "landmarks") @LandmarkListConverter() required IList<Checkpoint> checkpoints,
   }) = _Route;
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);

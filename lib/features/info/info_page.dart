@@ -16,8 +16,7 @@ class InfoPage extends ConsumerWidget {
     final combinedRef = ref.watch(fetchCreatorsAndInfosProvider);
 
     return switch (combinedRef) {
-      AsyncData(:final value) =>
-        InfoView(creators: value.creators, infoSections: value.infoSections),
+      AsyncData(:final value) => InfoView(creators: value.creators, infoSections: value.infoSections),
       AsyncError() => const FullScreenErrorView(),
       _ => const InfoLoadingView(),
     };

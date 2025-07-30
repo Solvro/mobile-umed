@@ -19,15 +19,11 @@ class TestWidget extends ConsumerWidget {
 
 Future<void> testCache(WidgetRef ref) async {
   final dio = await ref.read(dioClientProvider.future);
-  final url =
-      "${Env.apiUrl}items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*";
+  final url = "${Env.apiUrl}items/routes?fields=*,landmarks.landmarks_id.*,landmarks.landmarks_id.location.*";
 
   Future<int> measureTime() async {
     final stopwatch = Stopwatch()..start();
-    await dio.get(url,
-        options: (await getCacheOptions())
-            .copyWith(maxStale: const Duration(hours: 3))
-            .toOptions());
+    await dio.get(url, options: (await getCacheOptions()).copyWith(maxStale: const Duration(hours: 3)).toOptions());
     stopwatch.stop();
     return stopwatch.elapsedMilliseconds;
   }

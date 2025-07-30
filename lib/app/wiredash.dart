@@ -12,10 +12,7 @@ class ProdWiredash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (kReleaseMode) {
-      return Wiredash(
-          projectId: Env.wiredashProjectId,
-          secret: Env.wiredashSecretKey,
-          child: child);
+      return Wiredash(projectId: Env.wiredashProjectId, secret: Env.wiredashSecretKey, child: child);
     } else {
       return child;
     }

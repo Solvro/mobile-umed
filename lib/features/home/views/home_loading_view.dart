@@ -13,15 +13,13 @@ class HomeLoadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.common_finished_routes_title,
-            style: context.textTheme.headlineLarge),
+        title: Text(context.l10n.common_finished_routes_title, style: context.textTheme.headlineLarge),
         centerTitle: true,
         elevation: 0,
       ),
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppPaddings.tinySmall, vertical: AppPaddings.tinySmall),
+        padding: const EdgeInsets.symmetric(horizontal: AppPaddings.tinySmall, vertical: AppPaddings.tinySmall),
         children: [
           const SizedBox(height: AppPaddings.tinySmall),
           SectionHeader(context.l10n.home_nearest_to_you),

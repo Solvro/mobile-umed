@@ -13,8 +13,7 @@ import "../widgets/socials_section.dart";
 import "../widgets/text_info_tile.dart";
 
 class InfoView extends StatelessWidget {
-  const InfoView(
-      {super.key, required this.creators, required this.infoSections});
+  const InfoView({super.key, required this.creators, required this.infoSections});
 
   final IList<Creator> creators;
   final IList<InfoSection> infoSections;
@@ -27,17 +26,14 @@ class InfoView extends StatelessWidget {
         subtitle: context.l10n.common_app_bar_title_two,
       ),
       body: ListView(
-        padding: const EdgeInsets.only(
-            top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
+        padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [
-          ...infoSections
-              .map((section) => InfoSectionWidget(infoSection: section)),
+          ...infoSections.map((section) => InfoSectionWidget(infoSection: section)),
           SectionHeader(context.l10n.info_creators),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
+              padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
               child: Row(children: creators.map(CreatorTile.new).toList()),
             ),
           ),
@@ -60,25 +56,21 @@ class InfoSectionWidget extends StatelessWidget {
       children: [
         SectionHeader(infoSection.title),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: AppPaddings.nanoTiny, horizontal: AppPaddings.medium),
-          child: infoSection.socials != null
-              ? TextInfoTile(
-                  title: infoSection.subtitle,
-                  content: infoSection.description,
-                  bottomActions: (infoSection.socials != null &&
-                          infoSection.socials!.onlyWeb)
-                      ? MainActionButton(
-                          text: context.l10n.info_more_info,
-                          onPressed: () async =>
-                              customLaunchUrl(infoSection.socials!.webUrl!),
-                        )
-                      : SocialsSection(
-                          compact: false, socials: infoSection.socials!),
-                )
-              : TextInfoTile(
-                  title: infoSection.subtitle,
-                  content: infoSection.description),
+          padding: const EdgeInsets.symmetric(vertical: AppPaddings.nanoTiny, horizontal: AppPaddings.medium),
+          child:
+              infoSection.socials != null
+                  ? TextInfoTile(
+                    title: infoSection.subtitle,
+                    content: infoSection.description,
+                    bottomActions:
+                        (infoSection.socials != null && infoSection.socials!.onlyWeb)
+                            ? MainActionButton(
+                              text: context.l10n.info_more_info,
+                              onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
+                            )
+                            : SocialsSection(compact: false, socials: infoSection.socials!),
+                  )
+                  : TextInfoTile(title: infoSection.subtitle, content: infoSection.description),
         ),
       ],
     );

@@ -22,8 +22,7 @@ class RouteMapView extends ConsumerStatefulWidget {
   RouteMapViewState createState() => RouteMapViewState();
 }
 
-class RouteMapViewState extends ConsumerState<RouteMapView>
-    with TickerProviderStateMixin {
+class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderStateMixin {
   late final AnimatedMapController _mapController;
 
   late SheetMode _currentSheetMode;
@@ -82,9 +81,9 @@ class RouteMapViewState extends ConsumerState<RouteMapView>
           children: [
             switch (allRoutesAsync) {
               AsyncData() => RouteMapWidget(
-                  controller: _mapController,
-                  active: _currentSheetState == SheetState.hidden,
-                ),
+                controller: _mapController,
+                active: _currentSheetState == SheetState.hidden,
+              ),
               AsyncLoading() => const CircularProgressIndicator(),
               _ => Center(child: Text(context.l10n.errors_generic)),
             },
@@ -99,19 +98,14 @@ class RouteMapViewState extends ConsumerState<RouteMapView>
       child: Scaffold(
         body: Stack(
           children: [
-            RouteMapWidget(
-                controller: _mapController,
-                route: route,
-                active: _currentSheetState == SheetState.hidden),
+            RouteMapWidget(controller: _mapController, route: route, active: _currentSheetState == SheetState.hidden),
             _SheetHidingHitTest(currentSheetState: _currentSheetState),
             RouteProgressBar(checkpoints: route.checkpoints),
             const RouteBottomSheet(),
             Positioned(
               top: MediaQuery.of(context).padding.top + 56,
               right: 16,
-              child: FloatingActionButton.small(
-                  onPressed: _centerToUserLocation,
-                  child: const Icon(Icons.my_location)),
+              child: FloatingActionButton.small(onPressed: _centerToUserLocation, child: const Icon(Icons.my_location)),
             ),
           ],
         ),

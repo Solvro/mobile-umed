@@ -18,17 +18,12 @@ class ListLabel extends StatelessWidget {
           child: Container(
             height: AppRadius.big,
             width: AppRadius.big,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle, color: context.colorScheme.primary),
+            decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.primary),
             alignment: Alignment.center,
-            child: Text(index.toString(),
-                style: TextStyle(color: context.colorScheme.onPrimary)),
+            child: Text(index.toString(), style: TextStyle(color: context.colorScheme.onPrimary)),
           ),
         ),
-        Container(
-            height: AppRadius.big,
-            width: 4,
-            color: context.colorScheme.primary),
+        Container(height: AppRadius.big, width: 4, color: context.colorScheme.primary),
         const SizedBox(height: 1),
       ],
     );

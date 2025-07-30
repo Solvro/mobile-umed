@@ -4,11 +4,7 @@ import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 
 class TextInfoTile extends StatelessWidget {
-  const TextInfoTile(
-      {super.key,
-      required this.title,
-      required this.content,
-      this.bottomActions});
+  const TextInfoTile({super.key, required this.title, required this.content, this.bottomActions});
 
   final String title;
   final String content;

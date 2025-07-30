@@ -26,13 +26,7 @@ class StatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colorScheme.onSecondary,
         borderRadius: BorderRadius.circular(AppRadius.small),
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black12,
-              blurRadius: 1,
-              spreadRadius: 1,
-              offset: Offset(0, 3))
-        ],
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 1, offset: Offset(0, 3))],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

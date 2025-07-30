@@ -8,8 +8,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String subtitle;
   final List<Widget>? actions;
 
-  const CommonAppBar(
-      {super.key, required this.title, required this.subtitle, this.actions});
+  const CommonAppBar({super.key, required this.title, required this.subtitle, this.actions});
 
   @override
   Size get preferredSize => const Size.fromHeight(AppBarConfig.preferredSize);
@@ -41,18 +40,12 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               Center(
                 child: Text(
                   "$title\n$subtitle",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineLarge
-                      ?.copyWith(color: context.colorScheme.secondary),
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: context.colorScheme.secondary),
                   textAlign: TextAlign.center,
                 ),
               ),
               if (actions != null)
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                        mainAxisSize: MainAxisSize.min, children: actions!)),
+                Align(alignment: Alignment.centerRight, child: Row(mainAxisSize: MainAxisSize.min, children: actions!)),
             ],
           ),
         ),

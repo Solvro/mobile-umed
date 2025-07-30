@@ -29,8 +29,7 @@ class InfoModal extends StatelessWidget {
         vertical: InfoModalConfig.outerPaddingVertical,
       ),
       backgroundColor: context.colorScheme.surface,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(InfoModalConfig.radius)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(InfoModalConfig.radius)),
       child: Padding(
         padding: const EdgeInsets.all(AppPaddings.small),
         child: Stack(
@@ -40,9 +39,7 @@ class InfoModal extends StatelessWidget {
               Positioned(
                 top: 0,
                 right: 0,
-                child: Opacity(
-                    opacity: InfoModalConfig.decorationOpacity,
-                    child: decoration),
+                child: Opacity(opacity: InfoModalConfig.decorationOpacity, child: decoration),
               ),
             Column(
               mainAxisSize: MainAxisSize.min,

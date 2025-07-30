@@ -12,13 +12,11 @@ class ShimmerSwitcher extends StatelessWidget {
     required this.isLoading,
     required this.shimmer,
     required this.child,
-    this.duration =
-        const Duration(milliseconds: ShimmerConfig.millisecounds500),
+    this.duration = const Duration(milliseconds: ShimmerConfig.millisecounds500),
   });
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-        duration: duration, child: isLoading ? shimmer : child);
+    return AnimatedSwitcher(duration: duration, child: isLoading ? shimmer : child);
   }
 }

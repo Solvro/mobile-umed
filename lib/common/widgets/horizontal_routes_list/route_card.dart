@@ -29,8 +29,7 @@ class RouteCard extends StatelessWidget {
       height: height,
       child: Card(
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.small)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.small)),
         elevation: 2,
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -40,9 +39,7 @@ class RouteCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: CachedImage((route.image?.isNotEmpty ?? false)
-                    ? "${Env.apiUrl}assets/${route.image}"
-                    : null),
+                child: CachedImage((route.image?.isNotEmpty ?? false) ? "${Env.apiUrl}assets/${route.image}" : null),
               ),
               Container(
                 color: colorScheme.primary,
@@ -51,10 +48,7 @@ class RouteCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(route.name,
-                        style: textTheme.labelMedium,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1),
+                    Text(route.name, style: textTheme.labelMedium, overflow: TextOverflow.ellipsis, maxLines: 1),
                     Text("${route.distance} km", style: textTheme.labelSmall),
                   ],
                 ),

@@ -22,8 +22,7 @@ import "route_map_polyline.dart";
 import "route_selections_polyline.dart";
 
 class RouteMapWidget extends ConsumerStatefulWidget {
-  const RouteMapWidget(
-      {super.key, required this.controller, this.route, this.active = true});
+  const RouteMapWidget({super.key, required this.controller, this.route, this.active = true});
 
   final AnimatedMapController controller;
   final Route? route;
@@ -33,8 +32,7 @@ class RouteMapWidget extends ConsumerStatefulWidget {
   RouteMapWidgetState createState() => RouteMapWidgetState();
 }
 
-class RouteMapWidgetState extends ConsumerState<RouteMapWidget>
-    with WidgetsBindingObserver, TickerProviderStateMixin {
+class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBindingObserver, TickerProviderStateMixin {
   @override
   void initState() {
     if (Platform.isIOS) {
@@ -63,34 +61,27 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget>
     final landmarks = route?.checkpoints ?? const IListConst([]);
 
     return switch (tileProvider) {
-      AsyncData(:final value) => route == null
-          ? FlutterMap(
+      AsyncData(:final value) =>
+        route == null
+            ? FlutterMap(
               options: const MapOptions(initialCenter: MapConfig.wroclawCenter),
               mapController: widget.controller.mapController,
               children: [
-                TileLayer(
-                    urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
+                TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, maxZoom: 19),
                 if (expandedRoutes.isNotEmpty)
                   RouteSelectionsPolyline(
-                    locations:
-                        expandedRoutes.asList().map((r) => r.route).toIList(),
+                    locations: expandedRoutes.asList().map((r) => r.route).toIList(),
                     lastInteracted: expandedRoutes.last,
                     selectedColor: context.colorScheme.primary,
                     notSelectedColor: MapConfig.unvisitedColor,
                   ),
               ],
             )
-          : FlutterMap(
+            : FlutterMap(
               mapController: widget.controller.mapController,
-              options: MapOptions(
-                  initialCenter: landmarks.isNotEmpty
-                      ? landmarks.first.location
-                      : route.route.first),
+              options: MapOptions(initialCenter: landmarks.isNotEmpty ? landmarks.first.location : route.route.first),
               children: [
-                TileLayer(
-                    urlTemplate: FlutterMapConfig.urlTemplate,
-                    tileProvider: value,
-                    maxZoom: 19),
+                TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
                 RouteMapPolyline(
                   locations: route.route,
                   doneColor: context.colorScheme.primary,
@@ -108,24 +99,26 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget>
                   ),
                 ),
                 MarkerLayer(
-                  markers: landmarks.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final landmark = entry.value;
-                    final Alignment alignment = index == 0
-                        ? Alignment.center
-                        : index == landmarks.length - 1
-                            ? Alignment.topRight
-                            : Alignment.topCenter;
-                    return _buildMarkers(
-                      context: context,
-                      landmark: landmark,
-                      index: index,
-                      visitedCount: visitedCount,
-                      active: widget.active,
-                      totalLandmarks: landmarks.length,
-                      markerAlignment: alignment,
-                    );
-                  }).toList(),
+                  markers:
+                      landmarks.asMap().entries.map((entry) {
+                        final index = entry.key;
+                        final landmark = entry.value;
+                        final Alignment alignment =
+                            index == 0
+                                ? Alignment.center
+                                : index == landmarks.length - 1
+                                ? Alignment.topRight
+                                : Alignment.topCenter;
+                        return _buildMarkers(
+                          context: context,
+                          landmark: landmark,
+                          index: index,
+                          visitedCount: visitedCount,
+                          active: widget.active,
+                          totalLandmarks: landmarks.length,
+                          markerAlignment: alignment,
+                        );
+                      }).toList(),
                 ),
               ],
             ),
@@ -151,17 +144,14 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget>
       point: landmark.location,
       rotate: true,
       child: GestureDetector(
-        onTap: active
-            ? () async => showDialog<LandmarkInfoModal>(
+        onTap:
+            active
+                ? () async => showDialog<LandmarkInfoModal>(
                   context: context,
                   builder: (_) => LandmarkInfoModal(checkpoint: landmark),
                 )
-            : null,
-        child: RouteMapMarker(
-            type: landmark.type,
-            active: active,
-            visited: visitedCount > index,
-            order: index),
+                : null,
+        child: RouteMapMarker(type: landmark.type, active: active, visited: visitedCount > index, order: index),
       ),
     );
   }

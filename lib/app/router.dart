@@ -21,38 +21,24 @@ final _router = GoRouter(
       path: "${RouteMapPage.routeName}/:id",
       pageBuilder: (context, state) {
         final id = int.parse(state.pathParameters["id"]!);
-        return NoTransitionPage(
-            key: ValueKey("route_map_$id"), child: RouteMapPage(id: id));
+        return NoTransitionPage(key: ValueKey("route_map_$id"), child: RouteMapPage(id: id));
       },
     ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (_, _, navigationShell) =>
-          DashboardPage(navigationShell: navigationShell),
+      builder: (_, _, navigationShell) => DashboardPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           navigatorKey: _shellNavigatorHomeKey,
-          routes: [
-            GoRoute(
-                path: HomePage.routeName,
-                builder: (context, state) => const HomePage())
-          ],
+          routes: [GoRoute(path: HomePage.routeName, builder: (context, state) => const HomePage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorInfoKey,
-          routes: [
-            GoRoute(
-                path: InfoPage.routeName,
-                builder: (context, state) => const InfoPage())
-          ],
+          routes: [GoRoute(path: InfoPage.routeName, builder: (context, state) => const InfoPage())],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorProfileKey,
-          routes: [
-            GoRoute(
-                path: ProfilePage.routeName,
-                builder: (context, state) => const ProfilePage())
-          ],
+          routes: [GoRoute(path: ProfilePage.routeName, builder: (context, state) => const ProfilePage())],
         ),
       ],
     ),
@@ -61,8 +47,7 @@ final _router = GoRouter(
       parentNavigatorKey: _rootNavigatorKey,
       builder: (context, state) {
         final message = state.uri.queryParameters["message"];
-        return ErrorPage(
-            message: message, onBackToHome: () => context.router.goHome());
+        return ErrorPage(message: message, onBackToHome: () => context.router.goHome());
       },
     ),
     if (kDebugMode)
@@ -85,12 +70,10 @@ extension RouterX on GoRouter {
     final locationHasPermissions = await LocationService.requestPermissions();
 
     if (!locationHasPermissions) {
-      final locationServiceEnabled =
-          await LocationService.isLocationServiceEnabled();
+      final locationServiceEnabled = await LocationService.isLocationServiceEnabled();
       await showDialog<void>(
         context: _rootNavigatorKey.currentContext!,
-        builder: (context) => LocationAccessModal(
-            isLocationServiceEnabled: locationServiceEnabled),
+        builder: (context) => LocationAccessModal(isLocationServiceEnabled: locationServiceEnabled),
       );
       return;
     }
@@ -109,7 +92,6 @@ extension RouterX on GoRouter {
 
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);
   Future<void> pushFullScreenError(String message) async {
-    await push(
-        "${ErrorPage.routeName}?message=${Uri.encodeComponent(message)}");
+    await push("${ErrorPage.routeName}?message=${Uri.encodeComponent(message)}");
   }
 }

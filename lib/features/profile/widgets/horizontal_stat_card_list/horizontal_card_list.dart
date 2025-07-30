@@ -27,17 +27,12 @@ class StatListWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: sideMargin),
         scrollDirection: Axis.horizontal,
         itemCount: stats.length,
-        separatorBuilder: (_, __) =>
-            const SizedBox(width: AppPaddings.tinySmall),
+        separatorBuilder: (_, __) => const SizedBox(width: AppPaddings.tinySmall),
         itemBuilder: (_, index) {
           final stat = stats[index];
           return Padding(
             padding: const EdgeInsets.only(bottom: AppPaddings.nano),
-            child: StatCard(
-                stat: stat,
-                iconSize: iconSize,
-                width: itemWidth,
-                height: height),
+            child: StatCard(stat: stat, iconSize: iconSize, width: itemWidth, height: height),
           );
         },
       ),

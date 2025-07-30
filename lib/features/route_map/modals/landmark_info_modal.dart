@@ -15,16 +15,11 @@ class LandmarkInfoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final infoWidgets = [
       LabelValuePair(label: context.l10n.landmark_name, value: checkpoint.name),
-      LabelValuePair(
-          label: context.l10n.landmark_type,
-          value: checkpoint.type.toText(context.l10n)),
+      LabelValuePair(label: context.l10n.landmark_type, value: checkpoint.type.toText(context.l10n)),
       if (checkpoint.dateOfCreation != null)
-        LabelValuePair(
-            label: context.l10n.landmark_date_of_creation,
-            value: checkpoint.dateOfCreation.toString()),
+        LabelValuePair(label: context.l10n.landmark_date_of_creation, value: checkpoint.dateOfCreation.toString()),
       if (checkpoint.designer != null)
-        LabelValuePair(
-            label: context.l10n.landmark_designer, value: checkpoint.designer!),
+        LabelValuePair(label: context.l10n.landmark_designer, value: checkpoint.designer!),
     ];
 
     final List<Widget> infoRows = [];
@@ -35,10 +30,7 @@ class LandmarkInfoModal extends StatelessWidget {
           spacing: AppPaddings.small,
           children: [
             Expanded(child: infoWidgets[i]),
-            if (i + 1 < infoWidgets.length)
-              Expanded(child: infoWidgets[i + 1])
-            else
-              const Expanded(child: SizedBox()),
+            if (i + 1 < infoWidgets.length) Expanded(child: infoWidgets[i + 1]) else const Expanded(child: SizedBox()),
           ],
         ),
       );
@@ -52,8 +44,7 @@ class LandmarkInfoModal extends StatelessWidget {
           children: [
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
             ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
+              borderRadius: BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
               child: const CachedImage(
                 //for now there is no image url property in the landmark model
                 "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
@@ -66,8 +57,7 @@ class LandmarkInfoModal extends StatelessWidget {
                 ...infoRows,
                 LabelValuePair(
                   label: context.l10n.description,
-                  value: checkpoint.description ??
-                      context.l10n.landmark_no_description,
+                  value: checkpoint.description ?? context.l10n.landmark_no_description,
                 ),
               ],
             ),

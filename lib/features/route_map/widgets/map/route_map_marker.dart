@@ -6,12 +6,7 @@ import "../../../../app/config/ui_config.dart";
 import "../../../../common/models/checkpoint.dart";
 
 class RouteMapMarker extends StatelessWidget {
-  const RouteMapMarker(
-      {super.key,
-      required this.type,
-      required this.active,
-      this.visited = false,
-      this.order});
+  const RouteMapMarker({super.key, required this.type, required this.active, this.visited = false, this.order});
 
   final LandmarkType type;
   final bool active;
@@ -26,38 +21,14 @@ class RouteMapMarker extends StatelessWidget {
 
     (icon, isTextMarker) = switch ((type, active, visited)) {
       (LandmarkType.start, true, _) => (Assets.icons.startActive.svg(), false),
-      (LandmarkType.start, false, _) => (
-          Assets.icons.startInactive.svg(),
-          false
-        ),
-      (LandmarkType.finish, true, _) => (
-          Assets.icons.finishActive.svg(),
-          false
-        ),
-      (LandmarkType.finish, false, _) => (
-          Assets.icons.finishInactive.svg(),
-          false
-        ),
-      (LandmarkType.pulsometer, true, true) => (
-          Assets.icons.pulsometerVisited.svg(),
-          false
-        ),
-      (LandmarkType.pulsometer, true, false) => (
-          Assets.icons.pulsometerUnvisited.svg(),
-          false
-        ),
-      (LandmarkType.pulsometer, false, _) => (
-          Assets.icons.pulsometerInactive.svg(),
-          false
-        ),
-      (LandmarkType.checkpoint, true, true) => (
-          Assets.icons.checkpointVisited.svg(),
-          true
-        ),
-      (LandmarkType.checkpoint, true, false) => (
-          Assets.icons.checkpointUnvisited.svg(),
-          true
-        ),
+      (LandmarkType.start, false, _) => (Assets.icons.startInactive.svg(), false),
+      (LandmarkType.finish, true, _) => (Assets.icons.finishActive.svg(), false),
+      (LandmarkType.finish, false, _) => (Assets.icons.finishInactive.svg(), false),
+      (LandmarkType.pulsometer, true, true) => (Assets.icons.pulsometerVisited.svg(), false),
+      (LandmarkType.pulsometer, true, false) => (Assets.icons.pulsometerUnvisited.svg(), false),
+      (LandmarkType.pulsometer, false, _) => (Assets.icons.pulsometerInactive.svg(), false),
+      (LandmarkType.checkpoint, true, true) => (Assets.icons.checkpointVisited.svg(), true),
+      (LandmarkType.checkpoint, true, false) => (Assets.icons.checkpointUnvisited.svg(), true),
       _ => (Assets.icons.checkpointInactive.svg(), true),
     };
 
@@ -74,8 +45,7 @@ Stack _textMarker(SvgPicture icon, String value) {
         padding: const EdgeInsets.all(MapConfig.markerPadding),
         child: Text(
           value,
-          style: const TextStyle(
-              fontSize: MapConfig.textSize, color: MapConfig.markerTextColor),
+          style: const TextStyle(fontSize: MapConfig.textSize, color: MapConfig.markerTextColor),
           textAlign: TextAlign.center,
         ),
       ),

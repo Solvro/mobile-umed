@@ -18,16 +18,13 @@ class LabelValuePair extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label,
-              style: context.textTheme.headlineMedium
-                  ?.copyWith(fontSize: AppFontSizes.medium)),
+          Text(label, style: context.textTheme.headlineMedium?.copyWith(fontSize: AppFontSizes.medium)),
           ReadMoreText(
             value,
             trimLength: 150,
             trimCollapsedText: context.l10n.read_more,
             trimExpandedText: context.l10n.hide,
-            style: context.textTheme.bodyLarge
-                ?.copyWith(fontSize: AppFontSizes.medium),
+            style: context.textTheme.bodyLarge?.copyWith(fontSize: AppFontSizes.medium),
           ),
         ],
       ),

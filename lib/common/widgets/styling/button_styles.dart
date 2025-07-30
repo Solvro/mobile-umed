@@ -11,8 +11,7 @@ ButtonStyle sharedCardButtonStyle(
     backgroundColor: context.colorScheme.onPrimary,
     elevation: 2,
     padding: zeroPadding ? EdgeInsets.zero : null,
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadius)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
     minimumSize: Size(double.infinity, minimumHeight),
   );
 }

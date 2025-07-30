@@ -20,16 +20,13 @@ class RouteSelectionsPolyline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (locations.isEmpty)
-      return PolylineLayer(polylines: [Polyline(points: [])]);
+    if (locations.isEmpty) return PolylineLayer(polylines: [Polyline(points: [])]);
 
     return PolylineLayer(
       polylines: [
         ...locations.map(
-          (element) => Polyline(
-              points: element.toList(),
-              color: notSelectedColor,
-              strokeWidth: MapConfig.unvisitedLineWidth),
+          (element) =>
+              Polyline(points: element.toList(), color: notSelectedColor, strokeWidth: MapConfig.unvisitedLineWidth),
         ),
         if (lastInteracted != null)
           Polyline(

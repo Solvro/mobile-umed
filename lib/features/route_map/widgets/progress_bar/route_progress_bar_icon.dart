@@ -20,14 +20,11 @@ class RouteProgressBarIcon extends StatelessWidget {
       return Icon(Icons.play_circle_fill, color: color);
     }
     if (finish) {
-      return Icon(Icons.flag_circle,
-          color:
-              done ? color : color.withAlpha(ProgressBarConfig.notDoneAlpha));
+      return Icon(Icons.flag_circle, color: done ? color : color.withAlpha(ProgressBarConfig.notDoneAlpha));
     }
 
     return done
         ? Icon(Icons.check_circle, color: color)
-        : Icon(Icons.radio_button_unchecked,
-            color: color.withAlpha(ProgressBarConfig.notDoneAlpha));
+        : Icon(Icons.radio_button_unchecked, color: color.withAlpha(ProgressBarConfig.notDoneAlpha));
   }
 }

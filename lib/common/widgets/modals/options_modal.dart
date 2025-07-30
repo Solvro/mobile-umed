@@ -25,8 +25,7 @@ class OptionsModal extends StatelessWidget {
         vertical: OptionsModalConfig.outerPaddingVertical,
       ),
       backgroundColor: context.colorScheme.surface,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(OptionsModalConfig.radius)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(OptionsModalConfig.radius)),
       child: Padding(
         padding: const EdgeInsets.all(AppPaddings.small),
         child: Column(

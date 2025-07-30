@@ -16,10 +16,8 @@ class MainActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chosenBgColor =
-        backgroundColor ?? Theme.of(context).colorScheme.primary;
-    final chosenTextColor =
-        textColor ?? Theme.of(context).colorScheme.onPrimary;
+    final chosenBgColor = backgroundColor ?? Theme.of(context).colorScheme.primary;
+    final chosenTextColor = textColor ?? Theme.of(context).colorScheme.onPrimary;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(

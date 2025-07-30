@@ -13,9 +13,7 @@ class BoxShimmer extends StatelessWidget {
       highlightColor: Colors.white,
       child: Container(
         height: RouteListConfig.height,
-        decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(AppRadius.small)),
+        decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(AppRadius.small)),
       ),
     );
   }

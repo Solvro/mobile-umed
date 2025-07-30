@@ -53,19 +53,19 @@ class _ShimmerTestWidgetState extends State<ShimmerTestWidget> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 3,
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: AppPaddings.nano),
-              itemBuilder: (context, index) => CreatorTile(
-                Creator(
-                  id: index + 1,
-                  firstName: "Jan",
-                  lastName: "Kowalski",
-                  imageUrl: "",
-                  role: "Developer",
-                  sort: index,
-                ),
-                key: ValueKey("creator_$index"),
-              ),
+              separatorBuilder: (context, index) => const SizedBox(width: AppPaddings.nano),
+              itemBuilder:
+                  (context, index) => CreatorTile(
+                    Creator(
+                      id: index + 1,
+                      firstName: "Jan",
+                      lastName: "Kowalski",
+                      imageUrl: "",
+                      role: "Developer",
+                      sort: index,
+                    ),
+                    key: ValueKey("creator_$index"),
+                  ),
             ),
           ),
         ),

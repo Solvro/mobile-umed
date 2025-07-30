@@ -19,11 +19,9 @@ class MyTaskHandler extends TaskHandler {
 
   void _checkCheckpointProximity() {
     if (checkpoints.isNotEmpty &&
-        distance.as(LengthUnit.Meter, locations.first,
-                checkpoints.first.location) <=
+        distance.as(LengthUnit.Meter, locations.first, checkpoints.first.location) <=
             LocalizationConfig.coordProximityThresholdInMeters) {
-      FlutterForegroundTask.sendDataToMain(
-          TaskEvent.nextCheckpointReached.name);
+      FlutterForegroundTask.sendDataToMain(TaskEvent.nextCheckpointReached.name);
 
       if (checkpoints.first.type == LandmarkType.finish) {
         FlutterForegroundTask.sendDataToMain(TaskEvent.routeCompleted.name);
@@ -35,18 +33,15 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
-    _locationSubscription =
-        LocationService.getLocationStream().listen((latLng) async {
+    _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
       if (latLng != null && locations.isNotEmpty) {
         LatLng? currentLocation;
 
-        final endIndex =
-            (isLoop && passed <= 4) ? (locations.length - 4) : locations.length;
+        final endIndex = (isLoop && passed <= 4) ? (locations.length - 4) : locations.length;
 
         for (final LatLng location in locations.take(endIndex)) {
           final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
-          if (meterDistance <=
-              LocalizationConfig.coordProximityThresholdInMeters) {
+          if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
             currentLocation = location;
             break;
           }
@@ -59,16 +54,14 @@ class MyTaskHandler extends TaskHandler {
         while (currentLocation != locations.first) {
           _checkCheckpointProximity();
 
-          FlutterForegroundTask.sendDataToMain(
-              TaskEvent.nextLocationReached.name);
+          FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
           locations.removeFirst();
           passed++;
         }
 
         _checkCheckpointProximity();
 
-        FlutterForegroundTask.sendDataToMain(
-            TaskEvent.nextLocationReached.name);
+        FlutterForegroundTask.sendDataToMain(TaskEvent.nextLocationReached.name);
         locations.removeFirst();
         passed++;
 
@@ -102,21 +95,19 @@ class MyTaskHandler extends TaskHandler {
     if (data is Map) {
       if (data[ForegroundTaskKeys.locations] is List) {
         locations = Queue.from(
-          (data[ForegroundTaskKeys.locations] as List)
-              .map((e) => LatLng.fromJson(e as Map<String, dynamic>)),
+          (data[ForegroundTaskKeys.locations] as List).map((e) => LatLng.fromJson(e as Map<String, dynamic>)),
         );
       }
 
       if (data[ForegroundTaskKeys.checkpoints] is List) {
         checkpoints = Queue.from(
-          (data[ForegroundTaskKeys.checkpoints] as List)
-              .map((e) => Checkpoint.fromJson(e as Map<String, dynamic>)),
+          (data[ForegroundTaskKeys.checkpoints] as List).map((e) => Checkpoint.fromJson(e as Map<String, dynamic>)),
         );
       }
 
       if (checkpoints.length > 1) {
-        isLoop = distance.as(LengthUnit.Meter, checkpoints.first.location,
-                checkpoints.last.location) <=
+        isLoop =
+            distance.as(LengthUnit.Meter, checkpoints.first.location, checkpoints.last.location) <=
             LocalizationConfig.loopProximityThresholdInMeters;
       }
     }
@@ -132,8 +123,8 @@ enum TaskEvent {
   routeCompleted,
   error;
 
-  factory TaskEvent.fromString(String value) => TaskEvent.values
-      .firstWhere((e) => e.name == value, orElse: () => TaskEvent.error);
+  factory TaskEvent.fromString(String value) =>
+      TaskEvent.values.firstWhere((e) => e.name == value, orElse: () => TaskEvent.error);
 }
 
 abstract class ForegroundTaskKeys {

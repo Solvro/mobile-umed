@@ -14,19 +14,13 @@ Future<IList<T>> fetchAllWithSocials<T>({
   required WithSocials<T> copyWithSocials,
 }) async {
   final dataResponse = await dio.get<Map<String, dynamic>>(dataEndpoint);
-  final socialsResponse =
-      await dio.get<Map<String, dynamic>>("items/social_urls/");
+  final socialsResponse = await dio.get<Map<String, dynamic>>("items/social_urls/");
 
   final dataList = dataResponse.data!["data"] as List<dynamic>;
   final socialsData = socialsResponse.data!["data"] as List<dynamic>;
 
-  final socialsList = socialsData
-      .map((e) => Socials.fromJson(e as Map<String, dynamic>))
-      .toList()
-      .lock;
-  final socialsMap = {
-    for (final socialsItem in socialsList) socialsItem.id: socialsItem
-  };
+  final socialsList = socialsData.map((e) => Socials.fromJson(e as Map<String, dynamic>)).toList().lock;
+  final socialsMap = {for (final socialsItem in socialsList) socialsItem.id: socialsItem};
 
   return dataList
       .map((e) {
@@ -55,8 +49,7 @@ Future<T> fetchSingleWithSocials<T>({
   final socialsId = getSocialId(item);
   Socials? socials;
   if (socialsId != null) {
-    final socialsResp =
-        await dio.get<Map<String, dynamic>>("items/social_urls/$socialsId");
+    final socialsResp = await dio.get<Map<String, dynamic>>("items/social_urls/$socialsId");
     final socialsData = socialsResp.data!["data"] as Map<String, dynamic>;
     socials = Socials.fromJson(socialsData);
   }

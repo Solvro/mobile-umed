@@ -9,8 +9,7 @@ class RouteListShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
+      padding: const EdgeInsets.symmetric(horizontal: HomeViewConfig.sideMargin),
       child: SizedBox(
         height: RouteListConfig.height,
         child: Shimmer.fromColors(
@@ -20,13 +19,12 @@ class RouteListShimmer extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: 3,
             separatorBuilder: (_, _) => const SizedBox(width: AppPaddings.tiny),
-            itemBuilder: (_, _) => Container(
-              width: RouteListConfig.itemWidth,
-              height: RouteListConfig.height,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(AppRadius.small)),
-            ),
+            itemBuilder:
+                (_, _) => Container(
+                  width: RouteListConfig.itemWidth,
+                  height: RouteListConfig.height,
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(AppRadius.small)),
+                ),
           ),
         ),
       ),

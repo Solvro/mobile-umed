@@ -20,19 +20,13 @@ class RouteInfoSection extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _InformationBox(
-              text: timer.toHmsString(), color: context.colorScheme.primary),
+          _InformationBox(text: timer.toHmsString(), color: context.colorScheme.primary),
           Row(
             spacing: RouteInfoConfig.infoBubbleSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                  child: _InformationBox(
-                      text: distance.toDistanceString(),
-                      color: context.colorScheme.primary)),
-              Expanded(
-                  child: _InformationBox(
-                      text: "$speed km/h", color: context.colorScheme.primary)),
+              Expanded(child: _InformationBox(text: distance.toDistanceString(), color: context.colorScheme.primary)),
+              Expanded(child: _InformationBox(text: "$speed km/h", color: context.colorScheme.primary)),
             ],
           ),
         ],
@@ -71,8 +65,7 @@ class _InformationBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints:
-          const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight),
+      constraints: const BoxConstraints(minHeight: RouteInfoConfig.infoBubbleMinHeight),
       alignment: Alignment.center,
       decoration: _decoration(color), // keep this private method in same file
       child: Text(text, textAlign: TextAlign.center),
@@ -82,8 +75,7 @@ class _InformationBox extends StatelessWidget {
   static BoxDecoration _decoration(Color color) {
     return BoxDecoration(
       border: Border.all(color: color, width: 2),
-      borderRadius: const BorderRadius.all(
-          Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
+      borderRadius: const BorderRadius.all(Radius.circular(RouteInfoConfig.infoBubbleRoundedRad)),
     );
   }
 }

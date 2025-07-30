@@ -25,8 +25,7 @@ class HomeView extends StatelessWidget {
       body: ListView(
         shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.only(
-            top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
+        padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [
           const SizedBox(height: AppPaddings.tinySmall),
           SectionHeader(context.l10n.home_nearest_to_you),
