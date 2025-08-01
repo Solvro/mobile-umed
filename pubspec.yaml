@@ -71,7 +71,7 @@ dependencies:
   hive: ^2.2.3
 
   # env
-  envied: ^1.1.1
+  envied: ^1.2.0
 
   # others
   flutter_foreground_task: ^9.1.0
