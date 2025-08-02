@@ -21,10 +21,7 @@ class InfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: context.l10n.common_app_bar_title_one,
-        subtitle: context.l10n.common_app_bar_title_two,
-      ),
+      appBar: const CommonAppBar(),
       body: ListView(
         padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [

@@ -23,10 +23,7 @@ class ProfileView extends ConsumerWidget {
     final completedRoutes = ref.watch(completedRoutesProvider);
 
     return Scaffold(
-      appBar: CommonAppBar(
-        title: context.l10n.common_app_bar_title_one,
-        subtitle: context.l10n.common_app_bar_title_two,
-      ),
+      appBar: const CommonAppBar(),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),

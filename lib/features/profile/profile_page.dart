@@ -1,3 +1,4 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../error/views/full_screen_error_view.dart";
@@ -16,7 +17,9 @@ class ProfilePage extends ConsumerWidget {
 
     return switch (provider) {
       AsyncData(:final value) => ProfileView(routes: value),
-      AsyncError() => const FullScreenErrorView(),
+      AsyncError(:final error, :final stackTrace) => FullScreenErrorView(
+        message: kDebugMode ? "$error\n$stackTrace" : null,
+      ),
       _ => const Scaffold(body: Text("loading")), // TODO(tomasz-trela): add loading
     };
   }
