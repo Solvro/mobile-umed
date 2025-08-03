@@ -73,6 +73,9 @@ dependencies:
   # env
   envied: ^1.2.0
 
+  # Splash Screen
+  flutter_native_splash: ^2.4.6
+  
   # others
   flutter_foreground_task: ^9.1.0
   readmore: ^3.0.0
@@ -81,7 +84,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   solvro_config: ^1.0.1
   riverpod_generator: ^2.6.5
   riverpod_lint: ^2.6.5
