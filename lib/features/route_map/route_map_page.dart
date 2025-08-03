@@ -4,8 +4,10 @@ import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
 import "../../app/app.dart";
+import "../../common/models/completed_route.dart";
 import "../../common/models/route.dart";
 import "../../common/providers/bottom_sheet_providers.dart";
+import "../../common/providers/completed_routes_provider.dart";
 import "../error/error_page.dart";
 import "controllers/route_controller.dart" hide Distance;
 import "modals/route_completed_modal.dart";
@@ -65,6 +67,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
         case TaskEvent.routeCompleted:
           await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
           await FlutterForegroundTask.stopService();
+          await ref.read(completedRoutesProvider.notifier).addCompletedRoute(CompletedRoute.fromRoute(route));
         case TaskEvent.error:
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $data")));
       }

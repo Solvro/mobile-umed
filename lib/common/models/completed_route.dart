@@ -1,5 +1,7 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 
+import "route.dart";
+
 part "completed_route.freezed.dart";
 part "completed_route.g.dart";
 
@@ -15,4 +17,17 @@ abstract class CompletedRoute with _$CompletedRoute {
   }) = _CompletedRoute;
 
   factory CompletedRoute.fromJson(Map<String, dynamic> json) => _$CompletedRouteFromJson(json);
+
+  const CompletedRoute._();
+
+  factory CompletedRoute.fromRoute(Route route) {
+    return CompletedRoute(
+      dateCompleted: DateTime.now(),
+      routeId: route.id,
+      water: route.waterDemand?.toInt() ?? 0,
+      distance: route.distance,
+      calories: route.calories ?? 0,
+      time: route.estimatedTime ?? 0,
+    );
+  }
 }
