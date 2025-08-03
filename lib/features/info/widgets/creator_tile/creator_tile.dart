@@ -23,7 +23,7 @@ class CreatorTile extends StatelessWidget {
             CachedImage(creator.imageUrl),
             Text("${creator.firstName} ${creator.lastName}", style: context.textTheme.bodyMedium),
             Text(creator.role, style: context.textTheme.bodySmall),
-            if (creator.socials != null) SocialsSection(socials: creator.socials!),
+            if (creator.socialUrls != null) SocialsSection(socials: creator.socialUrls!),
             const SizedBox(height: AppPaddings.tiny),
           ],
         ),

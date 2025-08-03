@@ -25,6 +25,10 @@ class CompletedRoutes extends _$CompletedRoutes {
 
   Future<void> addCompletedRoute(CompletedRoute route) async {
     final box = Hive.box<Map<dynamic, dynamic>>(completedRoutesBoxName);
+    final completedRoutes = await _getAllCompletedRoutes();
+    if (completedRoutes.any((r) => r.routeId == route.routeId)) {
+      return;
+    }
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await box.add(route.toJson());

@@ -18,10 +18,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: context.l10n.common_app_bar_title_one,
-        subtitle: context.l10n.common_app_bar_title_two,
-      ),
+      appBar: const CommonAppBar(),
       body: ListView(
         shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),

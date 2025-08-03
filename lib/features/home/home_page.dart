@@ -1,3 +1,4 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../error/views/full_screen_error_view.dart";
@@ -17,7 +18,9 @@ class HomePage extends ConsumerWidget {
 
     return switch (provder) {
       AsyncData(:final value) => HomeView(routes: value),
-      AsyncError() => const FullScreenErrorView(),
+      AsyncError(:final error, :final stackTrace) => FullScreenErrorView(
+        message: kDebugMode ? "$error\n$stackTrace" : null,
+      ),
       _ => const HomeLoadingView(),
     };
   }

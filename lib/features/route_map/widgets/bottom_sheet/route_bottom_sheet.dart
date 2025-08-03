@@ -1,13 +1,13 @@
 import "dart:async";
 
-import "package:flutter/material.dart";
+import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../app/theme/color_consts.dart";
-import "../../../../common/data_source/mocks/mock_songs.dart";
+import "../../../../common/models/route.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/widgets/buttons/main_action_button.dart";
 import "../../../../common/widgets/buttons/secondary_action_button.dart";
@@ -18,7 +18,9 @@ import "sections/playlist_info_section.dart";
 import "sections/route_info_section.dart";
 
 class RouteBottomSheet extends ConsumerStatefulWidget {
-  const RouteBottomSheet({super.key});
+  const RouteBottomSheet({super.key, required this.route});
+
+  final Route route;
 
   @override
   RouteBottomSheetState createState() => RouteBottomSheetState();
@@ -87,7 +89,9 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         ],
       ),
       child:
-          (_chosenOption == RouteDetailsOption.info) ? const RouteInfoSection() : PlaylistInfoSection(songs: mockSongs),
+          (_chosenOption == RouteDetailsOption.playlist && widget.route.playlist != null)
+              ? PlaylistInfoSection(playlist: widget.route.playlist!)
+              : const RouteInfoSection(),
     );
   }
 }

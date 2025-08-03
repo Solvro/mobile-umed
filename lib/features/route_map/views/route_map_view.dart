@@ -101,7 +101,11 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
             RouteMapWidget(controller: _mapController, route: route, active: _currentSheetState == SheetState.hidden),
             _SheetHidingHitTest(currentSheetState: _currentSheetState),
             RouteProgressBar(checkpoints: route.checkpoints),
-            const RouteBottomSheet(),
+            switch (allRoutesAsync) {
+              AsyncData() => RouteBottomSheet(route: route),
+              AsyncLoading() => const CircularProgressIndicator(),
+              _ => Center(child: Text(context.l10n.errors_generic)),
+            },
             Positioned(
               top: MediaQuery.of(context).padding.top + 56,
               right: 16,

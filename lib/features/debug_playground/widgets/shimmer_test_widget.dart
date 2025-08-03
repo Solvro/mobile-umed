@@ -56,14 +56,7 @@ class _ShimmerTestWidgetState extends State<ShimmerTestWidget> {
               separatorBuilder: (context, index) => const SizedBox(width: AppPaddings.nano),
               itemBuilder:
                   (context, index) => CreatorTile(
-                    Creator(
-                      id: index + 1,
-                      firstName: "Jan",
-                      lastName: "Kowalski",
-                      imageUrl: "",
-                      role: "Developer",
-                      sort: index,
-                    ),
+                    Creator(id: index + 1, firstName: "Jan", lastName: "Kowalski", imageUrl: "", role: "Developer"),
                     key: ValueKey("creator_$index"),
                   ),
             ),
