@@ -55,17 +55,17 @@ class InfoSectionWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppPaddings.nanoTiny, horizontal: AppPaddings.medium),
           child:
-              infoSection.socials != null
+              infoSection.socialUrls != null
                   ? TextInfoTile(
                     title: infoSection.subtitle,
                     content: infoSection.description,
                     bottomActions:
-                        (infoSection.socials != null && infoSection.socials!.onlyWeb)
+                        (infoSection.socialUrls != null && infoSection.socialUrls!.onlyWeb)
                             ? MainActionButton(
                               text: context.l10n.info_more_info,
-                              onPressed: () async => customLaunchUrl(infoSection.socials!.webUrl!),
+                              onPressed: () async => customLaunchUrl(infoSection.socialUrls!.webUrl!),
                             )
-                            : SocialsSection(compact: false, socials: infoSection.socials!),
+                            : SocialsSection(compact: false, socials: infoSection.socialUrls!),
                   )
                   : TextInfoTile(title: infoSection.subtitle, content: infoSection.description),
         ),

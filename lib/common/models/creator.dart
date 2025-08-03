@@ -10,13 +10,11 @@ abstract class Creator with _$Creator {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Creator({
     required int id,
-    required int sort,
     required String firstName,
     required String lastName,
     required String role,
     String? imageUrl,
-    int? socialUrls,
-    Socials? socials,
+    Socials? socialUrls,
   }) = _Creator;
 
   factory Creator.fromJson(Map<String, dynamic> json) => _$CreatorFromJson(json);
