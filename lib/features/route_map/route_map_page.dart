@@ -39,6 +39,10 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
   }
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
+    final storage = ref.watch(storageServiceProvider);
+    debugPrint("storage service: $storage");
+    debugPrint("cacheNum: ${storage.cacheNum}");
+
     if (route != null) {
       FlutterForegroundTask.addTaskDataCallback((data) async {
         if (!mounted) return;
