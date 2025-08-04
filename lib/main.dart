@@ -11,7 +11,6 @@ import "package:shared_preferences/shared_preferences.dart";
 import "app/app.dart";
 import "app/config/env.dart";
 import "app/wiredash.dart";
-import "common/providers/storage_service_provider.dart";
 import "common/utils/location_service.dart";
 import "common/utils/storage_service.dart";
 import "features/route_map/services/task_handlers/foreground_task_service.dart";

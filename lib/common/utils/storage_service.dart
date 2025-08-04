@@ -1,3 +1,4 @@
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 const cacheKey = "cacheNum";
@@ -7,9 +8,13 @@ class StorageService {
 
   final SharedPreferences _prefs;
 
-  int get cacheNum => _prefs.getInt(cacheKey) ?? -1;
+  int get cacheNum => _prefs.getInt(cacheKey) ?? 0;
 
   Future<void> setCacheNum(int newCacheKey) async {
     await _prefs.setInt(cacheKey, newCacheKey);
   }
 }
+
+final storageServiceProvider = Provider<StorageService>((ref) {
+  throw UnimplementedError();
+});
