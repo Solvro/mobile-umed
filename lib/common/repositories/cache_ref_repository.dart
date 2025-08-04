@@ -9,7 +9,7 @@ part "cache_ref_repository.g.dart";
 Future<int> fetchCacheNum(Ref ref) async {
   final dio = await ref.read(dioClientProvider.future);
   final response = await dio.get<Map<String, dynamic>>("items/cache_ref");
-  final data = response.data!["data"] as Map;
+  final data = response.data?["data"] as Map;
   final cacheNum = data["cache_num"];
   return cacheNum as int;
 }
