@@ -1,6 +1,6 @@
 import "package:flutter/material.dart" hide Route;
 import "../../../../app/config/ui_config.dart";
-import "../../../app/config/env.dart";
+import "../../../app/config/cached_image_config.dart";
 import "../../../app/theme/app_theme.dart";
 import "../../models/route.dart";
 import "../image/cached_image.dart";
@@ -38,9 +38,7 @@ class RouteCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: CachedImage((route.image?.isNotEmpty ?? false) ? "${Env.apiUrl}assets/${route.image}" : null),
-              ),
+              Expanded(child: CachedImage(CachedImageConfig.getDirectusUrl(route.image))),
               Container(
                 color: colorScheme.primary,
                 padding: const EdgeInsets.all(AppPaddings.tinySmall),
