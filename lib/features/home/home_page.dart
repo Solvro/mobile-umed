@@ -14,9 +14,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provder = ref.watch(fetchAllRoutesProvider);
+    final provider = ref.watch(fetchAllRoutesProvider);
 
-    return switch (provder) {
+    return switch (provider) {
       AsyncData(:final value) => HomeView(routes: value),
       AsyncError(:final error, :final stackTrace) => FullScreenErrorView(
         message: kDebugMode ? "$error\n$stackTrace" : null,
