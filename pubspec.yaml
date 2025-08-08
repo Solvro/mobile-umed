@@ -39,7 +39,7 @@ dependencies:
   json_annotation: ^4.9.0 
 
   #HTTP Client
-  dio: ^5.8.0+1
+  dio: ^5.9.0
 
   # Redirects
   url_launcher: ^6.3.2
