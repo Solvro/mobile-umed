@@ -3,6 +3,7 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
 import "../../app/config/cached_image_config.dart";
+import "../../common/data_source/remote/cache_options.dart";
 import "../../common/repositories/cache_ref_repository.dart";
 import "../../common/utils/storage_service.dart";
 import "../error/error_page.dart";
@@ -15,6 +16,7 @@ class AppInitPage extends ConsumerWidget {
     final cachedCacheNum = ref.read(storageServiceProvider).cacheNum;
 
     if (cacheNum > cachedCacheNum) {
+      await clearDioCache();
       await CachedImageConfig.cacheManagerInstance.emptyCache();
       await ref.read(storageServiceProvider).setCacheNum(cacheNum);
     }

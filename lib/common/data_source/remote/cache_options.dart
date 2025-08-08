@@ -48,15 +48,24 @@ final errorCodes = [
   511,
 ];
 
+HiveCacheStore? _cacheStore;
+
 Future<CacheOptions> getCacheOptions() async {
-  final dir = await getApplicationSupportDirectory();
-  await Hive.initFlutter(dir.path);
+  if (_cacheStore == null) {
+    final dir = await getApplicationSupportDirectory();
+    await Hive.initFlutter(dir.path);
+    _cacheStore = HiveCacheStore(dir.path);
+  }
 
   return CacheOptions(
-    store: HiveCacheStore(dir.path),
+    store: _cacheStore,
     policy: CachePolicy.forceCache,
     hitCacheOnErrorCodes: errorCodes,
     hitCacheOnNetworkFailure: true,
     maxStale: const Duration(days: 7),
   );
+}
+
+Future<void> clearDioCache() async {
+  await _cacheStore?.clean();
 }
