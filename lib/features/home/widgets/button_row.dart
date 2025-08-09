@@ -28,11 +28,19 @@ class HomeButtonsRow extends ConsumerWidget {
                         (progress) => VerticalButton(
                           label: context.l10n.common_finished_routes,
                           customWidget: CircularProgressWithText(
-                            progress: 0.7,
+                            progress: progress,
                             size: 75,
                             strokeWidth: 8,
                             backgroundColor: context.colorScheme.primary.withValues(alpha: 0.2),
-                            progressColor: context.colorScheme.primary,
+                            progressGradient: LinearGradient(
+                              colors: [
+                                context.colorScheme.primary,
+                                context.colorScheme.secondary,
+                                context.colorScheme.error,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                             textStyle: context.textTheme.labelLarge?.copyWith(
                               color: context.colorScheme.primary,
                               fontWeight: FontWeight.bold,

@@ -2,11 +2,11 @@ import "dart:math" as math;
 import "package:flutter/material.dart" hide Route;
 
 class CircularProgressWithText extends StatelessWidget {
-  final double progress; // 0.0–1.0
+  final double progress;
   final double size;
   final double strokeWidth;
   final Color backgroundColor;
-  final Color progressColor;
+  final Gradient progressGradient;
   final TextStyle? textStyle;
 
   const CircularProgressWithText({
@@ -15,7 +15,7 @@ class CircularProgressWithText extends StatelessWidget {
     required this.size,
     required this.strokeWidth,
     required this.backgroundColor,
-    required this.progressColor,
+    required this.progressGradient,
     this.textStyle,
   });
 
@@ -33,8 +33,9 @@ class CircularProgressWithText extends StatelessWidget {
             painter: _CircularProgressPainter(
               progress: animatedValue,
               backgroundColor: backgroundColor,
-              progressColor: progressColor,
+              progressGradient: progressGradient,
               strokeWidth: strokeWidth,
+              size: size,
             ),
             child: Center(child: Text("${(animatedValue * 100).round()}%", style: textStyle)),
           ),
@@ -47,14 +48,16 @@ class CircularProgressWithText extends StatelessWidget {
 class _CircularProgressPainter extends CustomPainter {
   final double progress;
   final Color backgroundColor;
-  final Color progressColor;
+  final Gradient progressGradient;
   final double strokeWidth;
+  final double size;
 
   _CircularProgressPainter({
     required this.progress,
     required this.backgroundColor,
-    required this.progressColor,
+    required this.progressGradient,
     required this.strokeWidth,
+    required this.size,
   });
 
   @override
@@ -70,22 +73,25 @@ class _CircularProgressPainter extends CustomPainter {
           ..strokeWidth = strokeWidth
           ..strokeCap = StrokeCap.round;
 
+    final rect = Rect.fromCircle(center: center, radius: radius);
+    final shader = progressGradient.createShader(rect);
+
     final fg =
         Paint()
-          ..color = progressColor
+          ..shader = shader
           ..style = PaintingStyle.stroke
           ..strokeWidth = strokeWidth
           ..strokeCap = StrokeCap.round;
 
     canvas.drawCircle(center, radius, bg);
 
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), startAngle, -2 * math.pi * progress, false, fg);
+    canvas.drawArc(rect, startAngle, -2 * math.pi * progress, false, fg);
   }
 
   @override
   bool shouldRepaint(covariant _CircularProgressPainter old) =>
       old.progress != progress ||
       old.backgroundColor != backgroundColor ||
-      old.progressColor != progressColor ||
+      old.progressGradient != progressGradient ||
       old.strokeWidth != strokeWidth;
 }
