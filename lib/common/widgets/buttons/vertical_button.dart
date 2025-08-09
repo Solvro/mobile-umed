@@ -7,7 +7,7 @@ class VerticalButton extends StatelessWidget {
   final String label;
   final IconData? icon;
   final Color? iconColor;
-  final Widget? customWidget; // Nowy parametr dla custom widget
+  final Widget? customWidget;
   final VoidCallback onPressed;
 
   const VerticalButton({
@@ -17,8 +17,8 @@ class VerticalButton extends StatelessWidget {
     this.iconColor,
     this.customWidget,
     required this.onPressed,
-  }) : assert(icon != null || customWidget != null, 'Either icon or customWidget must be provided'),
-       assert(!(icon != null && customWidget != null), 'Cannot provide both icon and customWidget');
+  }) : assert(icon != null || customWidget != null, "Either icon or customWidget must be provided"),
+       assert(!(icon != null && customWidget != null), "Cannot provide both icon and customWidget");
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class VerticalButton extends StatelessWidget {
             child: Text(label, style: context.textTheme.labelMedium, textAlign: TextAlign.center),
           ),
           const Spacer(),
-          customWidget ?? Icon(icon!, size: VerticalButtonConfig.iconSize, color: iconColor!),
+          customWidget ?? Icon(icon, size: VerticalButtonConfig.iconSize, color: iconColor),
           const Spacer(),
         ],
       ),
