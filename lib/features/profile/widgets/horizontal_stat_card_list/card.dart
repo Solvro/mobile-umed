@@ -35,11 +35,7 @@ class StatCard extends StatelessWidget {
           const Spacer(),
           Opacity(
             opacity: StatCardConfig.iconOpacity,
-            child: Icon(
-              IconData(stat.iconCode, fontFamily: "MaterialIcons"),
-              color: Color(stat.iconColor),
-              size: iconSize,
-            ),
+            child: Icon(stat.iconData, color: Color(stat.iconColor), size: iconSize),
           ),
           const Spacer(),
           Text(stat.value, style: context.textTheme.displayLarge),

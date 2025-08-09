@@ -1,4 +1,4 @@
-package com.example.mobile_umed
+package com.solvro.mobile_umed
 
 import io.flutter.embedding.android.FlutterActivity
 

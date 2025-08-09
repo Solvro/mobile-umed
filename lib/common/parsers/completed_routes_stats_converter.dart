@@ -14,26 +14,16 @@ IList<Stats> convertCompletedRoutesToStats(List<CompletedRoute> routes) {
     Stats(
       id: 1,
       value: totalDistance.inKilometers(),
-      iconCode: Icons.directions_walk.codePoint,
+      iconData: Icons.directions_walk,
       iconColor: Colors.green.toARGB32(),
     ),
     Stats(
       id: 2,
       value: totalCalories.inKcal(),
-      iconCode: Icons.local_fire_department.codePoint,
+      iconData: Icons.local_fire_department,
       iconColor: Colors.red.toARGB32(),
     ),
-    Stats(
-      id: 3,
-      value: totalWaterMl.inLiters(),
-      iconCode: Icons.water_drop.codePoint,
-      iconColor: Colors.yellow.toARGB32(),
-    ),
-    Stats(
-      id: 4,
-      value: totalTimeMinutes.inHours(),
-      iconCode: Icons.schedule.codePoint,
-      iconColor: Colors.orange.toARGB32(),
-    ),
+    Stats(id: 3, value: totalWaterMl.inLiters(), iconData: Icons.water_drop, iconColor: Colors.yellow.toARGB32()),
+    Stats(id: 4, value: totalTimeMinutes.inHours(), iconData: Icons.schedule, iconColor: Colors.orange.toARGB32()),
   ].lock;
 }

@@ -58,3 +58,6 @@ git-crypt-key
 
 #VS Code
 .vscode/
+
+# Android specific
+upload-keystore.jks

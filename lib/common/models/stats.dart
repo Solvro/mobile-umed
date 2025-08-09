@@ -1,12 +1,10 @@
-import "package:freezed_annotation/freezed_annotation.dart";
+import "package:flutter/widgets.dart";
 
-part "stats.freezed.dart";
-part "stats.g.dart";
+class Stats {
+  final int id;
+  final String value;
+  final IconData iconData;
+  final int iconColor;
 
-@freezed
-abstract class Stats with _$Stats {
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory Stats({required int id, required String value, required int iconCode, required int iconColor}) = _Stats;
-
-  factory Stats.fromJson(Map<String, dynamic> json) => _$StatsFromJson(json);
+  Stats({required this.id, required this.value, required this.iconData, required this.iconColor});
 }
