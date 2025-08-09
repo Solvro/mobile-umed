@@ -175,6 +175,11 @@ abstract final class VerticalButtonConfig {
   static const double greenHeader = 60;
 }
 
+abstract final class CircularProgressConfig {
+  static const double strokeWidth = 10;
+  static const double backgroundAlpha = 0.2;
+}
+
 abstract final class RouteListConfig {
   static const double height = 225;
   static const double itemWidth = 180;
