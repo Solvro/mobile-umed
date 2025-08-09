@@ -29,7 +29,7 @@ class HomeButtonsRow extends ConsumerWidget {
                           label: context.l10n.common_finished_routes,
                           customWidget: CircularProgressWithText(
                             progress: progress,
-                            size: 75,
+                            size: VerticalButtonConfig.iconSize - 8, //  - strokeWidth
                             strokeWidth: 8,
                             backgroundColor: context.colorScheme.primary.withValues(alpha: 0.2),
                             progressGradient: LinearGradient(
