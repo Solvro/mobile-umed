@@ -1,5 +1,6 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/app.dart";
@@ -10,13 +11,13 @@ import "../../../common/widgets/styling/section_header.dart";
 import "../widgets/button_row.dart";
 import "../widgets/start_route_button.dart";
 
-class HomeView extends StatelessWidget {
+class HomeView extends ConsumerWidget {
   const HomeView({super.key, required this.routes});
 
   final IList<Route> routes;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const CommonAppBar(),
       body: ListView(
