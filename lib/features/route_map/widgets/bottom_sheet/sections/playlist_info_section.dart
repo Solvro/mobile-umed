@@ -35,20 +35,18 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
                   onPressed: () async => customLaunchUrl(playlist.spotifyUrl),
                 ),
               ),
-              if (playlist.youtubeUrl != null)
-                Expanded(
-                  child: SecondaryActionButton(
-                    iconData: Icons.play_circle_fill,
-                    onPressed: () async => customLaunchUrl(playlist.youtubeUrl!),
-                  ),
+              Expanded(
+                child: SecondaryActionButton(
+                  iconData: Icons.play_circle_fill,
+                  onPressed: () async => customLaunchUrl(playlist.youtubeUrl ?? ""),
                 ),
-              if (playlist.appleUrl != null)
-                Expanded(
-                  child: SecondaryActionButton(
-                    iconData: Icons.apple,
-                    onPressed: () async => customLaunchUrl(playlist.appleUrl!),
-                  ),
+              ),
+              Expanded(
+                child: SecondaryActionButton(
+                  iconData: Icons.apple,
+                  onPressed: () async => customLaunchUrl(playlist.appleUrl ?? ""),
                 ),
+              ),
             ],
           ),
           ListView.builder(
