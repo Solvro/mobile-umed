@@ -4,9 +4,9 @@ import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
 
 class TextInfoTile extends StatelessWidget {
-  const TextInfoTile({super.key, required this.title, required this.content, this.bottomActions});
+  const TextInfoTile({super.key, this.title, required this.content, this.bottomActions});
 
-  final String title;
+  final String? title;
   final String content;
   final Widget? bottomActions;
 
@@ -21,7 +21,7 @@ class TextInfoTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: context.textTheme.titleSmall),
+            if (title != null) Text(title!, style: context.textTheme.titleSmall),
             const SizedBox(height: AppPaddings.tinySmall),
             Text(content),
             const SizedBox(height: AppPaddings.small),
