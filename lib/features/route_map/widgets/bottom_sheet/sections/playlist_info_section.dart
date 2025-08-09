@@ -38,13 +38,13 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
               Expanded(
                 child: SecondaryActionButton(
                   iconData: Icons.play_circle_fill,
-                  onPressed: () async => customLaunchUrl(playlist.youtubeUrl),
+                  onPressed: () async => customLaunchUrl(playlist.youtubeUrl ?? ""),
                 ),
               ),
               Expanded(
                 child: SecondaryActionButton(
                   iconData: Icons.apple,
-                  onPressed: () async => customLaunchUrl(playlist.appleUrl),
+                  onPressed: () async => customLaunchUrl(playlist.appleUrl ?? ""),
                 ),
               ),
             ],
