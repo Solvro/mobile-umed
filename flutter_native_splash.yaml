@@ -15,14 +15,14 @@ flutter_native_splash:
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
   #color: "#42a5f5"
-  background_image: "assets/images/splash_screan_background.png"
+  background_image: "assets/images/splash_screen_background.png"
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
   # the leading # character.
 
   # The image parameter allows you to specify an image used in the splash screen.  It must be a
   # png file and should be sized for 4x pixel density.
-  #image: assets/splash.png
+  image: "assets/images/splashscreen_logo.png"
 
   # The branding property allows you to specify an image used as branding in the splash screen.
   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
@@ -64,12 +64,12 @@ flutter_native_splash:
 
     # Splash screen background color.
     color: "#74d0b2"
-    #background_image: "assets/images/splash_screan_background.png"
+    #background_image: "assets/images/splash_screen_background.png"
     # App icon background color.
     #icon_background_color: "#111111"
 
     # The branding property allows you to specify an image used as branding in the splash screen.
-    #branding: assets/images/splash_screan_background.png
+    #branding: assets/images/splash_screen_background.png
 
     # The image_dark, color_dark, icon_background_color_dark, and branding_dark set values that
     # apply when the device is in dark mode. If they are not specified, the app will use the
@@ -98,10 +98,10 @@ flutter_native_splash:
   #image_dark_ios: assets/splash-invert-ios.png
   #image_web: assets/splash-web.gif
   #image_dark_web: assets/splash-invert-web.gif
-  background_image_android: "assets/images/splash_screan_background.png"
-  background_image_dark_android: "assets/images/splash_screan_background.png"
-  background_image_ios: "assets/images/splash_screan_background.png"
-  background_image_dark_ios: "assets/images/splash_screan_background.png"
+  background_image_android: "assets/images/splash_screen_background.png"
+  background_image_dark_android: "assets/images/splash_screen_background.png"
+  background_image_ios: "assets/images/splash_screen_background.png"
+  background_image_dark_ios: "assets/images/splash_screen_background.png"
   #background_image_web: "assets/background-web.png"
   #background_image_dark_web: "assets/dark-background-web.png"
   #branding_android: assets/brand-android.png
