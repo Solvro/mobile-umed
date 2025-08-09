@@ -5,17 +5,21 @@ import "../styling/button_styles.dart";
 
 class VerticalButton extends StatelessWidget {
   final String label;
-  final IconData icon;
-  final Color iconColor;
+  final IconData? icon;
+  final Color? iconColor;
+  final Widget? customWidget;
   final VoidCallback onPressed;
 
   const VerticalButton({
     super.key,
     required this.label,
-    required this.icon,
-    required this.iconColor,
+    this.icon,
+
+    this.iconColor,
+    this.customWidget,
     required this.onPressed,
-  });
+  }) : assert(icon != null || customWidget != null, "Either icon or customWidget must be provided"),
+       assert(!(icon != null && customWidget != null), "Cannot provide both icon and customWidget");
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class VerticalButton extends StatelessWidget {
             child: Text(label, style: context.textTheme.labelMedium, textAlign: TextAlign.center),
           ),
           const Spacer(),
-          Icon(icon, size: VerticalButtonConfig.iconSize, color: iconColor),
+          customWidget ?? Icon(icon, size: VerticalButtonConfig.iconSize, color: iconColor),
           const Spacer(),
         ],
       ),
