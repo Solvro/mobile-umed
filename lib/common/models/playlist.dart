@@ -14,8 +14,8 @@ abstract class Playlist with _$Playlist {
     required int id,
     required String name,
     required String spotifyUrl,
-    required String youtubeUrl,
-    required String appleUrl,
+    String? youtubeUrl,
+    String? appleUrl,
     @SongsListConverter() required IList<Song> songs,
   }) = _Playlist;
 

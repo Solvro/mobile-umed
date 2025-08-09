@@ -19,7 +19,7 @@
 
 
     <application
-        android:label="mobile_umed"
+        android:label="Pierwsze Skrzypce"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

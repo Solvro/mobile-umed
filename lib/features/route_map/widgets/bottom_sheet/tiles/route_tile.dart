@@ -6,7 +6,6 @@ import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
 import "../../../../../app/theme/color_consts.dart";
-import "../../../../../common/data_source/mocks/mock_songs.dart";
 import "../../../../../common/models/route.dart";
 import "../../../../../common/widgets/buttons/secondary_action_button.dart";
 import "../../../modals/start_route_modal.dart";
@@ -106,18 +105,20 @@ class RouteTileState extends ConsumerState<RouteTile> {
                   textColor: _chosenOption != RouteDetailsOption.info ? ColorConsts.plumosa : ColorConsts.whiteGray,
                 ),
               ),
-              Expanded(
-                child: SecondaryActionButton(
-                  onPressed: () {
-                    updateExpandedRoutes(route);
-                    setState(() => _chosenOption = RouteDetailsOption.playlist);
-                  },
-                  text: context.l10n.playlist,
-                  backgroundColor:
-                      _chosenOption != RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.plumosa,
-                  textColor: _chosenOption != RouteDetailsOption.playlist ? ColorConsts.plumosa : ColorConsts.whiteGray,
+              if (widget.route.playlist != null)
+                Expanded(
+                  child: SecondaryActionButton(
+                    onPressed: () {
+                      updateExpandedRoutes(route);
+                      setState(() => _chosenOption = RouteDetailsOption.playlist);
+                    },
+                    text: context.l10n.playlist,
+                    backgroundColor:
+                        _chosenOption != RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.plumosa,
+                    textColor:
+                        _chosenOption != RouteDetailsOption.playlist ? ColorConsts.plumosa : ColorConsts.whiteGray,
+                  ),
                 ),
-              ),
             ],
           ),
         ),
@@ -125,7 +126,7 @@ class RouteTileState extends ConsumerState<RouteTile> {
         if (_chosenOption == RouteDetailsOption.info)
           LandmarksSection(checkpoints: route.checkpoints)
         else
-          PlaylistInfoSection(songs: mockSongs),
+          PlaylistInfoSection(playlist: widget.route.playlist!),
       ],
     );
   }

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     final appTheme = AppTheme();
     return _EagerInitialization(
       child: MaterialApp.router(
-        title: "Flutter Demo",
+        title: "Pierwsze Skrzypce",
         theme: appTheme.light,
         darkTheme: appTheme.dark,
         localizationsDelegates: AppLocalizations.localizationsDelegates,

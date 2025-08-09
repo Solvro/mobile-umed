@@ -10,12 +10,10 @@ abstract class InfoSection with _$InfoSection {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory InfoSection({
     required int id,
-    required int sort,
     required String description,
     required String title,
     required String subtitle,
-    int? socialUrls,
-    Socials? socials,
+    Socials? socialUrls,
   }) = _InfoSection;
 
   factory InfoSection.fromJson(Map<String, dynamic> json) => _$InfoSectionFromJson(json);

@@ -1,3 +1,4 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -17,7 +18,9 @@ class InfoPage extends ConsumerWidget {
 
     return switch (combinedRef) {
       AsyncData(:final value) => InfoView(creators: value.creators, infoSections: value.infoSections),
-      AsyncError() => const FullScreenErrorView(),
+      AsyncError(:final error, :final stackTrace) => FullScreenErrorView(
+        message: kDebugMode ? "$error\n$stackTrace" : null,
+      ),
       _ => const InfoLoadingView(),
     };
   }
