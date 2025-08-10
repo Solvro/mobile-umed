@@ -14,7 +14,7 @@ import "modals/route_completed_modal.dart";
 import "providers/locations_provider.dart";
 import "providers/route_provider.dart";
 import "repository/route_map_repository.dart";
-import "services/task_handlers/route_background_task_handler.dart";
+import "services/task_handlers/route_foreground_task_handler.dart";
 import "views/route_map_view.dart";
 
 const distance = Distance();

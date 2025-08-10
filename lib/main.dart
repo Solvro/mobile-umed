@@ -11,8 +11,6 @@ import "package:sentry_flutter/sentry_flutter.dart";
 import "app/app.dart";
 import "app/config/env.dart";
 import "app/wiredash.dart";
-import "common/utils/location_service.dart";
-import "features/route_map/services/task_handlers/foreground_task_service.dart";
 
 void main() async {
   final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +19,6 @@ void main() async {
   FlutterForegroundTask.initCommunicationPort();
   final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
-  await _requestPermissions();
   if (!kReleaseMode) {
     runMyApp();
   } else {
@@ -32,11 +29,6 @@ void main() async {
     }, appRunner: runMyApp);
   }
   FlutterNativeSplash.remove();
-}
-
-Future<void> _requestPermissions() async {
-  await LocationService.requestPermissions();
-  await MyFlutterForegroundTask.requestPermissions();
 }
 
 void runMyApp() => runApp(const ProviderScope(child: ProdWiredash(child: WithForegroundTask(child: MyApp()))));

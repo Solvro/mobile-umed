@@ -1,6 +1,7 @@
 import "dart:async";
 import "dart:collection";
 
+import "package:flutter/rendering.dart";
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:latlong2/latlong.dart";
 
@@ -43,6 +44,7 @@ class MyTaskHandler extends TaskHandler {
           final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
           if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
             currentLocation = location;
+            debugPrint("Current location: $currentLocation, distance: $meterDistance");
             break;
           }
         }
@@ -73,10 +75,10 @@ class MyTaskHandler extends TaskHandler {
           );
           await _locationSubscription?.cancel();
         } else {
-          await FlutterForegroundTask.updateService(
-            notificationTitle: "Jesteś niedaleko celu",
-            notificationText: "Dotarłeś do punktu: ${locations.first}",
-          );
+          // await FlutterForegroundTask.updateService(
+          //   notificationTitle: "Jesteś niedaleko celu",
+          //   notificationText: "Dotarłeś do punktu: ${locations.first}",
+          // );
         }
       }
     });

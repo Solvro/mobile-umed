@@ -47,9 +47,9 @@ class MyFlutterForegroundTask {
       if (!await FlutterForegroundTask.isIgnoringBatteryOptimizations) {
         await FlutterForegroundTask.requestIgnoreBatteryOptimization();
       }
-      if (!await FlutterForegroundTask.canScheduleExactAlarms) {
-        await FlutterForegroundTask.openAlarmsAndRemindersSettings();
-      }
+      // if (!await FlutterForegroundTask.canScheduleExactAlarms) {
+      //   await FlutterForegroundTask.openAlarmsAndRemindersSettings();
+      // }
     }
   }
 }
