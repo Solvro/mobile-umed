@@ -45,10 +45,7 @@ class LandmarkInfoModal extends StatelessWidget {
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
             ClipRRect(
               borderRadius: BorderRadius.circular(LandmarkInfoModalConfig.imageRadius),
-              child: const CachedImage(
-                //for now there is no image url property in the landmark model
-                "https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg",
-              ),
+              child: const CachedImage(""), // TODO(tt): Replace with actual image URL
             ),
             const SizedBox(height: LandmarkInfoModalConfig.verticalSpacing),
             Column(
