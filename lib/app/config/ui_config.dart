@@ -179,11 +179,11 @@ abstract final class CircularProgressConfig {
   static const double strokeWidth = 10;
   static const double backgroundAlpha = 0.2;
 
-  static LinearGradient createProgressGradient(ColorScheme colorScheme) {
-    return LinearGradient(
-      colors: [colorScheme.primary, colorScheme.secondary, colorScheme.error],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+  static SweepGradient createProgressGradient(ColorScheme colorScheme) {
+    return SweepGradient(
+      colors: [colorScheme.error, colorScheme.error, colorScheme.primary, colorScheme.primary, colorScheme.error],
+      stops: const [0.0, 0.25, 0.5, 0.75, 1.0],
+      endAngle: 2 * 3.14159,
     );
   }
 
