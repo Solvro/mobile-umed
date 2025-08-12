@@ -20,53 +20,41 @@ class HomeButtonsRow extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final progressAsync = ref.watch(routeProgressProvider);
-                  return progressAsync.when(
-                    data:
-                        (progress) => VerticalButton(
-                          label: context.l10n.common_finished_routes,
-                          customWidget: CircularProgressWithText(
-                            progress: progress,
-                            size: VerticalButtonConfig.iconSize - CircularProgressConfig.strokeWidth,
-                            strokeWidth: CircularProgressConfig.strokeWidth,
-                            backgroundColor: context.colorScheme.primary.withValues(
-                              alpha: CircularProgressConfig.backgroundAlpha,
-                            ),
-                            progressGradient: LinearGradient(
-                              colors: [
-                                context.colorScheme.primary,
-                                context.colorScheme.secondary,
-                                context.colorScheme.error,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            textStyle: context.textTheme.labelLarge?.copyWith(
-                              color: context.colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          onPressed: context.router.goProfile,
-                        ),
-                    loading:
-                        () => VerticalButton(
-                          label: context.l10n.common_finished_routes,
-                          icon: Icons.auto_graph,
-                          iconColor: context.colorScheme.primary,
-                          onPressed: context.router.goProfile,
-                        ),
-                    error:
-                        (error, stack) => VerticalButton(
-                          label: context.l10n.common_finished_routes,
-                          icon: Icons.wifi_off,
-                          iconColor: Colors.grey,
-                          onPressed: context.router.goProfile,
-                        ),
-                  );
-                },
-              ),
+              child: () {
+                final progressAsync = ref.watch(routeProgressProvider);
+
+                return switch (progressAsync) {
+                  AsyncData(:final value) => VerticalButton(
+                    label: context.l10n.common_finished_routes,
+                    customWidget: CircularProgressWithText(
+                      progress: value,
+                      size: VerticalButtonConfig.iconSize - CircularProgressConfig.strokeWidth,
+                      strokeWidth: CircularProgressConfig.strokeWidth,
+                      backgroundColor: context.colorScheme.primary.withValues(
+                        alpha: CircularProgressConfig.backgroundAlpha,
+                      ),
+                      progressGradient: CircularProgressConfig.createProgressGradient(context.colorScheme),
+                      textStyle: CircularProgressConfig.createProgressTextStyle(
+                        context.colorScheme,
+                        context.textTheme.labelLarge,
+                      ),
+                    ),
+                    onPressed: context.router.goProfile,
+                  ),
+                  AsyncError() => VerticalButton(
+                    label: context.l10n.common_finished_routes,
+                    icon: Icons.wifi_off,
+                    iconColor: Colors.grey,
+                    onPressed: context.router.goProfile,
+                  ),
+                  _ => VerticalButton(
+                    label: context.l10n.common_finished_routes,
+                    icon: Icons.auto_graph,
+                    iconColor: context.colorScheme.primary,
+                    onPressed: context.router.goProfile,
+                  ),
+                };
+              }(),
             ),
             const SizedBox(width: HomeViewConfig.commonGap),
             Expanded(

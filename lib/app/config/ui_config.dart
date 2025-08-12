@@ -178,6 +178,18 @@ abstract final class VerticalButtonConfig {
 abstract final class CircularProgressConfig {
   static const double strokeWidth = 10;
   static const double backgroundAlpha = 0.2;
+
+  static LinearGradient createProgressGradient(ColorScheme colorScheme) {
+    return LinearGradient(
+      colors: [colorScheme.primary, colorScheme.secondary, colorScheme.error],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+  }
+
+  static TextStyle? createProgressTextStyle(ColorScheme colorScheme, TextStyle? baseTextStyle) {
+    return baseTextStyle?.copyWith(color: colorScheme.primary, fontWeight: FontWeight.bold);
+  }
 }
 
 abstract final class RouteListConfig {
