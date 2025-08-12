@@ -7,7 +7,10 @@ import "../../../../../app/theme/app_theme.dart";
 import "../../../../../common/models/route.dart";
 import "../../../../app/theme/color_consts.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
+import "../../../app/config/cached_image_config.dart";
+import "../../../app/config/ui_config.dart";
 import "../../../common/widgets/buttons/main_action_button.dart";
+import "../../../common/widgets/image/cached_image.dart";
 import "../../../common/widgets/modals/options_modal.dart";
 import "../providers/route_provider.dart";
 
@@ -34,10 +37,18 @@ class StartRouteModal extends ConsumerWidget {
           context.router.pop();
         },
       ),
-      child: Text(
-        route.description != null ? route.description! : context.l10n.start_route_modal_title,
-        textAlign: TextAlign.start,
-        style: context.textTheme.bodyMedium?.copyWith(fontSize: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: AppPaddings.small,
+        children: [
+          Text(
+            route.description != null ? route.description! : context.l10n.start_route_modal_title,
+            textAlign: TextAlign.start,
+            style: context.textTheme.bodyMedium?.copyWith(fontSize: 14),
+          ),
+          Expanded(child: Center(child: CachedImage(CachedImageConfig.getDirectusUrl(route.image)))),
+          const SizedBox(height: AppPaddings.tinySmall),
+        ],
       ),
     );
   }
