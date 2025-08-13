@@ -38,12 +38,17 @@ class AppInitPage extends ConsumerWidget {
 }
 
 final cacheInitProvider = FutureProvider((ref) async {
+  final storageService = await ref.read(storageServiceProvider.future);
+  final cachedCacheNum = storageService.cacheNum;
+
   final cacheNum = await ref.read(fetchCacheNumProvider.future);
-  final cachedCacheNum = ref.read(storageServiceProvider).cacheNum;
+
+  debugPrint("cache Num: $cacheNum");
+  debugPrint("cached cache num: $cachedCacheNum");
 
   if (cacheNum > cachedCacheNum) {
     await clearDioCache();
     await CachedImageConfig.cacheManagerInstance.emptyCache();
-    await ref.read(storageServiceProvider).setCacheNum(cacheNum);
+    await storageService.setCacheNum(cacheNum);
   }
 });

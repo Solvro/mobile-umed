@@ -15,6 +15,8 @@ class StorageService {
   }
 }
 
-final storageServiceProvider = Provider<StorageService>((ref) {
-  throw UnimplementedError();
+final storageServiceProvider = FutureProvider<StorageService>((ref) async {
+  final prefs = await SharedPreferences.getInstance();
+  final storageService = StorageService(prefs);
+  return storageService;
 });
