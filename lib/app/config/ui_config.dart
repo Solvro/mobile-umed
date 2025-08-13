@@ -176,6 +176,23 @@ abstract final class VerticalButtonConfig {
   static const double greenHeader = 60;
 }
 
+abstract final class CircularProgressConfig {
+  static const double strokeWidth = 10;
+  static const double backgroundAlpha = 0.2;
+
+  static SweepGradient createProgressGradient(ColorScheme colorScheme) {
+    return SweepGradient(
+      colors: [colorScheme.error, colorScheme.error, colorScheme.primary, colorScheme.primary, colorScheme.error],
+      stops: const [0.0, 0.25, 0.5, 0.75, 1.0],
+      endAngle: 2 * 3.14159,
+    );
+  }
+
+  static TextStyle? createProgressTextStyle(ColorScheme colorScheme, TextStyle? baseTextStyle) {
+    return baseTextStyle?.copyWith(color: colorScheme.primary, fontWeight: FontWeight.bold);
+  }
+}
+
 abstract final class RouteListConfig {
   static const double height = 225;
   static const double itemWidth = 180;
