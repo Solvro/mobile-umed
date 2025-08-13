@@ -47,6 +47,7 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         text: context.l10n.end_route,
         backgroundColor: context.colorScheme.error,
         onPressed: () async {
+          ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
           ref.read(sheetTriggerProvider.notifier).state = true;
           final bool shouldPop =
               await showDialog<bool>(context: context, builder: (context) => EndRouteModal(route: widget.route)) ??

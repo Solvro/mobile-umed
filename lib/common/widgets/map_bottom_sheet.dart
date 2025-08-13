@@ -45,10 +45,17 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
     ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
       if (shouldTrigger) {
         ref.read(sheetTriggerProvider.notifier).state = false;
-        await controller.animateTo(
-          ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
+        if (!controller.isAttached) {
+          ref.read(sheetTriggerProvider.notifier).state = true;
+        }
+        debugPrint("Starting sheet animation to position: $sheetPosition");
+        Future.delayed(
+          Duration.zero,
+          () => controller.animateTo(
+            ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          ),
         );
       }
     });

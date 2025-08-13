@@ -32,10 +32,14 @@ class RouteMapPage extends ConsumerStatefulWidget {
 class _RouteMapPageState extends ConsumerState<RouteMapPage> {
   void _initializeState(WidgetRef ref, {Route? route}) {
     ref.read(routeProvider.notifier).state = route;
-    ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+    ref.read(sheetStateProvider.notifier).state = route == null ? SheetState.visible : SheetState.hidden;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
+    if (route == null && ref.read(sheetStateProvider) == SheetState.visible) {
+      debugPrint("It was set to visible, awaiting");
+      ref.read(sheetTriggerProvider.notifier).state = true;
+    }
   }
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {

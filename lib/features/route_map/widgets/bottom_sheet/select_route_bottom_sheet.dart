@@ -34,6 +34,8 @@ class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> 
       button: MainActionButton(
         text: context.l10n.browse_routes,
         onPressed: () {
+          debugPrint(ref.read(sheetStateProvider).toString());
+          debugPrint(ref.read(sheetTriggerProvider).toString());
           if (ref.read(sheetStateProvider) == SheetState.hidden) {
             ref.read(sheetStateProvider.notifier).state = SheetState.visible;
           } else {

@@ -1,13 +1,14 @@
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../app/app.dart";
 import "../../../common/widgets/styling/button_styles.dart";
 
-class StartRouteButton extends StatelessWidget {
+class StartRouteButton extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium),
       child: ElevatedButton(
