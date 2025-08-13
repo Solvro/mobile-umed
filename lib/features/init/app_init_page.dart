@@ -45,31 +45,6 @@ class _AppInitPageState extends ConsumerState<AppInitPage> {
       _ => const SizedBox.shrink(),
     };
   }
-
-  // @override
-  // Widget build(BuildContext context, WidgetRef ref) {
-  //   ref.listen(cacheInitProvider, (prev, status) {
-  //     if (status is AsyncData) {
-  //       WidgetsBinding.instance.addPostFrameCallback((_) {
-  //         if (context.mounted) {
-  //           FlutterNativeSplash.remove();
-  //           context.router.goHome();
-  //         }
-  //       });
-  //     }
-  //   });
-
-  //   final cacheInitProviderAsync = ref.watch(cacheInitProvider);
-
-  //   return switch (cacheInitProviderAsync) {
-  //     (AsyncData()) => const SizedBox.shrink(),
-  //     AsyncError(:final error, :final stackTrace) => FullScreenErrorView(
-  //       message: kDebugMode ? "$error\n$stackTrace" : null,
-  //     ),
-  //     AsyncLoading() => const CircularProgressIndicator(),
-  //     _ => const SizedBox.shrink(),
-  //   };
-  // }
 }
 
 final cacheInitProvider = FutureProvider((ref) async {
