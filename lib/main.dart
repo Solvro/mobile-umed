@@ -13,9 +13,7 @@ import "app/config/env.dart";
 import "app/wiredash.dart";
 import "common/data_source/remote/cache_options.dart";
 import "common/repositories/cache_ref_repository.dart";
-import "common/utils/location_service.dart";
 import "common/utils/storage_service.dart";
-import "features/route_map/services/task_handlers/foreground_task_service.dart";
 
 void main() async {
   final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -41,8 +39,6 @@ void main() async {
     FlutterNativeSplash.remove();
   }
 
-  await _requestPermissions();
-
   if (!kReleaseMode) {
     runApp(const ProviderScope(child: ProdWiredash(child: WithForegroundTask(child: MyApp()))));
   } else {
@@ -57,9 +53,4 @@ void main() async {
       },
     );
   }
-}
-
-Future<void> _requestPermissions() async {
-  await LocationService.requestPermissions();
-  await MyFlutterForegroundTask.requestPermissions();
 }

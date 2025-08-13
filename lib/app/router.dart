@@ -9,12 +9,6 @@ final _router = GoRouter(
   initialLocation: HomePage.routeName,
   navigatorKey: _rootNavigatorKey,
   routes: [
-    // GoRoute(
-    //   path: AppInitPage.routeName,
-    //   pageBuilder: (context, state) {
-    //     return const NoTransitionPage(child: AppInitPage());
-    //   },
-    // ),
     // this route is temporary here
     GoRoute(
       path: RouteMapPage.routeName,

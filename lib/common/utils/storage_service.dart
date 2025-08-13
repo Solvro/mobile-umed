@@ -1,6 +1,6 @@
 import "package:shared_preferences/shared_preferences.dart";
 
-const cacheKey = "cacheNum";
+const cacheNumKey = "cacheNum";
 
 class StorageService {
   static SharedPreferences? _sharedPrefs;
@@ -13,13 +13,13 @@ class StorageService {
     if (_sharedPrefs == null) {
       throw Exception("StorageService not initialized. Call init() first.");
     }
-    return _sharedPrefs!.getInt(cacheKey) ?? 0;
+    return _sharedPrefs!.getInt(cacheNumKey) ?? 0;
   }
 
   static Future<void> setCacheNum(int newCacheKey) async {
     if (_sharedPrefs == null) {
       throw Exception("StorageService not initialized. Call init() first.");
     }
-    await _sharedPrefs!.setInt(cacheKey, newCacheKey);
+    await _sharedPrefs!.setInt(cacheNumKey, newCacheKey);
   }
 }
