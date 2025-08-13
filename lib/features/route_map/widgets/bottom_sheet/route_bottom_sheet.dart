@@ -49,7 +49,8 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         onPressed: () async {
           ref.read(sheetTriggerProvider.notifier).state = true;
           final bool shouldPop =
-              await showDialog<bool>(context: context, builder: (context) => const EndRouteModal()) ?? false;
+              await showDialog<bool>(context: context, builder: (context) => EndRouteModal(route: widget.route)) ??
+              false;
           if (context.mounted && shouldPop) {
             context.pop();
           }

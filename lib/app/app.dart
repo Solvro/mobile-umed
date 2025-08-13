@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: "Pierwsze Skrzypce",
         theme: appTheme.light,
-        darkTheme: appTheme.dark,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: _router,

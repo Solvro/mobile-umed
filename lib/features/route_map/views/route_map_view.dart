@@ -94,7 +94,7 @@ class RouteMapViewState extends ConsumerState<RouteMapView> with TickerProviderS
       );
     }
     return ModalBeforeExiting(
-      modal: const EndRouteModal(),
+      modal: EndRouteModal(route: route),
       child: Scaffold(
         body: Stack(
           children: [

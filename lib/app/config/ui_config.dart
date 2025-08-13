@@ -116,6 +116,7 @@ abstract class LandmarkInfoModalConfig {
 
 abstract class EndRouteModalConfig {
   static const imageRadius = 12.0;
+  static const imageHeight = 200.0;
 }
 
 abstract class RouteCompleteModalConfig {
