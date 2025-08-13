@@ -27,7 +27,7 @@ void main() async {
   await _requestPermissions();
 
   if (!kReleaseMode) {
-    runMyApp();
+    await runMyApp();
   } else {
     await SentryFlutter.init((options) {
       options.dsn = Env.bugsinkDsn;

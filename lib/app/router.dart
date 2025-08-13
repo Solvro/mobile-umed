@@ -12,7 +12,7 @@ final _router = GoRouter(
     GoRoute(
       path: AppInitPage.routeName,
       pageBuilder: (context, state) {
-        return NoTransitionPage(child: AppInitPage());
+        return const NoTransitionPage(child: AppInitPage());
       },
     ),
     // this route is temporary here
