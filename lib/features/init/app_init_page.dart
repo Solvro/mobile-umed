@@ -43,9 +43,6 @@ final cacheInitProvider = FutureProvider((ref) async {
 
   final cacheNum = await ref.read(fetchCacheNumProvider.future);
 
-  debugPrint("cache Num: $cacheNum");
-  debugPrint("cached cache num: $cachedCacheNum");
-
   if (cacheNum > cachedCacheNum) {
     await clearDioCache();
     await CachedImageConfig.cacheManagerInstance.emptyCache();

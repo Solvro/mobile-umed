@@ -50,6 +50,10 @@ final errorCodes = [
 
 HiveCacheStore? _cacheStore;
 
+CacheOptions getNoCacheOptions() {
+  return CacheOptions(store: MemCacheStore(), policy: CachePolicy.noCache);
+}
+
 Future<CacheOptions> getCacheOptions() async {
   if (_cacheStore == null) {
     final dir = await getApplicationSupportDirectory();
