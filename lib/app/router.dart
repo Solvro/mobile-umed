@@ -6,15 +6,15 @@ final _shellNavigatorProfileKey = GlobalKey<NavigatorState>();
 final _shellNavigatorInfoKey = GlobalKey<NavigatorState>();
 
 final _router = GoRouter(
-  initialLocation: AppInitPage.routeName,
+  initialLocation: HomePage.routeName,
   navigatorKey: _rootNavigatorKey,
   routes: [
-    GoRoute(
-      path: AppInitPage.routeName,
-      pageBuilder: (context, state) {
-        return const NoTransitionPage(child: AppInitPage());
-      },
-    ),
+    // GoRoute(
+    //   path: AppInitPage.routeName,
+    //   pageBuilder: (context, state) {
+    //     return const NoTransitionPage(child: AppInitPage());
+    //   },
+    // ),
     // this route is temporary here
     GoRoute(
       path: RouteMapPage.routeName,

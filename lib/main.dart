@@ -8,8 +8,11 @@ import "package:hive/hive.dart";
 import "package:path_provider/path_provider.dart";
 import "package:sentry_flutter/sentry_flutter.dart";
 import "app/app.dart";
+import "app/config/cached_image_config.dart";
 import "app/config/env.dart";
 import "app/wiredash.dart";
+import "common/data_source/remote/cache_options.dart";
+import "common/repositories/cache_ref_repository.dart";
 import "common/utils/location_service.dart";
 import "common/utils/storage_service.dart";
 import "features/route_map/services/task_handlers/foreground_task_service.dart";
@@ -23,6 +26,20 @@ void main() async {
 
   final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
+
+  final container = ProviderContainer();
+  try {
+    final cachedCacheNum = StorageService.cacheNum;
+    final cacheNum = await container.read(fetchCacheNumProvider.future);
+
+    if (cacheNum > cachedCacheNum) {
+      await clearDioCache();
+      await CachedImageConfig.cacheManagerInstance.emptyCache();
+      await StorageService.setCacheNum(cacheNum);
+    }
+  } finally {
+    FlutterNativeSplash.remove();
+  }
 
   await _requestPermissions();
 
