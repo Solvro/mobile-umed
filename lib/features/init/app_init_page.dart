@@ -1,5 +1,6 @@
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter_native_splash/flutter_native_splash.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
@@ -15,11 +16,13 @@ class AppInitPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint("init");
     ref.listen(cacheInitProvider, (prev, status) {
       if (status is AsyncData) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (context.mounted) context.router.goHome();
+          if (context.mounted) {
+            FlutterNativeSplash.remove();
+            context.router.goHome();
+          }
         });
       }
     });
