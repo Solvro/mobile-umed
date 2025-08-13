@@ -21,11 +21,20 @@ class CreatorTile extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CachedImage(CachedImageConfig.getDirectusUrl(creator.imageUrl)),
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(InfoSectionConfig.radius),
+                topRight: Radius.circular(InfoSectionConfig.radius),
+              ),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: CachedImage(CachedImageConfig.getDirectusUrl(creator.imageUrl)),
+              ),
+            ),
+            const SizedBox(height: AppPaddings.tiny),
             Text("${creator.firstName} ${creator.lastName}", style: context.textTheme.bodyMedium),
             Text(creator.role, style: context.textTheme.bodySmall),
             if (creator.socialUrls != null) SocialsSection(socials: creator.socialUrls!),
-            const SizedBox(height: AppPaddings.tiny),
           ],
         ),
       ),
