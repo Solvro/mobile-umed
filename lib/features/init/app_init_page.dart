@@ -15,8 +15,9 @@ class AppInitPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint("init");
     ref.listen(cacheInitProvider, (prev, status) {
-      if (prev is! AsyncData && status is AsyncData) {
+      if (status is AsyncData) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (context.mounted) context.router.goHome();
         });

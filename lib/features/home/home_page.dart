@@ -14,6 +14,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint("home");
     final provider = ref.watch(fetchAllRoutesProvider);
 
     return switch (provider) {
