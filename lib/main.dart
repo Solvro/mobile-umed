@@ -11,12 +11,14 @@ import "app/app.dart";
 import "app/config/env.dart";
 import "app/wiredash.dart";
 import "common/utils/location_service.dart";
+import "common/utils/storage_service.dart";
 import "features/route_map/services/task_handlers/foreground_task_service.dart";
 
 void main() async {
   final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await StorageService.init();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   FlutterForegroundTask.initCommunicationPort();
 
   final dir = await getApplicationDocumentsDirectory();

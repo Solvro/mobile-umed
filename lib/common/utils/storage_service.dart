@@ -1,22 +1,25 @@
-import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 const cacheKey = "cacheNum";
 
 class StorageService {
-  StorageService(this._prefs);
+  static SharedPreferences? _sharedPrefs;
 
-  final SharedPreferences _prefs;
+  static Future<void> init() async {
+    _sharedPrefs ??= await SharedPreferences.getInstance();
+  }
 
-  int get cacheNum => _prefs.getInt(cacheKey) ?? 0;
+  static int get cacheNum {
+    if (_sharedPrefs == null) {
+      throw Exception("StorageService not initialized. Call init() first.");
+    }
+    return _sharedPrefs!.getInt(cacheKey) ?? 0;
+  }
 
-  Future<void> setCacheNum(int newCacheKey) async {
-    await _prefs.setInt(cacheKey, newCacheKey);
+  static Future<void> setCacheNum(int newCacheKey) async {
+    if (_sharedPrefs == null) {
+      throw Exception("StorageService not initialized. Call init() first.");
+    }
+    await _sharedPrefs!.setInt(cacheKey, newCacheKey);
   }
 }
-
-final storageServiceProvider = FutureProvider<StorageService>((ref) async {
-  final prefs = await SharedPreferences.getInstance();
-  final storageService = StorageService(prefs);
-  return storageService;
-});

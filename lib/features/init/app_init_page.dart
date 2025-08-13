@@ -48,14 +48,13 @@ class _AppInitPageState extends ConsumerState<AppInitPage> {
 }
 
 final cacheInitProvider = FutureProvider((ref) async {
-  final storageService = await ref.read(storageServiceProvider.future);
-  final cachedCacheNum = storageService.cacheNum;
+  final cachedCacheNum = StorageService.cacheNum;
 
   final cacheNum = await ref.read(fetchCacheNumProvider.future);
 
   if (cacheNum > cachedCacheNum) {
     await clearDioCache();
     await CachedImageConfig.cacheManagerInstance.emptyCache();
-    await storageService.setCacheNum(cacheNum);
+    await StorageService.setCacheNum(cacheNum);
   }
 });
