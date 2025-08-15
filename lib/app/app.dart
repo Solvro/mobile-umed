@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO(tomasz-trela): move this to logic layer
     final appTheme = AppTheme();
+
     return _EagerInitialization(
       child: MaterialApp.router(
         title: "Pierwsze Skrzypce",
