@@ -1,5 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
+import "package:wiredash/wiredash.dart";
+
 import "../../../app/config/ui_config.dart";
 import "../../../app/l10n/l10n.dart";
 import "../../../common/models/creator.dart";
@@ -32,6 +34,24 @@ class InfoView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.tiny),
               child: Row(children: creators.map(CreatorTile.new).toList()),
+            ),
+          ),
+          /////////////////////////////////////////////////////////
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.medium),
+            child: Card(
+              elevation: 4,
+              child: ListTile(
+                leading: const Icon(Icons.feedback_outlined),
+                title: Text(context.l10n.info_feedback_title),
+                subtitle: Text(context.l10n.info_feedback_subtitle),
+                trailing: ElevatedButton(
+                  onPressed: () async {
+                    await Wiredash.of(context).show(inheritMaterialTheme: true);
+                  },
+                  child: Text(context.l10n.info_feedback_button),
+                ),
+              ),
             ),
           ),
         ],
