@@ -1,4 +1,5 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/config/ui_config.dart";
@@ -44,9 +45,11 @@ class ProfileView extends ConsumerWidget {
             SectionHeader(context.l10n.achievements_statistics),
             StatListWidget(stats: convertCompletedRoutesToStats(completedRoutes)),
             const SizedBox(height: AppPaddings.medium),
-            SectionHeader(context.l10n.achievements_achievements),
-            const SizedBox(height: AppPaddings.tinySmall),
-            StatListWidget(stats: mockAchievements),
+            if (!kDebugMode) ...[
+              SectionHeader(context.l10n.achievements_achievements),
+              const SizedBox(height: AppPaddings.tinySmall),
+              StatListWidget(stats: mockAchievements),
+            ],
           ],
         ),
       ),

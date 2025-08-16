@@ -11,7 +11,7 @@ class SheetTopHandle extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: getSheetTopDecoration(context.colorScheme.surface),
-      padding: const EdgeInsets.symmetric(vertical: AppPaddings.tiny),
+      padding: const EdgeInsets.symmetric(vertical: AppPaddings.nano),
       height: maxExtent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
