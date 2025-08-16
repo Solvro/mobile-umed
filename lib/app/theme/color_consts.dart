@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 abstract class ColorConsts {
-  static const plumosa = Color(0xFF63A38E); // Plumosa
+  static const plumosa = Color(0xFF4C8F79); // Plumosa
   static const turtleLake = Color(0xFF76B5A1); // Turtle Lake
   static const baldKappa = Color(0xFFB4D6CB); // Bald Kappa
   static const blancTurtle = Color(0xFFCCE4DC); // Blanc Turtle
