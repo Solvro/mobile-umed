@@ -9,6 +9,8 @@ abstract interface class AppThemeData {
 }
 
 class AppTheme implements AppThemeData {
+  static const _fontFallback = <String>["sans-serif"];
+
   @override
   ThemeData get dark => ThemeData();
 
@@ -26,6 +28,7 @@ class AppTheme implements AppThemeData {
     ),
     textTheme: _textTheme,
     fontFamily: FontFamily.urbanist,
+    fontFamilyFallback: _fontFallback,
     elevatedButtonTheme: _elevatedButtonTheme,
   );
 
