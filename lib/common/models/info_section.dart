@@ -12,7 +12,7 @@ abstract class InfoSection with _$InfoSection {
     required int id,
     required String description,
     required String title,
-    required String subtitle,
+    String? subtitle,
     Socials? socialUrls,
   }) = _InfoSection;
 
