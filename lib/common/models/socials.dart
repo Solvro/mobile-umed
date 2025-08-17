@@ -16,5 +16,10 @@ abstract class Socials with _$Socials {
     @Default(false) bool onlyWeb,
   }) = _Socials;
 
+  const Socials._();
+
+  bool get hasSocials =>
+      webUrl != null || githubUrl != null || facebookUrl != null || linkedinUrl != null || emailAddress != null;
+
   factory Socials.fromJson(Map<String, dynamic> json) => _$SocialsFromJson(json);
 }
