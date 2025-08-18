@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+
 import "../../../app/theme/app_theme.dart";
 import "../../app/assets/assets.gen.dart";
 import "../../app/config/ui_config.dart";
