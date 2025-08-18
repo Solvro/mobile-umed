@@ -131,5 +131,6 @@ flutter:
         - asset: assets/fonts/Urbanist-Black.ttf
           weight: 900
 
+
 lint_staged:
   "lib/**.dart": dart format && dart fix --apply
