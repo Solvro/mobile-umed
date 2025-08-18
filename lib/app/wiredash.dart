@@ -14,7 +14,7 @@ class ProdWiredash extends StatelessWidget {
     if (kReleaseMode) {
       return Wiredash(projectId: Env.wiredashProjectId, secret: Env.wiredashSecretKey, child: child);
     } else {
-      return child;
+      return Wiredash(projectId: "", secret: "", child: child);
     }
   }
 }

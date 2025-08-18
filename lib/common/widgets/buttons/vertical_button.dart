@@ -14,7 +14,6 @@ class VerticalButton extends StatelessWidget {
     super.key,
     required this.label,
     this.icon,
-
     this.iconColor,
     this.customWidget,
     required this.onPressed,

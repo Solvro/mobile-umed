@@ -61,13 +61,14 @@ class FeedbackTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.medium),
       child: Card(
-        elevation: 4,
+        elevation: 2,
         child: ListTile(
           leading: const Icon(Icons.feedback_outlined),
           title: Text(context.l10n.info_feedback_title),
           subtitle: Text(context.l10n.info_feedback_subtitle),
           trailing: ElevatedButton(
             style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small, vertical: AppPaddings.nanoTiny),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.small)),
             ),
             onPressed: () async {
