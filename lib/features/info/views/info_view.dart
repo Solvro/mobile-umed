@@ -23,10 +23,21 @@ class InfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(),
+      appBar: CommonAppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.feedback_outlined),
+            tooltip: context.l10n.app_feedback,
+            onPressed: () async {
+              await Wiredash.of(context).show(inheritMaterialTheme: true);
+            },
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [
+          const FeedbackTile(),
           ...infoSections.map((section) => InfoSectionWidget(infoSection: section)),
           SectionHeader(context.l10n.info_creators),
           SingleChildScrollView(
@@ -36,25 +47,35 @@ class InfoView extends StatelessWidget {
               child: Row(children: creators.map(CreatorTile.new).toList()),
             ),
           ),
-          /////////////////////////////////////////////////////////
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.medium),
-            child: Card(
-              elevation: 4,
-              child: ListTile(
-                leading: const Icon(Icons.feedback_outlined),
-                title: Text(context.l10n.info_feedback_title),
-                subtitle: Text(context.l10n.info_feedback_subtitle),
-                trailing: ElevatedButton(
-                  onPressed: () async {
-                    await Wiredash.of(context).show(inheritMaterialTheme: true);
-                  },
-                  child: Text(context.l10n.info_feedback_button),
-                ),
-              ),
-            ),
-          ),
         ],
+      ),
+    );
+  }
+}
+
+class FeedbackTile extends StatelessWidget {
+  const FeedbackTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium, vertical: AppPaddings.medium),
+      child: Card(
+        elevation: 4,
+        child: ListTile(
+          leading: const Icon(Icons.feedback_outlined),
+          title: Text(context.l10n.info_feedback_title),
+          subtitle: Text(context.l10n.info_feedback_subtitle),
+          trailing: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.small)),
+            ),
+            onPressed: () async {
+              await Wiredash.of(context).show(inheritMaterialTheme: true);
+            },
+            child: Text(context.l10n.info_feedback_button),
+          ),
+        ),
       ),
     );
   }
