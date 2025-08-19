@@ -33,6 +33,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
   void _initializeState(WidgetRef ref, {Route? route}) {
     ref.read(routeProvider.notifier).state = route;
     ref.read(sheetStateProvider.notifier).state = route == null ? SheetState.visible : SheetState.hidden;
+    ref.read(sheetModeProvider.notifier).state = route == null ? SheetMode.expanded : SheetMode.half;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
