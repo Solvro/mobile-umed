@@ -151,6 +151,8 @@ class _BottomSheetFixedButton extends StatelessWidget {
   }
 }
 
+// DraggableScrollableSheet does not shrink-wrap to its child height.
+// Its size must be calculated dynamically and provided explicitly.
 double _calculateHalfPosition(BuildContext context, int? draggableAreaHeight) {
   if (draggableAreaHeight == null) {
     return BottomSheetConfig.halfSizeDefaultPercent;
