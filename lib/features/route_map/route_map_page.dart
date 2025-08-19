@@ -37,7 +37,6 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     ref.read(visitedCountProvider.notifier).resetVisited();
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
     if (route == null && ref.read(sheetStateProvider) == SheetState.visible) {
-      debugPrint("It was set to visible, awaiting");
       ref.read(sheetTriggerProvider.notifier).state = true;
     }
   }
@@ -108,7 +107,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     });
 
     return switch (routeAsync) {
-      AsyncData() => const RouteMapView(),
+      AsyncData() => RouteMapView(route: routeAsync.value),
       AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };

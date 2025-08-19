@@ -17,12 +17,14 @@ class MapBottomSheet extends ConsumerStatefulWidget {
 
 class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   final DraggableScrollableController controller = DraggableScrollableController();
+  bool isAnimating = false;
 
   @override
   void initState() {
     super.initState();
     controller.addListener(() {
       final currentPosition = controller.size;
+      if (isAnimating) return;
       ref.read(sheetStateProvider.notifier).state =
           currentPosition < BottomSheetConfig.hiddenSizePercent + BottomSheetConfig.tolerance
               ? SheetState.hidden
@@ -45,18 +47,17 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
     ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
       if (shouldTrigger) {
         ref.read(sheetTriggerProvider.notifier).state = false;
-        if (!controller.isAttached) {
-          ref.read(sheetTriggerProvider.notifier).state = true;
-        }
-        debugPrint("Starting sheet animation to position: $sheetPosition");
-        Future.delayed(
-          Duration.zero,
-          () => controller.animateTo(
-            ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition,
+        final targetPosition =
+            ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition;
+        isAnimating = true;
+        await Future.delayed(Duration.zero, () async {
+          await controller.animateTo(
+            targetPosition,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
-          ),
-        );
+          );
+        });
+        isAnimating = false;
       }
     });
 
