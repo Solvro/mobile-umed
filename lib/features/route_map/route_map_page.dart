@@ -32,10 +32,14 @@ class RouteMapPage extends ConsumerStatefulWidget {
 class _RouteMapPageState extends ConsumerState<RouteMapPage> {
   void _initializeState(WidgetRef ref, {Route? route}) {
     ref.read(routeProvider.notifier).state = route;
-    ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+    ref.read(sheetStateProvider.notifier).state = route == null ? SheetState.visible : SheetState.hidden;
+    ref.read(sheetModeProvider.notifier).state = route == null ? SheetMode.expanded : SheetMode.half;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
+    if (route == null && ref.read(sheetStateProvider) == SheetState.visible) {
+      ref.read(sheetTriggerProvider.notifier).state = true;
+    }
   }
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
@@ -104,7 +108,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     });
 
     return switch (routeAsync) {
-      AsyncData() => const RouteMapView(),
+      AsyncData() => RouteMapView(route: routeAsync.value),
       AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };
