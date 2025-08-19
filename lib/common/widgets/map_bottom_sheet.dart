@@ -6,10 +6,11 @@ import "../providers/bottom_sheet_providers.dart";
 import "styling/sheet_top_handle.dart";
 
 class MapBottomSheet extends ConsumerStatefulWidget {
-  const MapBottomSheet({super.key, required this.child, required this.button, this.controls});
+  const MapBottomSheet({super.key, required this.child, required this.button, this.controls, this.draggableAreaHeight});
   final Widget? controls;
   final Widget child;
   final Widget button;
+  final int? draggableAreaHeight;
 
   @override
   ConsumerState<MapBottomSheet> createState() => _MapBottomSheetState();
@@ -42,7 +43,9 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   Widget build(BuildContext context) {
     final mode = ref.watch(sheetModeProvider);
     final sheetPosition =
-        mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
+        mode == SheetMode.half
+            ? _calculateHalfPosition(context, widget.draggableAreaHeight)
+            : BottomSheetConfig.fullSizePercent;
 
     ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
       if (shouldTrigger) {
@@ -146,4 +149,19 @@ class _BottomSheetFixedButton extends StatelessWidget {
       ),
     );
   }
+}
+
+double _calculateHalfPosition(BuildContext context, int? draggableAreaHeight) {
+  if (draggableAreaHeight == null) {
+    return BottomSheetConfig.halfSizeDefaultPercent;
+  }
+
+  final mediaQuery = MediaQuery.of(context);
+  final availableHeight =
+      mediaQuery.size.height -
+      mediaQuery.padding.vertical -
+      mediaQuery.padding.top -
+      mediaQuery.padding.bottom +
+      mediaQuery.viewInsets.bottom;
+  return (draggableAreaHeight / availableHeight).clamp(BottomSheetConfig.hiddenSizePercent, 1);
 }

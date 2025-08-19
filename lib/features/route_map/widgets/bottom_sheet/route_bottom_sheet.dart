@@ -20,6 +20,7 @@ import "sections/route_info_section.dart";
 class RouteBottomSheet extends ConsumerStatefulWidget {
   const RouteBottomSheet({super.key, required this.route});
 
+  static const int widgetHeight = 192;
   final Route route;
 
   @override
@@ -43,6 +44,7 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return MapBottomSheet(
+      draggableAreaHeight: RouteBottomSheet.widgetHeight,
       button: MainActionButton(
         text: context.l10n.end_route,
         backgroundColor: context.colorScheme.error,
