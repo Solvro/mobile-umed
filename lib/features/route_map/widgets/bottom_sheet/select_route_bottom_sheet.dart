@@ -39,7 +39,6 @@ class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> 
           } else {
             ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
           }
-          ref.read(sheetTriggerProvider.notifier).state = true;
         },
       ),
       child: Container(

@@ -50,7 +50,6 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
         backgroundColor: context.colorScheme.error,
         onPressed: () async {
           ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-          ref.read(sheetTriggerProvider.notifier).state = true;
           final bool shouldPop =
               await showDialog<bool>(context: context, builder: (context) => EndRouteModal(route: widget.route)) ??
               false;
@@ -67,7 +66,6 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
             child: SecondaryActionButton(
               onPressed: () {
                 ref.read(sheetModeProvider.notifier).state = SheetMode.half;
-                ref.read(sheetTriggerProvider.notifier).state = true;
                 setState(() {
                   _chosenOption = RouteDetailsOption.info;
                 });
@@ -81,7 +79,6 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
             child: SecondaryActionButton(
               onPressed: () {
                 ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
-                ref.read(sheetTriggerProvider.notifier).state = true;
                 setState(() {
                   _chosenOption = RouteDetailsOption.playlist;
                 });

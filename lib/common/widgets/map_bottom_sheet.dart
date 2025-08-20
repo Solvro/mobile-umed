@@ -42,6 +42,7 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    // define halfPosition (once and for all)
     if (widget.draggableAreaHeight == null) {
       halfPosition = BottomSheetConfig.halfSizeDefaultPercent;
     } else {
@@ -69,20 +70,41 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
     final newInitialSheetPosition = _calculatePosition(ref, context, widget.draggableAreaHeight);
     // while animating do not set smaller initial sheet position than previous
     // it'd break the animation, not good for UX
-    if (!isAnimating || newInitialSheetPosition > initialSheetPosition) {
+    if (newInitialSheetPosition > initialSheetPosition) {
       initialSheetPosition = newInitialSheetPosition;
     }
 
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final targetPosition =
+          ref.watch(sheetStateProvider) == SheetState.visible
+              ? _calculatePosition(ref, context, widget.draggableAreaHeight)
+              : BottomSheetConfig.hiddenSizePercent;
+
+      await Future.delayed(Duration.zero, () async {
+        await controller.animateTo(
+          targetPosition,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    });
+
     ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
       if (shouldTrigger) {
-        // in case of rebuild inform about the animation
-        // we do not want DraggableScrollableSheet max height interfere with animation
-        isAnimating = true;
-        ref.read(sheetTriggerProvider.notifier).state = false;
         final targetPosition =
             ref.read(sheetStateProvider) == SheetState.visible
                 ? _calculatePosition(ref, context, widget.draggableAreaHeight)
                 : BottomSheetConfig.hiddenSizePercent;
+
+        // in case of rebuild inform about the animation
+        // we do not want DraggableScrollableSheet max height interfere with animation
+        setState(() {
+          isAnimating = true;
+          if (targetPosition > initialSheetPosition) {
+            initialSheetPosition = targetPosition;
+          }
+        });
+
         await Future.delayed(Duration.zero, () async {
           await controller.animateTo(
             targetPosition,
@@ -90,12 +112,15 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
             curve: Curves.easeInOut,
           );
         });
-        isAnimating = false;
+
+        ref.read(sheetTriggerProvider.notifier).state = false;
 
         // trigger rebuild explicitly to prevent expanding bottom sheet in half mode
         // cannot modify initialSheetPosition because the listener has old closure after rebuild
         // the previous rebuild is related to the change of sheetStateProvider value
-        if (mounted) setState(() {});
+        setState(() {
+          isAnimating = false;
+        });
       }
     });
 
