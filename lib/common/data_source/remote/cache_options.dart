@@ -54,11 +54,15 @@ CacheOptions getNoCacheOptions() {
   return CacheOptions(store: MemCacheStore(), policy: CachePolicy.noCache);
 }
 
+Future<void> _initCacheStore() async {
+  final dir = await getApplicationSupportDirectory();
+  await Hive.initFlutter(dir.path);
+  _cacheStore = HiveCacheStore(dir.path);
+}
+
 Future<CacheOptions> getCacheOptions() async {
   if (_cacheStore == null) {
-    final dir = await getApplicationSupportDirectory();
-    await Hive.initFlutter(dir.path);
-    _cacheStore = HiveCacheStore(dir.path);
+    await _initCacheStore();
   }
 
   return CacheOptions(
@@ -71,5 +75,6 @@ Future<CacheOptions> getCacheOptions() async {
 }
 
 Future<void> clearDioCache() async {
+  await _initCacheStore();
   await _cacheStore?.clean();
 }
