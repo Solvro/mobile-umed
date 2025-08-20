@@ -30,7 +30,7 @@ abstract class BottomSheetConfig {
   static const fixedBottomSpace = 95.0;
 
   // sheet content percent
-  static const fullSizePercent = 0.45;
+  static const fullSizePercent = 0.6;
   static const halfSizeDefaultPercent = 0.3;
   static const hiddenSizePercent = 0.04;
   static const tolerance = 0.01;

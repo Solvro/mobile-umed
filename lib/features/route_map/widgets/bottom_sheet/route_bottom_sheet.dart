@@ -20,7 +20,7 @@ import "sections/route_info_section.dart";
 class RouteBottomSheet extends ConsumerStatefulWidget {
   const RouteBottomSheet({super.key, required this.route});
 
-  static const int widgetHeight = 192;
+  static const int widgetHeight = 200;
   final Route route;
 
   @override
@@ -67,6 +67,7 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
             child: SecondaryActionButton(
               onPressed: () {
                 ref.read(sheetModeProvider.notifier).state = SheetMode.half;
+                ref.read(sheetTriggerProvider.notifier).state = true;
                 setState(() {
                   _chosenOption = RouteDetailsOption.info;
                 });
@@ -80,6 +81,7 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
             child: SecondaryActionButton(
               onPressed: () {
                 ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+                ref.read(sheetTriggerProvider.notifier).state = true;
                 setState(() {
                   _chosenOption = RouteDetailsOption.playlist;
                 });
