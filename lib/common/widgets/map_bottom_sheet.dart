@@ -19,7 +19,7 @@ class MapBottomSheet extends ConsumerStatefulWidget {
 class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   final DraggableScrollableController controller = DraggableScrollableController();
   // DraggableScrollableSheet does not shrink-wrap to its child height.
-  // Its size must be calculated dynamically and provided explicitly.
+  // its size must be calculated dynamically and provided explicitly.
   late final double halfPosition;
   late double initialSheetPosition;
   bool isAnimating = false;
@@ -65,15 +65,10 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   }
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final newInitialSheetPosition = _calculatePosition(ref, context, widget.draggableAreaHeight);
-    // do not set initial sheet position smaller than the previous one while animating
+    // while animating do not set smaller initial sheet position than previous
+    // it'd break the animation, not good for UX
     if (!isAnimating || newInitialSheetPosition > initialSheetPosition) {
       initialSheetPosition = newInitialSheetPosition;
     }
@@ -81,7 +76,7 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
     ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
       if (shouldTrigger) {
         // in case of rebuild inform about the animation
-        // cannot modify the widget state explicitly because there is an old closure inside this listener
+        // we do not want DraggableScrollableSheet max height interfere with animation
         isAnimating = true;
         ref.read(sheetTriggerProvider.notifier).state = false;
         final targetPosition =
@@ -96,6 +91,11 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
           );
         });
         isAnimating = false;
+
+        // trigger rebuild explicitly to prevent expanding bottom sheet in half mode
+        // cannot modify initialSheetPosition because the listener has old closure after rebuild
+        // the previous rebuild is related to the change of sheetStateProvider value
+        if (mounted) setState(() {});
       }
     });
 
@@ -110,6 +110,12 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
         _BottomSheetFixedButton(button: widget.button),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   double _calculatePosition(WidgetRef ref, BuildContext context, int? draggableAreaHeight) {
