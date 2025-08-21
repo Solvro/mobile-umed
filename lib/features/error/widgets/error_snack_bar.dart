@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 
 import "../../../app/config/ui_config.dart";
 import "../../../app/theme/app_theme.dart";
-import "../../../app/theme/color_consts.dart";
 
 extension ErrorSnackBar on BuildContext {
   void showErrorSnackBar(String message) {
@@ -10,7 +9,7 @@ extension ErrorSnackBar on BuildContext {
       SnackBar(
         content: Text(message, style: textTheme.labelMedium),
         padding: const EdgeInsets.all(AppPaddings.medium),
-        backgroundColor: ColorConsts.lightOrange,
+        backgroundColor: colorScheme.error,
       ),
     );
   }
