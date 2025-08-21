@@ -19,6 +19,7 @@ import "sections/route_info_section.dart";
 class RouteBottomSheet extends ConsumerStatefulWidget {
   const RouteBottomSheet({super.key, required this.route});
 
+  static const int widgetHeight = 200;
   final Route route;
 
   @override
@@ -42,12 +43,12 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return MapBottomSheet(
+      draggableAreaHeight: RouteBottomSheet.widgetHeight,
       button: MainActionButton(
         text: context.l10n.end_route,
         backgroundColor: context.colorScheme.error,
         onPressed: () async {
           ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-          ref.read(sheetTriggerProvider.notifier).state = true;
           final bool shouldPop =
               await showDialog<bool>(context: context, builder: (context) => EndRouteModal(route: widget.route)) ??
               false;

@@ -6,10 +6,11 @@ import "../providers/bottom_sheet_providers.dart";
 import "styling/sheet_top_handle.dart";
 
 class MapBottomSheet extends ConsumerStatefulWidget {
-  const MapBottomSheet({super.key, required this.child, required this.button, this.controls});
+  const MapBottomSheet({super.key, required this.child, required this.button, this.controls, this.draggableAreaHeight});
   final Widget? controls;
   final Widget child;
   final Widget button;
+  final int? draggableAreaHeight;
 
   @override
   ConsumerState<MapBottomSheet> createState() => _MapBottomSheetState();
@@ -17,11 +18,16 @@ class MapBottomSheet extends ConsumerStatefulWidget {
 
 class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   final DraggableScrollableController controller = DraggableScrollableController();
+  // DraggableScrollableSheet does not shrink-wrap to its child height.
+  // its size must be calculated dynamically and provided explicitly.
+  late final double halfPosition;
+  late double initialSheetPosition;
   bool isAnimating = false;
 
   @override
   void initState() {
     super.initState();
+
     controller.addListener(() {
       final currentPosition = controller.size;
       if (isAnimating) return;
@@ -33,39 +39,63 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
   }
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // define halfPosition (once and for all)
+    if (widget.draggableAreaHeight == null) {
+      halfPosition = BottomSheetConfig.halfSizeDefaultPercent;
+    } else {
+      final mediaQuery = MediaQuery.of(context);
+      final availableHeight =
+          mediaQuery.size.height -
+          mediaQuery
+              .viewPadding
+              .top // doesn't include keyboard
+              -
+          mediaQuery
+              .padding
+              .bottom // includes keyboard
+              -
+          BottomSheetConfig.fixedBottomSpace;
+
+      halfPosition = (widget.draggableAreaHeight! / availableHeight).clamp(BottomSheetConfig.hiddenSizePercent, 1);
+    }
+
+    initialSheetPosition = _calculatePosition(ref, context, widget.draggableAreaHeight);
   }
 
   @override
   Widget build(BuildContext context) {
-    final mode = ref.watch(sheetModeProvider);
-    final sheetPosition =
-        mode == SheetMode.half ? BottomSheetConfig.halfSizePercent : BottomSheetConfig.fullSizePercent;
+    final newInitialSheetPosition = _calculatePosition(ref, context, widget.draggableAreaHeight);
+    if (newInitialSheetPosition > initialSheetPosition) {
+      initialSheetPosition = newInitialSheetPosition;
+    }
 
-    ref.listen<bool>(sheetTriggerProvider, (previous, shouldTrigger) async {
-      if (shouldTrigger) {
-        ref.read(sheetTriggerProvider.notifier).state = false;
-        final targetPosition =
-            ref.read(sheetStateProvider) == SheetState.hidden ? BottomSheetConfig.hiddenSizePercent : sheetPosition;
-        isAnimating = true;
-        await Future.delayed(Duration.zero, () async {
-          await controller.animateTo(
-            targetPosition,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-          );
-        });
-        isAnimating = false;
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      isAnimating = true;
+
+      final targetPosition =
+          ref.watch(sheetStateProvider) == SheetState.visible
+              ? _calculatePosition(ref, context, widget.draggableAreaHeight)
+              : BottomSheetConfig.hiddenSizePercent;
+
+      await Future.delayed(Duration.zero, () async {
+        await controller.animateTo(
+          targetPosition,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+
+      isAnimating = false;
     });
 
     return Stack(
       children: [
         _BottomSheetDraggableArea(
           controller: controller,
-          sheetPosition: sheetPosition,
+          initialSheetPosition: initialSheetPosition,
           controls: widget.controls,
           child: widget.child,
         ),
@@ -73,18 +103,30 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  double _calculatePosition(WidgetRef ref, BuildContext context, int? draggableAreaHeight) {
+    final mode = ref.read(sheetModeProvider);
+    final sheetPosition = mode == SheetMode.half ? halfPosition : BottomSheetConfig.fullSizePercent;
+    return sheetPosition;
+  }
 }
 
 class _BottomSheetDraggableArea extends StatelessWidget {
   const _BottomSheetDraggableArea({
     required this.controller,
-    required this.sheetPosition,
+    required this.initialSheetPosition,
     required this.child,
     required this.controls,
   });
 
   final DraggableScrollableController controller;
-  final double sheetPosition;
+  final double initialSheetPosition;
   final Widget child;
   final Widget? controls;
 
@@ -100,7 +142,7 @@ class _BottomSheetDraggableArea extends StatelessWidget {
         controller: controller,
         initialChildSize: BottomSheetConfig.hiddenSizePercent,
         minChildSize: BottomSheetConfig.hiddenSizePercent,
-        maxChildSize: sheetPosition,
+        maxChildSize: initialSheetPosition,
         builder: (context, scrollController) {
           return DecoratedBox(
             decoration: getSheetTopDecoration(context.colorScheme.surface),

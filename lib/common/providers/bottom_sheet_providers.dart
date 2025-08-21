@@ -8,4 +8,5 @@ final sheetModeProvider = StateProvider<SheetMode>((ref) => SheetMode.expanded);
 
 final sheetStateProvider = StateProvider<SheetState>((ref) => SheetState.hidden);
 
+// TODO(24bartixx): remove after fixing starting route
 final sheetTriggerProvider = StateProvider<bool>((ref) => false);

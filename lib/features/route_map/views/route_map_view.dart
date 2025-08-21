@@ -132,7 +132,6 @@ class _SheetHidingHitTest extends ConsumerWidget {
           behavior: HitTestBehavior.translucent,
           onPointerDown: (_) {
             ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
-            ref.read(sheetTriggerProvider.notifier).state = true;
           },
         ),
       ),
