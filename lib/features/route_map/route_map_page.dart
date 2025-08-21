@@ -38,7 +38,8 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     ref.read(visitedCountProvider.notifier).resetVisited();
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
     if (route == null && ref.read(sheetStateProvider) == SheetState.visible) {
-      // ref.read(sheetTriggerProvider.notifier).state = true;
+      // TODO(24bartixx): remove after fixing starting route
+      ref.read(sheetTriggerProvider.notifier).state = true;
     }
   }
 
