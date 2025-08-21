@@ -6,11 +6,10 @@ import "package:go_router/go_router.dart";
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
-import "../../../../app/theme/color_consts.dart";
 import "../../../../common/models/route.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/widgets/buttons/main_action_button.dart";
-import "../../../../common/widgets/buttons/secondary_action_button.dart";
+import "../../../../common/widgets/buttons/route_segmented_button.dart";
 import "../../../../common/widgets/map_bottom_sheet.dart";
 import "../../modals/end_route_modal.dart";
 import "../../providers/route_provider.dart";
@@ -57,38 +56,19 @@ class RouteBottomSheetState extends ConsumerState<RouteBottomSheet> {
           }
         },
       ),
-      controls: Row(
-        spacing: BottomSheetHeaderConfig.controlsSpacing,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            child: SecondaryActionButton(
-              onPressed: () {
-                ref.read(sheetModeProvider.notifier).state = SheetMode.half;
-                setState(() {
-                  _chosenOption = RouteDetailsOption.info;
-                });
-              },
-              text: context.l10n.route_description,
-              backgroundColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.plumosa : ColorConsts.whiteGray,
-              textColor: _chosenOption == RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.plumosa,
-            ),
-          ),
-          Expanded(
-            child: SecondaryActionButton(
-              onPressed: () {
-                ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
-                setState(() {
-                  _chosenOption = RouteDetailsOption.playlist;
-                });
-              },
-              text: context.l10n.playlist,
-              backgroundColor:
-                  _chosenOption == RouteDetailsOption.playlist ? ColorConsts.plumosa : ColorConsts.whiteGray,
-              textColor: _chosenOption == RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.plumosa,
-            ),
-          ),
-        ],
+      controls: Container(
+        padding: const EdgeInsets.symmetric(horizontal: AppPaddings.tiny),
+        width: double.infinity,
+        child: RouteSegmentedButton(
+          chosenOption: _chosenOption,
+          onSelectionChanged: (newSelection) {
+            ref.read(sheetModeProvider.notifier).state =
+                newSelection.first == RouteDetailsOption.info ? SheetMode.half : SheetMode.expanded;
+            setState(() {
+              _chosenOption = newSelection.first;
+            });
+          },
+        ),
       ),
       child:
           (_chosenOption == RouteDetailsOption.playlist && widget.route.playlist != null)
