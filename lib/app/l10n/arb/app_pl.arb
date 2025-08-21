@@ -53,7 +53,7 @@
   "errors_generic":  "Coś poszło nie tak",
   "errors_launch": "Wystąpił błąd podczas otwierania adresu",
   "errors_stats": "Nie udało się załadować statystyk",
-  "browse_routes": "Przegądaj trasy",
+  "browse_routes": "Przeglądaj trasy",
   "choose_route": "Wybierz trasę",
   "start_route": "Rozpocznij trasę!",
   "start_route_modal_title": "Czy na pewno chcesz rozpocząć tę trasę?",
@@ -80,6 +80,9 @@
   "app_feedback" : "Zgłoś błąd",
   "info_feedback_title": "Wyślij feedback",
   "info_feedback_subtitle": "Podziel się opinią o aplikacji",
-  "info_feedback_button":"Wyślij"
+  "info_feedback_button":"Wyślij",
+
+  "apple_music_playlist_not_available": "Przepraszamy, playlista nie jest dostępna w Apple Music.",
+  "youtube_playlist_not_available": "Przepraszamy, playlista nie jest dostępna w YouTube Music."
 
 }

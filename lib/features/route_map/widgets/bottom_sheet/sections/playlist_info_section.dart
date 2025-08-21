@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import "../../../../../app/config/ui_config.dart";
+import "../../../../../app/l10n/l10n.dart";
 import "../../../../../common/models/playlist.dart";
 import "../../../../../common/utils/url_launcher.dart";
 import "../../../../../common/widgets/buttons/secondary_action_button.dart";
+import "../../../../error/widgets/error_snack_bar.dart";
 import "song_tile.dart";
 
 class PlaylistInfoSection extends StatefulWidget {
@@ -38,13 +40,23 @@ class _PlaylistInfoSectionState extends State<PlaylistInfoSection> {
               Expanded(
                 child: SecondaryActionButton(
                   iconData: Icons.play_circle_fill,
-                  onPressed: () async => customLaunchUrl(playlist.youtubeUrl ?? ""),
+                  onPressed: () async {
+                    final launched = await customLaunchUrl(playlist.youtubeUrl ?? "");
+                    if (!launched && context.mounted) {
+                      context.showErrorSnackBar(context.l10n.youtube_playlist_not_available);
+                    }
+                  },
                 ),
               ),
               Expanded(
                 child: SecondaryActionButton(
                   iconData: Icons.apple,
-                  onPressed: () async => customLaunchUrl(playlist.appleUrl ?? ""),
+                  onPressed: () async {
+                    final launched = await customLaunchUrl(playlist.appleUrl ?? "");
+                    if (!launched && context.mounted) {
+                      context.showErrorSnackBar(context.l10n.apple_music_playlist_not_available);
+                    }
+                  },
                 ),
               ),
             ],
