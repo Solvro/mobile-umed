@@ -95,10 +95,6 @@ abstract class ButtonsConfig {
   static const secondaryButtonRadius = 20.0;
   static const secondaryButtonShadowRadius = 25.0;
   static const secondaryButtonPadding = 6.0;
-
-  static const segmentedButtonBorderWidth = 2.0;
-  static const segmentedButtonFontSize = 14.0;
-  static const segmentedButtonFontWeight = FontWeight.w500;
 }
 
 abstract class InfoModalConfig {
