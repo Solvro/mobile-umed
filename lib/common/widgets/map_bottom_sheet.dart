@@ -73,6 +73,8 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      isAnimating = true;
+
       final targetPosition =
           ref.watch(sheetStateProvider) == SheetState.visible
               ? _calculatePosition(ref, context, widget.draggableAreaHeight)
@@ -85,6 +87,8 @@ class _MapBottomSheetState extends ConsumerState<MapBottomSheet> {
           curve: Curves.easeInOut,
         );
       });
+
+      isAnimating = false;
     });
 
     return Stack(
