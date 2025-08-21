@@ -27,6 +27,7 @@ class AppTheme implements AppThemeData {
     textTheme: _textTheme,
     fontFamily: FontFamily.urbanist,
     elevatedButtonTheme: _elevatedButtonTheme,
+    segmentedButtonTheme: _segmentedButtonTheme,
   );
 
   static const _textTheme = TextTheme(
@@ -52,6 +53,17 @@ class AppTheme implements AppThemeData {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       padding: const EdgeInsets.symmetric(vertical: 6),
       textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+    ),
+  );
+
+  SegmentedButtonThemeData get _segmentedButtonTheme => SegmentedButtonThemeData(
+    style: SegmentedButton.styleFrom(
+      backgroundColor: ColorConsts.whiteGray,
+      foregroundColor: ColorConsts.plumosa,
+      selectedForegroundColor: ColorConsts.whiteGray,
+      selectedBackgroundColor: ColorConsts.plumosa,
+      side: const BorderSide(color: ColorConsts.plumosa, width: 2),
+      textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
     ),
   );
 }

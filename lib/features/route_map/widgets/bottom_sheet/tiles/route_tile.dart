@@ -5,8 +5,8 @@ import "../../../../../app/assets/assets.gen.dart";
 import "../../../../../app/config/ui_config.dart";
 import "../../../../../app/l10n/l10n.dart";
 import "../../../../../app/theme/app_theme.dart";
-import "../../../../../app/theme/color_consts.dart";
 import "../../../../../common/models/route.dart";
+import "../../../../../common/widgets/buttons/route_segmented_button.dart";
 import "../../../../../common/widgets/buttons/secondary_action_button.dart";
 import "../../../modals/start_route_modal.dart";
 import "../../../providers/route_provider.dart";
@@ -89,37 +89,17 @@ class RouteTileState extends ConsumerState<RouteTile> {
         ),
         Padding(
           padding: const EdgeInsets.all(AppPaddings.tinySmall),
-          child: Row(
-            spacing: BottomSheetHeaderConfig.controlsSpacing,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: SecondaryActionButton(
-                  onPressed: () {
-                    updateExpandedRoutes(route);
-                    setState(() => _chosenOption = RouteDetailsOption.info);
-                  },
-                  text: context.l10n.route_description,
-                  backgroundColor:
-                      _chosenOption != RouteDetailsOption.info ? ColorConsts.whiteGray : ColorConsts.plumosa,
-                  textColor: _chosenOption != RouteDetailsOption.info ? ColorConsts.plumosa : ColorConsts.whiteGray,
-                ),
-              ),
-              if (widget.route.playlist != null)
-                Expanded(
-                  child: SecondaryActionButton(
-                    onPressed: () {
-                      updateExpandedRoutes(route);
-                      setState(() => _chosenOption = RouteDetailsOption.playlist);
-                    },
-                    text: context.l10n.playlist,
-                    backgroundColor:
-                        _chosenOption != RouteDetailsOption.playlist ? ColorConsts.whiteGray : ColorConsts.plumosa,
-                    textColor:
-                        _chosenOption != RouteDetailsOption.playlist ? ColorConsts.plumosa : ColorConsts.whiteGray,
-                  ),
-                ),
-            ],
+          child: SizedBox(
+            width: double.infinity,
+            child: RouteSegmentedButton(
+              chosenOption: _chosenOption,
+              onSelectionChanged: (newSelection) {
+                updateExpandedRoutes(route);
+                setState(() {
+                  _chosenOption = newSelection.first;
+                });
+              },
+            ),
           ),
         ),
         const SizedBox(height: AppPaddings.small),
