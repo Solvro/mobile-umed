@@ -63,6 +63,7 @@ class AppTheme implements AppThemeData {
       selectedForegroundColor: ColorConsts.whiteGray,
       selectedBackgroundColor: ColorConsts.plumosa,
       side: const BorderSide(color: ColorConsts.plumosa, width: 2),
+      textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
     ),
   );
 }
