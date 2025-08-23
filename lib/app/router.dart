@@ -82,10 +82,10 @@ extension RouterX on GoRouter {
       return;
     }
 
-    await MyFlutterForegroundTask.requestPermissions();
+    await FlutterForegroundService.requestPermissions();
 
-    MyFlutterForegroundTask.initMyService();
-    await MyFlutterForegroundTask.startMyForegroundService();
+    FlutterForegroundService.initMyService();
+    await FlutterForegroundService.startMyForegroundService();
     await push("${RouteMapPage.routeName}/$id");
   }
 

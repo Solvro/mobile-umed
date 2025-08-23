@@ -72,11 +72,6 @@ class MyTaskHandler extends TaskHandler {
             notificationText: "Gratulacje, dotarłeś do końca trasy!",
           );
           await _locationSubscription?.cancel();
-        } else {
-          // await FlutterForegroundTask.updateService(
-          //   notificationTitle: "Jesteś niedaleko celu",
-          //   notificationText: "Dotarłeś do punktu: ${locations.first}",
-          // );
         }
       }
     });

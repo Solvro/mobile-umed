@@ -4,17 +4,14 @@ import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:latlong2/latlong.dart";
 import "../../../app/app.dart";
-import "../../../common/models/completed_route.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
-import "../../../common/providers/completed_routes_provider.dart";
 import "../../error/error_page.dart";
-import "../../error/widgets/error_snack_bar.dart";
 import "controllers/route_controller.dart" hide Distance;
-import "modals/route_completed_modal.dart";
 import "providers/locations_provider.dart";
 import "providers/route_provider.dart";
 import "repository/route_map_repository.dart";
+import "services/task_handlers/foreground_task_service.dart";
 import "services/task_handlers/route_foreground_task_handler.dart";
 import "views/route_map_view.dart";
 
@@ -42,37 +39,17 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
     if (route != null) {
+      final handler = ref.read(foregroundServiceProvider);
+
       FlutterForegroundTask.addTaskDataCallback((data) async {
         if (!mounted) return;
-
-        final currentRoute = ref.read(routeProvider);
-        if (currentRoute != null) {
-          await _onReceiveTaskData(data, ref, context, route);
-        }
+        await handler.handleTaskData(data, route, context);
       });
 
       FlutterForegroundTask.sendDataToTask({
-        ForegroundTaskKeys.locations: route.route.map((element) => element.toJson()).toList(),
-        ForegroundTaskKeys.checkpoints: route.checkpoints.map((element) => element.toJson()).toList(),
+        ForegroundTaskKeys.locations: route.route.map((e) => e.toJson()).toList(),
+        ForegroundTaskKeys.checkpoints: route.checkpoints.map((e) => e.toJson()).toList(),
       });
-    }
-  }
-
-  Future<void> _onReceiveTaskData(Object data, WidgetRef ref, BuildContext context, Route route) async {
-    if (data is String) {
-      final event = TaskEvent.fromString(data);
-      switch (event) {
-        case TaskEvent.nextLocationReached:
-          ref.read(passedLocationsProvider.notifier).state++;
-        case TaskEvent.nextCheckpointReached:
-          ref.read(visitedCountProvider.notifier).incrementVisited();
-        case TaskEvent.routeCompleted:
-          await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
-          await FlutterForegroundTask.stopService();
-          await ref.read(completedRoutesProvider.notifier).addCompletedRoute(CompletedRoute.fromRoute(route));
-        case TaskEvent.error:
-          context.showErrorSnackBar("Error: $data");
-      }
     }
   }
 
@@ -91,7 +68,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     });
 
     return switch (routeAsync) {
-      AsyncData(:final value) => ProviderScope(overrides: [], child: RouteMapView(route: value)),
+      AsyncData(:final value) => ProviderScope(child: RouteMapView(route: value)),
       AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };
