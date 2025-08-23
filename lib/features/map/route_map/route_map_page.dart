@@ -31,17 +31,13 @@ class RouteMapPage extends ConsumerStatefulWidget {
 }
 
 class _RouteMapPageState extends ConsumerState<RouteMapPage> {
-  void _initializeState(WidgetRef ref, {Route? route}) {
+  void _initializeState(WidgetRef ref, Route route) {
     ref.read(routeProvider.notifier).state = route;
-    ref.read(sheetStateProvider.notifier).state = route == null ? SheetState.visible : SheetState.hidden;
-    ref.read(sheetModeProvider.notifier).state = route == null ? SheetMode.expanded : SheetMode.half;
+    ref.read(sheetStateProvider.notifier).state = SheetState.hidden;
+    ref.read(sheetModeProvider.notifier).state = SheetMode.half;
     ref.read(passedLocationsProvider.notifier).state = 0;
     ref.read(visitedCountProvider.notifier).resetVisited();
     ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
-    if (route == null && ref.read(sheetStateProvider) == SheetState.visible) {
-      // TODO(24bartixx): remove after fixing starting route
-      ref.read(sheetTriggerProvider.notifier).state = true;
-    }
   }
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
@@ -91,11 +87,11 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     final routeAsync = ref.watch(fetchRouteWithIdProvider(widget.id));
 
     ref.listen<AsyncValue<Route>>(fetchRouteWithIdProvider(widget.id), (prev, next) {
-      _initializeState(ref, route: next.value);
+      _initializeState(ref, next.value!);
     });
 
     return switch (routeAsync) {
-      AsyncData() => RouteMapView(route: routeAsync.value),
+      AsyncData(:final value) => ProviderScope(overrides: [], child: RouteMapView(route: value)),
       AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };

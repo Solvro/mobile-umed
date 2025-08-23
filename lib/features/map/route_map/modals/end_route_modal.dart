@@ -1,4 +1,5 @@
 import "package:flutter/material.dart" hide Route;
+import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "../../../../app/app.dart";
 import "../../../../app/config/cached_image_config.dart";
 import "../../../../app/config/ui_config.dart";
@@ -21,8 +22,9 @@ class EndRouteModal extends StatelessWidget {
       confirmButton: MainActionButton(
         backgroundColor: context.colorScheme.error,
         text: context.l10n.end_route,
-        onPressed: () {
-          context.router.pop(true);
+        onPressed: () async {
+          context.router.goHome();
+          await FlutterForegroundTask.stopService();
         },
       ),
       cancelButton: MainActionButton(
@@ -38,7 +40,7 @@ class EndRouteModal extends StatelessWidget {
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(EndRouteModalConfig.imageRadius),
-              child: CachedImage(CachedImageConfig.getDirectusUrl(route.image)), // Placeholder image URL
+              child: CachedImage(CachedImageConfig.getDirectusUrl(route.image)),
             ),
           ),
           const SizedBox(height: AppPaddings.small),

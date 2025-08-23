@@ -70,7 +70,7 @@ class Speed extends _$Speed {
   }
 }
 
-@riverpod
+@Riverpod(dependencies: [])
 class VisitedCount extends _$VisitedCount {
   @override
   int build() {
