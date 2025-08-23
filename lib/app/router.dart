@@ -11,9 +11,9 @@ final _router = GoRouter(
   routes: [
     // this route is temporary here
     GoRoute(
-      path: RouteMapPage.routeName,
+      path: MultiRoutePage.routeName,
       pageBuilder: (context, state) {
-        return const NoTransitionPage(child: RouteMapPage());
+        return const NoTransitionPage(child: MultiRoutePage());
       },
     ),
     // this route is temporary here
@@ -66,7 +66,11 @@ extension ContexRouterX on BuildContext {
 extension RouterX on GoRouter {
   void goHome() => go(HomePage.routeName);
   void goProfile() => go(ProfilePage.routeName);
-  Future<void> pushRouteMap({int? id}) async {
+  Future<void> pushMultiRouteMap() async {
+    await push("${MultiRoutePage.routeName}/");
+  }
+
+  Future<void> pushRouteMap(int id) async {
     final locationHasPermissions = await LocationService.requestPermissions();
 
     if (!locationHasPermissions) {
@@ -82,12 +86,7 @@ extension RouterX on GoRouter {
 
     MyFlutterForegroundTask.initMyService();
     await MyFlutterForegroundTask.startMyForegroundService();
-
-    if (id != null) {
-      await push("${RouteMapPage.routeName}/$id");
-    } else {
-      await push("${RouteMapPage.routeName}/");
-    }
+    await push("${RouteMapPage.routeName}/$id");
   }
 
   Future<void> pushPlayground() async => push(DebugPlayground.routeName);

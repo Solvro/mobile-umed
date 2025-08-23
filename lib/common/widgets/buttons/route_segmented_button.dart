@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 import "../../../app/l10n/l10n.dart";
-import "../../../features/route_map/providers/route_provider.dart";
+import "../../../features/map/route_map/providers/route_provider.dart";
 
 class RouteSegmentedButton extends StatelessWidget {
   const RouteSegmentedButton({super.key, required this.chosenOption, required this.onSelectionChanged});

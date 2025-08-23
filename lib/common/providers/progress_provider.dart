@@ -1,6 +1,6 @@
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
-import "../../../features/route_map/repository/route_map_repository.dart";
+import "../../features/map/route_map/repository/route_map_repository.dart";
 import "completed_routes_provider.dart";
 
 part "progress_provider.g.dart";
