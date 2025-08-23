@@ -45,7 +45,7 @@ class ProfileView extends ConsumerWidget {
             SectionHeader(context.l10n.achievements_statistics),
             StatListWidget(stats: convertCompletedRoutesToStats(completedRoutes)),
             const SizedBox(height: AppPaddings.medium),
-            if (!kDebugMode) ...[
+            if (kDebugMode) ...[
               SectionHeader(context.l10n.achievements_achievements),
               const SizedBox(height: AppPaddings.tinySmall),
               StatListWidget(stats: mockAchievements),
