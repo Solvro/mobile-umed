@@ -1,3 +1,5 @@
+import "dart:collection";
+
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
@@ -9,6 +11,8 @@ import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/app_theme.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/providers/cache_tile.dart";
+import "../../route_map/controllers/route_controller.dart";
+import "../../route_map/providers/locations_provider.dart";
 import "../../route_map/providers/route_provider.dart";
 import "../../route_map/repository/route_map_repository.dart";
 import "../../route_map/views/route_map_view.dart";
@@ -23,6 +27,26 @@ class MultiRouteView extends ConsumerStatefulWidget {
 }
 
 class _MultiRouteViewState extends ConsumerState<MultiRouteView> {
+  void _initializeState(WidgetRef ref) {
+    ref.read(sheetStateProvider.notifier).state = SheetState.visible;
+    ref.read(sheetModeProvider.notifier).state = SheetMode.expanded;
+    ref.read(passedLocationsProvider.notifier).state = 0;
+    ref.read(visitedCountProvider.notifier).resetVisited();
+    ref.read(expandedRoutesProvider.notifier).state = LinkedHashSet();
+    if (ref.read(sheetStateProvider) == SheetState.visible) {
+      // TODO(24bartixx): remove after fixing starting route
+      ref.read(sheetTriggerProvider.notifier).state = true;
+    }
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeState(ref);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
