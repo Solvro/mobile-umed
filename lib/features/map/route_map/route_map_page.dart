@@ -81,17 +81,6 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    if (widget.id == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _initializeState(ref);
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     ref.listen<Route?>(routeProvider, (previous, next) {
       if (next != null && mounted) {
@@ -99,9 +88,9 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
       }
     });
 
-    final routeAsync = ref.watch(fetchRouteWithIdProvider(widget.id!));
+    final routeAsync = ref.watch(fetchRouteWithIdProvider(widget.id));
 
-    ref.listen<AsyncValue<Route>>(fetchRouteWithIdProvider(widget.id!), (prev, next) {
+    ref.listen<AsyncValue<Route>>(fetchRouteWithIdProvider(widget.id), (prev, next) {
       _initializeState(ref, route: next.value);
     });
 

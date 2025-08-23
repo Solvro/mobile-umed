@@ -3,7 +3,6 @@ import "package:flutter/material.dart" hide Route;
 import "package:flutter_map_animations/flutter_map_animations.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../app/l10n/l10n.dart";
-import "../../../../app/theme/app_theme.dart";
 import "../../../../common/models/route.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/utils/location_service.dart";
@@ -11,7 +10,6 @@ import "../../../../common/utils/modal_before_exiting.dart";
 import "../modals/end_route_modal.dart";
 import "../repository/route_map_repository.dart";
 import "../widgets/bottom_sheet/route_bottom_sheet.dart";
-import "../widgets/bottom_sheet/select_route_bottom_sheet.dart";
 import "../widgets/map/route_map_widget.dart";
 import "../widgets/progress_bar/route_progress_bar.dart";
 
