@@ -73,7 +73,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
           const CurrentLocationLayer(
             style: LocationMarkerStyle(
               marker: DefaultLocationMarker(color: Colors.blue),
-              markerSize: Size(28, 29),
+              markerSize: Size(28, 28),
               accuracyCircleColor: Color(0x2288B4EA),
               headingSectorColor: Color(0x4488B4EA),
             ),
