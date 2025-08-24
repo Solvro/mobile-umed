@@ -12,7 +12,7 @@ import "../../../../../common/models/checkpoint.dart";
 import "../../../../../common/models/route.dart";
 import "../../../../../common/providers/cache_tile.dart";
 import "../../../../../common/utils/location_service.dart";
-import "../../controllers/route_controller.dart" hide Distance;
+import "../../controllers/route_controller.dart";
 import "../../modals/landmark_info_modal.dart";
 import "../../providers/locations_provider.dart";
 import "route_map_marker.dart";

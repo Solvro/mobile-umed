@@ -6,7 +6,7 @@ import "../../../app/app.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../error/error_page.dart";
-import "controllers/route_controller.dart" hide Distance;
+import "controllers/route_controller.dart";
 import "providers/locations_provider.dart";
 import "providers/route_provider.dart";
 import "repository/route_map_repository.dart";
