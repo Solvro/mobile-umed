@@ -12,7 +12,7 @@ abstract class Song with _$Song {
     required int id,
     required String title,
     required String author,
-    @DurationConverter() required Duration duration,
+    @DurationMinutesConverter() required Duration duration,
   }) = _Song;
 
   factory Song.fromJson(Map<String, dynamic> json) => _$SongFromJson(json);

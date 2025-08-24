@@ -2,16 +2,14 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../../../app/config/ui_config.dart";
 import "../../../../../../app/theme/app_theme.dart";
-import "../../../controllers/route_controller.dart";
+import "../../../providers/route_stats_provider.dart";
 
 class RouteInfoSection extends ConsumerWidget {
   const RouteInfoSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final timer = ref.watch(routeTimerProvider);
-    final distance = ref.watch(distanceProvider);
-    final speed = ref.watch(speedProvider);
+    final routeStats = ref.watch(routeStatsProvider);
 
     return Container(
       padding: const EdgeInsets.all(RouteInfoConfig.contentPadding),
@@ -20,13 +18,23 @@ class RouteInfoSection extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _InformationBox(text: timer.toHmsString(), color: context.colorScheme.primary),
+          _InformationBox(text: routeStats.elapsed.toHmsString(), color: context.colorScheme.primary),
           Row(
             spacing: RouteInfoConfig.infoBubbleSpacing,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _InformationBox(text: distance.toDistanceString(), color: context.colorScheme.primary)),
-              Expanded(child: _InformationBox(text: "$speed km/h", color: context.colorScheme.primary)),
+              Expanded(
+                child: _InformationBox(
+                  text: routeStats.distance.toDistanceString(),
+                  color: context.colorScheme.primary,
+                ),
+              ),
+              Expanded(
+                child: _InformationBox(
+                  text: "${routeStats.averageSpeed.toStringAsFixed(1)} km/h",
+                  color: context.colorScheme.primary,
+                ),
+              ),
             ],
           ),
         ],

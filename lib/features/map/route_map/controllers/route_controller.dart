@@ -7,69 +7,6 @@ import "../../../../common/models/checkpoint.dart";
 
 part "route_controller.g.dart";
 
-@riverpod
-class Distance extends _$Distance {
-  @override
-  int build() {
-    return 0;
-  }
-
-  void updateDistance(int distance) {
-    state = distance;
-  }
-
-  void reset() {
-    state = 0;
-  }
-}
-
-@riverpod
-class RouteTimer extends _$RouteTimer {
-  Timer? _timer;
-
-  @override
-  Duration build() {
-    ref.onDispose(() {
-      _timer?.cancel();
-      _timer = null;
-    });
-
-    return Duration.zero;
-  }
-
-  void start() {
-    stop();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      state += const Duration(seconds: 1);
-    });
-  }
-
-  void stop() {
-    _timer?.cancel();
-    _timer = null;
-  }
-
-  void reset() {
-    stop();
-    state = Duration.zero;
-  }
-}
-
-@riverpod
-class Speed extends _$Speed {
-  @override
-  double build() {
-    final distance = ref.watch(distanceProvider);
-    final time = ref.watch(routeTimerProvider);
-
-    if (time == Duration.zero) {
-      return 0;
-    }
-
-    return (distance / time.inSeconds) * 3.6; // distance in km/h
-  }
-}
-
 @Riverpod(dependencies: [])
 class VisitedCount extends _$VisitedCount {
   @override
