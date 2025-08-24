@@ -2,7 +2,7 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../error/views/full_screen_error_view.dart";
-import "../route_map/repository/route_map_repository.dart";
+import "../map/route_map/repository/route_map_repository.dart";
 import "./views/home_view.dart";
 import "views/home_loading_view.dart";
 

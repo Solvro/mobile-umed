@@ -29,7 +29,7 @@ class HomeView extends ConsumerWidget {
           SectionHeader(context.l10n.home_nearest_to_you),
           RouteListWidget(
             routes: routes,
-            onRouteTap: (route) => context.router.pushRouteMap(id: route.id),
+            onRouteTap: (route) => context.router.pushRouteMap(route.id),
             icon: Icons.arrow_forward_ios,
           ),
           const SizedBox(height: HomeViewConfig.commonGap),

@@ -12,7 +12,7 @@ class StartRouteButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppPaddings.medium),
       child: ElevatedButton(
         style: sharedCardButtonStyle(context),
-        onPressed: context.router.pushRouteMap,
+        onPressed: context.router.pushMultiRouteMap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppPaddings.small),
           child: Row(

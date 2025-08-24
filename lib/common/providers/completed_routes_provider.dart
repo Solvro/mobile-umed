@@ -1,6 +1,6 @@
 import "package:hive/hive.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
-import "../../features/route_map/repository/route_map_repository.dart";
+import "../../features/map/route_map/repository/route_map_repository.dart";
 import "../models/completed_route.dart";
 
 part "completed_routes_provider.g.dart";

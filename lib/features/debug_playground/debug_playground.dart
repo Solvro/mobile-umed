@@ -4,9 +4,9 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../app/app.dart";
 import "../../common/models/completed_route.dart";
 import "../../common/providers/completed_routes_provider.dart";
-import "../route_map/controllers/route_controller.dart";
-import "../route_map/modals/route_completed_modal.dart";
-import "../route_map/repository/route_map_repository.dart";
+import "../map/route_map/controllers/route_controller.dart";
+import "../map/route_map/modals/route_completed_modal.dart";
+import "../map/route_map/repository/route_map_repository.dart";
 import "widgets/shimmer_test_widget.dart";
 
 class DebugPlayground extends StatelessWidget {
@@ -21,9 +21,9 @@ class DebugPlayground extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OutlinedButton(onPressed: () async => context.router.pushRouteMap(), child: const Text("RouteMap")),
+            OutlinedButton(onPressed: () async => context.router.pushMultiRouteMap(), child: const Text("RouteMap")),
             OutlinedButton(
-              onPressed: () async => context.router.pushRouteMap(id: 71),
+              onPressed: () async => context.router.pushRouteMap(71),
               child: const Text("RouteMap with route"),
             ),
             OutlinedButton(

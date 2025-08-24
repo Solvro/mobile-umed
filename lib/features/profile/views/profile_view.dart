@@ -37,7 +37,7 @@ class ProfileView extends ConsumerWidget {
               const SizedBox(height: AppPaddings.tiny),
               RouteListWidget(
                 routes: routes.where((route) => completedRoutes.map((e) => e.routeId).contains(route.id)).toIList(),
-                onRouteTap: (route) => context.router.pushRouteMap(id: route.id),
+                onRouteTap: (route) => context.router.pushRouteMap(route.id),
                 icon: Icons.autorenew,
               ),
             ],
