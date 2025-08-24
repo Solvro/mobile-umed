@@ -70,19 +70,12 @@ class MyTaskHandler extends TaskHandler {
             ForegroundTaskProtocol.onlyEvent(TaskEvent.nextLocationReached).toJson(),
           );
 
-          if (lastVisitedLocation != null && currentLocation != lastVisitedLocation) {
-            distanceTravelled += distance.as(LengthUnit.Meter, lastVisitedLocation!, locations.first).round();
-            lastVisitedLocation = locations.first;
-          }
-          locations.removeFirst();
-          passed++;
+          _updateLocation(currentLocation);
         }
 
         _checkCheckpointProximity();
 
-        FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextLocationReached).toJson());
-        locations.removeFirst();
-        passed++;
+        _updateLocation(currentLocation);
 
         if (locations.isEmpty) {
           FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
@@ -94,6 +87,16 @@ class MyTaskHandler extends TaskHandler {
         }
       }
     });
+  }
+
+  void _updateLocation(LatLng currentLocation) {
+    FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextLocationReached).toJson());
+    if (lastVisitedLocation != null && currentLocation != lastVisitedLocation) {
+      distanceTravelled += distance.as(LengthUnit.Meter, lastVisitedLocation!, locations.first).round();
+      lastVisitedLocation = locations.first;
+    }
+    locations.removeFirst();
+    passed++;
   }
 
   @override

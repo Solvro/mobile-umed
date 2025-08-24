@@ -8,21 +8,14 @@ part "route_stats.g.dart";
 
 @freezed
 abstract class RouteStatsModel with _$RouteStatsModel {
-  const factory RouteStatsModel({
-    @DurationSecondsConverter() required Duration elapsed,
-    required double averageSpeed,
-    required int distance,
-  }) = _RouteStatsModel;
+  const factory RouteStatsModel({@DurationSecondsConverter() required Duration elapsed, required int distance}) =
+      _RouteStatsModel;
 
   factory RouteStatsModel.fromProtocol(ForegroundTaskProtocol protocol) {
     if (!protocol.isStats) {
       throw ArgumentError("Protocol does not contain stats");
     }
-    return RouteStatsModel(
-      elapsed: protocol.elapsed!,
-      averageSpeed: protocol.elapsed!.inSeconds == 0 ? 0 : (protocol.distance! / protocol.elapsed!.inSeconds) * 3.6,
-      distance: protocol.distance!,
-    );
+    return RouteStatsModel(elapsed: protocol.elapsed!, distance: protocol.distance!);
   }
 
   const RouteStatsModel._();

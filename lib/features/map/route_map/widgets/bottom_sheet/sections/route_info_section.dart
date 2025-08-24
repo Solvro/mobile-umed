@@ -11,6 +11,11 @@ class RouteInfoSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final routeStats = ref.watch(routeStatsProvider);
 
+    final speed =
+        routeStats.elapsed.inSeconds == 0
+            ? 0
+            : (routeStats.distance / routeStats.elapsed.inSeconds) * 3.6; // speed in km/h s
+
     return Container(
       padding: const EdgeInsets.all(RouteInfoConfig.contentPadding),
       child: Column(
@@ -30,10 +35,7 @@ class RouteInfoSection extends ConsumerWidget {
                 ),
               ),
               Expanded(
-                child: _InformationBox(
-                  text: "${routeStats.averageSpeed.toStringAsFixed(1)} km/h",
-                  color: context.colorScheme.primary,
-                ),
+                child: _InformationBox(text: "${speed.toStringAsFixed(1)} km/h", color: context.colorScheme.primary),
               ),
             ],
           ),

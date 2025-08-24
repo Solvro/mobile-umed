@@ -8,7 +8,7 @@ part "route_stats_provider.g.dart";
 class RouteStats extends _$RouteStats {
   @override
   RouteStatsModel build() {
-    return const RouteStatsModel(elapsed: Duration.zero, averageSpeed: 0, distance: 0);
+    return const RouteStatsModel(elapsed: Duration.zero, distance: 0);
   }
 
   void updateStats(RouteStatsModel stats) {
