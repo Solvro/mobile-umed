@@ -61,7 +61,7 @@ class RouteMapWidgetState extends ConsumerState<RouteMapWidget> with WidgetsBind
         mapController: widget.controller.mapController,
         options: MapOptions(initialCenter: landmarks.isNotEmpty ? landmarks.first.location : route.route.first),
         children: [
-          TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: 19),
+          TileLayer(urlTemplate: FlutterMapConfig.urlTemplate, tileProvider: value, maxZoom: MapConfig.maxZoom),
           RouteMapPolyline(
             locations: route.route,
             doneColor: context.colorScheme.primary,

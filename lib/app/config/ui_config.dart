@@ -145,6 +145,7 @@ abstract final class MapConfig {
   static const inactiveColor = Colors.grey;
 
   static const wroclawCenter = LatLng(51.1079, 17.0325);
+  static const maxZoom = 19.0;
 }
 
 abstract final class LocalizationConfig {

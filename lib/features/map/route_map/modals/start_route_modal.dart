@@ -22,8 +22,7 @@ class StartRouteModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return OptionsModal(
       title: route.name,
-      confirmButton: MainActionButton(text: context.l10n.start, onPressed: () => context.router.pushRouteMap(route.id)),
-      cancelButton: MainActionButton(
+      confirmButton: MainActionButton(
         backgroundColor: ColorConsts.whiteGray,
         textColor: ColorConsts.dimGray,
         text: context.l10n.keep_on_browsing,
@@ -33,6 +32,7 @@ class StartRouteModal extends ConsumerWidget {
           context.router.pop();
         },
       ),
+      cancelButton: MainActionButton(text: context.l10n.start, onPressed: () => context.router.pushRouteMap(route.id)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: AppPaddings.small,
