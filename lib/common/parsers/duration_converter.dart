@@ -1,7 +1,7 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 
-class DurationConverter implements JsonConverter<Duration, double> {
-  const DurationConverter();
+class DurationMinutesConverter implements JsonConverter<Duration, double> {
+  const DurationMinutesConverter();
 
   @override
   Duration fromJson(double json) {
@@ -14,4 +14,14 @@ class DurationConverter implements JsonConverter<Duration, double> {
   double toJson(Duration duration) {
     return duration.inSeconds / 60.0;
   }
+}
+
+class DurationSecondsConverter implements JsonConverter<Duration, int> {
+  const DurationSecondsConverter();
+
+  @override
+  Duration fromJson(int json) => Duration(seconds: json);
+
+  @override
+  int toJson(Duration duration) => duration.inSeconds;
 }

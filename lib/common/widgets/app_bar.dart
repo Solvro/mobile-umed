@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import "../../../app/theme/app_theme.dart";
+import "../../app/app.dart";
 import "../../app/assets/assets.gen.dart";
 import "../../app/config/ui_config.dart";
 import "../../app/l10n/l10n.dart";
@@ -24,9 +25,12 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: context.colorScheme.surface,
       elevation: 4,
       actions: actions,
-      leading: Padding(
-        padding: const EdgeInsets.all(AppPaddings.tiny),
-        child: Assets.icons.logoNoBg.svg(fit: BoxFit.cover),
+      leading: GestureDetector(
+        onTap: context.router.goHome,
+        child: Padding(
+          padding: const EdgeInsets.all(AppPaddings.tiny),
+          child: Assets.icons.logoNoBg.svg(fit: BoxFit.cover),
+        ),
       ),
     );
   }

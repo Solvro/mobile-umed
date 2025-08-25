@@ -2,20 +2,17 @@ import "dart:collection";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:latlong2/latlong.dart";
 import "../../../app/app.dart";
 import "../../../common/models/route.dart";
 import "../../../common/providers/bottom_sheet_providers.dart";
 import "../../error/error_page.dart";
-import "controllers/route_controller.dart" hide Distance;
+import "controllers/route_controller.dart";
 import "providers/locations_provider.dart";
 import "providers/route_provider.dart";
 import "repository/route_map_repository.dart";
 import "services/task_handlers/foreground_task_service.dart";
 import "services/task_handlers/route_foreground_task_handler.dart";
 import "views/route_map_view.dart";
-
-const distance = Distance();
 
 class RouteMapPage extends ConsumerStatefulWidget {
   const RouteMapPage({super.key, required this.id});
@@ -68,7 +65,7 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
     });
 
     return switch (routeAsync) {
-      AsyncData(:final value) => ProviderScope(child: RouteMapView(route: value)),
+      AsyncData(:final value) => RouteMapView(route: value),
       AsyncError(:final error) => ErrorPage(onBackToHome: context.router.goHome, message: error.toString()),
       _ => const Center(child: CircularProgressIndicator()),
     };
