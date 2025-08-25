@@ -1,7 +1,7 @@
 name: mobile_umed
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.8.2+5
+version: 0.8.3+6
 
 environment:
   sdk: ^3.7.0
