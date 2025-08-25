@@ -1,15 +1,17 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "../../../../app/config/ui_config.dart";
-import "../../../../common/models/stats.dart";
+import "../../../../common/models/achievement.dart";
+import "../../../../common/models/stat.dart";
 import "card.dart";
 
-class StatListWidget extends StatelessWidget {
-  final IList<Stats> stats;
+class StatListWidget<T extends Stat> extends StatelessWidget {
+  final IList<T> stats;
   final double height;
   final double itemWidth;
   final double sideMargin;
   final double iconSize;
+  final void Function(T stat)? onTap;
 
   const StatListWidget({
     required this.stats,
@@ -17,6 +19,7 @@ class StatListWidget extends StatelessWidget {
     this.itemWidth = CardListConfig.itemWidth,
     this.sideMargin = AppPaddings.medium,
     this.iconSize = CardListConfig.iconSize,
+    this.onTap,
   });
 
   @override
@@ -32,7 +35,25 @@ class StatListWidget extends StatelessWidget {
           final stat = stats[index];
           return Padding(
             padding: const EdgeInsets.only(bottom: AppPaddings.nano),
-            child: StatCard(stat: stat, iconSize: iconSize, width: itemWidth, height: height),
+            child:
+                (onTap != null)
+                    ? GestureDetector(
+                      onTap: () => onTap!(stat),
+                      child: StatCard(
+                        stat: stat,
+                        iconSize: iconSize,
+                        width: itemWidth,
+                        height: height,
+                        isValueText: T == Achievement,
+                      ),
+                    )
+                    : StatCard(
+                      stat: stat,
+                      iconSize: iconSize,
+                      width: itemWidth,
+                      height: height,
+                      isValueText: T == Achievement,
+                    ),
           );
         },
       ),

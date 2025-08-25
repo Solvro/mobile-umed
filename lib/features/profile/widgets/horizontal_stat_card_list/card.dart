@@ -2,19 +2,21 @@ import "package:flutter/material.dart";
 
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/theme/app_theme.dart";
-import "../../../../common/models/stats.dart";
+import "../../../../common/models/stat.dart";
 
 class StatCard extends StatelessWidget {
-  final Stats stat;
+  final Stat stat;
   final double width;
   final double height;
   final double iconSize;
+  final bool isValueText;
 
   const StatCard({
     required this.stat,
     this.iconSize = CardListConfig.iconSize,
     this.width = CardListConfig.itemWidth,
     this.height = CardListConfig.height,
+    this.isValueText = false,
     super.key,
   });
   @override
@@ -30,15 +32,13 @@ class StatCard extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Spacer(),
           Opacity(
             opacity: StatCardConfig.iconOpacity,
             child: Icon(stat.iconData, color: Color(stat.iconColor), size: iconSize),
           ),
-          const Spacer(),
-          Text(stat.value, style: context.textTheme.displayLarge),
+          Text(stat.value, style: isValueText ? context.textTheme.headlineSmall : context.textTheme.displayLarge),
         ],
       ),
     );
