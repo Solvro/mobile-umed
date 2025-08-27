@@ -35,25 +35,17 @@ class StatListWidget<T extends Stat> extends StatelessWidget {
           final stat = stats[index];
           return Padding(
             padding: const EdgeInsets.only(bottom: AppPaddings.nano),
-            child:
-                (onTap != null)
-                    ? GestureDetector(
-                      onTap: () => onTap!(stat),
-                      child: StatCard(
-                        stat: stat,
-                        iconSize: iconSize,
-                        width: itemWidth,
-                        height: height,
-                        isValueText: T == Achievement,
-                      ),
-                    )
-                    : StatCard(
-                      stat: stat,
-                      iconSize: iconSize,
-                      width: itemWidth,
-                      height: height,
-                      isValueText: T == Achievement,
-                    ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(AppRadius.small),
+              onTap: onTap != null ? () => onTap!(stat) : null,
+              child: StatCard(
+                stat: stat,
+                iconSize: iconSize,
+                width: itemWidth,
+                height: height,
+                isValueText: T == Achievement,
+              ),
+            ),
           );
         },
       ),
