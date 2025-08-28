@@ -211,6 +211,7 @@ abstract final class SectionAccentConfig {
 abstract final class ProfileViewConfig {
   static const double sideMargin = 10;
   static const double commonGap = 30;
+  static const double achievementsIconSize = 115;
 }
 
 abstract final class ProfileProgressBarConfig {

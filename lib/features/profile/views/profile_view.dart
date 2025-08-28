@@ -6,12 +6,15 @@ import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../app/app.dart";
 import "../../../common/data_source/mocks/mock_stats.dart";
+import "../../../common/models/achievement.dart";
 import "../../../common/models/completed_route.dart";
 import "../../../common/models/route.dart";
+import "../../../common/models/stat.dart";
 import "../../../common/parsers/completed_routes_stats_converter.dart";
 import "../../../common/widgets/app_bar.dart";
 import "../../../common/widgets/horizontal_routes_list/horizontal_routes_list.dart";
 import "../../../common/widgets/styling/section_header.dart";
+import "../widgets/achivement_description_modal.dart";
 import "../widgets/horizontal_stat_card_list/horizontal_card_list.dart";
 import "../widgets/progress_bar.dart";
 
@@ -43,12 +46,19 @@ class ProfileView extends ConsumerWidget {
             ],
             const SizedBox(height: AppPaddings.medium),
             SectionHeader(context.l10n.achievements_statistics),
-            StatListWidget(stats: convertCompletedRoutesToStats(completedRoutes)),
+            StatListWidget<Stat>(stats: convertCompletedRoutesToStats(completedRoutes)),
             const SizedBox(height: AppPaddings.medium),
             if (kDebugMode) ...[
               SectionHeader(context.l10n.achievements_achievements),
               const SizedBox(height: AppPaddings.tinySmall),
-              StatListWidget(stats: mockAchievements),
+              StatListWidget<Achievement>(
+                stats: mockAchievements,
+                onTap:
+                    (stat) async => showDialog(
+                      context: context,
+                      builder: (context) => AchievementDescriptionModal(achievement: stat),
+                    ),
+              ),
             ],
           ],
         ),
