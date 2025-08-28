@@ -21,25 +21,27 @@ class StatCard extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppPaddings.small),
-      height: height,
-      width: width,
+    return Ink(
       decoration: BoxDecoration(
         color: context.colorScheme.onSecondary,
         borderRadius: BorderRadius.circular(AppRadius.small),
         boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 1, offset: Offset(0, 3))],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Opacity(
-            opacity: StatCardConfig.iconOpacity,
-            child: Icon(stat.iconData, color: Color(stat.iconColor), size: iconSize),
-          ),
-          Text(stat.value, style: isValueText ? context.textTheme.headlineSmall : context.textTheme.displayLarge),
-        ],
+      child: Container(
+        padding: const EdgeInsets.all(AppPaddings.small),
+        height: height,
+        width: width,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Opacity(
+              opacity: StatCardConfig.iconOpacity,
+              child: Icon(stat.iconData, color: Color(stat.iconColor), size: iconSize),
+            ),
+            Text(stat.value, style: isValueText ? context.textTheme.headlineSmall : context.textTheme.displayLarge),
+          ],
+        ),
       ),
     );
   }
