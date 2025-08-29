@@ -65,11 +65,6 @@ class MyTaskHandler extends TaskHandler {
 
         while (currentLocation != locations.first) {
           _checkCheckpointProximity();
-
-          FlutterForegroundTask.sendDataToMain(
-            ForegroundTaskProtocol.onlyEvent(TaskEvent.nextLocationReached).toJson(),
-          );
-
           _updateLocation(currentLocation);
         }
 
