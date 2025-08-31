@@ -1,7 +1,6 @@
 import "dart:async";
 import "dart:collection";
 
-import "package:flutter/widgets.dart";
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:latlong2/latlong.dart";
 
@@ -30,12 +29,9 @@ class MyTaskHandler extends TaskHandler {
       didWalkAwayFromStart = meterDistance > LocalizationConfig.didWalkAwayThresholdInMeters;
     }
 
-    debugPrint("didWalkAwayFromStart: $didWalkAwayFromStart");
     if (checkpoints.isNotEmpty &&
         distance.as(LengthUnit.Meter, currentLocation, checkpoints.first.location) <=
             LocalizationConfig.coordProximityThresholdInMeters) {
-      debugPrint("Condition met");
-
       if (checkpoints.first.type == LandmarkType.start) {
         startCheckpointCoords = checkpoints.first.location;
         didWalkAwayFromStart = false;
@@ -43,7 +39,6 @@ class MyTaskHandler extends TaskHandler {
         if (!didWalkAwayFromStart) {
           return;
         }
-        debugPrint("finish");
         FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
       }
 
@@ -68,10 +63,17 @@ class MyTaskHandler extends TaskHandler {
 
         final endIndex = (isLoop && passed <= 4) ? (locations.length - 4) : locations.length;
 
+        bool didReachCurrentLocation = false;
+        double bestDistance = double.infinity;
         for (final LatLng location in locations.take(endIndex)) {
           final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
           if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
-            currentLocation = location;
+            if (meterDistance < bestDistance) {
+              currentLocation = location;
+              bestDistance = meterDistance;
+            }
+            didReachCurrentLocation = true;
+          } else if (didReachCurrentLocation) {
             break;
           }
         }
@@ -112,7 +114,6 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {
-    debugPrint("onDestroy");
     await _locationSubscription?.cancel();
     _timer?.cancel();
   }
