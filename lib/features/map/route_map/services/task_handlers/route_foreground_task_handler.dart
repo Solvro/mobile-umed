@@ -14,23 +14,36 @@ const distance = Distance();
 class MyTaskHandler extends TaskHandler {
   StreamSubscription<LatLng?>? _locationSubscription;
   Queue<LatLng> locations = Queue();
+  int lastBlockedCount = -4;
   LatLng? lastVisitedLocation;
   Queue<Checkpoint> checkpoints = Queue();
   bool isLoop = false;
   int passed = 0;
   Timer? _timer;
   int distanceTravelled = 0;
+  LatLng? startCheckpointCoords;
+  bool didWalkAwayFromStart = false;
 
-  void _checkCheckpointProximity() {
+  void _checkCheckpointProximity(LatLng currentLocation) {
+    if (!didWalkAwayFromStart && startCheckpointCoords != null) {
+      final meterDistance = distance.as(LengthUnit.Meter, startCheckpointCoords!, currentLocation);
+      didWalkAwayFromStart = meterDistance > LocalizationConfig.didWalkAwayThresholdInMeters;
+    }
+
     if (checkpoints.isNotEmpty &&
-        distance.as(LengthUnit.Meter, locations.first, checkpoints.first.location) <=
+        distance.as(LengthUnit.Meter, currentLocation, checkpoints.first.location) <=
             LocalizationConfig.coordProximityThresholdInMeters) {
-      FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextCheckpointReached).toJson());
-
-      if (checkpoints.first.type == LandmarkType.finish) {
+      if (checkpoints.first.type == LandmarkType.start) {
+        startCheckpointCoords = checkpoints.first.location;
+        didWalkAwayFromStart = false;
+      } else if (checkpoints.first.type == LandmarkType.finish) {
+        if (!didWalkAwayFromStart) {
+          return;
+        }
         FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
       }
 
+      FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextCheckpointReached).toJson());
       checkpoints.removeFirst();
     }
   }
@@ -48,13 +61,20 @@ class MyTaskHandler extends TaskHandler {
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
       if (latLng != null && locations.isNotEmpty) {
         LatLng? currentLocation;
+        bool didReachCurrentLocation = false;
+        double bestDistance = double.infinity;
 
-        final endIndex = (isLoop && passed <= 4) ? (locations.length - 4) : locations.length;
+        final endIndex = (isLoop && !didWalkAwayFromStart) ? (locations.length - lastBlockedCount) : locations.length;
 
         for (final LatLng location in locations.take(endIndex)) {
           final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
           if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
-            currentLocation = location;
+            if (meterDistance < bestDistance) {
+              currentLocation = location;
+              bestDistance = meterDistance;
+            }
+            didReachCurrentLocation = true;
+          } else if (didReachCurrentLocation) {
             break;
           }
         }
@@ -64,11 +84,10 @@ class MyTaskHandler extends TaskHandler {
         }
 
         while (currentLocation != locations.first) {
-          _checkCheckpointProximity();
           _updateLocation(currentLocation);
         }
 
-        _checkCheckpointProximity();
+        _checkCheckpointProximity(latLng);
 
         _updateLocation(currentLocation);
 
@@ -123,6 +142,21 @@ class MyTaskHandler extends TaskHandler {
         isLoop =
             distance.as(LengthUnit.Meter, checkpoints.first.location, checkpoints.last.location) <=
             LocalizationConfig.loopProximityThresholdInMeters;
+        if (isLoop) {
+          int newLastBlockedCount = 0;
+
+          final lastIndex = locations.length - 1;
+          int index = lastIndex;
+
+          while (index >= 0 &&
+              distance.as(LengthUnit.Meter, locations.elementAt(index), locations.elementAt(lastIndex)) <=
+                  LocalizationConfig.blockLastThreshouldInMeters) {
+            newLastBlockedCount++;
+            index--;
+          }
+
+          lastBlockedCount = newLastBlockedCount;
+        }
       }
     }
   }
