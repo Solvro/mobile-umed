@@ -5,8 +5,10 @@ import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
+import "../../../../../common/models/completed_route.dart";
 import "../../../../../common/models/route.dart";
 import "../../../../../common/models/route_stats.dart";
+import "../../../../../common/providers/completed_routes_provider.dart";
 import "../../../../error/widgets/error_snack_bar.dart";
 import "../../controllers/route_controller.dart";
 import "../../modals/route_completed_modal.dart";
@@ -36,7 +38,11 @@ class FlutterForegroundService {
         case TaskEvent.nextCheckpointReached:
           ref.read(visitedCountProvider.notifier).incrementVisited();
         case TaskEvent.routeCompleted:
-          await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
+          final completedRoute = CompletedRoute.fromRoute(route);
+          await ref.read(completedRoutesProvider.notifier).addCompletedRoute(completedRoute);
+          if (context.mounted) {
+            await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
+          }
           await FlutterForegroundTask.stopService();
         case TaskEvent.error:
           context.showErrorSnackBar("Error: $data");
