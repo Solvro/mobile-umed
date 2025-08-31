@@ -152,6 +152,7 @@ abstract final class LocalizationConfig {
   static const coordProximityThresholdInMeters = 10.0;
   static const loopProximityThresholdInMeters = 100.0;
   static const didWalkAwayThresholdInMeters = 70.0;
+  static const blockLastThreshouldInMeters = 70.0;
   static const distanceChangeFilter = 3;
 }
 

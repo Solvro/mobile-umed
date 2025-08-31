@@ -14,6 +14,7 @@ const distance = Distance();
 class MyTaskHandler extends TaskHandler {
   StreamSubscription<LatLng?>? _locationSubscription;
   Queue<LatLng> locations = Queue();
+  int lastBlockedCount = -4;
   LatLng? lastVisitedLocation;
   Queue<Checkpoint> checkpoints = Queue();
   bool isLoop = false;
@@ -61,7 +62,7 @@ class MyTaskHandler extends TaskHandler {
       if (latLng != null && locations.isNotEmpty) {
         LatLng? currentLocation;
 
-        final endIndex = (isLoop && passed <= 4) ? (locations.length - 4) : locations.length;
+        final endIndex = (isLoop && !didWalkAwayFromStart) ? (locations.length - lastBlockedCount) : locations.length;
 
         bool didReachCurrentLocation = false;
         double bestDistance = double.infinity;
@@ -141,6 +142,21 @@ class MyTaskHandler extends TaskHandler {
         isLoop =
             distance.as(LengthUnit.Meter, checkpoints.first.location, checkpoints.last.location) <=
             LocalizationConfig.loopProximityThresholdInMeters;
+        if (isLoop) {
+          int newLastBlockedCount = 0;
+
+          final lastIndex = locations.length - 1;
+          int index = lastIndex;
+
+          while (index >= 0 &&
+              distance.as(LengthUnit.Meter, locations.elementAt(index), locations.elementAt(lastIndex)) <=
+                  LocalizationConfig.blockLastThreshouldInMeters) {
+            newLastBlockedCount++;
+            index--;
+          }
+
+          lastBlockedCount = newLastBlockedCount;
+        }
       }
     }
   }
