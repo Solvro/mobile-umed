@@ -1,6 +1,7 @@
 import "dart:async";
 import "dart:collection";
 
+import "package:flutter/widgets.dart";
 import "package:flutter_foreground_task/flutter_foreground_task.dart";
 import "package:latlong2/latlong.dart";
 
@@ -20,17 +21,33 @@ class MyTaskHandler extends TaskHandler {
   int passed = 0;
   Timer? _timer;
   int distanceTravelled = 0;
+  LatLng? startCheckpointCoords;
+  bool didWalkAwayFromStart = false;
 
-  void _checkCheckpointProximity() {
+  void _checkCheckpointProximity(LatLng currentLocation) {
+    if (!didWalkAwayFromStart && startCheckpointCoords != null) {
+      final meterDistance = distance.as(LengthUnit.Meter, startCheckpointCoords!, currentLocation);
+      didWalkAwayFromStart = meterDistance > LocalizationConfig.didWalkAwayThresholdInMeters;
+    }
+
+    debugPrint("didWalkAwayFromStart: $didWalkAwayFromStart");
     if (checkpoints.isNotEmpty &&
-        distance.as(LengthUnit.Meter, locations.first, checkpoints.first.location) <=
+        distance.as(LengthUnit.Meter, currentLocation, checkpoints.first.location) <=
             LocalizationConfig.coordProximityThresholdInMeters) {
-      FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextCheckpointReached).toJson());
+      debugPrint("Condition met");
 
-      if (checkpoints.first.type == LandmarkType.finish) {
+      if (checkpoints.first.type == LandmarkType.start) {
+        startCheckpointCoords = checkpoints.first.location;
+        didWalkAwayFromStart = false;
+      } else if (checkpoints.first.type == LandmarkType.finish) {
+        if (!didWalkAwayFromStart) {
+          return;
+        }
+        debugPrint("finish");
         FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
       }
 
+      FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextCheckpointReached).toJson());
       checkpoints.removeFirst();
     }
   }
@@ -64,11 +81,10 @@ class MyTaskHandler extends TaskHandler {
         }
 
         while (currentLocation != locations.first) {
-          _checkCheckpointProximity();
           _updateLocation(currentLocation);
         }
 
-        _checkCheckpointProximity();
+        _checkCheckpointProximity(latLng);
 
         _updateLocation(currentLocation);
 
@@ -96,6 +112,7 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {
+    debugPrint("onDestroy");
     await _locationSubscription?.cancel();
     _timer?.cancel();
   }
