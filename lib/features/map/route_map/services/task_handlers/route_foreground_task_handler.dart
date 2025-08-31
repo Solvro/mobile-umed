@@ -61,11 +61,11 @@ class MyTaskHandler extends TaskHandler {
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
       if (latLng != null && locations.isNotEmpty) {
         LatLng? currentLocation;
+        bool didReachCurrentLocation = false;
+        double bestDistance = double.infinity;
 
         final endIndex = (isLoop && !didWalkAwayFromStart) ? (locations.length - lastBlockedCount) : locations.length;
 
-        bool didReachCurrentLocation = false;
-        double bestDistance = double.infinity;
         for (final LatLng location in locations.take(endIndex)) {
           final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
           if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
