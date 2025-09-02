@@ -72,7 +72,7 @@ dependencies:
   hive: ^2.2.3
 
   # env
-  envied: ^1.2.0
+  envied: ^1.2.1
 
   # Splash Screen
   flutter_native_splash: ^2.4.6
