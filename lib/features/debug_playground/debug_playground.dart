@@ -5,7 +5,6 @@ import "../../app/app.dart";
 import "../../common/models/completed_route.dart";
 import "../../common/providers/completed_routes_provider.dart";
 import "../map/route_map/controllers/route_controller.dart";
-import "../map/route_map/modals/route_completed_modal.dart";
 import "../map/route_map/repository/route_map_repository.dart";
 import "widgets/shimmer_test_widget.dart";
 
@@ -26,14 +25,7 @@ class DebugPlayground extends StatelessWidget {
               onPressed: () async => context.router.pushRouteMap(71),
               child: const Text("RouteMap with route"),
             ),
-            OutlinedButton(
-              onPressed:
-                  () async => showDialog<RouteCompletedModal>(
-                    context: context,
-                    builder: (context) => const RouteCompletedModal(),
-                  ),
-              child: const Text("Route Completed Modal"),
-            ),
+
             OutlinedButton(
               onPressed: () async => context.router.pushFullScreenError("Oto testowy error. lorem ipsum i tak dalej"),
               child: const Text("Error Page"),

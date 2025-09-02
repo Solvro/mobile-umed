@@ -5,6 +5,8 @@ import "../../../../../../app/assets/assets.gen.dart";
 import "../../../../../../app/config/ui_config.dart";
 import "../../../../../../app/l10n/l10n.dart";
 import "../../../../../../app/theme/app_theme.dart";
+import "../../../../../../common/extensions/double_ext.dart";
+import "../../../../../../common/extensions/int_ext.dart";
 import "../../../../../../common/models/route.dart";
 import "../../../../../../common/widgets/buttons/route_segmented_button.dart";
 import "../../../../../../common/widgets/buttons/secondary_action_button.dart";
