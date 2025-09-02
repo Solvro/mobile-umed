@@ -2,6 +2,8 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "../../../../../../app/config/ui_config.dart";
 import "../../../../../../app/theme/app_theme.dart";
+import "../../../../../../common/extensions/duration_ext.dart";
+import "../../../../../../common/extensions/int_ext.dart";
 import "../../../providers/route_stats_provider.dart";
 
 class RouteInfoSection extends ConsumerWidget {
@@ -42,27 +44,6 @@ class RouteInfoSection extends ConsumerWidget {
         ],
       ),
     );
-  }
-}
-
-extension DurationFormatting on Duration {
-  String toHmsString() {
-    final hours = inHours;
-    final minutes = inMinutes % 60;
-    final seconds = inSeconds % 60;
-    return "${hours.toString().padLeft(2, '0')}:"
-        "${minutes.toString().padLeft(2, '0')}:"
-        "${seconds.toString().padLeft(2, '0')}";
-  }
-}
-
-extension DistanceFormatting on int {
-  String toDistanceString() {
-    if (this < 1000) {
-      return "$this m";
-    } else {
-      return "${(this / 1000).toStringAsFixed(1)} km";
-    }
   }
 }
 

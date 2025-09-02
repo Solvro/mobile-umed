@@ -1,7 +1,8 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
+import "../extensions/double_ext.dart";
+import "../extensions/int_ext.dart";
 import "../models/completed_route.dart";
-import "../models/route.dart";
 import "../models/stat.dart";
 
 IList<Stat> convertCompletedRoutesToStats(List<CompletedRoute> routes) {

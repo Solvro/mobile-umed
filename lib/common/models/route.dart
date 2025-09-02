@@ -29,31 +29,3 @@ abstract class Route with _$Route {
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 }
-
-extension RouteParamsDoubleX on double {
-  String inKilometers() {
-    return "$this km";
-  }
-
-  String inMilliliters() {
-    return "${toInt()} ml";
-  }
-}
-
-extension RouteParamsIntX on int {
-  String inMinutes() {
-    return "$this min";
-  }
-
-  String inHours() {
-    return "${this / 60.0} h";
-  }
-
-  String inLiters() {
-    return "${this / 1000.0} l";
-  }
-
-  String inKcal() {
-    return "$this kcal";
-  }
-}

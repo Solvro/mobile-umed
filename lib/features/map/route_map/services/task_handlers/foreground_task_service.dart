@@ -41,7 +41,10 @@ class FlutterForegroundService {
           final completedRoute = CompletedRoute.fromRoute(route);
           await ref.read(completedRoutesProvider.notifier).addCompletedRoute(completedRoute);
           if (context.mounted) {
-            await showDialog<RouteCompletedModal>(context: context, builder: (context) => const RouteCompletedModal());
+            await showDialog<RouteCompletedModal>(
+              context: context,
+              builder: (context) => RouteCompletedModal(route: route, time: ref.read(routeStatsProvider).elapsed),
+            );
           }
           await FlutterForegroundTask.stopService();
         case TaskEvent.error:

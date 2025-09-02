@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "../../../../../../app/config/ui_config.dart";
 import "../../../../../../app/theme/app_theme.dart";
+import "../../../../../../common/extensions/duration_ext.dart";
 import "../../../../../../common/models/song.dart";
 
 class SongTile extends StatelessWidget {
@@ -46,14 +47,5 @@ class SongTile extends StatelessWidget {
         Text(song.duration.toShortTimeString()),
       ],
     );
-  }
-}
-
-extension DurationFormatting on Duration {
-  String toShortTimeString() {
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    final minutes = twoDigits(inMinutes.remainder(60));
-    final seconds = twoDigits(inSeconds.remainder(60));
-    return "$minutes:$seconds";
   }
 }
