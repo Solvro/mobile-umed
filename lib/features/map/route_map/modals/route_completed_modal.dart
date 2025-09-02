@@ -81,7 +81,7 @@ class RouteCompletedModal extends StatelessWidget {
                 child: StatInfoCompact(
                   title: context.l10n.avg_pace,
                   value:
-                      route.distance > 0 && time.inHours > 0
+                      route.distance > 0 && time.inMinutes > 0
                           ? "${(route.distance / (time.inMinutes / 60)).toStringAsFixed(2)} km/h"
                           : "-",
                   icon: Icons.speed_outlined,

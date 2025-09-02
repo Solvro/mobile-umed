@@ -136,6 +136,7 @@ class MyTaskHandler extends TaskHandler {
         checkpoints = Queue.from(
           (data[ForegroundTaskKeys.checkpoints] as List).map((e) => Checkpoint.fromJson(e as Map<String, dynamic>)),
         );
+        startCheckpointCoords = checkpoints.firstWhere((element) => element.type == LandmarkType.start).location;
       }
 
       if (checkpoints.length > 1) {

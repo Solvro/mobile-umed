@@ -1,7 +1,10 @@
+import "package:flutter_riverpod/flutter_riverpod.dart";
+
 import "stat.dart";
 
 class Achievement extends Stat {
   final String description;
+  final Future<bool> Function(Ref ref) isAchieved;
 
   Achievement({
     required super.id,
@@ -9,5 +12,6 @@ class Achievement extends Stat {
     required this.description,
     required super.iconData,
     required super.iconColor,
+    required this.isAchieved,
   });
 }
