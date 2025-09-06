@@ -23,9 +23,9 @@ class OptionsModal extends StatelessWidget {
       insetPadding: EdgeInsets.symmetric(
         horizontal: AppPaddings.medium,
         vertical:
-            MediaQuery.sizeOf(context).height > 920
+            MediaQuery.sizeOf(context).height > OptionsModalConfig.mediumThresh
                 ? OptionsModalConfig.largeOuterPaddingVertical
-                : MediaQuery.sizeOf(context).height > 620
+                : MediaQuery.sizeOf(context).height > OptionsModalConfig.smallThresh
                 ? OptionsModalConfig.mediumOuterPaddingVertical
                 : OptionsModalConfig.smallOuterPaddingVertical,
       ),
