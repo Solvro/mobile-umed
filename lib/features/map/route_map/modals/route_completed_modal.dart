@@ -48,7 +48,10 @@ class RouteCompletedModal extends StatelessWidget {
             children: [
               Expanded(
                 child: StatInfoCompact(
-                  title: context.l10n.covered_distance,
+                  title:
+                      MediaQuery.sizeOf(context).width > RouteCompleteModalConfig.widthThresh
+                          ? context.l10n.covered_distance
+                          : context.l10n.distance,
                   value: route.distance.inKilometers(),
                   icon: Icons.social_distance_outlined,
                   color: RouteCompleteModalConfig.distanceInfoColor,
