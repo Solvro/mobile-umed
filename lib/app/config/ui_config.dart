@@ -105,7 +105,9 @@ abstract class InfoModalConfig {
 
 abstract class OptionsModalConfig {
   static const radius = 15.0;
-  static const outerPaddingVertical = 195.0;
+  static const largeOuterPaddingVertical = 155.0;
+  static const mediumOuterPaddingVertical = 105.0;
+  static const smallOuterPaddingVertical = 55.0;
   static const titleSpacer = 6.0;
 }
 

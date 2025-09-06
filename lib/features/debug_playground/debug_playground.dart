@@ -2,9 +2,11 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../app/app.dart";
+import "../../common/data_source/mocks/mock_routes.dart";
 import "../../common/models/completed_route.dart";
 import "../../common/providers/completed_routes_provider.dart";
 import "../map/route_map/controllers/route_controller.dart";
+import "../map/route_map/modals/route_completed_modal.dart";
 import "../map/route_map/repository/route_map_repository.dart";
 import "widgets/shimmer_test_widget.dart";
 
@@ -21,6 +23,16 @@ class DebugPlayground extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OutlinedButton(onPressed: () async => context.router.pushMultiRouteMap(), child: const Text("RouteMap")),
+            OutlinedButton(
+              onPressed:
+                  () async => showDialog(
+                    context: context,
+                    builder:
+                        (context) =>
+                            RouteCompletedModal(route: mockData[0], time: const Duration(hours: 2, minutes: 3)),
+                  ),
+              child: const Text("Show modal"),
+            ),
             OutlinedButton(
               onPressed: () async => context.router.pushRouteMap(71),
               child: const Text("RouteMap with route"),
