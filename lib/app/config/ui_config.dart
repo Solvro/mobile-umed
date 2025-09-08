@@ -159,6 +159,7 @@ abstract final class LocalizationConfig {
   static const didWalkAwayThresholdInMeters = 70.0;
   static const blockLastThreshouldInMeters = 70.0;
   static const distanceChangeFilter = 3;
+  static const currentLocalizationSize = Size(22, 22);
 }
 
 abstract final class StatInfoCompactConfig {
