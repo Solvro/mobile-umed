@@ -1,7 +1,8 @@
 name: mobile_umed
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.9.0+9
+
+version: 0.9.1+9
 
 environment:
   sdk: ^3.7.0
@@ -46,7 +47,7 @@ dependencies:
 
   #Widgets
   cupertino_icons: ^1.0.8
-  flutter_svg: ^2.2.0
+  flutter_svg: ^2.2.1
   wiredash: ^2.5.0
 
   #Code Generation

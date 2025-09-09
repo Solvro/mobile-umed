@@ -20,9 +20,14 @@ class OptionsModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.symmetric(
+      insetPadding: EdgeInsets.symmetric(
         horizontal: AppPaddings.medium,
-        vertical: OptionsModalConfig.outerPaddingVertical,
+        vertical:
+            MediaQuery.sizeOf(context).height > OptionsModalConfig.mediumThresh
+                ? OptionsModalConfig.largeOuterPaddingVertical
+                : MediaQuery.sizeOf(context).height > OptionsModalConfig.smallThresh
+                ? OptionsModalConfig.mediumOuterPaddingVertical
+                : OptionsModalConfig.smallOuterPaddingVertical,
       ),
       backgroundColor: context.colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(OptionsModalConfig.radius)),

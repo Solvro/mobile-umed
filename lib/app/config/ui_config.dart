@@ -105,7 +105,11 @@ abstract class InfoModalConfig {
 
 abstract class OptionsModalConfig {
   static const radius = 15.0;
-  static const outerPaddingVertical = 195.0;
+  static const largeOuterPaddingVertical = 155.0;
+  static const mediumOuterPaddingVertical = 105.0;
+  static const smallOuterPaddingVertical = 55.0;
+  static const smallThresh = 620.0;
+  static const mediumThresh = 920.0;
   static const titleSpacer = 6.0;
 }
 
@@ -127,6 +131,7 @@ abstract class RouteCompleteModalConfig {
   static const verticalSpacing = 16.0;
   static const horizontalSpacing = 26.0;
   static const decorationSize = 120.0;
+  static const widthThresh = 420.0;
 }
 
 abstract final class MapConfig {
@@ -154,6 +159,7 @@ abstract final class LocalizationConfig {
   static const didWalkAwayThresholdInMeters = 70.0;
   static const blockLastThreshouldInMeters = 70.0;
   static const distanceChangeFilter = 3;
+  static const currentLocalizationSize = Size(22, 22);
 }
 
 abstract final class StatInfoCompactConfig {

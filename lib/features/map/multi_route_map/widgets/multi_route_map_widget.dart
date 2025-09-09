@@ -1,6 +1,7 @@
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart";
 import "package:flutter_map/flutter_map.dart";
+import "package:flutter_map_location_marker/flutter_map_location_marker.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
 import "../../../../app/config/flutter_map_config.dart";
@@ -46,6 +47,14 @@ class _MultiRouteMapWidgetState extends ConsumerState<MultiRouteMapWidget> {
               selectedColor: context.colorScheme.primary,
               notSelectedColor: MapConfig.unvisitedColor,
             ),
+          const CurrentLocationLayer(
+            style: LocationMarkerStyle(
+              marker: DefaultLocationMarker(color: Colors.blue),
+              markerSize: LocalizationConfig.currentLocalizationSize,
+              accuracyCircleColor: Color(0x2288B4EA),
+              headingSectorColor: Color(0x4488B4EA),
+            ),
+          ),
         ],
       ),
       _ => const Center(child: CircularProgressIndicator()),
