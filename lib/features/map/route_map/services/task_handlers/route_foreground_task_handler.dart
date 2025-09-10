@@ -20,6 +20,7 @@ class MyTaskHandler extends TaskHandler {
   bool isLoop = false;
   int passed = 0;
   Timer? _timer;
+  DateTime? startRouteTimestamp;
   int distanceTravelled = 0;
   LatLng? startCheckpointCoords;
   bool didWalkAwayFromStart = false;
@@ -51,7 +52,8 @@ class MyTaskHandler extends TaskHandler {
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      final elapsed = DateTime.now().difference(timestamp);
+      if (startRouteTimestamp == null) return;
+      final elapsed = DateTime.now().difference(startRouteTimestamp!);
       if (elapsed.inSeconds == 0) return;
       FlutterForegroundTask.sendDataToMain(
         ForegroundTaskProtocol.onlyDurationStats(elapsed, distanceTravelled).toJson(),
@@ -82,6 +84,8 @@ class MyTaskHandler extends TaskHandler {
         if (currentLocation == null) {
           return;
         }
+
+        startRouteTimestamp ??= DateTime.now();
 
         while (currentLocation != locations.first) {
           _updateLocation(currentLocation);

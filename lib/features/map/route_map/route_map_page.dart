@@ -9,6 +9,7 @@ import "../../error/error_page.dart";
 import "controllers/route_controller.dart";
 import "providers/locations_provider.dart";
 import "providers/route_provider.dart";
+import "providers/route_stats_provider.dart";
 import "repository/route_map_repository.dart";
 import "services/task_handlers/foreground_task_service.dart";
 import "services/task_handlers/route_foreground_task_handler.dart";
@@ -36,6 +37,8 @@ class _RouteMapPageState extends ConsumerState<RouteMapPage> {
 
   void _initializeBackgroundTracking(WidgetRef ref, BuildContext context, Route? route) {
     if (route != null) {
+      ref.invalidate(routeStatsProvider);
+
       final handler = ref.read(foregroundServiceProvider);
 
       FlutterForegroundTask.addTaskDataCallback((data) async {
