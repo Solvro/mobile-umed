@@ -20,9 +20,58 @@ class MyTaskHandler extends TaskHandler {
   bool isLoop = false;
   int passed = 0;
   Timer? _timer;
+  DateTime? startRouteTimestamp;
   int distanceTravelled = 0;
   LatLng? startCheckpointCoords;
   bool didWalkAwayFromStart = false;
+  LatLng? initialUserlocation;
+
+  Future<void> _processLocation(LatLng? latLng) async {
+    if (latLng == null) return;
+    if (locations.isEmpty) return;
+
+    LatLng? currentLocation;
+    bool didReachCurrentLocation = false;
+    double bestDistance = double.infinity;
+
+    final endIndex = (isLoop && !didWalkAwayFromStart) ? (locations.length - lastBlockedCount) : locations.length;
+
+    for (final LatLng location in locations.take(endIndex)) {
+      final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
+      if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
+        if (meterDistance < bestDistance) {
+          currentLocation = location;
+          bestDistance = meterDistance;
+        }
+        didReachCurrentLocation = true;
+      } else if (didReachCurrentLocation) {
+        break;
+      }
+    }
+
+    if (currentLocation == null) {
+      return;
+    }
+
+    startRouteTimestamp ??= DateTime.now();
+
+    while (currentLocation != locations.first) {
+      _updateLocation(currentLocation);
+    }
+
+    _checkCheckpointProximity(latLng);
+
+    _updateLocation(currentLocation);
+
+    if (locations.isEmpty) {
+      FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
+      await FlutterForegroundTask.updateService(
+        notificationTitle: "Dotarłeś do końca trasy",
+        notificationText: "Gratulacje, dotarłeś do końca trasy!",
+      );
+      await _locationSubscription?.cancel();
+    }
+  }
 
   void _checkCheckpointProximity(LatLng currentLocation) {
     if (!didWalkAwayFromStart && startCheckpointCoords != null) {
@@ -51,55 +100,18 @@ class MyTaskHandler extends TaskHandler {
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      final elapsed = DateTime.now().difference(timestamp);
+      if (startRouteTimestamp == null) return;
+      final elapsed = DateTime.now().difference(startRouteTimestamp!);
       if (elapsed.inSeconds == 0) return;
       FlutterForegroundTask.sendDataToMain(
         ForegroundTaskProtocol.onlyDurationStats(elapsed, distanceTravelled).toJson(),
       );
     });
 
+    initialUserlocation = await LocationService.getCurrentLatLng();
+
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
-      if (latLng != null && locations.isNotEmpty) {
-        LatLng? currentLocation;
-        bool didReachCurrentLocation = false;
-        double bestDistance = double.infinity;
-
-        final endIndex = (isLoop && !didWalkAwayFromStart) ? (locations.length - lastBlockedCount) : locations.length;
-
-        for (final LatLng location in locations.take(endIndex)) {
-          final meterDistance = distance.as(LengthUnit.Meter, location, latLng);
-          if (meterDistance <= LocalizationConfig.coordProximityThresholdInMeters) {
-            if (meterDistance < bestDistance) {
-              currentLocation = location;
-              bestDistance = meterDistance;
-            }
-            didReachCurrentLocation = true;
-          } else if (didReachCurrentLocation) {
-            break;
-          }
-        }
-
-        if (currentLocation == null) {
-          return;
-        }
-
-        while (currentLocation != locations.first) {
-          _updateLocation(currentLocation);
-        }
-
-        _checkCheckpointProximity(latLng);
-
-        _updateLocation(currentLocation);
-
-        if (locations.isEmpty) {
-          FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
-          await FlutterForegroundTask.updateService(
-            notificationTitle: "Dotarłeś do końca trasy",
-            notificationText: "Gratulacje, dotarłeś do końca trasy!",
-          );
-          await _locationSubscription?.cancel();
-        }
-      }
+      await _processLocation(latLng);
     });
   }
 
@@ -159,6 +171,10 @@ class MyTaskHandler extends TaskHandler {
           lastBlockedCount = newLastBlockedCount;
         }
       }
+    }
+
+    if (initialUserlocation != null) {
+      unawaited(Future.microtask(() => _processLocation(initialUserlocation)));
     }
   }
 
