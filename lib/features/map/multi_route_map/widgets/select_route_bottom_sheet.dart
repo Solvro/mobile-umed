@@ -1,7 +1,9 @@
 import "dart:async";
+
 import "package:fast_immutable_collections/fast_immutable_collections.dart";
 import "package:flutter/material.dart" hide Route;
 import "package:flutter_riverpod/flutter_riverpod.dart";
+
 import "../../../../app/config/ui_config.dart";
 import "../../../../app/l10n/l10n.dart";
 import "../../../../app/theme/color_consts.dart";
@@ -9,6 +11,7 @@ import "../../../../common/models/route.dart";
 import "../../../../common/providers/bottom_sheet_providers.dart";
 import "../../../../common/widgets/buttons/main_action_button.dart";
 import "../../../../common/widgets/map_bottom_sheet.dart";
+import "../../route_map/providers/route_provider.dart";
 import "../../route_map/widgets/bottom_sheet/tiles/route_tile.dart";
 
 class SelectRouteBottomSheet extends ConsumerStatefulWidget {
@@ -51,7 +54,16 @@ class SelectRouteBottomSheetState extends ConsumerState<SelectRouteBottomSheet> 
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          separatorBuilder: (context, index) => const Divider(height: 1, thickness: 1, color: ColorConsts.mistGray),
+          separatorBuilder: (context, index) {
+            final expandedRoutes = ref.watch(expandedRoutesProvider);
+            final isAboveExpanded = expandedRoutes.any((r) => r.id == routes[index].id);
+            final isBelowExpanded =
+                (index + 1 < routes.length) && expandedRoutes.any((r) => r.id == routes[index + 1].id);
+
+            final isDark = isAboveExpanded || isBelowExpanded;
+
+            return Divider(height: 1, thickness: 1, color: isDark ? Colors.grey[800] : ColorConsts.mistGray);
+          },
           itemCount: routes.length,
           itemBuilder: (context, index) => RouteTile(route: routes[index]),
         ),
