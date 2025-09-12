@@ -62,7 +62,7 @@ class HomeButtonsRow extends ConsumerWidget {
                 label: context.l10n.home_learn_more,
                 icon: Icons.public,
                 iconColor: context.colorScheme.primary,
-                onPressed: () => customLaunchUrl("https://umed.solvro.pl/"),
+                onPressed: () => customLaunchUrl("https://pierwszeskrzypce.umw.edu.pl/"),
               ),
             ),
           ],
