@@ -37,7 +37,6 @@ class InfoView extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.only(top: AppPaddings.tinySmall, bottom: AppPaddings.veryLarge),
         children: [
-          const FeedbackTile(),
           ...infoSections.map((section) => InfoSectionWidget(infoSection: section)),
           SectionHeader(context.l10n.info_creators),
           SingleChildScrollView(
@@ -47,6 +46,7 @@ class InfoView extends StatelessWidget {
               child: Row(children: creators.map(CreatorTile.new).toList()),
             ),
           ),
+          const FeedbackTile(),
         ],
       ),
     );
