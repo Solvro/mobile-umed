@@ -36,11 +36,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app needs location access to center the map.</string>
+	<string>Your location is used to track your progress along the route and show your current position on the map during walks.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs location access to center the map.</string>
+	<string>Your location is used to let the app follow your position on the route and display where you are in real time.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs location access to center the map.</string>
+	<string>Your location is used to display your position on the map and guide you along the selected route.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
