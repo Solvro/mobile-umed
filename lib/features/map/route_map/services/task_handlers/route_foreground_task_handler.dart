@@ -15,16 +15,16 @@ class MyTaskHandler extends TaskHandler {
   StreamSubscription<LatLng?>? _locationSubscription;
   Queue<LatLng> locations = Queue();
   int lastBlockedCount = -4;
-  LatLng? lastVisitedLocation;
   Queue<Checkpoint> checkpoints = Queue();
   bool isLoop = false;
   int passed = 0;
   Timer? _timer;
   DateTime? startRouteTimestamp;
-  int distanceTravelled = 0;
   LatLng? startCheckpointCoords;
   bool didWalkAwayFromStart = false;
   LatLng? initialUserlocation;
+  LatLng? lastVisitedLocation;
+  int distanceWalkedInMeters = 0;
 
   Future<void> _processLocation(LatLng? latLng) async {
     if (latLng == null) return;
@@ -97,6 +97,13 @@ class MyTaskHandler extends TaskHandler {
     }
   }
 
+  void _saveLastLocation(LatLng location) {
+    if (lastVisitedLocation != null) {
+      distanceWalkedInMeters += distance.as(LengthUnit.Meter, lastVisitedLocation!, location).round();
+    }
+    lastVisitedLocation = location;
+  }
+
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -104,23 +111,21 @@ class MyTaskHandler extends TaskHandler {
       final elapsed = DateTime.now().difference(startRouteTimestamp!);
       if (elapsed.inSeconds == 0) return;
       FlutterForegroundTask.sendDataToMain(
-        ForegroundTaskProtocol.onlyDurationStats(elapsed, distanceTravelled).toJson(),
+        ForegroundTaskProtocol.onlyDurationStats(elapsed, distanceWalkedInMeters).toJson(),
       );
     });
 
     initialUserlocation = await LocationService.getCurrentLatLng();
 
     _locationSubscription = LocationService.getLocationStream().listen((latLng) async {
+      if (latLng == null) return;
+      _saveLastLocation(latLng);
       await _processLocation(latLng);
     });
   }
 
   void _updateLocation(LatLng currentLocation) {
     FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.nextLocationReached).toJson());
-    if (lastVisitedLocation != null && currentLocation != lastVisitedLocation) {
-      distanceTravelled += distance.as(LengthUnit.Meter, lastVisitedLocation!, locations.first).round();
-      lastVisitedLocation = locations.first;
-    }
     locations.removeFirst();
     passed++;
   }
@@ -141,7 +146,6 @@ class MyTaskHandler extends TaskHandler {
         locations = Queue.from(
           (data[ForegroundTaskKeys.locations] as List).map((e) => LatLng.fromJson(e as Map<String, dynamic>)),
         );
-        lastVisitedLocation = locations.firstOrNull;
       }
 
       if (data[ForegroundTaskKeys.checkpoints] is List) {
