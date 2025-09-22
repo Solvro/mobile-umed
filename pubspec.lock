@@ -527,10 +527,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_map
-      sha256: df33e784b09fae857c6261a5521dd42bd4d3342cb6200884bb70730638af5fd5
+      sha256: "391e7dc95cc3f5190748210a69d4cfeb5d8f84dcdfa9c3235d0a9d7742ccb3f8"
       url: "https://pub.dev"
     source: hosted
-    version: "8.2.1"
+    version: "8.2.2"
   flutter_map_animations:
     dependency: "direct main"
     description:
@@ -769,10 +769,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "559ab0d950643c9a04512f4c4bd1c435dcb5af1aa9c848f3bf5867347044328a"
+      sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0-beta"
+    version: "1.5.0"
   http_cache_core:
     dependency: transitive
     description:
