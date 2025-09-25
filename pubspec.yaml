@@ -23,7 +23,7 @@ dependencies:
   riverpod_annotation: ^2.6.1
 
   #Maps
-  flutter_map: ^8.2.1
+  flutter_map: ^8.2.2
   flutter_map_animations: ^0.9.0
   latlong2: ^0.9.1
   flutter_map_cache: ^2.0.0
