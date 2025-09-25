@@ -1,7 +1,11 @@
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:geolocator/geolocator.dart";
 import "package:latlong2/latlong.dart";
+import "package:riverpod_annotation/riverpod_annotation.dart";
 
 import "../../app/config/ui_config.dart";
+
+part "location_service.g.dart";
 
 class LocationService {
   static Future<bool> requestPermissions() async {
@@ -60,4 +64,9 @@ class LocationService {
       distanceFilter: LocalizationConfig.distanceChangeFilter,
     ),
   ).map((position) => LatLng(position.latitude, position.longitude));
+}
+
+@riverpod
+Future<LatLng?> userLocation(Ref ref) {
+  return LocationService.getCurrentLatLng();
 }

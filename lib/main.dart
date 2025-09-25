@@ -13,6 +13,7 @@ import "app/config/env.dart";
 import "app/wiredash.dart";
 import "common/data_source/remote/cache_options.dart";
 import "common/repositories/cache_ref_repository.dart";
+import "common/utils/location_service.dart";
 import "common/utils/storage_service.dart";
 
 void main() async {
@@ -48,7 +49,8 @@ void main() async {
         options.sendDefaultPii = true;
         options.tracesSampleRate = 0;
       },
-      appRunner: () {
+      appRunner: () async {
+        await LocationService.requestPermissions();
         runApp(const ProviderScope(child: ProdWiredash(child: WithForegroundTask(child: MyApp()))));
       },
     );
