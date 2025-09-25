@@ -6,7 +6,7 @@ import "package:riverpod_annotation/riverpod_annotation.dart";
 
 part "cache_tile.g.dart";
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<CachedTileProvider> cacheTile(Ref ref) async {
   final cacheDirectory = await getTemporaryDirectory();
   final path = cacheDirectory.path;

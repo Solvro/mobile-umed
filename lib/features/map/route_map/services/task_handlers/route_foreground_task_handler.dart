@@ -49,17 +49,17 @@ class MyTaskHandler extends TaskHandler {
       }
     }
 
+    _checkCheckpointProximity(latLng);
+
     if (currentLocation == null) {
       return;
     }
 
     startRouteTimestamp ??= DateTime.now();
 
-    while (currentLocation != locations.first) {
+    while (locations.isNotEmpty && currentLocation != locations.first) {
       _updateLocation(currentLocation);
     }
-
-    _checkCheckpointProximity(latLng);
 
     _updateLocation(currentLocation);
 
@@ -74,14 +74,20 @@ class MyTaskHandler extends TaskHandler {
   }
 
   void _checkCheckpointProximity(LatLng currentLocation) {
+    if (passed > 0 && checkpoints.first.type == LandmarkType.start) {
+      checkpoints.removeFirst();
+    }
+
     if (!didWalkAwayFromStart && startCheckpointCoords != null) {
       final meterDistance = distance.as(LengthUnit.Meter, startCheckpointCoords!, currentLocation);
       didWalkAwayFromStart = meterDistance > LocalizationConfig.didWalkAwayThresholdInMeters;
     }
 
-    if (checkpoints.isNotEmpty &&
+    final isCheckpointNearby =
         distance.as(LengthUnit.Meter, currentLocation, checkpoints.first.location) <=
-            LocalizationConfig.coordProximityThresholdInMeters) {
+        LocalizationConfig.checkpointProximityThresholdInMeters;
+
+    if (checkpoints.isNotEmpty && isCheckpointNearby) {
       if (checkpoints.first.type == LandmarkType.start) {
         startCheckpointCoords = checkpoints.first.location;
         didWalkAwayFromStart = false;
@@ -89,6 +95,7 @@ class MyTaskHandler extends TaskHandler {
         if (!didWalkAwayFromStart) {
           return;
         }
+        locations.clear();
         FlutterForegroundTask.sendDataToMain(ForegroundTaskProtocol.onlyEvent(TaskEvent.routeCompleted).toJson());
       }
 

@@ -154,6 +154,7 @@ abstract final class MapConfig {
 }
 
 abstract final class LocalizationConfig {
+  static const checkpointProximityThresholdInMeters = 50.0;
   static const coordProximityThresholdInMeters = 10.0;
   static const loopProximityThresholdInMeters = 100.0;
   static const didWalkAwayThresholdInMeters = 70.0;
